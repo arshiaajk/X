@@ -29,6 +29,20 @@
       "albums": []
     },
     {
+      "name": "Googoosh",
+      "photo": null,
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Gharibeh Ashena (Remixbaz.com) (320)",
+          "artist": "Googoosh",
+          "audio": "music/Googoosh/singles/Googoosh - Gharibeh Ashena (Remixbaz.com) (320).mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
       "name": "Shayan Yo",
       "photo": "music/Shayan Yo/Photo.jpg",
       "description": "ARTIST",
