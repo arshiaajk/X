@@ -5,7 +5,11 @@ on:
     paths:
       - 'assets/music/**'
       - 'tools/scan.js'
-  workflow_dispatch:   # این باعث می‌شه دستی هم بتونی اجراش کنی
+      - '.github/workflows/scan-music.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   scan:
