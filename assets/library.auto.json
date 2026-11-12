@@ -29,6 +29,20 @@
       "albums": []
     },
     {
+      "name": "Googoosh",
+      "photo": null,
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Gharibeh Ashena ",
+          "artist": "Googoosh",
+          "audio": "music/Googoosh/singles/Googoosh - Gharibeh Ashena .mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
       "name": "Sepehr Khalse",
       "photo": null,
       "description": "ARTIST",
