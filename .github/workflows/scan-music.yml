@@ -22,9 +22,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
-      - name: Run Script (Folders + Scan)
+      - name: Check files exist
+        run: ls -la tools/
+
+      - name: Run Script
         run: node tools/scan.js
 
       - name: Commit and Push changes
