@@ -5,7 +5,14 @@
    "photo": null,
    "description": "ARTIST",
    "aliases": [],
-   "singles": [],
+   "singles": [
+    {
+     "title": "Kam Kam",
+     "artist": "Shayan Yo",
+     "cover": "music/Shayan Yo/singles/Shayan Yo - Kam Kam.jpg",
+     "audio": "music/Shayan Yo/singles/Shayan Yo - Kam Kam.mp3"
+    }
+   ],
    "albums": []
   }
  ]
