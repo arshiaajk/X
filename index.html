@@ -118,20 +118,18 @@ footer a{color:#111;text-decoration:none}
   transform: translateY(100%);
   transition: opacity .4s, transform .4s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
-  --bass: 0; /* متغیر برای ذخیره میزان بیس */
+  --bass: 0;
 }
 .full-player.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
 .fp-bg {
   position: absolute; inset: -50px;
   background-size: cover; background-position: center;
-  /* افکت بلور، تاریکی و زوم با توجه به متغیر بیس تغییر می‌کند */
   filter: blur(calc(40px - (var(--bass) * 25px))) brightness(calc(0.4 - (var(--bass) * 0.15)));
   transform: scale(calc(1 + (var(--bass) * 0.06)));
   transition: filter 0.08s ease-out, transform 0.08s ease-out;
   z-index: 1;
 }
-/* لایه اضافی برای کدرتر شدن هرچه بیشتر هنگام بیس */
 .fp-bg::after {
   content: ''; position: absolute; inset: 0;
   background: #000;
@@ -217,17 +215,17 @@ footer a{color:#111;text-decoration:none}
 </section>
 <section class="about">
   <h2 class="section-title">ABOUT</h2>
-  <p>ARSX is an independent music archive. Discover artists, explore albums and enjoy music. Stay1 connected for upcoming releases.</p>
+  <p>ARSX is an independent music archive. Discover artists, explore albums and enjoy music. Stay connected for upcoming releases.</p>
 </section>
 </main>
 <footer>
-  <a href="https://t.me/Ars_teamX" target="_blank" rel="nocopener">TELEGRAM</a>
-  <p style="margin-top:15px">© 2026 ARSX — ALL RIGHTS RESERVED.</p>
+  <a href="https://t.me/Ars_teamX" target="_blank" rel="noopener">TELEGRAM</a>
+  <p style="margin-top:15px">© 2026 ARSX — ALL RIGHTS RESERVED</p>
 </footer>
 
 <div class="tg" id="tg" role="region" aria-label="Join Telegram">
-  <a class="tg-link" href="73https://t.me/Ars_teamX" target="_blank" rel="noopener" draggable="false">
-    <svg class="tg-ico-." viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED933"/><path fill="#fff" transform="translate(4.6 4.9) scale(.62)" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12.5c-.88-.25-.89-.86.2-1.3l16.54-6. 1.42.18 1.12 1.4l-3 12.7c-.2.9-.75 1.1-1.5.7l-4.4-3.2-2 1.95c-.25.25-.4.4-.82.7z"/></svg>
+  <a class="tg-link" href="https://t.me/Ars_teamX" target="_blank" rel="noopener" draggable="false">
+    <svg class="tg-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path fill="#fff" transform="translate(4.6 4.9) scale(.62)" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12.5c-.88-.25-.89-.86.2-1.3l16.54-6.1c.73-.33 1.42.18 1.12 1.4l-3 12.7c-.2.9-.75 1.1-1.5.7l-4.4-3.2-2 1.95c-.25.25-.4.4-.82.7z"/></svg>
     <span class="tg-text"><b>JOIN TELEGRAM</b><small>t.me/Ars_teamX</small></span>
   </a>
 </div>
@@ -268,8 +266,6 @@ footer a{color:#111;text-decoration:none}
       <button class="fp-close" id="fpClose" aria-label="Close full player">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
-      
-      <!-- دکمه دانلود در صفحه کامل -->
       <a class="fp-dl" id="fpDl" href="#" aria-label="Download track">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
       </a>
@@ -315,7 +311,12 @@ document.getElementById("date").textContent =
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
-const pic=(cls,p,alt)=>{const i=el("img",cls);i.alt=alt;i.loading="lazy";if(p)i.src=url(p);i.onerror=()=>{i.style.visibility="hidden"};return i};
+const pic=(cls,p,alt)=>{
+  const i=el("img",cls);i.alt=alt;i.loading="lazy";
+  if(p)i.src=url(p);
+  i.onerror=()=>{i.style.visibility="hidden"};
+  return i;
+};
 const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
 
 function collapse(content){
@@ -333,7 +334,6 @@ function bindToggle(btn,wrap,onChange){
 const A=new Audio();A.preload="none";
 let cur=null;
 
-// Web Audio API Elements
 let audioCtx, analyser, source, dataArray;
 let isAnimating = false;
 
@@ -365,40 +365,33 @@ const fpDl = document.getElementById("fpDl");
 const SVG_PLAY = '<path d="M8 5v14l11-7z"/>';
 const SVG_PAUSE = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 
-// تابع راه‌اندازی تحلیل‌گر صدا
 function initAudioEngine() {
   if (audioCtx) return;
-  const AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) return;
-  
-  audioCtx = new AC();
-  analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 64; // تعداد کمی باند برای تمرکز روی بیس و سرعت بالا
-  analyser.smoothingTimeConstant = 0.8; // نرم کردن تغییرات
-  dataArray = new Uint8Array(analyser.frequencyBinCount);
-  
-  source = audioCtx.createMediaElementSource(A);
-  source.connect(analyser);
-  analyser.connect(audioCtx.destination);
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    audioCtx = new AC();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 64;
+    analyser.smoothingTimeConstant = 0.8;
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+    source = audioCtx.createMediaElementSource(A);
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+  } catch (e) {
+    console.warn("AudioContext blocked", e);
+  }
 }
 
-// تابع حلقه انیمیشن برای آپدیت متغیر CSS
 function animateBass() {
   if (!analyser) return;
-  
   analyser.getByteFrequencyData(dataArray);
-  
-  // محاسبه میانگین فرکانس‌های پایین (بیس)
   let bassSum = 0;
-  const bins = 6; // چند باند اول (بیس و کیک درام)
+  const bins = 6;
   for (let i = 0; i < bins; i++) {
     bassSum += dataArray[i];
   }
-  const avg = bassSum / bins;
-  // نرمال سازی بین 0 تا 1
-  const level = avg / 255;
-  
-  // ست کردن متغیر CSS در صفحه پلیر
+  const level = (bassSum / bins) / 255;
   fullPlayer.style.setProperty('--bass', level.toFixed(3));
   
   if (!A.paused) {
@@ -444,19 +437,9 @@ function updateUI(){
 
 A.addEventListener("play",()=>{
   document.body.classList.add("playing");
-  
-  // راه‌اندازی موتور صدا در اولین پخش (به دلیل محدودیت مرورگرها)
   initAudioEngine();
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
-  
-  // شروع انیمیشن بیس
-  if (!isAnimating) {
-    isAnimating = true;
-    requestAnimationFrame(animateBass);
-  }
-  
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  if (!isAnimating) { isAnimating = true; requestAnimationFrame(animateBass); }
   updateUI();
 });
 
@@ -660,37 +643,45 @@ function renderArtist(artist,list){
   updateVisibility();
 
   function run(raw){
-    items.forEach(it=>{it.auto.forEach(f=>f(false));it.auto=[];it.tracks.forEach(x=>x.row.classList.remove("hit"))});
-    const q=norm(raw);
-    
-    if(q.length<2){
-      items.forEach(it=>it.group.style.display="");
-      list.append(...items.map(i=>i.group));
-      noRes.style.display="none";
-      updateVisibility();
-      return;
-    }
-    
-    const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
-    items.forEach(it=>{
-      const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
-      it.albums.forEach(b=>b.s=score(q,b.title));
-      it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
-      const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
-      it.score=Math.max(sName,sAlb,sTr);
-      if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
-        const min=Math.max(.6,it.score-.1);
-        open(it,it.set,it.wrap);
-        it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
-        it.albums.forEach(b=>{if(b.s*.95>=min)open(it,b.set,b.wrap)});
+    try {
+      items.forEach(it=>{
+        if(it.auto) it.auto.forEach(f=>f(false));
+        it.auto=[];
+        if(it.tracks) it.tracks.forEach(x=>{if(x.row) x.row.classList.remove("hit")});
+      });
+      const q=norm(raw);
+      
+      if(q.length<2){
+        items.forEach(it=>it.group.style.display="");
+        list.append(...items.map(i=>i.group));
+        noRes.style.display="none";
+        updateVisibility();
+        return;
       }
-    });
-    const shown=items.filter(i=>i.score>=.6).sort((a,b)=>b.score-a.score);
-    items.forEach(i=>i.group.style.display=i.score>=.6?"":"none");
-    list.append(...shown.map(i=>i.group),...items.filter(i=>i.score<.6).map(i=>i.group));
-    noRes.style.display=shown.length?"none":"";noRes.textContent=shown.length?"":"NOTHING FOUND — TRY FEWER LETTERS";
-    
-    loadMoreBtn.style.display = "none";
+      
+      const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
+      items.forEach(it=>{
+        const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
+        it.albums.forEach(b=>b.s=score(q,b.title));
+        it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
+        const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
+        it.score=Math.max(sName,sAlb,sTr);
+        if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
+          const min=Math.max(.6,it.score-.1);
+          open(it,it.set,it.wrap);
+          it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
+          it.albums.forEach(b=>{if(b.s*.95>=min)open(it,b.set,b.wrap)});
+        }
+      });
+      const shown=items.filter(i=>i.score>=.6).sort((a,b)=>b.score-a.score);
+      items.forEach(i=>i.group.style.display=i.score>=.6?"":"none");
+      list.append(...shown.map(i=>i.group),...items.filter(i=>i.score<.6).map(i=>i.group));
+      noRes.style.display=shown.length?"none":"";noRes.textContent=shown.length?"":"NOTHING FOUND — TRY FEWER LETTERS";
+      
+      loadMoreBtn.style.display = "none";
+    } catch(e) {
+      console.error("Search execution error", e);
+    }
   }
   
   let timer;
