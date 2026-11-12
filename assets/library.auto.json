@@ -2,7 +2,7 @@
   "artists": [
     {
       "name": "Amir Tataloo",
-      "photo": null,
+      "photo": "music/Amir Tataloo/photo.jpg",
       "description": "ARTIST",
       "singles": [
         {
@@ -16,7 +16,7 @@
     },
     {
       "name": "Ebi",
-      "photo": null,
+      "photo": "music/Ebi/photo.jpg",
       "description": "ARTIST",
       "singles": [
         {
@@ -30,7 +30,7 @@
     },
     {
       "name": "Googoosh",
-      "photo": null,
+      "photo": "music/Googoosh/photo.jpg",
       "description": "ARTIST",
       "singles": [
         {
@@ -44,11 +44,11 @@
     },
     {
       "name": "Sepehr Khalse",
-      "photo": null,
+      "photo": "music/Sepehr Khalse/photo.jpg",
       "description": "ARTIST",
       "singles": [
         {
-          "title": "Shahin Miri – Fargh Darim",
+          "title": "Fargh Darim",
           "artist": "Sepehr Khalse",
           "audio": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.mp3",
           "cover": null
@@ -72,7 +72,7 @@
     },
     {
       "name": "Siavash Ghomayshi",
-      "photo": null,
+      "photo": "music/Siavash Ghomayshi/photo.jpg",
       "description": "ARTIST",
       "singles": [
         {
