@@ -3,7 +3,7 @@ name: Scan Music Library
 on:
   push:
     paths:
-      - 'assets/**'
+      - 'assets/music/**'
       - 'tools/scan.js'
   workflow_dispatch:   # این باعث می‌شه دستی هم بتونی اجراش کنی
 
