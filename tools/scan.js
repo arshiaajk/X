@@ -1,13 +1,4 @@
-// Scans assets/music/ and writes assets/library.auto.json  (no dependencies)
-//
-//  assets/music/<Artist Name>/
-//      photo.jpg|jpeg|png|webp        ← عکس خواننده
-//      artist.json                    (optional)
-//      singles/Song Name.mp3          (+ optional Song Name.jpg as its cover)
-//      albums/<Album Name>/cover.jpg  (album cover)
-//      albums/<Album Name>/01 Track.mp3 ...   (sorted by file name)
-//      albums/<Album Name>/tracks.json (optional)
-
+// Scans assets/music/ and writes assets/library.auto.json (no dependencies)
 const fs = require("fs"), path = require("path");
 const ROOT = path.join(__dirname, "..", "assets"), MUSIC = path.join(ROOT, "music");
 const AUD = /\.(mp3|m4a|ogg|wav|flac)$/i, IMG = /\.(jpe?g|png|webp)$/i;
@@ -15,7 +6,6 @@ const rel = p => path.relative(ROOT, p).split(path.sep).join("/");
 const ls = d => fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }) : [];
 const natural = (a, b) => a.localeCompare(b, undefined, { numeric: true });
 
-// مدیریت خطا برای خواندن فایل‌های JSON
 const read = f => {
   if (!fs.existsSync(f)) return {};
   try {
@@ -26,79 +16,11 @@ const read = f => {
   }
 };
 
+// فقط عکس‌های خارجی را پیدا می‌کند (استخراج از MP3 حذف شد)
 const findImg = (dir, base) => {
   const f = ls(dir).map(e => e.name).find(n => IMG.test(n) && path.parse(n).name.toLowerCase() === base.toLowerCase());
   return f ? rel(path.join(dir, f)) : null;
 };
-
-// ---------- Extract embedded cover (APIC) from MP3 ----------
-function extractCoverFromMp3(audioPath, outPath) {
-  try {
-    if (fs.existsSync(outPath)) return true;
-    const buf = fs.readFileSync(audioPath);
-    if (buf.length < 10 || buf.toString("ascii", 0, 3) !== "ID3") return false;
-    const ver = buf[3];
-    const flags = buf[5];
-    let size = ((buf[6] & 0x7f) << 21) | ((buf[7] & 0x7f) << 14) | ((buf[8] & 0x7f) << 7) | (buf[9] & 0x7f);
-    let offset = 10;
-    if (flags & 0x40) {
-      const extSize = (buf[offset] << 24) | (buf[offset + 1] << 16) | (buf[offset + 2] << 8) | buf[offset + 3];
-      offset += 4 + extSize;
-    }
-    const end = Math.min(offset + size, buf.length);
-    while (offset + 10 < end) {
-      const id = buf.toString("ascii", offset, offset + 4);
-      let frameSize;
-      if (ver === 4) {
-        frameSize = ((buf[offset + 4] & 0x7f) << 21) | ((buf[offset + 5] & 0x7f) << 14) | ((buf[offset + 6] & 0x7f) << 7) | (buf[offset + 7] & 0x7f);
-      } else {
-        frameSize = (buf[offset + 4] << 24) | (buf[offset + 5]) << 16) | (buf[offset + 6] << 8 | buf[offset + 7];
-      }
-      if (frameSize <= 0 || offset + 10 + frameSize > buf.length) break;
-
-      if (id === "APIC" || id === "PIC") {
-        let pos = offset + 10;
-        const encoding = buf[pos++];
-        while (pos < offset + 10 + frameSize && buf[pos] !== 0) pos++;
-        pos++;
-        if (id === "APIC") {
-          pos++;
-          if (encoding === 1 || encoding === 2) {
-            while (pos + 1 < offset + 10 + frameSize && !(buf[pos] === 0 && buf[pos + 1] === 0)) pos += 2;
-            pos += 2;
-          } else {
-            while (pos < offset + 10 + frameSize && buf[pos] !== 0) pos++;
-            pos++;
-          }
-        } else {
-          pos += 3; pos++;
-          while (pos < offset + 10 + frameSize && buf[pos] !== 0) pos++;
-          pos++;
-        }
-        const imgData = buf.slice(pos, offset + 10 + frameSize);
-        if (imgData.length > 100) {
-          fs.writeFileSync(outPath, imgData);
-          return true;
-        }
-      }
-      offset += 10 + frameSize;
-    }
-  } catch (e) { /* ignore */ }
-  return false;
-}
-
-function getCover(dir, baseName, audioFile) {
-  let cover = findImg(dir, baseName);
-  if (cover) return cover;
-  if (/\.mp3$/i.test(audioFile)) {
-    const outName = baseName + ".jpg";
-    const outPath = path.join(dir, outName);
-    if (extractCoverFromMp3(path.join(dir, audioFile), outPath)) {
-      return rel(outPath);
-    }
-  }
-  return null;
-}
 
 const norm = s => s.toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g, "");
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -161,7 +83,7 @@ function main() {
         return { 
           title: p.title, 
           artist: p.artist, 
-          cover: getCover(path.join(dir, "singles"), base, n), 
+          cover: findImg(path.join(dir, "singles"), base), // فقط عکس خارجی
           audio: rel(path.join(dir, "singles", n)) 
         };
       });
@@ -173,17 +95,16 @@ function main() {
         const tracks = ls(ad).map(e => e.name).filter(n => AUD.test(n)).sort(natural).map(n => {
           const p = parseName(n, name, true, a.name);
           const base = path.parse(n).name;
-          const trackCover = getCover(ad, base, n);
+          const trackCover = findImg(ad, base); // فقط عکس خارجی
           if (!albumCover && trackCover) albumCover = trackCover;
           
           return { 
             title: (tm[n] && tm[n].title) || p.title, 
             artist: (tm[n] && tm[n].artist) || p.artist, 
-            cover: trackCover, // 👈 این خط مشکلِ نبودن عکس را حل می‌کند
+            cover: trackCover, // 👈 اضافه شد تا کاور آهنگ‌های آلبوم هم در سایت بیاید
             audio: rel(path.join(ad, n)) 
           };
         });
-        
         return { title: a.name, cover: albumCover, tracks };
       });
 
@@ -198,19 +119,16 @@ function main() {
     }
 
     fs.writeFileSync(path.join(ROOT, "library.auto.json"), JSON.stringify({ artists }, null, 1));
-    console.log("library.auto.json generated successfully with", artists.length, "artists");
+    console.log("library.auto.json:", artists.length, "artists");
 
     if (missingPhotos.length) {
-      console.log("\n⚠️ Artist photos missing for:");
-      missingPhotos.forEach(n => console.log("   • " + n));
-    } else {
-      console.log("✓ All artists have photos.");
+      console.log("\n⚠️ Artist photos missing for:", missingPhotos.join(", "));
     }
   } catch (err) {
-    console.error("❌ Fatal error during scan:", err);
+    console.error("❌ Fatal error:", err);
     process.exit(1);
   }
 }
 
 if (require.main === module) main();
-module.exports = { parseName, extractCoverFromMp3 };
+module.exports = { parseName };
