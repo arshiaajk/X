@@ -16,16 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          # اطمینان از دسترسی نوشتن با استفاده از توکن پیش‌فرض
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v6 # ارتقا برای رفع هشدار Node.js 20
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7 # ارتقا برای رفع هشدار Node.js 20
         with:
-          # ارتقا به نسخه ۲۲ (LTS) برای رفع هشدار منسوخ شدن نسخه ۲۰
           node-version: '22'
+
+      # در صورت نیاز اسکریپت به پکیج‌های خارجی، این مرحله را اضافه کنید
+      # - name: Install dependencies
+      #   run: npm ci
 
       - name: Run scan
         run: node tools/scan.js
@@ -35,15 +35,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/library.auto.json
-          
-          # بررسی اینکه آیا تغییری وجود دارد یا خیر
           if ! git diff --staged --quiet; then
             git commit -m "Update library.auto.json [skip ci]"
-            
-            # همگام‌سازی با مخزن اصلی برای جلوگیری از خطای 128
             git pull --rebase origin ${{ github.ref_name }}
-            
             git push
           else
-            echo "No changes detected. Skipping commit and push."
+            echo "No changes detected. Skipping commit."
           fi
