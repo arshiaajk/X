@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;padding:35px 7%;padding-bottom:120px}
+body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;padding:35px 7%;padding-bottom:120px;overflow-x:hidden}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:100px}
 .date{font-size:11px;letter-spacing:2px;color:#777}
 .logo{font-size:35px;font-weight:900;letter-spacing:7px;animation:logoMove 7s ease-in-out infinite alternate}
@@ -42,10 +42,10 @@ main{max-width:900px;margin:auto}
 
 .track{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0}
 .cover{width:85px;height:85px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:12px}
-.ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.ctrl button{border:1px solid #111;background:#fff;color:#111;cursor:pointer;font-size:10px;width:30px;height:30px;border-radius:50%;transition:.2s}
-.ctrl button.play{width:40px;height:40px;font-size:13px}
-.ctrl button:hover,.ctrl button:focus-visible{background:#111;color:#fff}
+.ctrl{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ctrl button, .ctrl a.dl-btn{border:1px solid #111;background:#fff;color:#111;cursor:pointer;font-size:10px;width:32px;height:32px;border-radius:50%;transition:.2s;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+.ctrl button.play{width:42px;height:42px;font-size:14px}
+.ctrl button:hover,.ctrl button:focus-visible,.ctrl a.dl-btn:hover{background:#111;color:#fff}
 .track-info{flex:1;min-width:0}
 .track-info h4{font-size:14px;margin-bottom:7px}
 .track-info p{font-size:10px;color:#888;margin-bottom:12px}
@@ -60,6 +60,9 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;bac
 .track.hit{background:#f7f7f7;box-shadow:0 0 0 10px #f7f7f7;border-radius:12px;border-bottom-color:transparent}
 .empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0}
 
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.artist-group.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
 .tg{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,200%);opacity:0;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
 .tg.show{transform:translate(calc(-50% + var(--dx,0px)),0);opacity:1}
 .tg.drag{transition:none}
@@ -71,70 +74,132 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;bac
 .about p{font-size:13px;line-height:2;color:#777;max-width:550px}
 footer{text-align:center;border-top:1px solid #eee;padding-top:30px;font-size:10px;color:#999;letter-spacing:2px}
 footer a{color:#111;text-decoration:none}
-@media(max-width:600px){
-body{padding:25px 6%;padding-bottom:110px}header{margin-bottom:70px}.logo{font-size:27px}
-.artist-card{gap:15px}.artist-photo{width:95px;height:95px}.artist-info h3{font-size:15px}
-.track{flex-wrap:wrap;gap:12px}.cover{width:72px;height:72px}.track-info{flex:1 1 calc(100% - 90px)}
-.ctrl{order:3;width:100%;justify-content:center}.time{min-width:70px}
-}
-@media(prefers-reduced-motion:reduce){.logo .l{animation:none!important}.collapse,.chev,.logo{transition:none;animation:none}}
 
 /* ===== MINI PLAYER ===== */
 .mini-player{
   position:fixed;left:0;right:0;bottom:0;z-index:60;
-  background:#fff;border-top:1px solid #e8e8e8;
+  background:#fff;
+  border-radius: 28px 28px 0 0;
+  border-top: 1px solid rgba(0,0,0,0.04);
   transform:translateY(110%);opacity:0;
   transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;
   padding-bottom:env(safe-area-inset-bottom,0px);
-  box-shadow:0 -8px 30px rgba(0,0,0,.04);
+  box-shadow:0 -10px 40px rgba(0,0,0,.06);
+  cursor:pointer;
 }
 .mini-player.show{transform:translateY(0);opacity:1}
-.mini-progress{
-  height:3px;width:100%;position:relative;overflow:hidden;background:#f0f0f0;
-}
-.mini-progress-fill{
-  position:absolute;left:0;top:0;bottom:0;width:0%;
-  background:#111;
-  transition:width .15s linear;
-}
-/* soft water-like wave on top of progress */
-.mini-wave{
-  position:absolute;left:0;right:0;top:-6px;height:14px;
-  pointer-events:none;opacity:0;transition:opacity .4s;
-}
+.mini-progress{height:3px;width:100%;position:relative;overflow:hidden;background:#f0f0f0;border-radius: 28px 28px 0 0;}
+.mini-progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:#111;transition:width .15s linear}
+.mini-wave{position:absolute;left:0;right:0;top:-6px;height:14px;pointer-events:none;opacity:0;transition:opacity .4s}
 .mini-player.show .mini-wave{opacity:1}
 .mini-wave svg{width:200%;height:100%;display:block}
-.mini-wave path{
-  fill:none;stroke:#111;stroke-width:1.4;stroke-linecap:round;
-  opacity:.35;
-  animation:waveFlow 4.5s ease-in-out infinite;
-}
+.mini-wave path{fill:none;stroke:#111;stroke-width:1.4;stroke-linecap:round;opacity:.35;animation:waveFlow 4.5s ease-in-out infinite}
 .mini-wave path:nth-child(2){opacity:.22;animation-duration:5.8s;animation-delay:-1.2s}
 .mini-wave path:nth-child(3){opacity:.15;animation-duration:7s;animation-delay:-2.4s}
-@keyframes waveFlow{
-  0%{transform:translateX(0)}
-  50%{transform:translateX(-25%)}
-  100%{transform:translateX(-50%)}
-}
-.mini-inner{
-  display:flex;align-items:center;gap:14px;
-  padding:12px 18px 14px;max-width:900px;margin:0 auto;
-}
-.mini-cover{
-  width:44px;height:44px;border-radius:10px;object-fit:cover;background:#eee;flex-shrink:0;
-}
+@keyframes waveFlow{0%{transform:translateX(0)}50%{transform:translateX(-25%)}100%{transform:translateX(-50%)}}
+.mini-inner{display:flex;align-items:center;gap:14px;padding:12px 18px 14px;max-width:900px;margin:0 auto;}
+.mini-cover{width:44px;height:44px;border-radius:10px;object-fit:cover;background:#eee;flex-shrink:0;}
 .mini-info{flex:1;min-width:0}
 .mini-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mini-artist{font-size:10px;color:#888;letter-spacing:1px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mini-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.mini-ctrl button{
-  border:1px solid #111;background:#fff;color:#111;cursor:pointer;
-  width:36px;height:36px;border-radius:50%;font-size:12px;
-  display:flex;align-items:center;justify-content:center;transition:.2s;
-}
+.mini-ctrl button{border:1px solid #111;background:#fff;color:#111;cursor:pointer;width:36px;height:36px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.mini-ctrl #miniNext {background: #111; color: #fff; border: none;}
+.mini-ctrl #miniNext:hover {background: #333; transform: scale(1.05);}
 .mini-ctrl button:hover,.mini-ctrl button:focus-visible{background:#111;color:#fff}
 .mini-ctrl .mini-play{width:42px;height:42px;font-size:14px}
-@media(max-width:480px){
+
+/* ===== FULL SCREEN PLAYER ===== */
+.full-player {
+  position: fixed; inset: 0; z-index: 100;
+  background: #111; color: #fff;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transform: translateY(100%);
+  transition: opacity .4s, transform .4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+  --bass: 0; /* متغیر برای ذخیره میزان بیس */
+}
+.full-player.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+.fp-bg {
+  position: absolute; inset: -50px;
+  background-size: cover; background-position: center;
+  /* افکت بلور، تاریکی و زوم با توجه به متغیر بیس تغییر می‌کند */
+  filter: blur(calc(40px - (var(--bass) * 25px))) brightness(calc(0.4 - (var(--bass) * 0.15)));
+  transform: scale(calc(1 + (var(--bass) * 0.06)));
+  transition: filter 0.08s ease-out, transform 0.08s ease-out;
+  z-index: 1;
+}
+/* لایه اضافی برای کدرتر شدن هرچه بیشتر هنگام بیس */
+.fp-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: #000;
+  opacity: calc(0.2 + (var(--bass) * 0.3)); 
+  transition: opacity 0.08s ease-out;
+}
+
+.fp-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+  height: 100%; padding: 40px 20px calc(30px + env(safe-area-inset-bottom,0px));
+  max-width: 600px; margin: 0 auto; width: 100%;
+}
+.fp-header { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.fp-close, .fp-dl {
+  background: rgba(255,255,255,0.1); border: none; color: #fff;
+  width: 44px; height: 44px; border-radius: 50%;
+  font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; text-decoration: none;
+}
+.fp-close:hover, .fp-dl:hover { background: rgba(255,255,255,0.2); }
+
+.fp-main { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 20px;}
+.fp-cover {
+  width: 75vw; max-width: 320px; aspect-ratio: 1;
+  border-radius: 20px; object-fit: cover;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  background: #222;
+}
+.fp-info { text-align: center; margin-top: 40px; width: 100%; }
+.fp-title { font-size: 24px; font-weight: 700; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-artist { font-size: 14px; color: #aaa; letter-spacing: 1px; }
+
+.fp-bottom { width: 100%; }
+.fp-bar { display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px; }
+.fp-times { display: flex; justify-content: space-between; font-size: 11px; color: #aaa; font-variant-numeric: tabular-nums;}
+.fp-bar input[type=range] { height: 4px; background:linear-gradient(to right,#fff var(--p),rgba(255,255,255,0.2) var(--p)); }
+.fp-bar input[type=range]::-webkit-slider-thumb { background: #fff; width: 12px; height: 12px; }
+.fp-bar input[type=range]::-moz-range-thumb { background: #fff; width: 12px; height: 12px; }
+
+.fp-ctrl { display: flex; align-items: center; justify-content: center; gap: 30px; }
+.fp-ctrl button {
+  background: transparent; border: none; color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.fp-ctrl button:hover { opacity: 0.7; transform: scale(1.1); }
+.fp-ctrl .fp-play {
+  background: #fff; color: #111; width: 70px; height: 70px;
+  border-radius: 50%; font-size: 24px;
+  box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+}
+.fp-ctrl .fp-play:hover { opacity: 1; transform: scale(1.05); }
+.fp-ctrl svg { fill: currentColor; }
+
+@media(max-width:600px){
+  body{padding:25px 6%;padding-bottom:110px}
+  header{margin-bottom:70px}
+  .logo{font-size:27px}
+  .artist-card{gap:15px}
+  .artist-photo{width:95px;height:95px}
+  .artist-info h3{font-size:15px}
+  .track{flex-wrap:wrap;gap:12px}
+  .cover{width:72px;height:72px}
+  .track-info{flex:1 1 calc(100% - 90px)}
+  .ctrl{order:3;width:100%;justify-content:center;gap:10px;}
+  .time{min-width:70px}
   .mini-inner{padding:10px 14px 12px;gap:10px}
   .mini-cover{width:38px;height:38px}
   .mini-ctrl button{width:32px;height:32px}
@@ -152,17 +217,17 @@ body{padding:25px 6%;padding-bottom:110px}header{margin-bottom:70px}.logo{font-s
 </section>
 <section class="about">
   <h2 class="section-title">ABOUT</h2>
-  <p>ARSX is an independent music archive. Discover artists, explore albums and enjoy music. Stay connected for upcoming releases.</p>
+  <p>ARSX is an independent music archive. Discover artists, explore albums and enjoy music. Stay1 connected for upcoming releases.</p>
 </section>
 </main>
 <footer>
-  <a href="https://t.me/Ars_teamX" target="_blank" rel="noopener">TELEGRAM</a>
-  <p style="margin-top:15px">© 2026 ARSX — ALL RIGHTS RESERVED</p>
+  <a href="https://t.me/Ars_teamX" target="_blank" rel="nocopener">TELEGRAM</a>
+  <p style="margin-top:15px">© 2026 ARSX — ALL RIGHTS RESERVED.</p>
 </footer>
 
 <div class="tg" id="tg" role="region" aria-label="Join Telegram">
-  <a class="tg-link" href="https://t.me/Ars_teamX" target="_blank" rel="noopener" draggable="false">
-    <svg class="tg-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED9"/><path fill="#fff" transform="translate(4.6 4.9) scale(.62)" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12.5c-.88-.25-.89-.86.2-1.3l16.54-6.1c.73-.33 1.42.18 1.12 1.4l-3 12.7c-.2.9-.75 1.1-1.5.7l-4.4-3.2-2 1.95c-.25.25-.4.4-.82.7z"/></svg>
+  <a class="tg-link" href="73https://t.me/Ars_teamX" target="_blank" rel="noopener" draggable="false">
+    <svg class="tg-ico-." viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#229ED933"/><path fill="#fff" transform="translate(4.6 4.9) scale(.62)" d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12.5c-.88-.25-.89-.86.2-1.3l16.54-6. 1.42.18 1.12 1.4l-3 12.7c-.2.9-.75 1.1-1.5.7l-4.4-3.2-2 1.95c-.25.25-.4.4-.82.7z"/></svg>
     <span class="tg-text"><b>JOIN TELEGRAM</b><small>t.me/Ars_teamX</small></span>
   </a>
 </div>
@@ -187,8 +252,58 @@ body{padding:25px 6%;padding-bottom:110px}header{margin-bottom:70px}.logo{font-s
     </div>
     <div class="mini-ctrl">
       <button type="button" class="mini-play" id="miniPlay" aria-label="Play / Pause">▶</button>
-      <button type="button" id="miniNext" aria-label="Next track">⏭</button>
+      <button type="button" id="miniNext" aria-label="Next track">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
     </div>
+  </div>
+</div>
+
+<!-- FULL SCREEN PLAYER -->
+<div class="full-player" id="fullPlayer" aria-hidden="true">
+  <div class="fp-bg" id="fpBg"></div>
+  <div class="fp-content">
+    
+    <div class="fp-header">
+      <button class="fp-close" id="fpClose" aria-label="Close full player">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+      
+      <!-- دکمه دانلود در صفحه کامل -->
+      <a class="fp-dl" id="fpDl" href="#" aria-label="Download track">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      </a>
+    </div>
+
+    <div class="fp-main">
+      <img class="fp-cover" id="fpCover" alt="" src="">
+      <div class="fp-info">
+        <div class="fp-title" id="fpTitle">—</div>
+        <div class="fp-artist" id="fpArtist"></div>
+      </div>
+    </div>
+
+    <div class="fp-bottom">
+      <div class="fp-bar">
+        <input type="range" id="fpRange" min="0" max="1000" value="0" aria-label="Seek">
+        <div class="fp-times">
+          <span id="fpTimeCur">0:00</span>
+          <span id="fpTimeTot">0:00</span>
+        </div>
+      </div>
+      <div class="fp-ctrl">
+        <button id="fpPrev" aria-label="Previous track">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="fp-play" id="fpPlay" aria-label="Play / Pause">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" id="fpPlayIcon"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button id="fpNext" aria-label="Next track">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -198,12 +313,12 @@ document.getElementById("date").textContent =
 
 /* ---------- helpers ---------- */
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
-const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");   // exact file name match
+const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
 const pic=(cls,p,alt)=>{const i=el("img",cls);i.alt=alt;i.loading="lazy";if(p)i.src=url(p);i.onerror=()=>{i.style.visibility="hidden"};return i};
 const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
 
-function collapse(content){            // returns {wrap, inner}
+function collapse(content){
   const wrap=el("div","collapse"),inner=el("div","inner");
   inner.appendChild(content);wrap.appendChild(inner);return wrap;
 }
@@ -214,11 +329,15 @@ function bindToggle(btn,wrap,onChange){
   return set;
 }
 
-/* ---------- single custom player (no native controls, no download) ---------- */
+/* ---------- Player Logic & Audio Analyzer ---------- */
 const A=new Audio();A.preload="none";
-let cur=null;                           // {row,btn,rng,time,reset,title,artist,cover}
+let cur=null;
 
-/* Mini player elements */
+// Web Audio API Elements
+let audioCtx, analyser, source, dataArray;
+let isAnimating = false;
+
+// Mini Player Elements
 const miniPlayer=document.getElementById("miniPlayer");
 const miniFill=document.getElementById("miniFill");
 const miniCover=document.getElementById("miniCover");
@@ -227,31 +346,123 @@ const miniArtist=document.getElementById("miniArtist");
 const miniPlay=document.getElementById("miniPlay");
 const miniNext=document.getElementById("miniNext");
 
-function updateMini(){
+// Full Player Elements
+const fullPlayer = document.getElementById("fullPlayer");
+const fpBg = document.getElementById("fpBg");
+const fpCover = document.getElementById("fpCover");
+const fpTitle = document.getElementById("fpTitle");
+const fpArtist = document.getElementById("fpArtist");
+const fpRange = document.getElementById("fpRange");
+const fpTimeCur = document.getElementById("fpTimeCur");
+const fpTimeTot = document.getElementById("fpTimeTot");
+const fpPlay = document.getElementById("fpPlay");
+const fpPlayIcon = document.getElementById("fpPlayIcon");
+const fpPrev = document.getElementById("fpPrev");
+const fpNext = document.getElementById("fpNext");
+const fpClose = document.getElementById("fpClose");
+const fpDl = document.getElementById("fpDl");
+
+const SVG_PLAY = '<path d="M8 5v14l11-7z"/>';
+const SVG_PAUSE = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+
+// تابع راه‌اندازی تحلیل‌گر صدا
+function initAudioEngine() {
+  if (audioCtx) return;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return;
+  
+  audioCtx = new AC();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 64; // تعداد کمی باند برای تمرکز روی بیس و سرعت بالا
+  analyser.smoothingTimeConstant = 0.8; // نرم کردن تغییرات
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+  
+  source = audioCtx.createMediaElementSource(A);
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+}
+
+// تابع حلقه انیمیشن برای آپدیت متغیر CSS
+function animateBass() {
+  if (!analyser) return;
+  
+  analyser.getByteFrequencyData(dataArray);
+  
+  // محاسبه میانگین فرکانس‌های پایین (بیس)
+  let bassSum = 0;
+  const bins = 6; // چند باند اول (بیس و کیک درام)
+  for (let i = 0; i < bins; i++) {
+    bassSum += dataArray[i];
+  }
+  const avg = bassSum / bins;
+  // نرمال سازی بین 0 تا 1
+  const level = avg / 255;
+  
+  // ست کردن متغیر CSS در صفحه پلیر
+  fullPlayer.style.setProperty('--bass', level.toFixed(3));
+  
+  if (!A.paused) {
+    requestAnimationFrame(animateBass);
+  } else {
+    fullPlayer.style.setProperty('--bass', 0);
+    isAnimating = false;
+  }
+}
+
+function updateUI(){
   if(!cur){
     miniPlayer.classList.remove("show");
+    fullPlayer.classList.remove("show");
     return;
   }
+  
   miniTitle.textContent=cur.title||"—";
   miniArtist.textContent=cur.artist||"";
+  fpTitle.textContent=cur.title||"—";
+  fpArtist.textContent=cur.artist||"";
+
   if(cur.cover){
-    miniCover.src=url(cur.cover);
-    miniCover.style.visibility="visible";
+    const u = url(cur.cover);
+    miniCover.src=u; miniCover.style.visibility="visible";
+    fpCover.src=u;
+    fpBg.style.backgroundImage = `url('${u}')`;
   }else{
-    miniCover.removeAttribute("src");
-    miniCover.style.visibility="hidden";
+    miniCover.removeAttribute("src"); miniCover.style.visibility="hidden";
+    fpCover.removeAttribute("src");
+    fpBg.style.backgroundImage = "none";
   }
-  miniPlay.textContent=A.paused?"▶":"❚❚";
+
+  fpDl.href = url(cur.audio);
+  fpDl.download = (cur.title || "track") + ".mp3";
+
+  const isPaused = A.paused;
+  miniPlay.textContent = isPaused ? "▶" : "❚❚";
+  fpPlayIcon.innerHTML = isPaused ? SVG_PLAY : SVG_PAUSE;
+  
   miniPlayer.classList.add("show");
 }
 
-A.addEventListener("play",()=>{document.body.classList.add("playing");updateMini()});
+A.addEventListener("play",()=>{
+  document.body.classList.add("playing");
+  
+  // راه‌اندازی موتور صدا در اولین پخش (به دلیل محدودیت مرورگرها)
+  initAudioEngine();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
+  // شروع انیمیشن بیس
+  if (!isAnimating) {
+    isAnimating = true;
+    requestAnimationFrame(animateBass);
+  }
+  
+  updateUI();
+});
+
 ["pause","ended","error"].forEach(e=>A.addEventListener(e,()=>{
   document.body.classList.remove("playing");
-  if(e==="pause"||e==="error") updateMini();
-  if(e==="ended"||e==="error"){
-    // keep mini visible until next track starts or user stops
-  }
+  if(e==="pause"||e==="error") updateUI();
 }));
 A.addEventListener("play",()=>cur&&(cur.btn.textContent="❚❚"));
 A.addEventListener("pause",()=>cur&&!A.ended&&(cur.btn.textContent="▶"));
@@ -260,21 +471,25 @@ A.addEventListener("ended",()=>{
   const n=cur.row.nextRow;
   cur.reset();
   if(n) n.start();
-  else {
-    // no next → hide mini after a short delay
-    setTimeout(()=>{if(!cur||A.paused) miniPlayer.classList.remove("show")},400);
-  }
+  else setTimeout(()=>{if(!cur||A.paused) miniPlayer.classList.remove("show")},400);
 });
 A.addEventListener("error",()=>cur&&cur.reset());
+
 A.addEventListener("timeupdate",()=>{
   if(!cur||!A.duration)return;
-  const p=(A.currentTime/A.duration)*100;
-  cur.rng.value=A.currentTime/A.duration*1000;fill(cur.rng);
-  cur.time.textContent=fmt(A.currentTime)+" / "+fmt(A.duration);
-  miniFill.style.width=p+"%";
+  const p = (A.currentTime/A.duration)*100;
+  const val = A.currentTime/A.duration*1000;
+  
+  cur.rng.value = val; fill(cur.rng);
+  cur.time.textContent = fmt(A.currentTime)+" / "+fmt(A.duration);
+  miniFill.style.width = p+"%";
+  
+  fpRange.value = val; fill(fpRange);
+  fpTimeCur.textContent = fmt(A.currentTime);
+  fpTimeTot.textContent = fmt(A.duration);
 });
 
-const chain=r=>r.forEach((x,i)=>x.nextRow=r[i+1]);
+const chain=r=>r.forEach((x,i)=>{ x.nextRow=r[i+1]; x.prevRow=r[i-1]; });
 function createTrack(t){
   const row=el("div","track");
   const info=el("div","track-info");
@@ -286,17 +501,25 @@ function createTrack(t){
 
   const mk=(cls,txt,label)=>{const b=el("button",cls,txt);b.type="button";b.setAttribute("aria-label",label);return b};
   const back=mk("","−10","Back 10 seconds"),play=mk("play","▶","Play "+t.title),fwd=mk("","+10","Forward 10 seconds");
-  const ctrl=el("div","ctrl");ctrl.append(back,play,fwd);
+  
+  const dl = el("a", "dl-btn");
+  dl.href = url(t.audio);
+  dl.setAttribute("download", (t.title || "track") + ".mp3");
+  dl.setAttribute("aria-label", "Download " + t.title);
+  dl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
+  
+  const ctrl=el("div","ctrl");
+  ctrl.append(back,play,fwd,dl);
 
   const reset=()=>{play.textContent="▶";rng.value=0;fill(rng);rng.disabled=true;time.textContent="0:00"};
   const mine=()=>cur&&cur.row===row;
 
   const start=()=>{
     if(cur)cur.reset();
-    cur={row,btn:play,rng,time,reset,title:t.title,artist:t.artist||"",cover:t.cover||null};
+    cur={row,btn:play,rng,time,reset,title:t.title,artist:t.artist||"",cover:t.cover||null,audio:t.audio};
     rng.disabled=false;
     A.src=url(t.audio);A.play().catch(()=>reset());
-    updateMini();
+    updateUI();
   };
   row.start=start;
   play.addEventListener("click",()=>{if(mine()){A.paused?A.play():A.pause();return}start()});
@@ -316,15 +539,15 @@ function createAlbum(album){
   head.append(txt,btn);
   const list=el("div");
   const rows=album.tracks.map(t=>createTrack({...t,cover:album.cover,artist:t.artist||""}));chain(rows);rows.forEach(r=>list.appendChild(r));
-  const wrap=collapse(list);            // closed by default, opens/closes independently
+  const wrap=collapse(list);
   const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
   box.append(head,wrap);box.api={set,wrap,rows,title:album.title};return box;
 }
 
-/* ---------- fuzzy search (typo tolerant) ---------- */
+/* ---------- fuzzy search ---------- */
 const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f\u200c]/g,"").toLowerCase()
   .replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/[^a-z0-9\u0600-\u06ff]+/g," ").trim();
-function lev(a,b){                       // edit distance, swapping two letters counts as 1
+function lev(a,b){
   const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>{const r=new Array(n+1).fill(0);r[0]=i;return r});
   for(let j=1;j<=n;j++)d[0][j]=j;
   for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){
@@ -342,7 +565,7 @@ function tokScore(q,t){
   const d=Math.min(lev(q,t),q.length>=4?lev(q,t.slice(0,q.length)):9);
   return d<=lim?.8-d*.1:0;
 }
-function score(q,text){                  // q is already normalized
+function score(q,text){
   const t=norm(text);if(!t)return 0;
   const qt=q.split(" "),tt=t.split(" ");let sum=0;
   for(const x of qt){let b=0;for(const y of tt)b=Math.max(b,tokScore(x,y));if(!b){sum=0;break}sum+=b}
@@ -355,7 +578,7 @@ function score(q,text){                  // q is already normalized
   return s;
 }
 
-/* ---------- data: assets/library.json (manual) + assets/library.auto.json (generated) ---------- */
+/* ---------- data ---------- */
 async function load(f){
   try{const r=await fetch("./assets/"+f,{cache:"no-cache"});return r.ok?((await r.json()).artists||[]):[]}
   catch{return[]}
@@ -398,13 +621,56 @@ function renderArtist(artist,list){
   const list=document.getElementById("artistList");
   const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
   if(!artists.length){list.appendChild(el("div","empty","LIBRARY NOT FOUND — open the site through GitHub Pages or a local server."));return}
+  
   const items=artists.map(a=>renderArtist(a,list));
   const noRes=el("div","empty","");noRes.style.display="none";list.after(noRes);
+
+  const loadMoreBtn = el("button", "view-more", "MORE ARTISTS");
+  loadMoreBtn.style.display = "none";
+  loadMoreBtn.style.width = "100%";
+  loadMoreBtn.style.padding = "16px";
+  loadMoreBtn.style.marginTop = "30px";
+  loadMoreBtn.style.fontSize = "11px";
+  list.after(loadMoreBtn);
+
+  let showingAll = false;
+
+  function updateVisibility() {
+    const isSearching = document.getElementById("search").value.trim().length >= 2;
+    if (isSearching) {
+      loadMoreBtn.style.display = "none";
+      return;
+    }
+    items.forEach((it, index) => {
+      if (index < 5 || showingAll) {
+        it.group.style.display = "";
+        if (showingAll && index >= 5) it.group.classList.add("fade-in");
+      } else {
+        it.group.style.display = "none";
+      }
+    });
+    loadMoreBtn.style.display = (items.length > 5 && !showingAll) ? "block" : "none";
+  }
+
+  loadMoreBtn.addEventListener("click", () => {
+    showingAll = true;
+    updateVisibility();
+  });
+
+  updateVisibility();
 
   function run(raw){
     items.forEach(it=>{it.auto.forEach(f=>f(false));it.auto=[];it.tracks.forEach(x=>x.row.classList.remove("hit"))});
     const q=norm(raw);
-    if(q.length<2){items.forEach(it=>it.group.style.display="");list.append(...items.map(i=>i.group));noRes.style.display="none";return}
+    
+    if(q.length<2){
+      items.forEach(it=>it.group.style.display="");
+      list.append(...items.map(i=>i.group));
+      noRes.style.display="none";
+      updateVisibility();
+      return;
+    }
+    
     const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
     items.forEach(it=>{
       const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
@@ -412,7 +678,7 @@ function renderArtist(artist,list){
       it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
       const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
       it.score=Math.max(sName,sAlb,sTr);
-      if(it.score>=.6&&sName<Math.max(sAlb,sTr)){            // matched through an album or a track
+      if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
         const min=Math.max(.6,it.score-.1);
         open(it,it.set,it.wrap);
         it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
@@ -423,25 +689,70 @@ function renderArtist(artist,list){
     items.forEach(i=>i.group.style.display=i.score>=.6?"":"none");
     list.append(...shown.map(i=>i.group),...items.filter(i=>i.score<.6).map(i=>i.group));
     noRes.style.display=shown.length?"none":"";noRes.textContent=shown.length?"":"NOTHING FOUND — TRY FEWER LETTERS";
+    
+    loadMoreBtn.style.display = "none";
   }
-  let timer;document.getElementById("search").addEventListener("input",e=>{clearTimeout(timer);timer=setTimeout(()=>run(e.target.value),120)});
+  
+  let timer;
+  document.getElementById("search").addEventListener("input",e=>{
+    clearTimeout(timer);
+    timer=setTimeout(()=>run(e.target.value),120);
+  });
 })();
 
-/* Mini player controls */
-miniPlay.addEventListener("click",()=>{
+/* ---------- Mini Player Controls & Full Screen Event ---------- */
+miniPlay.addEventListener("click",(e)=>{
+  e.stopPropagation();
   if(!cur)return;
-  if(A.paused) A.play();
-  else A.pause();
+  if(A.paused) A.play(); else A.pause();
 });
-miniNext.addEventListener("click",()=>{
+
+miniNext.addEventListener("click",(e)=>{
+  e.stopPropagation();
   if(!cur)return;
   const n=cur.row.nextRow;
+  if(n) n.start(); else {
+    A.pause(); cur.reset(); cur=null; updateUI();
+  }
+});
+
+miniPlayer.addEventListener("click", () => {
+  if(cur) {
+    fullPlayer.classList.add("show");
+    fullPlayer.setAttribute("aria-hidden", "false");
+  }
+});
+
+fpClose.addEventListener("click", () => {
+  fullPlayer.classList.remove("show");
+  fullPlayer.setAttribute("aria-hidden", "true");
+});
+
+fpPlay.addEventListener("click", () => {
+  if(!cur) return;
+  if(A.paused) A.play(); else A.pause();
+});
+
+fpNext.addEventListener("click", () => {
+  if(!cur) return;
+  const n = cur.row.nextRow;
   if(n) n.start();
-  else {
-    A.pause();
-    cur.reset();
-    cur=null;
-    miniPlayer.classList.remove("show");
+});
+
+fpPrev.addEventListener("click", () => {
+  if(!cur) return;
+  if (A.currentTime > 3) {
+    A.currentTime = 0;
+  } else {
+    const p = cur.row.prevRow;
+    if (p) p.start();
+  }
+});
+
+fpRange.addEventListener("input", (e) => {
+  fill(fpRange);
+  if(cur && A.duration) {
+    A.currentTime = e.target.value / 1000 * A.duration;
   }
 });
 
