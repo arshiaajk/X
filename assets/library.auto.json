@@ -69,6 +69,20 @@
         }
       ],
       "albums": []
+    },
+    {
+      "name": "Siavash Ghomayshi",
+      "photo": null,
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "03 Golaye Pooneh",
+          "artist": "Siavash Ghomayshi",
+          "audio": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.mp3",
+          "cover": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.jpg"
+        }
+      ],
+      "albums": []
     }
   ]
 }
