@@ -5,7 +5,14 @@
    "photo": null,
    "description": "ARTIST",
    "aliases": [],
-   "singles": [],
+   "singles": [
+    {
+     "title": "Pooste Shir",
+     "artist": "Ebi",
+     "cover": "music/Ebi/singles/Ebi - Pooste Shir.jpg",
+     "audio": "music/Ebi/singles/Ebi - Pooste Shir.mp3"
+    }
+   ],
    "albums": []
   },
   {
