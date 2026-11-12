@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARSX — Music Archive</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -109,7 +110,7 @@ footer a{color:#111;text-decoration:none}
 .mini-ctrl button:hover,.mini-ctrl button:focus-visible{background:#111;color:#fff}
 .mini-ctrl .mini-play{width:42px;height:42px;font-size:14px}
 
-/* ===== FULL SCREEN PLAYER ===== */
+/* ===== FULL SCREEN PLAYER (BASS EFFECT UPGRADED) ===== */
 .full-player {
   position: fixed; inset: 0; z-index: 100;
   background: #111; color: #fff;
@@ -122,19 +123,22 @@ footer a{color:#111;text-decoration:none}
 }
 .full-player.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
+/* افکت قوی‌تر: بلور از 50px تا 5px کم میشه و تاریکی خیلی بیشتر میشه */
 .fp-bg {
   position: absolute; inset: -50px;
   background-size: cover; background-position: center;
-  filter: blur(calc(40px - (var(--bass) * 25px))) brightness(calc(0.4 - (var(--bass) * 0.15)));
-  transform: scale(calc(1 + (var(--bass) * 0.06)));
-  transition: filter 0.08s ease-out, transform 0.08s ease-out;
+  filter: blur(calc(50px - (var(--bass) * 45px))) brightness(calc(0.6 - (var(--bass) * 0.5)));
+  transform: scale(calc(1 + (var(--bass) * 0.15)));
+  transition: filter 0.06s ease-out, transform 0.06s ease-out;
   z-index: 1;
 }
+
+/* لایه اضافی برای تاریکی مطلق هنگام بیس */
 .fp-bg::after {
   content: ''; position: absolute; inset: 0;
   background: #000;
-  opacity: calc(0.2 + (var(--bass) * 0.3)); 
-  transition: opacity 0.08s ease-out;
+  opacity: calc(0.2 + (var(--bass) * 0.6)); 
+  transition: opacity 0.06s ease-out;
 }
 
 .fp-content {
@@ -311,10 +315,50 @@ document.getElementById("date").textContent =
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
-const pic=(cls,p,alt)=>{
-  const i=el("img",cls);i.alt=alt;i.loading="lazy";
-  if(p)i.src=url(p);
-  i.onerror=()=>{i.style.visibility="hidden"};
+
+const pic=(cls,p,alt,audioUrl)=>{
+  const i=el("img",cls);i.alt=alt||"";i.loading="lazy";
+  const defaultArtistSVG = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
+  
+  if(p){
+    i.src=url(p);
+  } else if (audioUrl && window.jsmediatags) {
+    jsmediatags.read(url(audioUrl), {
+      onSuccess: function(tag) {
+        var image = tag.tags.picture;
+        if (image) {
+          var base64String = "";
+          for (var j = 0; j < image.data.length; j++) {
+            base64String += String.fromCharCode(image.data[j]);
+          }
+          var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+          i.src = base64;
+        } else {
+          i.src = defaultArtistSVG;
+          i.style.background = "#f0f0f0";
+        }
+      },
+      onError: function(error) {
+        i.src = defaultArtistSVG;
+        i.style.background = "#f0f0f0";
+      }
+    });
+  } else if (cls.includes("artist")) {
+    i.src = defaultArtistSVG;
+    i.style.background = "#f0f0f0";
+    i.style.padding = "20%";
+  } else {
+    i.style.visibility="hidden";
+  }
+  
+  i.onerror=()=>{
+    if (cls.includes("artist")) {
+      i.src = defaultArtistSVG;
+      i.style.background = "#f0f0f0";
+    } else {
+      i.style.visibility="hidden";
+    }
+  };
   return i;
 };
 const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
@@ -330,14 +374,13 @@ function bindToggle(btn,wrap,onChange){
   return set;
 }
 
-/* ---------- Player Logic & Audio Analyzer ---------- */
+/* ---------- Player Logic & Audio Analyzer (BASS BOOST) ---------- */
 const A=new Audio();A.preload="none";
 let cur=null;
 
 let audioCtx, analyser, source, dataArray;
 let isAnimating = false;
 
-// Mini Player Elements
 const miniPlayer=document.getElementById("miniPlayer");
 const miniFill=document.getElementById("miniFill");
 const miniCover=document.getElementById("miniCover");
@@ -346,7 +389,6 @@ const miniArtist=document.getElementById("miniArtist");
 const miniPlay=document.getElementById("miniPlay");
 const miniNext=document.getElementById("miniNext");
 
-// Full Player Elements
 const fullPlayer = document.getElementById("fullPlayer");
 const fpBg = document.getElementById("fpBg");
 const fpCover = document.getElementById("fpCover");
@@ -391,8 +433,12 @@ function animateBass() {
   for (let i = 0; i < bins; i++) {
     bassSum += dataArray[i];
   }
-  const level = (bassSum / bins) / 255;
-  fullPlayer.style.setProperty('--bass', level.toFixed(3));
+  
+  // تقویت بیس (ضرب در 1.8 تا افکت خیلی قوی‌تر بشه)
+  let rawLevel = (bassSum / bins) / 255;
+  let boostedLevel = Math.min(1, rawLevel * 1.8);
+  
+  fullPlayer.style.setProperty('--bass', boostedLevel.toFixed(3));
   
   if (!A.paused) {
     requestAnimationFrame(animateBass);
@@ -423,6 +469,25 @@ function updateUI(){
     miniCover.removeAttribute("src"); miniCover.style.visibility="hidden";
     fpCover.removeAttribute("src");
     fpBg.style.backgroundImage = "none";
+    
+    if (window.jsmediatags) {
+      jsmediatags.read(url(cur.audio), {
+        onSuccess: function(tag) {
+          var image = tag.tags.picture;
+          if (image) {
+            var base64String = "";
+            for (var j = 0; j < image.data.length; j++) {
+              base64String += String.fromCharCode(image.data[j]);
+            }
+            var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+            miniCover.src = base64; miniCover.style.visibility="visible";
+            fpCover.src = base64;
+            fpBg.style.backgroundImage = `url('${base64}')`;
+          }
+        },
+        onError: function(error) {}
+      });
+    }
   }
 
   fpDl.href = url(cur.audio);
@@ -477,18 +542,18 @@ function createTrack(t){
   const row=el("div","track");
   const info=el("div","track-info");
   const bar=el("div","bar");
-  const rng=el("input");rng.type="range";rng.min=0;rng.max=1000;rng.value=0;rng.disabled=true;rng.setAttribute("aria-label","Seek "+t.title);
+  const rng=el("input");rng.type="range";rng.min=0;rng.max=1000;rng.value=0;rng.disabled=true;rng.setAttribute("aria-label","Seek "+(t.title||"track"));
   const time=el("span","time","0:00");
   bar.append(rng,time);
-  info.append(el("h4","",t.title),el("p","",t.artist||""),bar);
+  info.append(el("h4","",t.title||"Unknown"),el("p","",t.artist||""),bar);
 
   const mk=(cls,txt,label)=>{const b=el("button",cls,txt);b.type="button";b.setAttribute("aria-label",label);return b};
-  const back=mk("","−10","Back 10 seconds"),play=mk("play","▶","Play "+t.title),fwd=mk("","+10","Forward 10 seconds");
+  const back=mk("","−10","Back 10 seconds"),play=mk("play","▶","Play "+(t.title||"track")),fwd=mk("","+10","Forward 10 seconds");
   
   const dl = el("a", "dl-btn");
   dl.href = url(t.audio);
   dl.setAttribute("download", (t.title || "track") + ".mp3");
-  dl.setAttribute("aria-label", "Download " + t.title);
+  dl.setAttribute("aria-label", "Download " + (t.title||"track"));
   dl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
   
   const ctrl=el("div","ctrl");
@@ -510,18 +575,19 @@ function createTrack(t){
   back.addEventListener("click",skip(-10));fwd.addEventListener("click",skip(10));
   rng.addEventListener("input",()=>{fill(rng);if(mine()&&A.duration)A.currentTime=rng.value/1000*A.duration});
 
-  row.append(pic("cover",t.cover,t.title),ctrl,info);
+  row.append(pic("cover",t.cover,t.title,t.audio),ctrl,info);
   return row;
 }
 
 function createAlbum(album){
   const box=el("div");
   const head=el("div","album-heading");
-  const txt=el("div");txt.append(el("h3","",album.title),el("p","","FULL ALBUM"));
+  const txt=el("div");txt.append(el("h3","",album.title||"Album"),el("p","","FULL ALBUM"));
   const btn=el("button","view-more","VIEW MORE");btn.type="button";
   head.append(txt,btn);
   const list=el("div");
-  const rows=album.tracks.map(t=>createTrack({...t,cover:album.cover,artist:t.artist||""}));chain(rows);rows.forEach(r=>list.appendChild(r));
+  const rows=(album.tracks||[]).map(t=>createTrack({...t,cover:album.cover || t.cover,artist:t.artist||""}));
+  chain(rows);rows.forEach(r=>list.appendChild(r));
   const wrap=collapse(list);
   const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
   box.append(head,wrap);box.api={set,wrap,rows,title:album.title};return box;
@@ -530,6 +596,7 @@ function createAlbum(album){
 /* ---------- fuzzy search ---------- */
 const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f\u200c]/g,"").toLowerCase()
   .replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/[^a-z0-9\u0600-\u06ff]+/g," ").trim();
+
 function lev(a,b){
   const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>{const r=new Array(n+1).fill(0);r[0]=i;return r});
   for(let j=1;j<=n;j++)d[0][j]=j;
@@ -539,7 +606,9 @@ function lev(a,b){
   }
   return d[m][n];
 }
+
 function tokScore(q,t){
+  if(!q || !t) return 0;
   if(t===q)return 1;
   if(t.startsWith(q))return .95;
   if(q.length>=3&&t.includes(q))return .85;
@@ -548,8 +617,9 @@ function tokScore(q,t){
   const d=Math.min(lev(q,t),q.length>=4?lev(q,t.slice(0,q.length)):9);
   return d<=lim?.8-d*.1:0;
 }
+
 function score(q,text){
-  const t=norm(text);if(!t)return 0;
+  const t=norm(text);if(!t||!q)return 0;
   const qt=q.split(" "),tt=t.split(" ");let sum=0;
   for(const x of qt){let b=0;for(const y of tt)b=Math.max(b,tokScore(x,y));if(!b){sum=0;break}sum+=b}
   let s=sum/qt.length;
@@ -569,6 +639,7 @@ async function load(f){
 function merge(lists){
   const map=new Map();
   lists.flat().forEach(a=>{
+    if(!a || !a.name) return; 
     const k=a.name.trim().toLowerCase();
     if(!map.has(k))map.set(k,{name:a.name,photo:a.photo,description:a.description,aliases:[],singles:[],albums:[]});
     const m=map.get(k);
@@ -585,15 +656,17 @@ function renderArtist(artist,list){
   const info=el("div","artist-info");
   const btn=el("button","view-more","VIEW MORE");btn.type="button";
   info.append(el("h3","",artist.name),el("p","",artist.description||"ARTIST"),btn);
+  
   card.append(pic("artist-photo",artist.photo,artist.name),info);
 
   const pad=el("div","pad");
   if(!artist.singles.length&&!artist.albums.length)pad.appendChild(el("div","empty","NO TRACKS YET"));
-  const sr=artist.singles.map(t=>createTrack(t));chain(sr);sr.forEach(r=>pad.appendChild(r));
-  const boxes=artist.albums.map(a=>createAlbum(a));boxes.forEach(b=>pad.appendChild(b));
+  const sr=(artist.singles||[]).map(t=>createTrack(t));chain(sr);sr.forEach(r=>pad.appendChild(r));
+  const boxes=(artist.albums||[]).map(a=>createAlbum(a));boxes.forEach(b=>pad.appendChild(b));
   const wrap=collapse(pad);wrap.classList.add("artist-content");
   const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
   group.append(card,wrap);list.appendChild(group);
+  
   const tracks=[
     ...sr.map((row,i)=>({row,t:artist.singles[i],album:null})),
     ...boxes.flatMap((b,i)=>b.api.rows.map((row,j)=>({row,t:artist.albums[i].tracks[j],album:b.api})))];
@@ -603,7 +676,10 @@ function renderArtist(artist,list){
 (async()=>{
   const list=document.getElementById("artistList");
   const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
-  if(!artists.length){list.appendChild(el("div","empty","LIBRARY NOT FOUND — open the site through GitHub Pages or a local server."));return}
+  
+  // لاگ برای دیباگ کردن در کنسول مرورگر
+  console.log("Artists loaded:", artists.length);
+  if(!artists.length){list.appendChild(el("div","empty","LIBRARY NOT FOUND"));return}
   
   const items=artists.map(a=>renderArtist(a,list));
   const noRes=el("div","empty","");noRes.style.display="none";list.after(noRes);
@@ -624,6 +700,7 @@ function renderArtist(artist,list){
       loadMoreBtn.style.display = "none";
       return;
     }
+    
     items.forEach((it, index) => {
       if (index < 5 || showingAll) {
         it.group.style.display = "";
@@ -632,7 +709,12 @@ function renderArtist(artist,list){
         it.group.style.display = "none";
       }
     });
-    loadMoreBtn.style.display = (items.length > 5 && !showingAll) ? "block" : "none";
+    
+    if (items.length > 5 && !showingAll) {
+      loadMoreBtn.style.display = "block";
+    } else {
+      loadMoreBtn.style.display = "none";
+    }
   }
 
   loadMoreBtn.addEventListener("click", () => {
@@ -649,6 +731,7 @@ function renderArtist(artist,list){
         it.auto=[];
         if(it.tracks) it.tracks.forEach(x=>{if(x.row) x.row.classList.remove("hit")});
       });
+      
       const q=norm(raw);
       
       if(q.length<2){
@@ -660,25 +743,40 @@ function renderArtist(artist,list){
       }
       
       const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
+      
       items.forEach(it=>{
-        const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
-        it.albums.forEach(b=>b.s=score(q,b.title));
-        it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
-        const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
-        it.score=Math.max(sName,sAlb,sTr);
-        if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
+        const names = [it.artist.name, ...(it.artist.aliases || [])].filter(Boolean);
+        const sName = names.length ? Math.max(...names.map(n => score(q, n))) : 0;
+        
+        it.albums.forEach(b => { b.s = score(q, b.title); });
+        it.tracks.forEach(x => { x.s = Math.max(score(q, x.t.title), .85 * score(q, x.t.artist || "")); });
+        
+        const sAlb = Math.max(0, ...it.albums.map(b => b.s * .95));
+        const sTr = Math.max(0, ...it.tracks.map(x => x.s));
+        
+        it.score = Math.max(sName, sAlb, sTr);
+        
+        if(it.score>=.6 && sName < Math.max(sAlb, sTr)){
           const min=Math.max(.6,it.score-.1);
           open(it,it.set,it.wrap);
-          it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
-          it.albums.forEach(b=>{if(b.s*.95>=min)open(it,b.set,b.wrap)});
+          it.tracks.forEach(x=>{
+            if(x.s>=min){ x.row.classList.add("hit"); if(x.album) open(it, x.album.set, x.album.wrap); }
+          });
+          it.albums.forEach(b=>{ if(b.s*.95>=min) open(it, b.set, b.wrap); });
         }
       });
+      
       const shown=items.filter(i=>i.score>=.6).sort((a,b)=>b.score-a.score);
-      items.forEach(i=>i.group.style.display=i.score>=.6?"":"none");
-      list.append(...shown.map(i=>i.group),...items.filter(i=>i.score<.6).map(i=>i.group));
-      noRes.style.display=shown.length?"none":"";noRes.textContent=shown.length?"":"NOTHING FOUND — TRY FEWER LETTERS";
+      
+      items.forEach(i => { i.group.style.display = i.score >= .6 ? "" : "none"; });
+      
+      list.append(...shown.map(i=>i.group), ...items.filter(i=>i.score<.6).map(i=>i.group));
+      
+      noRes.style.display = shown.length ? "none" : "";
+      noRes.textContent = shown.length ? "" : "NOTHING FOUND — TRY FEWER LETTERS";
       
       loadMoreBtn.style.display = "none";
+      
     } catch(e) {
       console.error("Search execution error", e);
     }
