@@ -40,16 +40,16 @@ main{max-width:900px;margin:auto}
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border : 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 24px;
   margin-bottom: 25px;
   overflow: hidden;
-  box-shadow:0 0 8px 32px 0 rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease,  box-shadow 0.3s ease;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .artist-group:hover {
   transform: translateY(-2px);
-  box-shadow:12px 40px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.08);
 }
 
 .artist-card{display:flex;align-items:center;gap:25px;padding:25px;border-bottom: 1px solid rgba(0,0,0,0.04);}
@@ -65,15 +65,15 @@ main{max-width:900px;margin:auto}
 .collapse.open{grid-template-rows:1fr}
 .collapse>.inner{overflow:hidden;min-height:0}
 .artist-content .inner{padding:0}
-.artist-content .pad{padding:10px 25px 35px;} /* هماهنگ با پدینگ کارت */
+.artist-content .pad{padding:10px 25px 35px;}
 
-.album-heading{display:flex;justify-content:space:-between;align-items:center;gap:15px;margin:20px 0 10px;padding-top:20px;border-top:112px solid rgba(0,0,0,0.06)}
-.album-heading h3{font-size:15px;letter-spacing:3pxpx;margin-bottom:7px}
+.album-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:20px 0 10px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06)}
+.album-heading h3{font-size:15px;letter-spacing:3px;margin-bottom:7px}
 .album-heading p{font-size:10px;color:#888;letter-spacing:2px}
-.album-head;ing .view-more{flex-shrink:0}
+.album-heading .view-more{flex-shrink:0}
 
-.track{display:flex;align-items:center;gap:16px;paddingbox:16px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
-.cover{width:85px;height:-shadow85px;object-fit:cover;background:#eee;flex-shrink:0;border-radius: 0 2px 10px rgba(0,0,0,0.05);}
+.track{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+.cover{width:85px;height:85px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:12px;box-shadow: 0 2px 10px rgba(0,0,0,0.05);}
 .ctrl{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .ctrl button, .ctrl a.dl-btn{border:1px solid #111;background:#fff;color:#111;cursor:pointer;font-size:10px;width:32px;height:32px;border-radius:50%;transition:.2s;display:flex;align-items:center;justify-content:center;text-decoration:none;}
 .ctrl button.play{width:42px;height:42px;font-size:14px}
@@ -367,7 +367,7 @@ function updateUI(){
   else {
     miniCover.removeAttribute("src"); miniCover.style.visibility="hidden"; fpCover.removeAttribute("src"); fpBg.style.backgroundImage = "none";
     if (window.jsmediatags) {
-      try { jsmediatags.read(url(cur.audio), { onSuccess: function(tag) { var image = tag.tags.picture; if (image) { var base64String = ""; for (var j = 0; j < image.data.length; j++) { base64String += String.fromCharCode(image.data[j]); } var base64 = "data:" + image.format + ";base64,"if + window.btoa(base64String); miniCover.src = base64; miniCover.style.visibility="visible"; fpCover.src = base64; fpBg.style.backgroundImage = `url('${base64}')`; } }, onError: function() {} }); } catch(e) {}
+      try { jsmediatags.read(url(cur.audio), { onSuccess: function(tag) { var image = tag.tags.picture; if (image) { var base64String = ""; for (var j = 0; j < image.data.length; j++) { base64String += String.fromCharCode(image.data[j]); } var base64 = "data:" + image.format + ";base64," + window.btoa(base64String); miniCover.src = base64; miniCover.style.visibility="visible"; fpCover.src = base64; fpBg.style.backgroundImage = `url('${base64}')`; } }, onError: function() {} }); } catch(e) {}
     }
   }
   fpDl.href = url(cur.audio); fpDl.download = (cur.title || "track") + ".mp3";
@@ -378,7 +378,7 @@ A.addEventListener("play",()=>{ document.body.classList.add("playing"); initAudi
 ["pause","ended","error"].forEach(e=>A.addEventListener(e,()=>{ document.body.classList.remove("playing"); if(e==="pause"||e==="error") updateUI(); }));
 A.addEventListener("play",()=>cur&&(cur.btn.textContent="❚❚"));
 A.addEventListener("pause",()=>cur&&!A.ended&&(cur.btn.textContent="▶"));
-A.addEventListener("ended",()=>{ if(!cur)return; const n=cur.row.nextRow; cur.reset(); if(n) n.start(); else setTimeout(()=>{(!cur||A.paused) miniPlayer.classList.remove("show")},400); });
+A.addEventListener("ended",()=>{ if(!cur)return; const n=cur.row.nextRow; cur.reset(); if(n) n.start(); else setTimeout(()=>{if(!cur||A.paused) miniPlayer.classList.remove("show")},400); });
 A.addEventListener("error",()=>cur&&cur.reset());
 A.addEventListener("timeupdate",()=>{ if(!cur||!A.duration)return; const p = (A.currentTime/A.duration)*100, val = A.currentTime/A.duration*1000; cur.rng.value = val; fill(cur.rng); cur.time.textContent = fmt(A.currentTime)+" / "+fmt(A.duration); miniFill.style.width = p+"%"; fpRange.value = val; fill(fpRange); fpTimeCur.textContent = fmt(A.currentTime); fpTimeTot.textContent = fmt(A.duration); });
 
@@ -414,15 +414,13 @@ function createAlbum(album){
   box.append(head,wrap);box.api={set,wrap,rows,title:album.title};return box;
 }
 
-/* ===== کدهای سرچ اصلی شما ===== */
-const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f\u200c]/g,"").toLowerCase()
-  .replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/[^a-z0-9\u0600-\u06ff]+/g," ").trim();
-function lev(a,b){ const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>{const r=new Array(n+1).fill(0);r[0]=i;return r}); for(let j=1;j<=n;j++)d[0][j]=j; for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){ d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1); } return d[m][n]; }
-function tokScore(q,t){ if(t===q)return 1; if(t.startsWith(q))return .95; if(q.length>=3&&t.includes(q))return .85; const lim=q.length<=3?0:q.length<=5?1:q.length<=8?2:3; if(!lim)return 0; const d=Math.min(lev(q,t),q.length>=4?lev(q,t.slice(0,q.length)):9); return d<=lim?.8-d*.1:0; }
-function score(q,text){ const t=norm(text);if(!t)return 0; const qt=q.split(" "),tt=t.split(" ");let sum=0; for(const x of qt){let b=0;for(const y of tt)b=Math.max(b,tokScore(x,y));if(!b){sum=0;break}sum+=b} let s=sum/qt.length; const qc=q.replace(/ /g,""),tc=t.replace(/ /g,""); if(qc.length>=3){ if(tc.includes(qc))s=Math.max(s,.9); else if(qc.length>=4){const lim=qc.length<=5?1:qc.length<=8?2:3;if(Math.min(lev(qc,tc),lev(qc,tc.slice(0,qc.length)))<=lim)s=Math.max(s,.7)} } return s; }
-
 /* ===== Load Data ===== */
-async function load(f){ try{const r=await fetch("./assets/"+f,{cache:"no-cache"});return r.ok?((await r.json()).artists||[]):[]} catch{return[]} }
+async function load(f){ 
+  try{ const r=await fetch("./assets/"+f,{cache:"no-cache"}); 
+    if(!r.ok) return [];
+    const data = await r.json(); return Array.isArray(data.artists) ? data.artists : [];
+  } catch{ return []; } 
+}
 function merge(lists){
   const map=new Map();
   lists.flat().forEach(a=>{
@@ -450,7 +448,21 @@ function renderArtist(artist,list){
   
   const wrap=collapse(pad);wrap.classList.add("artist-content");
   const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
-  group.append(card,wrap);list.appendChild(group);
+  group.append(card,wrap);
+  
+  // ساخت متن جستجو برای هر خواننده (شامل اسم خواننده، آلبوم ها و آهنگ ها)
+  const searchStr = [
+    artist.name,
+    ...(artist.aliases || []),
+    ...(artist.singles || []).map(t => t.title),
+    ...(artist.singles || []).map(t => t.artist),
+    ...(artist.albums || []).map(a => a.title),
+    ...(artist.albums || []).flatMap(a => (a.tracks || []).map(t => t.title))
+  ].filter(Boolean).join(" ").toLowerCase();
+  
+  group.dataset.searchText = searchStr;
+  
+  list.appendChild(group);
   
   const tracks=[ ...sr.map((row,i)=>({row,t:artist.singles[i],album:null})), ...boxes.flatMap((b,i)=>b.api.rows.map((row,j)=>({row,t:artist.albums[i].tracks[j],album:b.api})))];
   return{group,artist,set,wrap,albums:boxes.map(b=>b.api),tracks,auto:[]};
@@ -462,27 +474,30 @@ function renderArtist(artist,list){
   if(!artists.length){ list.appendChild(el("div","empty","LIBRARY NOT FOUND")); return; }
   
   const items = artists.map(a=>renderArtist(a,list));
-  const noRes = el("div","empty",""); noRes.style.display="none"; list.after(noRes);
+  
+  const noRes = el("div","empty","NOTHING FOUND");
+  noRes.id = "no-res-msg";
+  noRes.style.display = "none";
+  list.after(noRes);
 
-  // --- مدیریت نمایش ۵ خواننده و دکمه More ---
   const loadMoreContainer = document.getElementById("load-more-container");
   const loadMoreBtn = document.getElementById("load-more-btn");
   let showingAll = false;
 
   function updateVisibility() {
-    const q = norm(document.getElementById("search").value);
+    const q = document.getElementById("search").value.trim();
     if (q.length >= 2) {
       loadMoreContainer.style.display = "none";
       return;
     }
-    if (showingAll) {
+    if (showingAll || items.length <= 5) {
       items.forEach(it => it.group.style.display = "");
       loadMoreContainer.style.display = "none";
     } else {
       items.forEach((it, index) => {
         it.group.style.display = index < 5 ? "" : "none";
       });
-      loadMoreContainer.style.display = items.length > 5 ? "block" : "none";
+      loadMoreContainer.style.display = "block";
     }
   }
 
@@ -490,51 +505,46 @@ function renderArtist(artist,list){
     showingAll = true;
     updateVisibility();
   });
-  // ----------------------------------------
 
-  function run(raw){
-    items.forEach(it=>{it.auto.forEach(f=>f(false));it.auto=[];it.tracks.forEach(x=>x.row.classList.remove("hit"))});
-    const q=norm(raw);
-    
-    if(q.length<2){
-      items.forEach(it=>it.group.style.display="");
-      list.append(...items.map(i=>i.group));
-      noRes.style.display="none";
-      updateVisibility(); // برگرداندن محدودیت ۵ خواننده وقتی سرچ پاک میشود
-      return;
-    }
-    
-    const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
-    items.forEach(it=>{
-      const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
-      it.albums.forEach(b=>b.s=score(q,b.title));
-      it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
-      const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
-      it.score=Math.max(sName,sAlb,sTr);
+  function run(raw) {
+    try {
+      const q = raw.toLowerCase().trim();
+      const noRes = document.getElementById("no-res-msg");
       
-      if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
-        const min=Math.max(.6,it.score-.1);
-        open(it,it.set,it.wrap);
-        it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
-        it.albums.forEach(b=>{if(b.s*.95>=min)open(it,b.set,b.wrap)});
+      if (q.length < 2) {
+        items.forEach(it => it.group.style.display = "");
+        if (noRes) noRes.style.display = "none";
+        updateVisibility();
+        return;
       }
-    });
-    
-    const shown=items.filter(i=>i.score>=.6).sort((a,b)=>b.score-a.score);
-    items.forEach(i=>i.group.style.display=i.score>=.6?"":"none");
-    list.append(...shown.map(i=>i.group),...items.filter(i=>i.score<.6).map(i=>i.group));
-    noRes.style.display=shown.length?"none":"";noRes.textContent=shown.length?"":"NOTHING FOUND — TRY FEWER LETTERS";
-    
-    loadMoreContainer.style.display = "none";
+      
+      loadMoreContainer.style.display = "none";
+
+      let found = 0;
+      items.forEach(it => {
+        const searchData = it.group.dataset.searchText || "";
+        if (searchData.includes(q)) {
+          it.group.style.display = "";
+          found++;
+        } else {
+          it.group.style.display = "none";
+        }
+      });
+
+      if (noRes) {
+        noRes.style.display = found === 0 ? "block" : "none";
+      }
+    } catch (e) {
+      console.error("Search error:", e);
+    }
   }
   
   let timer;
   document.getElementById("search").addEventListener("input",e=>{
     clearTimeout(timer);
-    timer=setTimeout(()=>run(e.target.value),120);
+    timer=setTimeout(()=>run(e.target.value),150);
   });
 
-  // اجرای اولیه محدودیت ۵ خواننده
   updateVisibility();
 })();
 
