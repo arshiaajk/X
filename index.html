@@ -8,8 +8,22 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;padding:35px 7%;padding-bottom:120px;overflow-x:hidden}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:100px}
+
+/* پس‌زمینه ملایم برای اینکه افکت شیشه‌ای کارت خواننده‌ها دیده شود */
+body{
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(200, 220, 255, 0.4) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 210, 220, 0.4) 0%, transparent 40%),
+    #fafafa;
+  color:#111;
+  font-family:Arial,Helvetica,sans-serif;
+  padding:35px 7%;
+  padding-bottom:120px;
+  overflow-x:hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:80px}
 .date{font-size:11px;letter-spacing:2px;color:#777}
 .logo{font-size:35px;font-weight:900;letter-spacing:7px;animation:logoMove 7s ease-in-out infinite alternate}
 @property --amp{syntax:"<length>";inherits:true;initial-value:3px}
@@ -21,13 +35,29 @@ body.playing .logo{--amp:9px}
 main{max-width:900px;margin:auto}
 .section-title{font-size:12px;letter-spacing:5px;margin-bottom:35px}
 
-/* بازگشت به استایل اصلی و شیک کارت‌ها */
-.artist-card{display:flex;align-items:center;gap:25px;padding:25px 0;border-bottom:1px solid #e8e8e8}
-.artist-photo{width:125px;height:125px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:16px}
+/* ===== افکت شیشه‌ای (Glassmorphism) ===== */
+.artist-group {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border : 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  margin-bottom: 25px;
+  overflow: hidden;
+  box-shadow:0 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease,  box-shadow 0.3s ease;
+}
+.artist-group:hover {
+  transform: translateY(-2px);
+  box-shadow:12px 40px 0 rgba(0, 0, 0, 0.08);
+}
+
+.artist-card{display:flex;align-items:center;gap:25px;padding:25px;border-bottom: 1px solid rgba(0,0,0,0.04);}
+.artist-photo{width:125px;height:125px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:16px;box-shadow: 0 4px 15px rgba(0,0,0,0.08);}
 .artist-info{flex:1;min-width:0}
 .artist-info h3{font-size:19px;margin-bottom:9px}
-.artist-info p{font-size:10px;color:#888;letter-spacing:2px;margin-bottom:18px}
-.view-more{background:transparent;color:#111;border:1px solid #111;padding:11px 23px;font-size:9px;letter-spacing:3px;cursor:pointer;transition:.3s;border-radius:12px}
+.artist-info p{font-size:10px;color:#666;letter-spacing:2px;margin-bottom:18px}
+.view-more{background:transparent;color:#111;border:1px solid #111;padding:11px 23px;font-size:9px;letter-spacing:3px;cursor:pointer;transition:.3s;border-radius:12px;font-weight: 600;}
 .view-more:hover,.view-more:focus-visible{background:#111;color:#fff}
 
 /* smooth open/close */
@@ -35,16 +65,15 @@ main{max-width:900px;margin:auto}
 .collapse.open{grid-template-rows:1fr}
 .collapse>.inner{overflow:hidden;min-height:0}
 .artist-content .inner{padding:0}
-.artist-content.open{border-bottom:1px solid #e8e8e8}
-.artist-content .pad{padding:10px 0 35px}
+.artist-content .pad{padding:10px 25px 35px;} /* هماهنگ با پدینگ کارت */
 
-.album-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:30px 0 10px;padding-top:20px;border-top:1px solid #eee}
-.album-heading h3{font-size:15px;letter-spacing:3px;margin-bottom:7px}
+.album-heading{display:flex;justify-content:space:-between;align-items:center;gap:15px;margin:20px 0 10px;padding-top:20px;border-top:112px solid rgba(0,0,0,0.06)}
+.album-heading h3{font-size:15px;letter-spacing:3pxpx;margin-bottom:7px}
 .album-heading p{font-size:10px;color:#888;letter-spacing:2px}
-.album-heading .view-more{flex-shrink:0}
+.album-head;ing .view-more{flex-shrink:0}
 
-.track{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0}
-.cover{width:85px;height:85px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:12px}
+.track{display:flex;align-items:center;gap:16px;paddingbox:16px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+.cover{width:85px;height:-shadow85px;object-fit:cover;background:#eee;flex-shrink:0;border-radius: 0 2px 10px rgba(0,0,0,0.05);}
 .ctrl{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .ctrl button, .ctrl a.dl-btn{border:1px solid #111;background:#fff;color:#111;cursor:pointer;font-size:10px;width:32px;height:32px;border-radius:50%;transition:.2s;display:flex;align-items:center;justify-content:center;text-decoration:none;}
 .ctrl button.play{width:42px;height:42px;font-size:14px}
@@ -58,28 +87,17 @@ input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:3px;bord
 input[type=range]:disabled{cursor:default;opacity:.6}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:#111;border:0}
 input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#111;border:0}
-#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:10px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
-#search:focus{border-color:#111}
-.track.hit{background:#f7f7f7;box-shadow:0 0 0 10px #f7f7f7;border-radius:12px;border-bottom-color:transparent}
-.empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0}
 
-/* استایل دکمه MORE */
-#load-more-container {
-  display: none; 
-  text-align: center; 
-  margin-top: 20px; 
-  margin-bottom: 40px;
-}
-#load-more-btn {
-  background: #111; color: #fff; border: none;
-  padding: 16px 30px; font-size: 11px; letter-spacing: 3px;
-  font-weight: bold; cursor: pointer; border-radius: 12px;
-  width: 100%; transition: 0.2s;
-}
-#load-more-btn:hover { background: #333; }
+#search{width:100%;border:1px solid rgba(0,0,0,0.1);border-radius:16px;padding:15px 20px;margin-bottom:20px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:all .3s;background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);}
+#search:focus{border-color:#111; background: #fff;}
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-.artist-group.fade-in { animation: fadeIn 0.5s ease-out forwards; }
+.track.hit{background:rgba(0,0,0,0.04);border-radius:12px;border-bottom-color:transparent}
+.empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0;text-align:center;}
+
+/* دکمه MORE */
+#load-more-container{text-align:center;margin-top:20px;margin-bottom:30px;display:none;}
+#load-more-btn{background:#111;color:#fff;border:none;padding:16px 30px;font-size:11px;letter-spacing:3px;font-weight:bold;cursor:pointer;border-radius:16px;width:100%;transition:0.2s;box-shadow: 0 4px 15px rgba(0,0,0,0.1);}
+#load-more-btn:hover{background:#333;transform:translateY(-2px);}
 
 .tg{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,200%);opacity:0;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
 .tg.show{transform:translate(calc(-50% + var(--dx,0px)),0);opacity:1}
@@ -88,38 +106,33 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;bac
 .tg-ico{width:34px;height:34px;flex-shrink:0}
 .tg-text b{display:block;font-size:11px;letter-spacing:3px}
 .tg-text small{display:block;font-size:10px;color:#888;letter-spacing:1px;margin-top:4px}
-.about{border-top:1px solid #e8e8e8;margin-top:100px;padding-top:40px;margin-bottom:80px}
+.about{border-top:1px solid rgba(0,0,0,0.06);margin-top:80px;padding-top:40px;margin-bottom:80px}
 .about p{font-size:13px;line-height:2;color:#777;max-width:550px}
-footer{text-align:center;border-top:1px solid #eee;padding-top:30px;font-size:10px;color:#999;letter-spacing:2px}
+footer{text-align:center;border-top:1px solid rgba(0,0,0,0.06);padding-top:30px;font-size:10px;color:#999;letter-spacing:2px}
 footer a{color:#111;text-decoration:none}
 
 /* ===== MINI PLAYER ===== */
 .mini-player{
   position:fixed;left:0;right:0;bottom:0;z-index:60;
-  background:#fff;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 28px 28px 0 0;
-  border-top: 1px solid rgba(0,0,0,0.04);
+  border-top: 1px solid rgba(255,255,255,0.6);
   transform:translateY(110%);opacity:0;
   transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .4s;
   padding-bottom:env(safe-area-inset-bottom,0px);
-  box-shadow:0 -10px 40px rgba(0,0,0,.06);
+  box-shadow:0 -10px 40px rgba(0,0,0,.08);
   cursor:pointer;
 }
 .mini-player.show{transform:translateY(0);opacity:1}
-.mini-progress{height:3px;width:100%;position:relative;overflow:hidden;background:#f0f0f0;border-radius: 28px 28px 0 0;}
+.mini-progress{height:3px;width:100%;position:relative;overflow:hidden;background:rgba(0,0,0,0.05);border-radius: 28px 28px 0 0;}
 .mini-progress-fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:#111;transition:width .15s linear}
-.mini-wave{position:absolute;left:0;right:0;top:-6px;height:14px;pointer-events:none;opacity:0;transition:opacity .4s}
-.mini-player.show .mini-wave{opacity:1}
-.mini-wave svg{width:200%;height:100%;display:block}
-.mini-wave path{fill:none;stroke:#111;stroke-width:1.4;stroke-linecap:round;opacity:.35;animation:waveFlow 4.5s ease-in-out infinite}
-.mini-wave path:nth-child(2){opacity:.22;animation-duration:5.8s;animation-delay:-1.2s}
-.mini-wave path:nth-child(3){opacity:.15;animation-duration:7s;animation-delay:-2.4s}
-@keyframes waveFlow{0%{transform:translateX(0)}50%{transform:translateX(-25%)}100%{transform:translateX(-50%)}}
 .mini-inner{display:flex;align-items:center;gap:14px;padding:12px 18px 14px;max-width:900px;margin:0 auto;}
-.mini-cover{width:44px;height:44px;border-radius:10px;object-fit:cover;background:#eee;flex-shrink:0;}
+.mini-cover{width:44px;height:44px;border-radius:10px;object-fit:cover;background:#eee;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
 .mini-info{flex:1;min-width:0}
 .mini-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mini-artist{font-size:10px;color:#888;letter-spacing:1px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-artist{font-size:10px;color:#666;letter-spacing:1px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mini-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .mini-ctrl button{border:1px solid #111;background:#fff;color:#111;cursor:pointer;width:36px;height:36px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;transition:.2s}
 .mini-ctrl #miniNext {background: #111; color: #fff; border: none;}
@@ -143,7 +156,7 @@ footer a{color:#111;text-decoration:none}
 .fp-bg {
   position: absolute; inset: -50px;
   background-size: cover; background-position: center;
-  filter: blur(calc(60px - (var(--bass) * 55px))) brightness(calc(0.7 - (var(--bass) * 0.6)));
+  filter: blur(calc(60px - (var(--bass) * 55px))) brightness(calc(0.6 - (var(--bass) * 0.5)));
   transform: scale(calc(1 + (var(--bass) * 0.25)));
   transition: filter 0.05s ease-out, transform 0.05s ease-out;
   z-index: 1;
@@ -151,10 +164,9 @@ footer a{color:#111;text-decoration:none}
 .fp-bg::after {
   content: ''; position: absolute; inset: 0;
   background: #000;
-  opacity: calc(0.1 + (var(--bass) * 0.7)); 
+  opacity: calc(0.2 + (var(--bass) * 0.7)); 
   transition: opacity 0.05s ease-out;
 }
-
 .fp-content {
   position: relative; z-index: 2;
   display: flex; flex-direction: column; align-items: center; justify-content: space-between;
@@ -195,26 +207,26 @@ footer a{color:#111;text-decoration:none}
   display: flex; align-items: center; justify-content: center;
   transition: transform 0.2s, opacity 0.2s;
 }
-.fp-ctrl button:hover { opacity: 0.7; transform: scale(1.1); }
 .fp-ctrl .fp-play {
   background: #fff; color: #111; width: 70px; height: 70px;
   border-radius: 50%; font-size: 24px;
   box-shadow: 0 4px 15px rgba(255,255,255,0.2);
 }
-.fp-ctrl .fp-play:hover { opacity: 1; transform: scale(1.05); }
 .fp-ctrl svg { fill: currentColor; }
 
 @media(max-width:600px){
-  body{padding:25px 6%;padding-bottom:110px}
-  header{margin-bottom:70px}
+  body{padding:25px 5%;padding-bottom:110px}
+  header{margin-bottom:60px}
   .logo{font-size:27px}
-  .artist-card{gap:15px}
-  .artist-photo{width:95px;height:95px}
-  .artist-info h3{font-size:15px}
+  .artist-group{border-radius: 20px;}
+  .artist-card{gap:15px; padding: 18px;}
+  .artist-photo{width:90px;height:90px;border-radius: 12px;}
+  .artist-info h3{font-size:16px}
+  .artist-content .pad{padding:10px 18px 25px;}
   .track{flex-wrap:wrap;gap:12px}
   .cover{width:72px;height:72px}
   .track-info{flex:1 1 calc(100% - 90px)}
-  .ctrl{order:3;width:100%;justify-content:center;gap:10px;}
+  .ctrl{order:3;width:100%;justify-content:center;gap:15px;}
   .time{min-width:70px}
   .mini-inner{padding:10px 14px 12px;gap:10px}
   .mini-cover{width:38px;height:38px}
@@ -254,83 +266,45 @@ footer a{color:#111;text-decoration:none}
   </a>
 </div>
 
-<!-- MINI PLAYER -->
 <div class="mini-player" id="miniPlayer" aria-live="polite">
-  <div class="mini-progress">
-    <div class="mini-progress-fill" id="miniFill"></div>
-    <div class="mini-wave" aria-hidden="true">
-      <svg viewBox="0 0 1200 14" preserveAspectRatio="none">
-        <path d="M0 7 Q 50 2 100 7 T 200 7 T 300 7 T 400 7 T 500 7 T 600 7 T 700 7 T 800 7 T 900 7 T 1000 7 T 1100 7 T 1200 7"/>
-        <path d="M0 7 Q 60 3 120 7 T 240 7 T 360 7 T 480 7 T 600 7 T 720 7 T 840 7 T 960 7 T 1080 7 T 1200 7"/>
-        <path d="M0 7 Q 40 4 80 7 T 160 7 T 240 7 T 320 7 T 400 7 T 480 7 T 560 7 T 640 7 T 720 7 T 800 7 T 880 7 T 960 7 T 1040 7 T 1120 7 T 1200 7"/>
-      </svg>
-    </div>
-  </div>
+  <div class="mini-progress"><div class="mini-progress-fill" id="miniFill"></div></div>
   <div class="mini-inner">
     <img class="mini-cover" id="miniCover" alt="" src="" style="visibility:hidden">
-    <div class="mini-info">
-      <div class="mini-title" id="miniTitle">—</div>
-      <div class="mini-artist" id="miniArtist"></div>
-    </div>
+    <div class="mini-info"><div class="mini-title" id="miniTitle">—</div><div class="mini-artist" id="miniArtist"></div></div>
     <div class="mini-ctrl">
       <button type="button" class="mini-play" id="miniPlay" aria-label="Play / Pause">▶</button>
-      <button type="button" id="miniNext" aria-label="Next track">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
+      <button type="button" id="miniNext" aria-label="Next track"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
     </div>
   </div>
 </div>
 
-<!-- FULL SCREEN PLAYER -->
 <div class="full-player" id="fullPlayer" aria-hidden="true">
   <div class="fp-bg" id="fpBg"></div>
   <div class="fp-content">
-    
     <div class="fp-header">
-      <button class="fp-close" id="fpClose" aria-label="Close full player">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-      </button>
-      <a class="fp-dl" id="fpDl" href="#" aria-label="Download track">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      </a>
+      <button class="fp-close" id="fpClose" aria-label="Close full player"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+      <a class="fp-dl" id="fpDl" href="#" aria-label="Download track"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
     </div>
-
     <div class="fp-main">
       <img class="fp-cover" id="fpCover" alt="" src="">
-      <div class="fp-info">
-        <div class="fp-title" id="fpTitle">—</div>
-        <div class="fp-artist" id="fpArtist"></div>
-      </div>
+      <div class="fp-info"><div class="fp-title" id="fpTitle">—</div><div class="fp-artist" id="fpArtist"></div></div>
     </div>
-
     <div class="fp-bottom">
       <div class="fp-bar">
         <input type="range" id="fpRange" min="0" max="1000" value="0" aria-label="Seek">
-        <div class="fp-times">
-          <span id="fpTimeCur">0:00</span>
-          <span id="fpTimeTot">0:00</span>
-        </div>
+        <div class="fp-times"><span id="fpTimeCur">0:00</span><span id="fpTimeTot">0:00</span></div>
       </div>
       <div class="fp-ctrl">
-        <button id="fpPrev" aria-label="Previous track">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-        </button>
-        <button class="fp-play" id="fpPlay" aria-label="Play / Pause">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" id="fpPlayIcon"><path d="M8 5v14l11-7z"/></svg>
-        </button>
-        <button id="fpNext" aria-label="Next track">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-        </button>
+        <button id="fpPrev" aria-label="Previous track"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+        <button class="fp-play" id="fpPlay" aria-label="Play / Pause"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" id="fpPlayIcon"><path d="M8 5v14l11-7z"/></svg></button>
+        <button id="fpNext" aria-label="Next track"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
 document.getElementById("date").textContent = new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
-
-/* ---------- helpers ---------- */
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
@@ -339,219 +313,124 @@ const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
 const pic=(cls,p,alt,audioUrl)=>{
   const i=el("img",cls);i.alt=alt||"";i.loading="lazy";
   const defaultArtistSVG = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ccc'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
-  
-  if(p){
-    i.src=url(p);
-  } else if (audioUrl && window.jsmediatags) {
+  if(p){ i.src=url(p); } 
+  else if (audioUrl && window.jsmediatags) {
     try {
       jsmediatags.read(url(audioUrl), {
         onSuccess: function(tag) {
           var image = tag.tags.picture;
           if (image) {
-            var base64String = "";
-            for (var j = 0; j < image.data.length; j++) { base64String += String.fromCharCode(image.data[j]); }
-            var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-            i.src = base64;
+            var base64String = ""; for (var j = 0; j < image.data.length; j++) { base64String += String.fromCharCode(image.data[j]); }
+            i.src = "data:" + image.format + ";base64," + window.btoa(base64String);
           } else { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; }
-        },
-        onError: function() { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; }
+        }, onError: function() { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; }
       });
     } catch(e) { i.src = defaultArtistSVG; }
-  } else if (cls.includes("artist")) {
-    i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; i.style.padding = "20%";
-  } else { i.style.visibility="hidden"; }
-  
-  i.onerror=()=>{
-    if (cls.includes("artist")) { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; } 
-    else { i.style.visibility="hidden"; }
-  };
+  } 
+  else if (cls.includes("artist")) { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; i.style.padding = "20%"; } 
+  else { i.style.visibility="hidden"; }
+  i.onerror=()=>{ if (cls.includes("artist")) { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; } else { i.style.visibility="hidden"; } };
   return i;
 };
 
-function collapse(content){
-  const wrap=el("div","collapse"),inner=el("div","inner");
-  inner.appendChild(content);wrap.appendChild(inner);return wrap;
-}
-function bindToggle(btn,wrap,onChange){
-  const set=o=>{wrap.classList.toggle("open",o);btn.setAttribute("aria-expanded",String(o));onChange&&onChange(o)};
-  btn.setAttribute("aria-expanded","false");
-  btn.addEventListener("click",()=>set(!wrap.classList.contains("open")));
-  return set;
-}
+function collapse(content){ const wrap=el("div","collapse"),inner=el("div","inner"); inner.appendChild(content);wrap.appendChild(inner);return wrap; }
+function bindToggle(btn,wrap,onChange){ const set=o=>{wrap.classList.toggle("open",o);btn.setAttribute("aria-expanded",String(o));onChange&&onChange(o)}; btn.setAttribute("aria-expanded","false"); btn.addEventListener("click",()=>set(!wrap.classList.contains("open"))); return set; }
 
-/* ---------- Player Logic & Audio Analyzer ---------- */
-const A=new Audio();A.preload="none";
-let cur=null;
-let audioCtx, analyser, source, dataArray;
-let isAnimating = false;
-
-const miniPlayer=document.getElementById("miniPlayer");
-const miniFill=document.getElementById("miniFill");
-const miniCover=document.getElementById("miniCover");
-const miniTitle=document.getElementById("miniTitle");
-const miniArtist=document.getElementById("miniArtist");
-const miniPlay=document.getElementById("miniPlay");
-const miniNext=document.getElementById("miniNext");
-
-const fullPlayer = document.getElementById("fullPlayer");
-const fpBg = document.getElementById("fpBg");
-const fpCover = document.getElementById("fpCover");
-const fpTitle = document.getElementById("fpTitle");
-const fpArtist = document.getElementById("fpArtist");
-const fpRange = document.getElementById("fpRange");
-const fpTimeCur = document.getElementById("fpTimeCur");
-const fpTimeTot = document.getElementById("fpTimeTot");
-const fpPlay = document.getElementById("fpPlay");
-const fpPlayIcon = document.getElementById("fpPlayIcon");
-const fpPrev = document.getElementById("fpPrev");
-const fpNext = document.getElementById("fpNext");
-const fpClose = document.getElementById("fpClose");
-const fpDl = document.getElementById("fpDl");
-
-const SVG_PLAY = '<path d="M8 5v14l11-7z"/>';
-const SVG_PAUSE = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+/* ===== Player Logic & Audio Analyzer ===== */
+const A=new Audio();A.preload="none"; let cur=null; let audioCtx, analyser, source, dataArray; let isAnimating = false;
+const miniPlayer=document.getElementById("miniPlayer"),miniFill=document.getElementById("miniFill"),miniCover=document.getElementById("miniCover"),miniTitle=document.getElementById("miniTitle"),miniArtist=document.getElementById("miniArtist"),miniPlay=document.getElementById("miniPlay"),miniNext=document.getElementById("miniNext");
+const fullPlayer=document.getElementById("fullPlayer"),fpBg=document.getElementById("fpBg"),fpCover=document.getElementById("fpCover"),fpTitle=document.getElementById("fpTitle"),fpArtist=document.getElementById("fpArtist"),fpRange=document.getElementById("fpRange"),fpTimeCur=document.getElementById("fpTimeCur"),fpTimeTot=document.getElementById("fpTimeTot"),fpPlay=document.getElementById("fpPlay"),fpPlayIcon=document.getElementById("fpPlayIcon"),fpPrev=document.getElementById("fpPrev"),fpNext=document.getElementById("fpNext"),fpClose=document.getElementById("fpClose"),fpDl=document.getElementById("fpDl");
+const SVG_PLAY = '<path d="M8 5v14l11-7z"/>', SVG_PAUSE = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 
 function initAudioEngine() {
   if (audioCtx) return;
   try {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
-    audioCtx = new AC();
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 64;
-    analyser.smoothingTimeConstant = 0.8;
-    dataArray = new Uint8Array(analyser.frequencyBinCount);
-    source = audioCtx.createMediaElementSource(A);
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-  } catch (e) { console.warn("AudioContext blocked"); }
+    audioCtx = new AC(); analyser = audioCtx.createAnalyser(); analyser.fftSize = 64; analyser.smoothingTimeConstant = 0.8;
+    dataArray = new Uint8Array(analyser.frequencyBinCount); source = audioCtx.createMediaElementSource(A); source.connect(analyser); analyser.connect(audioCtx.destination);
+  } catch (e) {}
 }
 
 function animateBass() {
   if (!analyser) return;
   analyser.getByteFrequencyData(dataArray);
-  let bassSum = 0;
-  for (let i = 0; i < 6; i++) bassSum += dataArray[i];
-  let boostedLevel = Math.min(1, ((bassSum / 6) / 255) * 2.5); 
-  fullPlayer.style.setProperty('--bass', boostedLevel.toFixed(3));
-  
-  if (!A.paused) requestAnimationFrame(animateBass);
-  else { fullPlayer.style.setProperty('--bass', 0); isAnimating = false; }
+  let bassSum = 0; for (let i = 0; i < 6; i++) bassSum += dataArray[i];
+  fullPlayer.style.setProperty('--bass', Math.min(1, ((bassSum / 6) / 255) * 2.5).toFixed(3));
+  if (!A.paused) requestAnimationFrame(animateBass); else { fullPlayer.style.setProperty('--bass', 0); isAnimating = false; }
 }
 
 function updateUI(){
   if(!cur){ miniPlayer.classList.remove("show"); fullPlayer.classList.remove("show"); return; }
-  miniTitle.textContent=cur.title||"—"; miniArtist.textContent=cur.artist||"";
-  fpTitle.textContent=cur.title||"—"; fpArtist.textContent=cur.artist||"";
-  if(cur.cover){
-    const u = url(cur.cover);
-    miniCover.src=u; miniCover.style.visibility="visible"; fpCover.src=u; fpBg.style.backgroundImage = `url('${u}')`;
-  } else {
+  miniTitle.textContent=cur.title||"—"; miniArtist.textContent=cur.artist||""; fpTitle.textContent=cur.title||"—"; fpArtist.textContent=cur.artist||"";
+  if(cur.cover){ const u = url(cur.cover); miniCover.src=u; miniCover.style.visibility="visible"; fpCover.src=u; fpBg.style.backgroundImage = `url('${u}')`; }
+  else {
     miniCover.removeAttribute("src"); miniCover.style.visibility="hidden"; fpCover.removeAttribute("src"); fpBg.style.backgroundImage = "none";
     if (window.jsmediatags) {
-      try {
-        jsmediatags.read(url(cur.audio), {
-          onSuccess: function(tag) {
-            var image = tag.tags.picture;
-            if (image) {
-              var base64String = "";
-              for (var j = 0; j < image.data.length; j++) { base64String += String.fromCharCode(image.data[j]); }
-              var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-              miniCover.src = base64; miniCover.style.visibility="visible"; fpCover.src = base64; fpBg.style.backgroundImage = `url('${base64}')`;
-            }
-          }, onError: function() {}
-        });
-      } catch(e) {}
+      try { jsmediatags.read(url(cur.audio), { onSuccess: function(tag) { var image = tag.tags.picture; if (image) { var base64String = ""; for (var j = 0; j < image.data.length; j++) { base64String += String.fromCharCode(image.data[j]); } var base64 = "data:" + image.format + ";base64,"if + window.btoa(base64String); miniCover.src = base64; miniCover.style.visibility="visible"; fpCover.src = base64; fpBg.style.backgroundImage = `url('${base64}')`; } }, onError: function() {} }); } catch(e) {}
     }
   }
   fpDl.href = url(cur.audio); fpDl.download = (cur.title || "track") + ".mp3";
-  miniPlay.textContent = A.paused ? "▶" : "❚❚"; fpPlayIcon.innerHTML = A.paused ? SVG_PLAY : SVG_PAUSE;
-  miniPlayer.classList.add("show");
+  miniPlay.textContent = A.paused ? "▶" : "❚❚"; fpPlayIcon.innerHTML = A.paused ? SVG_PLAY : SVG_PAUSE; miniPlayer.classList.add("show");
 }
 
-A.addEventListener("play",()=>{
-  document.body.classList.add("playing"); initAudioEngine();
-  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-  if (!isAnimating) { isAnimating = true; requestAnimationFrame(animateBass); }
-  updateUI();
-});
-["pause","ended","error"].forEach(e=>A.addEventListener(e,()=>{
-  document.body.classList.remove("playing"); if(e==="pause"||e==="error") updateUI();
-}));
+A.addEventListener("play",()=>{ document.body.classList.add("playing"); initAudioEngine(); if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); if (!isAnimating) { isAnimating = true; requestAnimationFrame(animateBass); } updateUI(); });
+["pause","ended","error"].forEach(e=>A.addEventListener(e,()=>{ document.body.classList.remove("playing"); if(e==="pause"||e==="error") updateUI(); }));
 A.addEventListener("play",()=>cur&&(cur.btn.textContent="❚❚"));
 A.addEventListener("pause",()=>cur&&!A.ended&&(cur.btn.textContent="▶"));
-A.addEventListener("ended",()=>{
-  if(!cur)return; const n=cur.row.nextRow; cur.reset();
-  if(n) n.start(); else setTimeout(()=>{if(!cur||A.paused) miniPlayer.classList.remove("show")},400);
-});
+A.addEventListener("ended",()=>{ if(!cur)return; const n=cur.row.nextRow; cur.reset(); if(n) n.start(); else setTimeout(()=>{(!cur||A.paused) miniPlayer.classList.remove("show")},400); });
 A.addEventListener("error",()=>cur&&cur.reset());
-A.addEventListener("timeupdate",()=>{
-  if(!cur||!A.duration)return;
-  const p = (A.currentTime/A.duration)*100, val = A.currentTime/A.duration*1000;
-  cur.rng.value = val; fill(cur.rng); cur.time.textContent = fmt(A.currentTime)+" / "+fmt(A.duration); miniFill.style.width = p+"%";
-  fpRange.value = val; fill(fpRange); fpTimeCur.textContent = fmt(A.currentTime); fpTimeTot.textContent = fmt(A.duration);
-});
+A.addEventListener("timeupdate",()=>{ if(!cur||!A.duration)return; const p = (A.currentTime/A.duration)*100, val = A.currentTime/A.duration*1000; cur.rng.value = val; fill(cur.rng); cur.time.textContent = fmt(A.currentTime)+" / "+fmt(A.duration); miniFill.style.width = p+"%"; fpRange.value = val; fill(fpRange); fpTimeCur.textContent = fmt(A.currentTime); fpTimeTot.textContent = fmt(A.duration); });
 
 const chain=r=>r.forEach((x,i)=>{ x.nextRow=r[i+1]; x.prevRow=r[i-1]; });
 function createTrack(t){
   const row=el("div","track"), info=el("div","track-info"), bar=el("div","bar");
   const rng=el("input");rng.type="range";rng.min=0;rng.max=1000;rng.value=0;rng.disabled=true;
-  const time=el("span","time","0:00");
-  bar.append(rng,time); info.append(el("h4","",t.title||"Unknown"),el("p","",t.artist||""),bar);
-
+  const time=el("span","time","0:00"); bar.append(rng,time); info.append(el("h4","",t.title||"Unknown"),el("p","",t.artist||""),bar);
+  
   const mk=(cls,txt,label)=>{const b=el("button",cls,txt);b.type="button";b.setAttribute("aria-label",label);return b};
   const back=mk("","−10","Back"),play=mk("play","▶","Play"),fwd=mk("","+10","Forward");
   
-  const dl = el("a", "dl-btn"); dl.href = url(t.audio); dl.setAttribute("download", (t.title || "track") + ".mp3");
-  dl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
+  const dl = el("a", "dl-btn"); dl.href = url(t.audio); dl.setAttribute("download", (t.title || "track") + ".mp3"); dl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
   
   const ctrl=el("div","ctrl"); ctrl.append(back,play,fwd,dl);
 
   const reset=()=>{play.textContent="▶";rng.value=0;fill(rng);rng.disabled=true;time.textContent="0:00"};
   const mine=()=>cur&&cur.row===row;
-  const start=()=>{
-    if(cur)cur.reset(); cur={row,btn:play,rng,time,reset,title:t.title,artist:t.artist||"",cover:t.cover||null,audio:t.audio};
-    rng.disabled=false; A.src=url(t.audio);A.play().catch(()=>reset()); updateUI();
-  };
-  row.start=start;
-  play.addEventListener("click",()=>{if(mine()){A.paused?A.play():A.pause();return}start()});
+  const start=()=>{ if(cur)cur.reset(); cur={row,btn:play,rng,time,reset,title:t.title,artist:t.artist||"",cover:t.cover||null,audio:t.audio}; rng.disabled=false; A.src=url(t.audio);A.play().catch(()=>reset()); updateUI(); };
+  
+  row.start=start; play.addEventListener("click",()=>{if(mine()){A.paused?A.play():A.pause();return}start()});
   const skip=d=>()=>{if(mine()&&A.duration)A.currentTime=Math.max(0,Math.min(A.duration,A.currentTime+d))};
-  back.addEventListener("click",skip(-10));fwd.addEventListener("click",skip(10));
-  rng.addEventListener("input",()=>{fill(rng);if(mine()&&A.duration)A.currentTime=rng.value/1000*A.duration});
-
-  row.append(pic("cover",t.cover,t.title,t.audio),ctrl,info);
-  return row;
+  back.addEventListener("click",skip(-10));fwd.addEventListener("click",skip(10)); rng.addEventListener("input",()=>{fill(rng);if(mine()&&A.duration)A.currentTime=rng.value/1000*A.duration});
+  
+  row.append(pic("cover",t.cover,t.title,t.audio),ctrl,info); return row;
 }
 
 function createAlbum(album){
-  const box=el("div"), head=el("div","album-heading"), txt=el("div");
-  txt.append(el("h3","",album.title||"Album"),el("p","","FULL ALBUM"));
-  const btn=el("button","view-more","VIEW MORE");btn.type="button";
-  head.append(txt,btn);
-  const list=el("div");
-  const rows=(album.tracks||[]).map(t=>createTrack({...t,cover:album.cover || t.cover,artist:t.artist||""}));
-  chain(rows);rows.forEach(r=>list.appendChild(r));
-  const wrap=collapse(list);
-  const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
+  const box=el("div"), head=el("div","album-heading"), txt=el("div"); txt.append(el("h3","",album.title||"Album"),el("p","","FULL ALBUM"));
+  const btn=el("button","view-more","VIEW MORE");btn.type="button"; head.append(txt,btn);
+  const list=el("div"); const rows=(album.tracks||[]).map(t=>createTrack({...t,cover:album.cover || t.cover,artist:t.artist||""}));
+  chain(rows);rows.forEach(r=>list.appendChild(r)); const wrap=collapse(list); const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
   box.append(head,wrap);box.api={set,wrap,rows,title:album.title};return box;
 }
 
-/* ---------- Data Loading ---------- */
-async function load(f){
-  try{const r=await fetch("./assets/"+f,{cache:"no-cache"});return r.ok?((await r.json()).artists||[]):[]}
-  catch{return[]}
-}
+/* ===== کدهای سرچ اصلی شما ===== */
+const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f\u200c]/g,"").toLowerCase()
+  .replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/[^a-z0-9\u0600-\u06ff]+/g," ").trim();
+function lev(a,b){ const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>{const r=new Array(n+1).fill(0);r[0]=i;return r}); for(let j=1;j<=n;j++)d[0][j]=j; for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){ d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1)); if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1); } return d[m][n]; }
+function tokScore(q,t){ if(t===q)return 1; if(t.startsWith(q))return .95; if(q.length>=3&&t.includes(q))return .85; const lim=q.length<=3?0:q.length<=5?1:q.length<=8?2:3; if(!lim)return 0; const d=Math.min(lev(q,t),q.length>=4?lev(q,t.slice(0,q.length)):9); return d<=lim?.8-d*.1:0; }
+function score(q,text){ const t=norm(text);if(!t)return 0; const qt=q.split(" "),tt=t.split(" ");let sum=0; for(const x of qt){let b=0;for(const y of tt)b=Math.max(b,tokScore(x,y));if(!b){sum=0;break}sum+=b} let s=sum/qt.length; const qc=q.replace(/ /g,""),tc=t.replace(/ /g,""); if(qc.length>=3){ if(tc.includes(qc))s=Math.max(s,.9); else if(qc.length>=4){const lim=qc.length<=5?1:qc.length<=8?2:3;if(Math.min(lev(qc,tc),lev(qc,tc.slice(0,qc.length)))<=lim)s=Math.max(s,.7)} } return s; }
+
+/* ===== Load Data ===== */
+async function load(f){ try{const r=await fetch("./assets/"+f,{cache:"no-cache"});return r.ok?((await r.json()).artists||[]):[]} catch{return[]} }
 function merge(lists){
   const map=new Map();
   lists.flat().forEach(a=>{
     if(!a || !a.name) return; 
     const k = String(a.name).toLowerCase().trim();
     if(!map.has(k)) map.set(k,{name:a.name,photo:a.photo,description:a.description,aliases:[],singles:[],albums:[]});
-    const m=map.get(k);
-    m.photo=m.photo||a.photo;m.description=m.description||a.description;
-    if(Array.isArray(a.singles)) m.singles.push(...a.singles);
-    if(Array.isArray(a.albums)) m.albums.push(...a.albums);
-    if(Array.isArray(a.aliases)) m.aliases=[...new Set([...m.aliases,...a.aliases])];
+    const m=map.get(k); m.photo=m.photo||a.photo;m.description=m.description||a.description;
+    if(Array.isArray(a.singles)) m.singles.push(...a.singles); if(Array.isArray(a.albums)) m.albums.push(...a.albums); if(Array.isArray(a.aliases)) m.aliases=[...new Set([...m.aliases,...a.aliases])];
   });
   return [...map.values()];
 }
@@ -563,106 +442,103 @@ function renderArtist(artist,list){
   const btn=el("button","view-more","VIEW MORE");btn.type="button";
   info.append(el("h3","",artist.name),el("p","",artist.description||"ARTIST"),btn);
   card.append(pic("artist-photo",artist.photo,artist.name),info);
-
+  
   const pad=el("div","pad");
   if(!artist.singles.length&&!artist.albums.length)pad.appendChild(el("div","empty","NO TRACKS YET"));
   const sr=(artist.singles||[]).map(t=>createTrack(t));chain(sr);sr.forEach(r=>pad.appendChild(r));
   const boxes=(artist.albums||[]).map(a=>createAlbum(a));boxes.forEach(b=>pad.appendChild(b));
+  
   const wrap=collapse(pad);wrap.classList.add("artist-content");
   const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
   group.append(card,wrap);list.appendChild(group);
   
-  return group;
+  const tracks=[ ...sr.map((row,i)=>({row,t:artist.singles[i],album:null})), ...boxes.flatMap((b,i)=>b.api.rows.map((row,j)=>({row,t:artist.albums[i].tracks[j],album:b.api})))];
+  return{group,artist,set,wrap,albums:boxes.map(b=>b.api),tracks,auto:[]};
 }
 
-/* ---------- CORE LOGIC (Reverted to original + InnerText Search) ---------- */
 (async()=>{
   const list=document.getElementById("artistList");
-  const loadMoreContainer = document.getElementById("load-more-container");
-  const loadMoreBtn = document.getElementById("load-more-btn");
-  const searchInput = document.getElementById("search");
-  
   const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
   if(!artists.length){ list.appendChild(el("div","empty","LIBRARY NOT FOUND")); return; }
   
-  // ساخت DOM برای همه خواننده‌ها در ابتدا
-  const items = artists.map(artist => {
-    const group = renderArtist(artist, list);
-    return { group, artist };
-  });
-  
-  const noRes = el("div","empty","NOTHING FOUND"); noRes.style.display="none"; list.after(noRes);
+  const items = artists.map(a=>renderArtist(a,list));
+  const noRes = el("div","empty",""); noRes.style.display="none"; list.after(noRes);
 
+  // --- مدیریت نمایش ۵ خواننده و دکمه More ---
+  const loadMoreContainer = document.getElementById("load-more-container");
+  const loadMoreBtn = document.getElementById("load-more-btn");
   let showingAll = false;
 
-  // تابعی که مشخص می‌کند چه چیزی نمایش داده شود
-  function updateView() {
-    const query = searchInput.value.toLowerCase().trim();
-    
-    // 1. حالت جستجو
-    if (query.length > 0) {
-      loadMoreContainer.style.display = "none"; // دکمه MORE در سرچ مخفی میشود
-      let found = 0;
-      
-      items.forEach(item => {
-        // جادوی سرچ: چک کردن کل متنِ کارت خواننده (شامل اسم خواننده، آهنگ‌ها و آلبوم‌ها)
-        const textToSearch = item.group.innerText.toLowerCase();
-        
-        if (textToSearch.includes(query)) {
-          item.group.style.display = "";
-          found++;
-          
-          // اگر اسم خواننده با سرچ مطابقت نداشت (یعنی داخل آهنگ‌ها پیدا شد)، خواننده را باز کن
-          if (!item.artist.name.toLowerCase().includes(query)) {
-            const wrap = item.group.querySelector('.artist-content');
-            const btn = item.group.querySelector('.view-more');
-            if (wrap && !wrap.classList.contains('open')) {
-                wrap.classList.add('open');
-                btn.textContent = "VIEW LESS";
-            }
-          }
-        } else {
-          item.group.style.display = "none";
-        }
+  function updateVisibility() {
+    const q = norm(document.getElementById("search").value);
+    if (q.length >= 2) {
+      loadMoreContainer.style.display = "none";
+      return;
+    }
+    if (showingAll) {
+      items.forEach(it => it.group.style.display = "");
+      loadMoreContainer.style.display = "none";
+    } else {
+      items.forEach((it, index) => {
+        it.group.style.display = index < 5 ? "" : "none";
       });
-      
-      noRes.style.display = found === 0 ? "block" : "none";
-      
-    } 
-    // 2. حالت عادی (بدون جستجو)
-    else {
-      noRes.style.display = "none";
-      
-      // اگر کاربر روی MORE کلیک کرده باشد، همه را نشان بده
-      if (showingAll || items.length <= 5) {
-        items.forEach(item => item.group.style.display = "");
-        loadMoreContainer.style.display = "none";
-      } 
-      // در غیر این صورت فقط 5 تای اول
-      else {
-        items.forEach((item, index) => {
-          if (index < 5) item.group.style.display = "";
-          else item.group.style.display = "none";
-        });
-        loadMoreContainer.style.display = "block";
-      }
+      loadMoreContainer.style.display = items.length > 5 ? "block" : "none";
     }
   }
 
-  // کلیک روی دکمه MORE
   loadMoreBtn.addEventListener("click", () => {
     showingAll = true;
-    updateView();
+    updateVisibility();
+  });
+  // ----------------------------------------
+
+  function run(raw){
+    items.forEach(it=>{it.auto.forEach(f=>f(false));it.auto=[];it.tracks.forEach(x=>x.row.classList.remove("hit"))});
+    const q=norm(raw);
+    
+    if(q.length<2){
+      items.forEach(it=>it.group.style.display="");
+      list.append(...items.map(i=>i.group));
+      noRes.style.display="none";
+      updateVisibility(); // برگرداندن محدودیت ۵ خواننده وقتی سرچ پاک میشود
+      return;
+    }
+    
+    const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
+    items.forEach(it=>{
+      const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
+      it.albums.forEach(b=>b.s=score(q,b.title));
+      it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
+      const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
+      it.score=Math.max(sName,sAlb,sTr);
+      
+      if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
+        const min=Math.max(.6,it.score-.1);
+        open(it,it.set,it.wrap);
+        it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
+        it.albums.forEach(b=>{if(b.s*.95>=min)open(it,b.set,b.wrap)});
+      }
+    });
+    
+    const shown=items.filter(i=>i.score>=.6).sort((a,b)=>b.score-a.score);
+    items.forEach(i=>i.group.style.display=i.score>=.6?"":"none");
+    list.append(...shown.map(i=>i.group),...items.filter(i=>i.score<.6).map(i=>i.group));
+    noRes.style.display=shown.length?"none":"";noRes.textContent=shown.length?"":"NOTHING FOUND — TRY FEWER LETTERS";
+    
+    loadMoreContainer.style.display = "none";
+  }
+  
+  let timer;
+  document.getElementById("search").addEventListener("input",e=>{
+    clearTimeout(timer);
+    timer=setTimeout(()=>run(e.target.value),120);
   });
 
-  // تایپ کردن در سرچ
-  searchInput.addEventListener("input", updateView);
-
-  // اجرای اولیه
-  updateView();
+  // اجرای اولیه محدودیت ۵ خواننده
+  updateVisibility();
 })();
 
-/* ---------- Mini Player Controls & Full Screen Event ---------- */
+/* ===== Player Events ===== */
 miniPlay.addEventListener("click",(e)=>{ e.stopPropagation(); if(!cur)return; if(A.paused) A.play(); else A.pause(); });
 miniNext.addEventListener("click",(e)=>{ e.stopPropagation(); if(!cur)return; const n=cur.row.nextRow; if(n) n.start(); else { A.pause(); cur.reset(); cur=null; updateUI(); } });
 miniPlayer.addEventListener("click", () => { if(cur) { fullPlayer.classList.add("show"); fullPlayer.setAttribute("aria-hidden", "false"); } });
@@ -672,7 +548,7 @@ fpNext.addEventListener("click", () => { if(!cur) return; const n = cur.row.next
 fpPrev.addEventListener("click", () => { if(!cur) return; if (A.currentTime > 3) { A.currentTime = 0; } else { const p = cur.row.prevRow; if (p) p.start(); } });
 fpRange.addEventListener("input", (e) => { fill(fpRange); if(cur && A.duration) { A.currentTime = e.target.value / 1000 * A.duration; } });
 
-/* ---------- swipe-to-dismiss Telegram notice ---------- */
+/* ===== Telegram Notice ===== */
 (function(){
   const tg=document.getElementById("tg");if(!tg)return;
   const KEY="arsx-tg-dismissed";
@@ -684,12 +560,8 @@ fpRange.addEventListener("input", (e) => { fill(fpRange); if(cur && A.duration) 
   const onUp=()=>{
     removeEventListener("pointermove",onMove);removeEventListener("pointerup",onUp);removeEventListener("pointercancel",onUp);
     tg.classList.remove("drag");
-    if(Math.abs(dx)>70){
-      const dir=dx>0?1:-1;
-      tg.style.setProperty("--dx",dir*innerWidth+"px");tg.style.opacity=0;
-      try{localStorage.setItem(KEY,String(Date.now()))}catch(e){}
-      setTimeout(()=>tg.remove(),500);
-    }else{tg.style.setProperty("--dx","0px");tg.style.opacity=""}
+    if(Math.abs(dx)>70){ const dir=dx>0?1:-1; tg.style.setProperty("--dx",dir*innerWidth+"px");tg.style.opacity=0; try{localStorage.setItem(KEY,String(Date.now()))}catch(e){} setTimeout(()=>tg.remove(),500); }
+    else{tg.style.setProperty("--dx","0px");tg.style.opacity=""}
   };
   tg.addEventListener("pointerdown",e=>{
     if(e.pointerType==="mouse"&&e.button!==0)return;
