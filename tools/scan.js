@@ -1,15 +1,23 @@
 /*
   ساخت library.auto.json + پیدا کردن خودکار کاور آهنگ و عکس خواننده
 
-  منبع‌ها (به ترتیب): Spotify ← SoundCloud ← iTunes ← Deezer
+  منبع‌های عکس (به ترتیب اولویت): SoundCloud ← Spotify ← iTunes ← Deezer
+  SoundCloud منبع اصلیه؛ اگه چیزی پیدا نکرد نوبت Spotify و بعد بقیه می‌شه.
   Spotify و SoundCloud فقط وقتی فعال می‌شن که کلید API بدی (رایگانه، پایین‌تر توضیح داده شده):
     SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET        (developer.spotify.com/dashboard)
     SOUNDCLOUD_CLIENT_ID / SOUNDCLOUD_CLIENT_SECRET  (اختیاری)
   iTunes و Deezer کلید نمی‌خوان و همیشه فعالن.
 
+  آهنگ از منبع‌های «باز» (فقط آهنگ‌های با لایسنس Creative Commons / دامنه عمومی):
+    Jamendo         JAMENDO_CLIENT_ID   (رایگان: devportal.jamendo.com)
+    Internet Archive  بدون کلید، فقط آیتم‌هایی که لایسنس CC یا public domain دارن
+  آهنگ‌ها داخل پوشه singles هر خواننده ذخیره می‌شن، کنار هر کدوم یه فایل «.license.json» با لایسنس و لینک منبع.
+
   متغیرهای محیطی دیگر:
-    NO_COVERS=1      اصلاً دنبال عکس نگرده
-    FORCE_COVERS=1   کش «پیدا نشد» رو نادیده بگیره
+    NO_COVERS=1       اصلاً دنبال عکس نگرده
+    NO_OPEN_MUSIC=1   دنبال آهنگ باز نگرده
+    FORCE_COVERS=1    کش «پیدا نشد» رو نادیده بگیره (برای آهنگ‌ها: FORCE_OPEN=1)
+    OPEN_MAX=20       حداکثر تعداد آهنگ جدید برای هر خواننده در هر اجرا
 
   اگه اسم پوشه خواننده فارسیه و توی اسپاتیفای انگلیسی ثبت شده، داخل پوشه‌اش فایل info.json بساز:
     { "searchName": "Hichkas" }
@@ -125,7 +133,8 @@ const sources = [
       const r = await getJson(`https://api.soundcloud.com/tracks?limit=10&q=${enc(artist + ' ' + title)}`,
         { headers: { Authorization: 'OAuth ' + tok } });
       return { error: r.error, list: (Array.isArray(r.data) ? r.data : []).map(x => ({
-        artist: x.user && x.user.username, title: x.title, art: scArt(x.artwork_url) })) };
+        artist: [x.user && x.user.username, x.publisher_metadata && x.publisher_metadata.artist].filter(Boolean).join(' '),
+        title: x.title, art: scArt(x.artwork_url) })) };
     },
     async artist(name) {
       const tok = await soundcloudToken(); if (!tok) return { error: 'no token' };
@@ -161,6 +170,10 @@ const sources = [
     }
   }
 ];
+
+// اولویت: SoundCloud اول، بعد Spotify، بعد iTunes و Deezer
+const ORDER = ['SoundCloud', 'Spotify', 'iTunes', 'Deezer'];
+sources.sort((a, b) => ORDER.indexOf(a.name) - ORDER.indexOf(b.name));
 
 // کاور آهنگ: فقط وقتی اسم خواننده و آهنگ هر دو بخونن قبول می‌شه
 async function findCover(artist, title) {
@@ -212,6 +225,92 @@ function searchNameOf(artistPath, artistName) {
 const artistDirs = () => fs.existsSync(musicDir)
   ? fs.readdirSync(musicDir, { withFileTypes: true }).filter(d => d.isDirectory()) : [];
 
+/* ---------- آهنگ از منبع‌های باز (CC / public domain) ---------- */
+const OPEN_RECHECK_MS = 7 * 24 * 3600 * 1000;   // هر خواننده هفته‌ای یک بار بررسی می‌شه
+const OPEN_MAX = parseInt(env.OPEN_MAX, 10) || 20;
+const MAX_BYTES = 40 * 1024 * 1024;
+const safeName = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
+const isMp3 = b => b.length > 10000 && ((b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) || (b[0] === 0xff && (b[1] & 0xe0) === 0xe0));
+const OPEN_LICENSE_RE = /creativecommons\.org|publicdomain/i;
+
+async function downloadMp3(url, dest) {
+  try {
+    const r = await fetch(url, { signal: AbortSignal.timeout(180000), redirect: 'follow' });
+    if (!r.ok) { console.log('  download failed: HTTP ' + r.status); return false; }
+    if (+r.headers.get('content-length') > MAX_BYTES) { console.log('  skipped: file too large'); return false; }
+    const buf = Buffer.from(await r.arrayBuffer());
+    if (buf.length > MAX_BYTES || !isMp3(buf)) { console.log('  skipped: not a valid mp3'); return false; }
+    fs.writeFileSync(dest, buf);
+    return true;
+  } catch (e) { console.log('  download failed: ' + e.message); return false; }
+}
+
+// هر منبع باز: tracks(artistName) -> { error, list: [{ title, url, cover, license, page, source, by }] }
+const openSources = [
+  {
+    name: 'Jamendo', enabled: () => !!env.JAMENDO_CLIENT_ID,
+    async tracks(name) {
+      const r = await getJson('https://api.jamendo.com/v3.0/tracks/?format=json&limit=50&audiodlformat=mp32&order=popularity_total'
+        + '&client_id=' + enc(env.JAMENDO_CLIENT_ID) + '&artist_name=' + enc(name));
+      if (r.error) return { error: r.error, list: [] };
+      return { list: ((r.data && r.data.results) || [])
+        .filter(x => norm(x.artist_name) === norm(name) && x.audiodownload_allowed && x.audiodownload && x.license_ccurl)
+        .map(x => ({ title: x.name, url: x.audiodownload, cover: x.image, license: x.license_ccurl,
+                     page: x.shareurl, source: 'Jamendo', by: x.artist_name })) };
+    }
+  },
+  {
+    name: 'Internet Archive', enabled: () => true,
+    async tracks(name) {
+      const q = `creator:"${name.replace(/"/g, '')}" AND mediatype:audio`;
+      const s = await getJson('https://archive.org/advancedsearch.php?output=json&rows=15&fl[]=identifier&fl[]=creator&fl[]=licenseurl&q=' + enc(q));
+      if (s.error) return { error: s.error, list: [] };
+      const out = [];
+      for (const d of ((s.data && s.data.response && s.data.response.docs) || [])) {
+        const creators = [].concat(d.creator || []);
+        const lic = [].concat(d.licenseurl || []).find(u => OPEN_LICENSE_RE.test(u));
+        if (!lic || !creators.some(c => norm(c) === norm(name))) continue;     // لایسنس باز + اسم دقیق خواننده
+        const m = await getJson('https://archive.org/metadata/' + enc(d.identifier));
+        for (const f of ((m.data && m.data.files) || [])) {
+          if (!/\.mp3$/i.test(f.name) || f.source === 'metadata' || !/mp3/i.test(f.format || '')) continue;
+          out.push({ title: f.title || path.parse(f.name).name, url: `https://archive.org/download/${enc(d.identifier)}/${enc(f.name)}`,
+                     cover: null, license: lic, page: 'https://archive.org/details/' + d.identifier, source: 'Internet Archive', by: name });
+        }
+        await sleep(300);
+      }
+      return { list: out };
+    }
+  }
+];
+
+async function fetchOpenMusic(artist, artistPath, singlesPath, searchName) {
+  let added = 0, anyError = false;
+  const seen = new Set();
+  for (const s of openSources.filter(s => s.enabled())) {
+    if (added >= OPEN_MAX) break;
+    const { error, list } = await s.tracks(searchName);
+    if (error) { anyError = true; console.log(`  ${s.name}: ERROR ${error}`); continue; }
+    console.log(`  ${s.name}: ${list.length} open-licensed tracks`);
+    for (const tr of list) {
+      if (added >= OPEN_MAX) break;
+      const title = safeName(tr.title);
+      if (!title || seen.has(norm(title))) continue;
+      seen.add(norm(title));
+      const base = `${artist} - ${title}`;
+      if (fs.existsSync(path.join(singlesPath, base + '.mp3'))) continue;        // قبلاً گرفته شده
+      if (fs.readdirSync(singlesPath).some(f => f.toLowerCase().endsWith('.mp3') && similar(titleOf(path.parse(f).name), title))) continue;
+      console.log(`  downloading: ${title}  [${tr.license}]`);
+      if (!(await downloadMp3(tr.url, path.join(singlesPath, base + '.mp3')))) { anyError = true; continue; }
+      fs.writeFileSync(path.join(singlesPath, base + '.license.json'),
+        JSON.stringify({ license: tr.license, source: tr.source, url: tr.page, by: tr.by }, null, 2));
+      if (tr.cover && !hasCover(singlesPath, base)) await download(tr.cover, path.join(singlesPath, base + '.jpg'));
+      added++;
+      await sleep(500);
+    }
+  }
+  return { added, anyError };
+}
+
 /* ---------- اصلی ---------- */
 async function main() {
   // ۱. ساخت پوشه‌ها
@@ -234,17 +333,37 @@ async function main() {
   }
 
   // ۲. پیدا کردن عکس خواننده و کاور آهنگ‌هایی که ندارن
-  if (env.NO_COVERS !== '1') {
+  if (env.NO_COVERS !== '1' || env.NO_OPEN_MUSIC !== '1') {
     if (typeof fetch !== 'function') {
-      console.log(`!! Node ${process.version} has no fetch - Node 18+ is required to download images.`);
+      console.log(`!! Node ${process.version} has no fetch - Node 18+ is required to download images and music.`);
     } else {
       let cache = {};
       try { cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8')); } catch {}
       if (env.FORCE_COVERS === '1') cache = {};
       const fresh = key => cache[key] && Date.now() - cache[key] < RETRY_MS;
+      const stat = { photos: 0, covers: 0, missed: 0, songs: 0 };
+
+      // ۲-پ) آهنگ از منبع‌های باز
+      if (env.NO_OPEN_MUSIC !== '1') {
+        console.log('Open music sources: ' + openSources.filter(s => s.enabled()).map(s => s.name).join(', '));
+        if (!env.JAMENDO_CLIENT_ID) console.log('(Jamendo is off - set JAMENDO_CLIENT_ID to enable it)');
+        for (const dir of artistDirs()) {
+          const artist = dir.name, artistPath = path.join(musicDir, artist);
+          const singlesPath = path.join(artistPath, 'singles');
+          const key = 'open:' + artist;
+          if (env.FORCE_OPEN !== '1' && cache[key] && Date.now() - cache[key] < OPEN_RECHECK_MS) continue;
+          if (!fs.existsSync(singlesPath)) fs.mkdirSync(singlesPath, { recursive: true });
+          console.log(`Searching open-licensed music: ${artist}`);
+          const res = await fetchOpenMusic(artist, artistPath, singlesPath, searchNameOf(artistPath, artist));
+          stat.songs += res.added;
+          if (!res.anyError) cache[key] = Date.now();
+        }
+      }
+
+      if (env.NO_COVERS !== '1') {
       console.log('Sources: ' + sources.filter(s => s.enabled()).map(s => s.name).join(', '));
+      if (!hasSoundcloud()) console.log('(SoundCloud is off - set SOUNDCLOUD_CLIENT_ID and SOUNDCLOUD_CLIENT_SECRET to enable it)');
       if (!hasSpotify()) console.log('(Spotify is off - set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET to enable it)');
-      const stat = { photos: 0, covers: 0, missed: 0 };
 
       // ۲-الف) عکس خواننده
       for (const dir of artistDirs()) {
@@ -292,8 +411,9 @@ async function main() {
           await sleep(500);
         }
       }
+      }
       fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2));
-      console.log(`Images: ${stat.photos} artist photos, ${stat.covers} covers downloaded, ${stat.missed} not found.`);
+      console.log(`Done: ${stat.songs} open songs, ${stat.photos} artist photos, ${stat.covers} covers downloaded, ${stat.missed} images not found.`);
     }
   }
 
@@ -313,11 +433,14 @@ async function main() {
       all.filter(f => f.toLowerCase().endsWith('.mp3')).forEach(file => {
         const base = path.parse(file).name;
         const coverFile = all.find(f => new RegExp(`^${escapeRe(base)}\\.(${IMG_EXT.join('|')})$`, 'i').test(f));
+        let lic = null;
+        try { lic = JSON.parse(fs.readFileSync(path.join(singlesPath, base + '.license.json'), 'utf8')); } catch {}
         artistObj.singles.push({
           title: titleOf(base),
           artist: artistName,
           audio: `music/${artistName}/singles/${file}`,
-          cover: coverFile ? `music/${artistName}/singles/${coverFile}` : null
+          cover: coverFile ? `music/${artistName}/singles/${coverFile}` : null,
+          ...(lic ? { license: lic } : {})
         });
       });
     }
