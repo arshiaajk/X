@@ -1,5 +1,12 @@
 // Scans assets/music/ and writes assets/library.auto.json  (no dependencies)
-// ... (توضیحات بالای فایل شما بدون تغییر می‌ماند) ...
+//
+//  assets/music/<Artist Name>/
+//      photo.jpg|jpeg|png|webp        ← عکس خواننده
+//      artist.json                    (optional)
+//      singles/Song Name.mp3          (+ optional Song Name.jpg as its cover)
+//      albums/<Album Name>/cover.jpg  (album cover)
+//      albums/<Album Name>/01 Track.mp3 ...   (sorted by file name)
+//      albums/<Album Name>/tracks.json (optional)
 
 const fs = require("fs"), path = require("path");
 const ROOT = path.join(__dirname, "..", "assets"), MUSIC = path.join(ROOT, "music");
@@ -8,7 +15,7 @@ const rel = p => path.relative(ROOT, p).split(path.sep).join("/");
 const ls = d => fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }) : [];
 const natural = (a, b) => a.localeCompare(b, undefined, { numeric: true });
 
-// مدیریت خطا برای خواندن فایل‌های JSON (اگر فایل خراب باشد، اسکریپت متوقف نمی‌شود)
+// مدیریت خطا برای خواندن فایل‌های JSON
 const read = f => {
   if (!fs.existsSync(f)) return {};
   try {
@@ -45,7 +52,7 @@ function extractCoverFromMp3(audioPath, outPath) {
       if (ver === 4) {
         frameSize = ((buf[offset + 4] & 0x7f) << 21) | ((buf[offset + 5] & 0x7f) << 14) | ((buf[offset + 6] & 0x7f) << 7) | (buf[offset + 7] & 0x7f);
       } else {
-        frameSize = (buf[offset + 4] << 24) | (buf[offset + 5] << 16) | (buf[offset + 6] << 8) | buf[offset + 7];
+        frameSize = (buf[offset + 4] << 24) | (buf[offset + 5]) << 16) | (buf[offset + 6] << 8 | buf[offset + 7];
       }
       if (frameSize <= 0 || offset + 10 + frameSize > buf.length) break;
 
@@ -135,7 +142,6 @@ function parseName(file, artist, numbered, album) {
 
 function main() {
   try {
-    // اطمینان از وجود پوشه assets برای جلوگیری از خطای ENOENT هنگام ذخیره فایل
     if (!fs.existsSync(ROOT)) fs.mkdirSync(ROOT, { recursive: true });
     if (!fs.existsSync(MUSIC)) fs.mkdirSync(MUSIC, { recursive: true });
 
@@ -152,37 +158,57 @@ function main() {
       const singles = ls(path.join(dir, "singles")).map(e => e.name).filter(n => AUD.test(n)).sort(natural).map(n => {
         const p = parseName(n, name, false);
         const base = path.parse(n).name;
-        return { title: p.title, artist: p.artist, cover: getCover(path.join(dir, "singles"), base, n), audio: rel(path.join(dir, "singles", n)) };
+        return { 
+          title: p.title, 
+          artist: p.artist, 
+          cover: getCover(path.join(dir, "singles"), base, n), 
+          audio: rel(path.join(dir, "singles", n)) 
+        };
       });
 
       const albums = ls(path.join(dir, "albums")).filter(e => e.isDirectory()).sort((a, b) => natural(a.name, b.name)).map(a => {
         const ad = path.join(dir, "albums", a.name), tm = read(path.join(ad, "tracks.json"));
         let albumCover = findImg(ad, "cover");
+        
         const tracks = ls(ad).map(e => e.name).filter(n => AUD.test(n)).sort(natural).map(n => {
           const p = parseName(n, name, true, a.name);
           const base = path.parse(n).name;
           const trackCover = getCover(ad, base, n);
           if (!albumCover && trackCover) albumCover = trackCover;
-          return { title: (tm[n] && tm[n].title) || p.title, artist: (tm[n] && tm[n].artist) || p.artist, audio: rel(path.join(ad, n)) };
+          
+          return { 
+            title: (tm[n] && tm[n].title) || p.title, 
+            artist: (tm[n] && tm[n].artist) || p.artist, 
+            cover: trackCover, // 👈 این خط مشکلِ نبودن عکس را حل می‌کند
+            audio: rel(path.join(ad, n)) 
+          };
         });
+        
         return { title: a.name, cover: albumCover, tracks };
       });
 
-      artists.push({ name, photo, description: meta.description || "ARTIST", aliases: meta.aliases || [], singles, albums });
+      artists.push({ 
+        name, 
+        photo, 
+        description: meta.description || "ARTIST", 
+        aliases: meta.aliases || [], 
+        singles, 
+        albums 
+      });
     }
 
     fs.writeFileSync(path.join(ROOT, "library.auto.json"), JSON.stringify({ artists }, null, 1));
-    console.log("library.auto.json:", artists.length, "artists");
+    console.log("library.auto.json generated successfully with", artists.length, "artists");
 
     if (missingPhotos.length) {
-      console.log("\n⚠️ عکس خواننده پیدا نشد برای این هنرمندها:");
+      console.log("\n⚠️ Artist photos missing for:");
       missingPhotos.forEach(n => console.log("   • " + n));
     } else {
-      console.log("✓ همه هنرمندها عکس دارند.");
+      console.log("✓ All artists have photos.");
     }
   } catch (err) {
     console.error("❌ Fatal error during scan:", err);
-    process.exit(1); // خروج با کد خطا برای اینکه گیت‌هاب متوجه مشکل شود
+    process.exit(1);
   }
 }
 
