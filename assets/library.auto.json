@@ -1,6 +1,20 @@
 {
   "artists": [
     {
+      "name": "Amir Tataloo",
+      "photo": null,
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Nagoo Na",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
       "name": "Ebi",
       "photo": null,
       "description": "ARTIST",
