@@ -9,7 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;padding:35px 7%;padding-bottom:120px;overflow-x:hidden}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:50px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:100px}
 .date{font-size:11px;letter-spacing:2px;color:#777}
 .logo{font-size:35px;font-weight:900;letter-spacing:7px;animation:logoMove 7s ease-in-out infinite alternate}
 @property --amp{syntax:"<length>";inherits:true;initial-value:3px}
@@ -20,13 +20,15 @@ body.playing .logo{--amp:9px}
 @keyframes logoMove{from{letter-spacing:7px}to{letter-spacing:11px}}
 main{max-width:900px;margin:auto}
 .section-title{font-size:12px;letter-spacing:5px;margin-bottom:35px}
+
+/* بازگشت به استایل اصلی و شیک کارت‌ها */
 .artist-card{display:flex;align-items:center;gap:25px;padding:25px 0;border-bottom:1px solid #e8e8e8}
-.artist-photo{width:125px;height:125px12;object-fit:cover;background:#eee;flex-shrink:0;border-radius:16px}
-.artist-info{flex:1px;min-width:0}
+.artist-photo{width:125px;height:125px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:16px}
+.artist-info{flex:1;min-width:0}
 .artist-info h3{font-size:19px;margin-bottom:9px}
-.artist-info p{font-size:}
-10px;color:#888;letter-spacing:2px;margin-bottom:18px}
-.view-more{.viewbackground:transparent;color:#111;border:1px solid #111;padding:11px 23px;font-size:9px;letter-spacing-m:3px;cursor:pointer;transition:.3s;border-radius:ore:hover,.view-more:focus-visible{background:#111;color:#fff}
+.artist-info p{font-size:10px;color:#888;letter-spacing:2px;margin-bottom:18px}
+.view-more{background:transparent;color:#111;border:1px solid #111;padding:11px 23px;font-size:9px;letter-spacing:3px;cursor:pointer;transition:.3s;border-radius:12px}
+.view-more:hover,.view-more:focus-visible{background:#111;color:#fff}
 
 /* smooth open/close */
 .collapse{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.4,0,.2,1)}
@@ -56,41 +58,25 @@ input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:3px;bord
 input[type=range]:disabled{cursor:default;opacity:.6}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:#111;border:0}
 input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#111;border:0}
-#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:20px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
+#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:10px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
 #search:focus{border-color:#111}
 .track.hit{background:#f7f7f7;box-shadow:0 0 0 10px #f7f7f7;border-radius:12px;border-bottom-color:transparent}
 .empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0}
 
-/* ====== ترفند اصلی مخفی کردن با CSS ====== */
-/* به صورت پیش‌فرض، هر خواننده‌ای که بعد از نفر پنجم بیاید مخفی است */
-#artistList .artist-group:nth-child(n+6) { display: none; }
-/* اگر کلاس show-all به لیست اضافه شود، همه نمایش داده می‌شوند */
-#artistList.show-all .artist-group { display: block !important; }
-/* اگر در حالت جستجو هستیم، محدودیت ۵ تایی برداشته می‌شود */
-#artistList.search-mode .artist-group { display: block !important; }
-
-/* دکمه MORE */
-#more-container {
-  display: none; /* جاوااسکریپت این را روشن میکند */
-  text-align: center;
-  margin-top: 30px;
-  padding-bottom: 50px;
+/* استایل دکمه MORE */
+#load-more-container {
+  display: none; 
+  text-align: center; 
+  margin-top: 20px; 
+  margin-bottom: 40px;
 }
-#more-btn {
-  background: #111;
-  color: #fff;
-  border: none;
-  padding: 20px 30px;
-  font-size: 13px;
-  letter-spacing: 2px;
-  font-weight: 900;
-  cursor: pointer;
-  border-radius: 16px;
-  width: 100%;
-  transition: transform 0.2s, background 0.2s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+#load-more-btn {
+  background: #111; color: #fff; border: none;
+  padding: 16px 30px; font-size: 11px; letter-spacing: 3px;
+  font-weight: bold; cursor: pointer; border-radius: 12px;
+  width: 100%; transition: 0.2s;
 }
-#more-btn:hover { background: #333; transform: translateY(-2px); }
+#load-more-btn:hover { background: #333; }
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 .artist-group.fade-in { animation: fadeIn 0.5s ease-out forwards; }
@@ -244,12 +230,10 @@ footer a{color:#111;text-decoration:none}
   <h2 class="section-title">ARSHIA AJANKAN</h2>
   <input id="search" type="search" placeholder="Search artist, album or track" aria-label="Search artist, album or track" autocomplete="off">
   
-  <!-- لیست خواننده ها -->
   <div id="artistList"></div>
   
-  <!-- دکمه بزرگ MORE -->
-  <div id="more-container">
-    <button id="more-btn">MORE ARTISTS</button>
+  <div id="load-more-container">
+    <button id="load-more-btn">MORE ARTISTS</button>
   </div>
   
 </section>
@@ -350,6 +334,7 @@ document.getElementById("date").textContent = new Date().toLocaleDateString("en-
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
+const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
 
 const pic=(cls,p,alt,audioUrl)=>{
   const i=el("img",cls);i.alt=alt||"";i.loading="lazy";
@@ -369,7 +354,7 @@ const pic=(cls,p,alt,audioUrl)=>{
             i.src = base64;
           } else { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; }
         },
-        onError: function(error) { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; }
+        onError: function() { i.src = defaultArtistSVG; i.style.background = "#f0f0f0"; }
       });
     } catch(e) { i.src = defaultArtistSVG; }
   } else if (cls.includes("artist")) {
@@ -382,7 +367,6 @@ const pic=(cls,p,alt,audioUrl)=>{
   };
   return i;
 };
-const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
 
 function collapse(content){
   const wrap=el("div","collapse"),inner=el("div","inner");
@@ -591,74 +575,91 @@ function renderArtist(artist,list){
   return group;
 }
 
-/* ---------- Core Logic (Search & More) ---------- */
+/* ---------- CORE LOGIC (Reverted to original + InnerText Search) ---------- */
 (async()=>{
   const list=document.getElementById("artistList");
-  const moreContainer = document.getElementById("more-container");
-  const moreBtn = document.getElementById("more-btn");
+  const loadMoreContainer = document.getElementById("load-more-container");
+  const loadMoreBtn = document.getElementById("load-more-btn");
   const searchInput = document.getElementById("search");
   
   const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
   if(!artists.length){ list.appendChild(el("div","empty","LIBRARY NOT FOUND")); return; }
   
-  // ساخت متن جستجو برای هر خواننده تا سرچ روی همه چیز (حتی آهنگ‌های بسته) کار کند
-  const searchData = [];
-  
-  artists.forEach(artist => {
-    renderArtist(artist, list);
-    
-    const searchString = [
-      artist.name,
-      ...(artist.albums||[]).map(a=>a.title),
-      ...(artist.singles||[]).map(s=>s.title)
-    ].filter(Boolean).join(" ").toLowerCase();
-    
-    searchData.push({ group: list.lastChild, text: searchString });
+  // ساخت DOM برای همه خواننده‌ها در ابتدا
+  const items = artists.map(artist => {
+    const group = renderArtist(artist, list);
+    return { group, artist };
   });
-
+  
   const noRes = el("div","empty","NOTHING FOUND"); noRes.style.display="none"; list.after(noRes);
 
-  // اگر تعداد کل بیشتر از 5 بود، دکمه MORE را نشان بده
-  if (artists.length > 5) {
-    moreContainer.style.display = "block";
-  }
+  let showingAll = false;
 
-  // کلیک روی دکمه MORE
-  moreBtn.addEventListener("click", () => {
-    list.classList.add("show-all"); // این کلاس باعث می‌شود CSS بقیه را نشان دهد
-    moreContainer.style.display = "none"; // دکمه مخفی شود
-  });
-
-  // تایپ کردن در سرچ
-  searchInput.addEventListener("input", (e) => {
-    const q = e.target.value.toLowerCase().trim();
+  // تابعی که مشخص می‌کند چه چیزی نمایش داده شود
+  function updateView() {
+    const query = searchInput.value.toLowerCase().trim();
     
-    if (q.length > 0) {
-      list.classList.add("search-mode"); // غیرفعال کردن محدودیت ۵ تایی
-      moreContainer.style.display = "none";
+    // 1. حالت جستجو
+    if (query.length > 0) {
+      loadMoreContainer.style.display = "none"; // دکمه MORE در سرچ مخفی میشود
       let found = 0;
       
-      searchData.forEach(item => {
-        if (item.text.includes(q)) {
-          item.group.style.display = "block";
+      items.forEach(item => {
+        // جادوی سرچ: چک کردن کل متنِ کارت خواننده (شامل اسم خواننده، آهنگ‌ها و آلبوم‌ها)
+        const textToSearch = item.group.innerText.toLowerCase();
+        
+        if (textToSearch.includes(query)) {
+          item.group.style.display = "";
           found++;
+          
+          // اگر اسم خواننده با سرچ مطابقت نداشت (یعنی داخل آهنگ‌ها پیدا شد)، خواننده را باز کن
+          if (!item.artist.name.toLowerCase().includes(query)) {
+            const wrap = item.group.querySelector('.artist-content');
+            const btn = item.group.querySelector('.view-more');
+            if (wrap && !wrap.classList.contains('open')) {
+                wrap.classList.add('open');
+                btn.textContent = "VIEW LESS";
+            }
+          }
         } else {
           item.group.style.display = "none";
         }
       });
       
       noRes.style.display = found === 0 ? "block" : "none";
-    } else {
-      list.classList.remove("search-mode");
+      
+    } 
+    // 2. حالت عادی (بدون جستجو)
+    else {
       noRes.style.display = "none";
       
-      // برگشت به حالت عادی (اگر قبلا MORE زده باشد، همه می‌مانند)
-      if (!list.classList.contains("show-all")) {
-         searchData.forEach(item => item.group.style.display = "block"); // CSS خودش ۵ تا اول را نشان میدهد
-         if (artists.length > 5) moreContainer.style.display = "block";
+      // اگر کاربر روی MORE کلیک کرده باشد، همه را نشان بده
+      if (showingAll || items.length <= 5) {
+        items.forEach(item => item.group.style.display = "");
+        loadMoreContainer.style.display = "none";
+      } 
+      // در غیر این صورت فقط 5 تای اول
+      else {
+        items.forEach((item, index) => {
+          if (index < 5) item.group.style.display = "";
+          else item.group.style.display = "none";
+        });
+        loadMoreContainer.style.display = "block";
       }
     }
+  }
+
+  // کلیک روی دکمه MORE
+  loadMoreBtn.addEventListener("click", () => {
+    showingAll = true;
+    updateView();
   });
+
+  // تایپ کردن در سرچ
+  searchInput.addEventListener("input", updateView);
+
+  // اجرای اولیه
+  updateView();
 })();
 
 /* ---------- Mini Player Controls & Full Screen Event ---------- */
