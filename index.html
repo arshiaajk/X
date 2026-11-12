@@ -9,7 +9,7 @@
 html{scroll-behavior:smooth}
 body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;padding:35px 7%;padding-bottom:120px;overflow-x:hidden}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:100px}
-.date{font-size:11px;letter-spacing:2px;color:#555;font-weight:600}
+.date{font-size:8px;letter-spacing:1.5px;color:#666;font-weight:600}
 .logo{font-size:35px;font-weight:900;letter-spacing:7px;animation:logoMove 7s ease-in-out infinite alternate}
 @property --amp{syntax:"<length>";inherits:true;initial-value:3px}
 .logo{display:inline-flex;--amp:3px;transition:--amp 1.4s ease}
@@ -339,7 +339,7 @@ setDate();
 
 /* ---------- helpers ---------- */
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
-const url=p=>"./assets/"+p.split("/").map(encodeURIComponent).join("/");
+const url=p=>p?"./assets/"+String(p).split("/").map(encodeURIComponent).join("/"):"";
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
 const pic=(cls,p,alt)=>{
     const i=el("img",cls);i.alt=alt;i.loading="lazy";
@@ -640,9 +640,9 @@ function renderArtist(artist,list){
     const list=document.getElementById("artistList");
     const searchEl=document.getElementById("search");
     const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
-    if(!artists.length){list.appendChild(el("div","empty","LIBRARY NOT FOUND - open the site through GitHub Pages or a local server."));return}
+    if(!artists.length){list.appendChild(el("div","empty",location.protocol==="file:"?"OPENED AS A LOCAL FILE - the browser blocks loading assets/library.json. Open the site through GitHub Pages or a local server.":"LIBRARY NOT FOUND - check assets/library.json"));return}
 
-    const items=artists.map(a=>renderArtist(a,list));
+    const items=artists.map(a=>{try{return renderArtist(a,list)}catch(err){console.error("Bad artist entry:",a&&a.name,err);return null}}).filter(Boolean);
     const noRes=el("div","empty","");noRes.style.display="none";
     const moreBtn=el("button","view-more more-artists","MORE ARTISTS");moreBtn.type="button";
     list.after(noRes);noRes.after(moreBtn);
