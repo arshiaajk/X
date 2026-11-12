@@ -22,6 +22,14 @@
     }
    ],
    "albums": []
+  },
+  {
+   "name": "singles",
+   "photo": null,
+   "description": "ARTIST",
+   "aliases": [],
+   "singles": [],
+   "albums": []
   }
  ]
 }
