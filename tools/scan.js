@@ -1,113 +1,72 @@
-const fs = require("fs"), path = require("path");
-const ROOT = path.join(__dirname, "..", "assets"), MUSIC = path.join(ROOT, "music");
-const AUD = /\.(mp3|m4a|ogg|wav|flac)$/i, IMG = /\.(jpe?g|png|webp)$/i;
-const rel = p => path.relative(ROOT, p).split(path.sep).join("/");
-const ls = d => fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }) : [];
-const natural = (a, b) => a.localeCompare(b, undefined, { numeric: true });
+const fs = require('fs');
+const path = require('path');
 
-const read = f => {
-  if (!fs.existsSync(f)) return {};
-  try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch (e) { return {}; }
-};
+const assetsDir = path.join(__dirname, '..', 'assets');
+const musicDir = path.join(assetsDir, 'music');
+const libFile = path.join(assetsDir, 'library.json');
 
-const findImg = (dir, base) => {
+// ۱. ساخت پوشه‌ها
+if (!fs.existsSync(musicDir)) fs.mkdirSync(musicDir, { recursive: true });
+
+if (fs.existsSync(libFile)) {
   try {
-    const f = ls(dir).map(e => e.name).find(n => IMG.test(n) && path.parse(n).name.toLowerCase|() === base.toLowerCase());
-    return f ? rel(path.join(dir, f)) : null;
-  } catch (e) { return null; }
-};
-
-const norm = s => String(s).toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g, "");
-const esc = s => String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-const JUNK = /\b(bandmusic|band music|mahan ?music|aria ?music|radio ?javan|download|official|audio|lyrics?music video|video|hd|hq|\d{2,3} ?kbps|128|192|256|320|www)\b/i;
-
-function parseName(file, artist, numbered, album) {
-  try {
-    let s = file.replace(AUD, "").replace(/_+/g, " ");
-    s = s.replace(/[\s\-–_]*\b(?:www\.)?[a-z0-9]+\.(?:com|net|ir|org|info|me|ws|b (!iz|co)\b/gi, "");
-    s = s.replace(/[\(\[][^\)\]]*[\)\]]/g, m => JUNK.test(m) ? "" : m);
-    s/\ = s.replace(/[\s\-–]*\b(?:128|192|256|320s)\s*(?:kbps)?\s*$/i, "").replace(/\s+/g, " ").trim();
-    const num = numbered ?/. /^\d{1,3}(?:\s*[-–)]\s*|\.(?=\D)\s*|\stest+)/ : /^0\d{1,2}(?:\s*[-–)]\s*|\.(?=\D)\s*|\s+)/;
-    s = s.replace(num, "");
-    const feat = [];
-    s = s.replace(/\s*[\(\[]\s*(?:ft|feat|featuring)\b\.?\s*([^\)\]]+)[\)\]]/gi, (_, x) => { feat.push(x); return ""; });
-    s = s.replace(/\s+(?:ft|feat|featuring)\b\.?\s+([^\-\u2013\u2014]+)$/i, (_, x) => { feat.push(x); return ""; });
-    const na = norm(artist);
-    const startRe = new RegExp("^\\s*" + esc(artist) + "(?:\\s+(?:ft|feat|featuring)\\b\\.?\\s+(.+?))?\\s*[-\u2013\u2014:]\\s*", "i");
-    if (startRe.test(s)) {
-      s = s.replace(startRe, (_, f) => { if (f) feat.push(f); return ""; });
-    } else {
-      const parts = s.split(/\s*[-\u2013\u2014]\s*/).filter(Boolean);
-      if (parts.length > 1) {
-        const hit = f => parts.findIndex(p => { const n = norm(p); return n && f(n); });
-        const ai = [hit(n => n === na), hit(n => na.length > 3 && n.includes(na))].find(i => i >= 0) ?? -1;
-        if (ai >= 0) {
-          const rest = parts.filter((_, i) => i !== ai), ti = ai === 0 ? rest.length - 1 : 0;
-          s = ai === 0 ? rest.join(" - ") : rest[0];
-          rest.forEach((p, i) => { if (i !== ti) feat.push(p); });
-        }
+    const lib = JSON.parse(fs.readFileSync(libFile, 'utf8'));
+    const artists = lib.artists || [];
+    artists.forEach(a => {
+      if (a.name) {
+        const s = path.join(musicDir, a.name, 'singles');
+        const alb = path.join(musicDir, a.name, 'albums');
+        if (!fs.existsSync(s)) fs.mkdirSync(s, { recursive: true });
+        if (!fs.existsSync(alb)) fs.mkdirSync(alb, { recursive: true });
+        if (!fs.existsSync(path.join(s, '.gitkeep'))) fs.writeFileSync(path.join(s, '.gitkeep'), '');
+        if (!fs.existsSync(path.join(alb, '.gitkeep'))) fs.writeFileSync(path.join(alb, '.gitkeep'), '');
       }
-    }
-    if (album) {
-      const r = new RegExp("^" + esc(album) + "\\s*[-–:]?\\s*", "i"), t = s.replace(r, "");
-      if (t) s = t.replace(num, "").replace(/^\((.*)\)$/, "$1");
-    }
-    if(s) && s === s.toLowerCase()) s = s.split(/[-_]+/).map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-    s = s.replace(/\s+/g, " ").replace(/^[-–\s]+|[-–\s]+$/g, "") || file.replace(AUD, "");
-    const f = [...new Set(feat.join(", ").replace(/\s+x\s+/gi, ", ").split(/\s*,\s*|\s*&\s*/).map(x => x.trim()).filter(x => x && norm(x) !== na))];
-    return { title: s, artist: f.length ? artist + " feat. " + f.join(", ") : artist };
-  } catch(e) {
-    return { title: file, artist: artist };
-  }
+    });
+    console.log("Folders created successfully.");
+  } catch (e) { console.log('Error reading library.json'); }
 }
 
-function main() {
-  try {
-    if (!fs.existsSync(ROOT)) fs.mkdirSync(ROOT, { recursive: true });
-    if (!fs.existsSync(MUSIC)) fs.mkdirSync(MUSIC, { recursive: true });
+// ۲. خواندن آهنگ‌ها و ساخت فایل JSON
+const result = { artists: [] };
+if (fs.existsSync(musicDir)) {
+  const artistDirs = fs.readdirSync(musicDir, { withFileTypes: true }).filter(d => d.isDirectory());
 
-    const artists = [];
+  artistDirs.forEach(dir => {
+    const artistName = dir.name;
+    const artistPath = path.join(musicDir, artistName);
+    const singlesPath = path.join(artistPath, 'singles');
+    
+    const artistObj = { name: artistName, photo: null, description: "ARTIST", singles: [], albums: [] };
 
-    for (const d of ls(MUSIC).filter(e => e.isDirectory()).sort((a, b) => natural(a.name, b.name))) {
-      try {
-        const dir = path.join(MUSIC, d.name), meta = read(path.join(dir, "artist.json"));
-        const name = meta.name || d.name;
-
-        const photo = findImg(dir, "photo");
-
-        const singles = ls(path.join(dir, "singles")).map(e => e.name).filter(n => AUD.test(n)).sort(natural).map(n => {
-          const p = parseName(n, name, false);
-          const base = path.parse(n).name;
-          return { title: p.title, artist: p.artist, cover: findImg(path.join(dir, "singles"), base), audio: rel(path.join(dir, "singles", n)) };
-        });
-
-        const albums = ls(path.join(dir, "albums")).filter(e => e.isDirectory()).sort((a, b) => natural(a.name, b.name)).map(a => {
-          const ad = path.join(dir, "albums", a.name), tm = read(path.join(ad, "tracks.json"));
-          let albumCover = findImg(ad, "cover");
-          
-          const tracks = ls(ad).map(e => e.name).filter(n => AUD.test(n)).sort(natural).map(n => {
-            const p = parseName(n, name, true, a.name);
-            const base = path.parse(n).name;
-            const trackCover = findImg(ad, base); 
-            if (!albumCover && trackCover) albumCover = trackCover;
-            
-            return { title: (tm[n] && tm[n].title) || p.title, artist: (tm[n] && tm[n].artist) || p.artist, cover: trackCover, audio: rel(path.join(ad, n)) };
-          });
-          return { title: a.name, cover: albumCover, tracks };
-        });
-
-        artists.push({ name, photo, description: meta.description || "ARTIST", aliases: meta.aliases || [], singles, albums });
-      } catch(e) {
-        console.log(`⚠️ Error processing folder ${d.name}:`, e.message);
-      }
+    // عکس خواننده
+    if (fs.existsSync(artistPath)) {
+      const files = fs.readdirSync(artistPath);
+      const photo = files.find(f => f.match(/^photo\.(jpg|jpeg|png|webp)$/i));
+      if (photo) artistObj.photo = `music/${artistName}/${photo}`;
     }
 
-    fs.writeFileSync(path.join(ROOT, "library.auto.json"), JSON.stringify({ artists }, null, 1));
-    console.log("✅ library.auto.json generated successfully.");
-  } catch (err) {
-    console.error("❌ Fatal error:", err);
-    process.exit(1);
-  }
+    // آهنگ‌ها
+    if (fs.existsSync(singlesPath)) {
+      const files = fs.readdirSync(singlesPath).filter(f => f.endsWith('.mp3'));
+      files.forEach(file => {
+        const baseName = path.parse(file).name;
+        let title = baseName.includes(' - ') ? baseName.split(' - ').slice(1).join(' - ') : baseName;
+        const coverFile = fs.readdirSync(singlesPath).find(f => f.match(new RegExp(`^${baseName}\\.(jpg|jpeg|png|webp)$`, 'i')));
+        
+        artistObj.singles.push({
+          title: title,
+          artist: artistName,
+          audio: `music/${artistName}/singles/${file}`,
+          cover: coverFile ? `music/${artistName}/singles/${coverFile}` : null
+        });
+      });
+    }
+
+    if (artistObj.singles.length > 0 || artistObj.albums.length > 0) {
+      result.artists.push(artistObj);
+    }
+  });
 }
 
-if (require.main === module) main();
+fs.writeFileSync(path.join(assetsDir, 'library.auto.json'), JSON.stringify(result, null, 2));
+console.log('Successfully generated library.auto.json with ' + result.artists.length + ' artists.');
