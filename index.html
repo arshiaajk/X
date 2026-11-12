@@ -56,8 +56,9 @@ input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:3px;bord
 input[type=range]:disabled{cursor:default;opacity:.6}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:#111;border:0}
 input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#111;border:0}
-#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:10px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
+#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:5px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
 #search:focus{border-color:#111}
+#debug-count{font-size:10px;color:#999;letter-spacing:1px;margin-bottom:20px;display:block;text-align:right}
 .track.hit{background:#f7f7f7;box-shadow:0 0 0 10px #f7f7f7;border-radius:12px;border-bottom-color:transparent}
 .empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0}
 
@@ -110,7 +111,7 @@ footer a{color:#111;text-decoration:none}
 .mini-ctrl button:hover,.mini-ctrl button:focus-visible{background:#111;color:#fff}
 .mini-ctrl .mini-play{width:42px;height:42px;font-size:14px}
 
-/* ===== FULL SCREEN PLAYER (BASS EFFECT UPGRADED) ===== */
+/* ===== FULL SCREEN PLAYER ===== */
 .full-player {
   position: fixed; inset: 0; z-index: 100;
   background: #111; color: #fff;
@@ -123,22 +124,21 @@ footer a{color:#111;text-decoration:none}
 }
 .full-player.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-/* افکت قوی‌تر: بلور از 50px تا 5px کم میشه و تاریکی خیلی بیشتر میشه */
+/* افکت قوی‌تر و محسوس‌تر */
 .fp-bg {
   position: absolute; inset: -50px;
   background-size: cover; background-position: center;
-  filter: blur(calc(50px - (var(--bass) * 45px))) brightness(calc(0.6 - (var(--bass) * 0.5)));
-  transform: scale(calc(1 + (var(--bass) * 0.15)));
-  transition: filter 0.06s ease-out, transform 0.06s ease-out;
+  filter: blur(calc(60px - (var(--bass) * 55px))) brightness(calc(0.7 - (var(--bass) * 0.6)));
+  transform: scale(calc(1 + (var(--bass) * 0.25)));
+  transition: filter 0.05s ease-out, transform 0.05s ease-out;
   z-index: 1;
 }
 
-/* لایه اضافی برای تاریکی مطلق هنگام بیس */
 .fp-bg::after {
   content: ''; position: absolute; inset: 0;
   background: #000;
-  opacity: calc(0.2 + (var(--bass) * 0.6)); 
-  transition: opacity 0.06s ease-out;
+  opacity: calc(0.1 + (var(--bass) * 0.7)); 
+  transition: opacity 0.05s ease-out;
 }
 
 .fp-content {
@@ -156,6 +156,11 @@ footer a{color:#111;text-decoration:none}
   transition: background 0.2s; text-decoration: none;
 }
 .fp-close:hover, .fp-dl:hover { background: rgba(255,255,255,0.2); }
+
+/* Equalizer */
+.eq-container { display: flex; gap: 4px; align-items: flex-end; height: 20px; margin: 0 auto; margin-top: -30px; margin-bottom: 20px; opacity: 0; transition: opacity 0.3s; }
+.full-player.show .eq-container { opacity: 1; }
+.eq-bar { width: 4px; background: #fff; border-radius: 2px; height: 5px; transition: height 0.05s ease; }
 
 .fp-main { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 20px;}
 .fp-cover {
@@ -215,6 +220,7 @@ footer a{color:#111;text-decoration:none}
 <section id="artists">
   <h2 class="section-title">ARSHIA AJANKAN</h2>
   <input id="search" type="search" placeholder="Search artist, album or track" aria-label="Search artist, album or track" autocomplete="off">
+  <span id="debug-count"></span>
   <div id="artistList"></div>
 </section>
 <section class="about">
@@ -277,6 +283,14 @@ footer a{color:#111;text-decoration:none}
 
     <div class="fp-main">
       <img class="fp-cover" id="fpCover" alt="" src="">
+      
+      <!-- نوار اکولایزر برای تست بیس -->
+      <div class="eq-container">
+        <div class="eq-bar" id="eq1"></div><div class="eq-bar" id="eq2"></div>
+        <div class="eq-bar" id="eq3"></div><div class="eq-bar" id="eq4"></div>
+        <div class="eq-bar" id="eq5"></div>
+      </div>
+
       <div class="fp-info">
         <div class="fp-title" id="fpTitle">—</div>
         <div class="fp-artist" id="fpArtist"></div>
@@ -374,12 +388,14 @@ function bindToggle(btn,wrap,onChange){
   return set;
 }
 
-/* ---------- Player Logic & Audio Analyzer (BASS BOOST) ---------- */
+/* ---------- Player Logic & Audio Analyzer ---------- */
 const A=new Audio();A.preload="none";
 let cur=null;
 
 let audioCtx, analyser, source, dataArray;
 let isAnimating = false;
+
+const eqBars = [document.getElementById('eq1'), document.getElementById('eq2'), document.getElementById('eq3'), document.getElementById('eq4'), document.getElementById('eq5')];
 
 const miniPlayer=document.getElementById("miniPlayer");
 const miniFill=document.getElementById("miniFill");
@@ -428,22 +444,27 @@ function initAudioEngine() {
 function animateBass() {
   if (!analyser) return;
   analyser.getByteFrequencyData(dataArray);
-  let bassSum = 0;
-  const bins = 6;
-  for (let i = 0; i < bins; i++) {
-    bassSum += dataArray[i];
-  }
   
-  // تقویت بیس (ضرب در 1.8 تا افکت خیلی قوی‌تر بشه)
-  let rawLevel = (bassSum / bins) / 255;
-  let boostedLevel = Math.min(1, rawLevel * 1.8);
+  let bassSum = 0;
+  for (let i = 0; i < 6; i++) bassSum += dataArray[i];
+  
+  // تقویت بسیار زیاد افکت بیس
+  let rawLevel = (bassSum / 6) / 255;
+  let boostedLevel = Math.min(1, rawLevel * 2.5); // افکت رو ۲.۵ برابر کردم
   
   fullPlayer.style.setProperty('--bass', boostedLevel.toFixed(3));
+  
+  // به‌روزرسانی نوارهای اکولایزر
+  eqBars.forEach((bar, i) => {
+    let h = 5 + (dataArray[i * 2] / 255) * 25; // ارتفاع بین 5 تا 30
+    if (bar) bar.style.height = h + "px";
+  });
   
   if (!A.paused) {
     requestAnimationFrame(animateBass);
   } else {
     fullPlayer.style.setProperty('--bass', 0);
+    eqBars.forEach(bar => { if(bar) bar.style.height = "5px"; });
     isAnimating = false;
   }
 }
@@ -675,10 +696,13 @@ function renderArtist(artist,list){
 
 (async()=>{
   const list=document.getElementById("artistList");
+  const debugCount = document.getElementById("debug-count");
+  
   const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
   
-  // لاگ برای دیباگ کردن در کنسول مرورگر
-  console.log("Artists loaded:", artists.length);
+  // این خط تعداد دقیق خواننده‌های لود شده رو نشون میده (برای دیباگ)
+  debugCount.textContent = `${artists.length} Artists loaded from database`;
+
   if(!artists.length){list.appendChild(el("div","empty","LIBRARY NOT FOUND"));return}
   
   const items=artists.map(a=>renderArtist(a,list));
@@ -710,6 +734,7 @@ function renderArtist(artist,list){
       }
     });
     
+    // اگر تعداد کل بیشتر از 5 بود، دکمه نمایش داده میشه
     if (items.length > 5 && !showingAll) {
       loadMoreBtn.style.display = "block";
     } else {
