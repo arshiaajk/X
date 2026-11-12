@@ -1,6 +1,14 @@
 {
  "artists": [
   {
+   "name": "Dua lipa",
+   "photo": null,
+   "description": "ARTIST",
+   "aliases": [],
+   "singles": [],
+   "albums": []
+  },
+  {
    "name": "Ebi",
    "photo": null,
    "description": "ARTIST",
