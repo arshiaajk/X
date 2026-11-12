@@ -9,7 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif;padding:35px 7%;padding-bottom:120px;overflow-x:hidden}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:100px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:50px}
 .date{font-size:11px;letter-spacing:2px;color:#777}
 .logo{font-size:35px;font-weight:900;letter-spacing:7px;animation:logoMove 7s ease-in-out infinite alternate}
 @property --amp{syntax:"<length>";inherits:true;initial-value:3px}
@@ -20,6 +20,8 @@ body.playing .logo{--amp:9px}
 @keyframes logoMove{from{letter-spacing:7px}to{letter-spacing:11px}}
 main{max-width:900px;margin:auto}
 .section-title{font-size:12px;letter-spacing:5px;margin-bottom:35px}
+#debug-box{font-size:11px;color:#4caf50;background:#e8f5e9;padding:10px;border-radius:8px;margin-bottom:20px;text-align:center;font-weight:bold;}
+
 .artist-card{display:flex;align-items:center;gap:25px;padding:25px 0;border-bottom:1px solid #e8e8e8}
 .artist-photo{width:125px;height:125px;object-fit:cover;background:#eee;flex-shrink:0;border-radius:16px}
 .artist-info{flex:1;min-width:0}
@@ -56,11 +58,33 @@ input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:3px;bord
 input[type=range]:disabled{cursor:default;opacity:.6}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;background:#111;border:0}
 input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#111;border:0}
-#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:5px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
+#search{width:100%;border:1px solid #e8e8e8;border-radius:12px;padding:13px 18px;margin-bottom:20px;font-size:12px;letter-spacing:2px;font-family:inherit;color:#111;outline:none;transition:border-color .3s}
 #search:focus{border-color:#111}
-#debug-count{font-size:10px;color:#999;letter-spacing:1px;margin-bottom:20px;display:block;text-align:right}
 .track.hit{background:#f7f7f7;box-shadow:0 0 0 10px #f7f7f7;border-radius:12px;border-bottom-color:transparent}
 .empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0}
+
+#load-more-container {
+  display: none;
+  text-align: center;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+#load-more-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 18px 30px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 12px;
+  width: 100%;
+  transition: background 0.2s;
+}
+#load-more-btn:hover {
+  background: #333;
+}
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 .artist-group.fade-in { animation: fadeIn 0.5s ease-out forwards; }
@@ -124,7 +148,6 @@ footer a{color:#111;text-decoration:none}
 }
 .full-player.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
-/* افکت قوی‌تر و محسوس‌تر */
 .fp-bg {
   position: absolute; inset: -50px;
   background-size: cover; background-position: center;
@@ -156,11 +179,6 @@ footer a{color:#111;text-decoration:none}
   transition: background 0.2s; text-decoration: none;
 }
 .fp-close:hover, .fp-dl:hover { background: rgba(255,255,255,0.2); }
-
-/* Equalizer */
-.eq-container { display: flex; gap: 4px; align-items: flex-end; height: 20px; margin: 0 auto; margin-top: -30px; margin-bottom: 20px; opacity: 0; transition: opacity 0.3s; }
-.full-player.show .eq-container { opacity: 1; }
-.eq-bar { width: 4px; background: #fff; border-radius: 2px; height: 5px; transition: height 0.05s ease; }
 
 .fp-main { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 20px;}
 .fp-cover {
@@ -219,9 +237,15 @@ footer a{color:#111;text-decoration:none}
 <main>
 <section id="artists">
   <h2 class="section-title">ARSHIA AJANKAN</h2>
+  <div id="debug-box">Loading...</div>
   <input id="search" type="search" placeholder="Search artist, album or track" aria-label="Search artist, album or track" autocomplete="off">
-  <span id="debug-count"></span>
+  
   <div id="artistList"></div>
+  
+  <div id="load-more-container">
+    <button id="load-more-btn">MORE ARTISTS</button>
+  </div>
+  
 </section>
 <section class="about">
   <h2 class="section-title">ABOUT</h2>
@@ -283,14 +307,6 @@ footer a{color:#111;text-decoration:none}
 
     <div class="fp-main">
       <img class="fp-cover" id="fpCover" alt="" src="">
-      
-      <!-- نوار اکولایزر برای تست بیس -->
-      <div class="eq-container">
-        <div class="eq-bar" id="eq1"></div><div class="eq-bar" id="eq2"></div>
-        <div class="eq-bar" id="eq3"></div><div class="eq-bar" id="eq4"></div>
-        <div class="eq-bar" id="eq5"></div>
-      </div>
-
       <div class="fp-info">
         <div class="fp-title" id="fpTitle">—</div>
         <div class="fp-artist" id="fpArtist"></div>
@@ -337,26 +353,28 @@ const pic=(cls,p,alt,audioUrl)=>{
   if(p){
     i.src=url(p);
   } else if (audioUrl && window.jsmediatags) {
-    jsmediatags.read(url(audioUrl), {
-      onSuccess: function(tag) {
-        var image = tag.tags.picture;
-        if (image) {
-          var base64String = "";
-          for (var j = 0; j < image.data.length; j++) {
-            base64String += String.fromCharCode(image.data[j]);
+    try {
+      jsmediatags.read(url(audioUrl), {
+        onSuccess: function(tag) {
+          var image = tag.tags.picture;
+          if (image) {
+            var base64String = "";
+            for (var j = 0; j < image.data.length; j++) {
+              base64String += String.fromCharCode(image.data[j]);
+            }
+            var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+            i.src = base64;
+          } else {
+            i.src = defaultArtistSVG;
+            i.style.background = "#f0f0f0";
           }
-          var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-          i.src = base64;
-        } else {
+        },
+        onError: function(error) {
           i.src = defaultArtistSVG;
           i.style.background = "#f0f0f0";
         }
-      },
-      onError: function(error) {
-        i.src = defaultArtistSVG;
-        i.style.background = "#f0f0f0";
-      }
-    });
+      });
+    } catch(e) { i.src = defaultArtistSVG; }
   } else if (cls.includes("artist")) {
     i.src = defaultArtistSVG;
     i.style.background = "#f0f0f0";
@@ -394,8 +412,6 @@ let cur=null;
 
 let audioCtx, analyser, source, dataArray;
 let isAnimating = false;
-
-const eqBars = [document.getElementById('eq1'), document.getElementById('eq2'), document.getElementById('eq3'), document.getElementById('eq4'), document.getElementById('eq5')];
 
 const miniPlayer=document.getElementById("miniPlayer");
 const miniFill=document.getElementById("miniFill");
@@ -448,23 +464,15 @@ function animateBass() {
   let bassSum = 0;
   for (let i = 0; i < 6; i++) bassSum += dataArray[i];
   
-  // تقویت بسیار زیاد افکت بیس
   let rawLevel = (bassSum / 6) / 255;
-  let boostedLevel = Math.min(1, rawLevel * 2.5); // افکت رو ۲.۵ برابر کردم
+  let boostedLevel = Math.min(1, rawLevel * 2.5); 
   
   fullPlayer.style.setProperty('--bass', boostedLevel.toFixed(3));
-  
-  // به‌روزرسانی نوارهای اکولایزر
-  eqBars.forEach((bar, i) => {
-    let h = 5 + (dataArray[i * 2] / 255) * 25; // ارتفاع بین 5 تا 30
-    if (bar) bar.style.height = h + "px";
-  });
   
   if (!A.paused) {
     requestAnimationFrame(animateBass);
   } else {
     fullPlayer.style.setProperty('--bass', 0);
-    eqBars.forEach(bar => { if(bar) bar.style.height = "5px"; });
     isAnimating = false;
   }
 }
@@ -492,22 +500,24 @@ function updateUI(){
     fpBg.style.backgroundImage = "none";
     
     if (window.jsmediatags) {
-      jsmediatags.read(url(cur.audio), {
-        onSuccess: function(tag) {
-          var image = tag.tags.picture;
-          if (image) {
-            var base64String = "";
-            for (var j = 0; j < image.data.length; j++) {
-              base64String += String.fromCharCode(image.data[j]);
+      try {
+        jsmediatags.read(url(cur.audio), {
+          onSuccess: function(tag) {
+            var image = tag.tags.picture;
+            if (image) {
+              var base64String = "";
+              for (var j = 0; j < image.data.length; j++) {
+                base64String += String.fromCharCode(image.data[j]);
+              }
+              var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+              miniCover.src = base64; miniCover.style.visibility="visible";
+              fpCover.src = base64;
+              fpBg.style.backgroundImage = `url('${base64}')`;
             }
-            var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-            miniCover.src = base64; miniCover.style.visibility="visible";
-            fpCover.src = base64;
-            fpBg.style.backgroundImage = `url('${base64}')`;
-          }
-        },
-        onError: function(error) {}
-      });
+          },
+          onError: function(error) {}
+        });
+      } catch(e) {}
     }
   }
 
@@ -614,42 +624,10 @@ function createAlbum(album){
   box.append(head,wrap);box.api={set,wrap,rows,title:album.title};return box;
 }
 
-/* ---------- fuzzy search ---------- */
-const norm=s=>String(s||"").normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f\u200c]/g,"").toLowerCase()
-  .replace(/ي/g,"ی").replace(/ك/g,"ک").replace(/[^a-z0-9\u0600-\u06ff]+/g," ").trim();
-
-function lev(a,b){
-  const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>{const r=new Array(n+1).fill(0);r[0]=i;return r});
-  for(let j=1;j<=n;j++)d[0][j]=j;
-  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++){
-    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
-    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])d[i][j]=Math.min(d[i][j],d[i-2][j-2]+1);
-  }
-  return d[m][n];
-}
-
-function tokScore(q,t){
-  if(!q || !t) return 0;
-  if(t===q)return 1;
-  if(t.startsWith(q))return .95;
-  if(q.length>=3&&t.includes(q))return .85;
-  const lim=q.length<=3?0:q.length<=5?1:q.length<=8?2:3;
-  if(!lim)return 0;
-  const d=Math.min(lev(q,t),q.length>=4?lev(q,t.slice(0,q.length)):9);
-  return d<=lim?.8-d*.1:0;
-}
-
-function score(q,text){
-  const t=norm(text);if(!t||!q)return 0;
-  const qt=q.split(" "),tt=t.split(" ");let sum=0;
-  for(const x of qt){let b=0;for(const y of tt)b=Math.max(b,tokScore(x,y));if(!b){sum=0;break}sum+=b}
-  let s=sum/qt.length;
-  const qc=q.replace(/ /g,""),tc=t.replace(/ /g,"");
-  if(qc.length>=3){
-    if(tc.includes(qc))s=Math.max(s,.9);
-    else if(qc.length>=4){const lim=qc.length<=5?1:qc.length<=8?2:3;if(Math.min(lev(qc,tc),lev(qc,tc.slice(0,qc.length)))<=lim)s=Math.max(s,.7)}
-  }
-  return s;
+/* ---------- Bulletproof Search ---------- */
+function getCleanString(str) {
+  if (!str) return "";
+  return String(str).toLowerCase().trim();
 }
 
 /* ---------- data ---------- */
@@ -657,16 +635,27 @@ async function load(f){
   try{const r=await fetch("./assets/"+f,{cache:"no-cache"});return r.ok?((await r.json()).artists||[]):[]}
   catch{return[]}
 }
+
 function merge(lists){
   const map=new Map();
   lists.flat().forEach(a=>{
     if(!a || !a.name) return; 
-    const k=a.name.trim().toLowerCase();
-    if(!map.has(k))map.set(k,{name:a.name,photo:a.photo,description:a.description,aliases:[],singles:[],albums:[]});
+    const k = getCleanString(a.name);
+    if(!map.has(k)) map.set(k,{name:a.name,photo:a.photo,description:a.description,aliases:[],singles:[],albums:[]});
     const m=map.get(k);
-    m.photo=m.photo||a.photo;m.description=m.description||a.description;
-    m.aliases=[...new Set([...m.aliases,...(a.aliases||[])])];
-    m.singles.push(...(a.singles||[]));m.albums.push(...(a.albums||[]));
+    
+    m.photo = m.photo || a.photo;
+    m.description = m.description || a.description;
+    
+    const safePush = (arr, items) => {
+      if (Array.isArray(items)) arr.push(...items);
+    };
+    safePush(m.singles, a.singles);
+    safePush(m.albums, a.albums);
+    
+    if (Array.isArray(a.aliases)) {
+       m.aliases = [...new Set([...m.aliases, ...a.aliases])];
+    }
   });
   return [...map.values()];
 }
@@ -696,32 +685,26 @@ function renderArtist(artist,list){
 
 (async()=>{
   const list=document.getElementById("artistList");
-  const debugCount = document.getElementById("debug-count");
+  const debugBox = document.getElementById("debug-box");
+  const loadMoreContainer = document.getElementById("load-more-container");
+  const loadMoreBtn = document.getElementById("load-more-btn");
   
   const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
   
-  // این خط تعداد دقیق خواننده‌های لود شده رو نشون میده (برای دیباگ)
-  debugCount.textContent = `${artists.length} Artists loaded from database`;
+  debugBox.textContent = `✅ Loaded ${artists.length} artists from database.`;
 
   if(!artists.length){list.appendChild(el("div","empty","LIBRARY NOT FOUND"));return}
   
   const items=artists.map(a=>renderArtist(a,list));
   const noRes=el("div","empty","");noRes.style.display="none";list.after(noRes);
 
-  const loadMoreBtn = el("button", "view-more", "MORE ARTISTS");
-  loadMoreBtn.style.display = "none";
-  loadMoreBtn.style.width = "100%";
-  loadMoreBtn.style.padding = "16px";
-  loadMoreBtn.style.marginTop = "30px";
-  loadMoreBtn.style.fontSize = "11px";
-  list.after(loadMoreBtn);
-
   let showingAll = false;
 
   function updateVisibility() {
-    const isSearching = document.getElementById("search").value.trim().length >= 2;
-    if (isSearching) {
-      loadMoreBtn.style.display = "none";
+    const searchVal = getCleanString(document.getElementById("search").value);
+    
+    if (searchVal.length >= 1) {
+      loadMoreContainer.style.display = "none";
       return;
     }
     
@@ -734,17 +717,20 @@ function renderArtist(artist,list){
       }
     });
     
-    // اگر تعداد کل بیشتر از 5 بود، دکمه نمایش داده میشه
     if (items.length > 5 && !showingAll) {
-      loadMoreBtn.style.display = "block";
+      loadMoreContainer.style.display = "block";
+      loadMoreBtn.textContent = `MORE ARTISTS (Showing 5 of ${items.length})`;
     } else {
-      loadMoreBtn.style.display = "none";
+      loadMoreContainer.style.display = "none";
     }
   }
 
   loadMoreBtn.addEventListener("click", () => {
     showingAll = true;
     updateVisibility();
+    setTimeout(() => {
+      window.scrollBy({ top: 300, behavior: 'smooth' });
+    }, 100);
   });
 
   updateVisibility();
@@ -757,9 +743,9 @@ function renderArtist(artist,list){
         if(it.tracks) it.tracks.forEach(x=>{if(x.row) x.row.classList.remove("hit")});
       });
       
-      const q=norm(raw);
+      const q = getCleanString(raw);
       
-      if(q.length<2){
+      if(q.length < 1){
         items.forEach(it=>it.group.style.display="");
         list.append(...items.map(i=>i.group));
         noRes.style.display="none";
@@ -767,50 +753,56 @@ function renderArtist(artist,list){
         return;
       }
       
+      let foundCount = 0;
       const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
       
       items.forEach(it=>{
-        const names = [it.artist.name, ...(it.artist.aliases || [])].filter(Boolean);
-        const sName = names.length ? Math.max(...names.map(n => score(q, n))) : 0;
+        let isMatch = false;
+        let subMatch = false;
+
+        if(getCleanString(it.artist.name).includes(q)) isMatch = true;
         
-        it.albums.forEach(b => { b.s = score(q, b.title); });
-        it.tracks.forEach(x => { x.s = Math.max(score(q, x.t.title), .85 * score(q, x.t.artist || "")); });
+        it.albums.forEach(b => {
+          if(getCleanString(b.title).includes(q)) { isMatch = true; subMatch = true; }
+        });
         
-        const sAlb = Math.max(0, ...it.albums.map(b => b.s * .95));
-        const sTr = Math.max(0, ...it.tracks.map(x => x.s));
+        it.tracks.forEach(x => {
+          if(getCleanString(x.t.title).includes(q) || getCleanString(x.t.artist).includes(q)) { isMatch = true; subMatch = true; }
+        });
         
-        it.score = Math.max(sName, sAlb, sTr);
-        
-        if(it.score>=.6 && sName < Math.max(sAlb, sTr)){
-          const min=Math.max(.6,it.score-.1);
-          open(it,it.set,it.wrap);
-          it.tracks.forEach(x=>{
-            if(x.s>=min){ x.row.classList.add("hit"); if(x.album) open(it, x.album.set, x.album.wrap); }
-          });
-          it.albums.forEach(b=>{ if(b.s*.95>=min) open(it, b.set, b.wrap); });
+        if(isMatch) {
+          foundCount++;
+          it.group.style.display = "";
+          if(subMatch) {
+             open(it,it.set,it.wrap);
+             it.tracks.forEach(x => {
+                if(getCleanString(x.t.title).includes(q) || getCleanString(x.t.artist).includes(q)) {
+                   x.row.classList.add("hit");
+                   if(x.album) open(it, x.album.set, x.album.wrap);
+                }
+             });
+             it.albums.forEach(b => {
+                if(getCleanString(b.title).includes(q)) open(it, b.set, b.wrap);
+             });
+          }
+        } else {
+          it.group.style.display = "none";
         }
       });
       
-      const shown=items.filter(i=>i.score>=.6).sort((a,b)=>b.score-a.score);
-      
-      items.forEach(i => { i.group.style.display = i.score >= .6 ? "" : "none"; });
-      
-      list.append(...shown.map(i=>i.group), ...items.filter(i=>i.score<.6).map(i=>i.group));
-      
-      noRes.style.display = shown.length ? "none" : "";
-      noRes.textContent = shown.length ? "" : "NOTHING FOUND — TRY FEWER LETTERS";
-      
-      loadMoreBtn.style.display = "none";
+      noRes.style.display = foundCount === 0 ? "block" : "none";
+      noRes.textContent = foundCount === 0 ? "NOTHING FOUND" : "";
+      loadMoreContainer.style.display = "none";
       
     } catch(e) {
-      console.error("Search execution error", e);
+      console.error("Search fatal error:", e);
     }
   }
   
   let timer;
   document.getElementById("search").addEventListener("input",e=>{
     clearTimeout(timer);
-    timer=setTimeout(()=>run(e.target.value),120);
+    timer=setTimeout(()=>run(e.target.value),150);
   });
 })();
 
