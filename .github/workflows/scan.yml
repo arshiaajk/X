@@ -17,19 +17,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # اطمینان از دسترسی نوشتن با استفاده از توکن پیش‌فرض
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # ارتقا به نسخه ۲۲ (LTS) برای رفع هشدار منسوخ شدن نسخه ۲۰
+          node-version: '22'
 
       - name: Run scan
         run: node tools/scan.js
 
-      - name: Commit changes
+      - name: Commit and Push changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/library.auto.json
-          git diff --staged --quiet || git commit -m "Update library.auto.json"
-          git push
+          
+          # بررسی اینکه آیا تغییری وجود دارد یا خیر
+          if ! git diff --staged --quiet; then
+            git commit -m "Update library.auto.json [skip ci]"
+            
+            # همگام‌سازی با مخزن اصلی برای جلوگیری از خطای 128
+            git pull --rebase origin ${{ github.ref_name }}
+            
+            git push
+          else
+            echo "No changes detected. Skipping commit and push."
+          fi
