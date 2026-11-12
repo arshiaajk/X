@@ -43,6 +43,20 @@
       "albums": []
     },
     {
+      "name": "Sepehr Khalse",
+      "photo": null,
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Shahin Miri – Fargh Darim",
+          "artist": "Sepehr Khalse",
+          "audio": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
       "name": "Shayan Yo",
       "photo": "music/Shayan Yo/Photo.jpg",
       "description": "ARTIST",
