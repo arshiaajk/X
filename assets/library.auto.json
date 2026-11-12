@@ -15,6 +15,58 @@
       "albums": []
     },
     {
+      "name": "Dariush",
+      "photo": "music/Dariush/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "DariushDobarevatan_64kb",
+          "artist": "Dariush",
+          "audio": "music/Dariush/singles/Dariush - DariushDobarevatan_64kb.mp3",
+          "cover": null,
+          "license": {
+            "license": "http://creativecommons.org/licenses/by-nc-sa/2.5/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/DariushDobaremisazamatvatan",
+            "by": "Dariush"
+          }
+        },
+        {
+          "title": "Dobare misazamat vatan",
+          "artist": "Dariush",
+          "audio": "music/Dariush/singles/Dariush - Dobare misazamat vatan.mp3",
+          "cover": null,
+          "license": {
+            "license": "http://creativecommons.org/licenses/by-nc-sa/2.5/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/DariushDobaremisazamatvatan",
+            "by": "Dariush"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Dua Lipa",
+      "photo": "music/Dua Lipa/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "25 8",
+          "artist": "Dua Lipa",
+          "audio": "music/Dua Lipa/singles/Dua Lipa - 25 8.mp3",
+          "cover": null,
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/25-8_20250413",
+            "by": "Dua Lipa"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
       "name": "Ebi",
       "photo": "music/Ebi/photo.jpg",
       "description": "ARTIST",
@@ -29,6 +81,26 @@
       "albums": []
     },
     {
+      "name": "Erfan",
+      "photo": "music/Erfan/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "029_Kurdish_Audio_Quran_Translation_Mp3",
+          "artist": "Erfan",
+          "audio": "music/Erfan/singles/Erfan - 029_Kurdish_Audio_Quran_Translation_Mp3.mp3",
+          "cover": null,
+          "license": {
+            "license": "http://creativecommons.org/publicdomain/mark/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/KurdishAudioQuranTranslationMp3",
+            "by": "Erfan"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
       "name": "Googoosh",
       "photo": "music/Googoosh/photo.jpg",
       "description": "ARTIST",
@@ -38,6 +110,294 @@
           "artist": "Googoosh",
           "audio": "music/Googoosh/singles/Googoosh - Gharibeh Ashena .mp3",
           "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Linkin Park",
+      "photo": "music/Linkin Park/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "BURN IT DOWN",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - BURN IT DOWN.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - BURN IT DOWN.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Bleed It Out",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Bleed It Out.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Bleed It Out.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Breaking The Habit",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Breaking The Habit.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Breaking The Habit.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "CASTLE OF GLASS",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - CASTLE OF GLASS.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - CASTLE OF GLASS.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Crawling",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Crawling.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Crawling.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Faint",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Faint.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Faint.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Friendly Fire",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Friendly Fire.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Friendly Fire.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "In The End",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - In The End.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - In The End.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Leave Out All The Rest",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Leave Out All The Rest.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Leave Out All The Rest.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Lost",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Lost.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Lost.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "New Divide",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - New Divide.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - New Divide.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Numb Encore",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Numb Encore.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Numb Encore.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "One More Light",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - One More Light.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - One More Light.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "One Step Closer",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - One Step Closer.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - One Step Closer.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Papercut",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Papercut.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Papercut.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "QWERTY",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - QWERTY.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - QWERTY.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Somewhere I Belong",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Somewhere I Belong.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Somewhere I Belong.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "Waiting For The End",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Waiting For The End.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Waiting For The End.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "What I've Done",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - What I've Done.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - What I've Done.jpg",
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/papercuts-edit",
+            "by": "Linkin Park"
+          }
+        },
+        {
+          "title": "With You",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - With You.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - With You.jpg",
+          "license": {
+            "license": "http://creativecommons.org/publicdomain/mark/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/Hybrid-Theory",
+            "by": "Linkin Park"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Metallica",
+      "photo": "music/Metallica/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Too Far Gone (Live at MetLife Stadium, East Rutherford, NJ, 8 6 2023)",
+          "artist": "Metallica",
+          "audio": "music/Metallica/singles/Metallica - Too Far Gone (Live at MetLife Stadium, East Rutherford, NJ, 8 6 2023).mp3",
+          "cover": null,
+          "license": {
+            "license": "http://creativecommons.org/licenses/by/4.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/gs_metallica-too-far-gone-live-at-metlife-stadium-east-rutherford-nj-862023",
+            "by": "Metallica"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Rihanna",
+      "photo": "music/Rihanna/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Rihanna - Kiss It Better (Explicit) - RihannaVEVO (youtube)",
+          "artist": "Rihanna",
+          "audio": "music/Rihanna/singles/Rihanna - Rihanna - Kiss It Better (Explicit) - RihannaVEVO (youtube).mp3",
+          "cover": null,
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/mark/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/rihanna-kiss-it-better-explicit-rihanna-vevo-youtube",
+            "by": "Rihanna"
+          }
         }
       ],
       "albums": []
@@ -80,6 +440,78 @@
           "artist": "Siavash Ghomayshi",
           "audio": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.mp3",
           "cover": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.jpg"
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "System Of A Down",
+      "photo": "music/System Of A Down/Photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "lv-0-20260528133151",
+          "artist": "System Of A Down",
+          "audio": "music/System Of A Down/singles/System Of A Down - lv-0-20260528133151.mp3",
+          "cover": null,
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/mark/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/S.O.A.D.U.L.T.I.M.A.T.E.",
+            "by": "System Of A Down"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "TJ",
+      "photo": "music/TJ/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Shot 4 Me",
+          "artist": "TJ",
+          "audio": "music/TJ/singles/TJ - Shot 4 Me.mp3",
+          "cover": null,
+          "license": {
+            "license": "https://creativecommons.org/publicdomain/mark/1.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/08-shot-4-me",
+            "by": "TJ"
+          }
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Yas",
+      "photo": "music/Yas/photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Podcast 10 - Good Stress.Accelerated Learning - 21 09 2016, 21.18",
+          "artist": "Yas",
+          "audio": "music/Yas/singles/Yas - Podcast 10 - Good Stress.Accelerated Learning - 21 09 2016, 21.18.mp3",
+          "cover": null,
+          "license": {
+            "license": "http://creativecommons.org/licenses/by-nc/3.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/Podcast10GoodStress.AcceleratedLearning2109201621.18",
+            "by": "Yas"
+          }
+        },
+        {
+          "title": "Yas- tracktrack",
+          "artist": "Yas",
+          "audio": "music/Yas/singles/Yas - Yas- tracktrack.mp3",
+          "cover": null,
+          "license": {
+            "license": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
+            "source": "Internet Archive",
+            "url": "https://archive.org/details/jamendo-467628",
+            "by": "Yas"
+          }
         }
       ],
       "albums": []
