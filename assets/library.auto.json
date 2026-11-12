@@ -1,50 +1,32 @@
 {
- "artists": [
-  {
-   "name": "Ebi",
-   "photo": null,
-   "description": "ARTIST",
-   "aliases": [],
-   "singles": [
+  "artists": [
     {
-     "title": "Pooste Shir",
-     "artist": "Ebi",
-     "cover": null,
-     "audio": "music/Ebi/singles/Ebi - Pooste Shir.mp3"
-    }
-   ],
-   "albums": []
-  },
-  {
-   "name": "Hayedeh ",
-   "photo": null,
-   "description": "ARTIST",
-   "aliases": [],
-   "singles": [],
-   "albums": []
-  },
-  {
-   "name": "Shayan Yo",
-   "photo": "music/Shayan Yo/Photo.jpg",
-   "description": "ARTIST",
-   "aliases": [],
-   "singles": [
+      "name": "Ebi",
+      "photo": null,
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Pooste Shir",
+          "artist": "Ebi",
+          "audio": "music/Ebi/singles/Ebi - Pooste Shir.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
     {
-     "title": "Kam Kam",
-     "artist": "Shayan Yo",
-     "cover": null,
-     "audio": "music/Shayan Yo/singles/Shayan Yo - Kam Kam.mp3"
+      "name": "Shayan Yo",
+      "photo": "music/Shayan Yo/Photo.jpg",
+      "description": "ARTIST",
+      "singles": [
+        {
+          "title": "Kam Kam",
+          "artist": "Shayan Yo",
+          "audio": "music/Shayan Yo/singles/Shayan Yo - Kam Kam.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
     }
-   ],
-   "albums": []
-  },
-  {
-   "name": "Vinak",
-   "photo": null,
-   "description": "ARTIST",
-   "aliases": [],
-   "singles": [],
-   "albums": []
-  }
- ]
+  ]
 }
