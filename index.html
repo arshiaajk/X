@@ -966,34 +966,95 @@ fpRange.addEventListener("input", (e) => {
     addEventListener("keydown",e=>{if(e.key==="Escape"&&tg.isConnected){dx=100;onUp()}});
 })();
 
-/* ---------- tilt / mouse motion ---------- */
+/* ---------- motion: tilt + compass + gyroscope (+ mouse on desktop) ---------- */
 (function(){
-    if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+    const reduced=matchMedia("(prefers-reduced-motion:reduce)").matches;
+    // hidden diagnostics: add ?motion to the end of the address
+    const dbg=/[?&]motion/.test(location.search)?(()=>{const d=el("div");
+        d.style.cssText="position:fixed;left:8px;top:8px;z-index:999;font:10px/1.5 monospace;background:rgba(0,0,0,.75);color:#7f7;padding:6px 9px;border-radius:8px;pointer-events:none;white-space:pre";
+        document.body.appendChild(d);return d})():null;
+    if(reduced){if(dbg)dbg.textContent="reduce-motion is ON -> effect disabled";return}
     const root=document.documentElement;
-    let tx=0,ty=0,x=0,y=0,raf=0,last=0,on=false,denied=false;
+    let tx=0,ty=0,sx=0,sy=0,x=0,y=0,raf=0,last=0,on=false,denied=false;
+    let oriN=0,motN=0,genN=0,src="-",info="",base=null,accOk=false;
     const cl=v=>Math.max(-1,Math.min(1,v));
+    const show=()=>{if(dbg)dbg.textContent="secure:"+window.isSecureContext+"\norientation:"+oriN+" motion:"+motN+" generic:"+genN+"\nsource:"+src+"  "+info+"\nmx:"+x.toFixed(2)+" my:"+y.toFixed(2)};
     const tick=t=>{
-        x+=(tx-x)*.1;y+=(ty-y)*.1;
-        if(t-last>33){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t}
-        raf=(Math.abs(tx-x)>.002||Math.abs(ty-y)>.002)?requestAnimationFrame(tick):0;
+        sx*=.93;sy*=.93;                                   // gyroscope "slosh" eases back
+        x+=(cl(tx+sx)-x)*.1;y+=(cl(ty+sy)-y)*.1;
+        if(t-last>33){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t;show()}
+        raf=(Math.abs(cl(tx+sx)-x)>.002||Math.abs(cl(ty+sy)-y)>.002||Math.abs(sx)>.002||Math.abs(sy)>.002)?requestAnimationFrame(tick):0;
     };
     const kick=()=>{if(!raf)raf=requestAnimationFrame(tick)};
-    const onOri=e=>{if(e.gamma==null||e.beta==null)return;tx=cl(e.gamma/30);ty=cl((e.beta-50)/35);kick()};
-    const listen=()=>{if(on)return;on=true;addEventListener("deviceorientation",onOri,{passive:true})};
+
+    // 1) orientation = gyroscope + accelerometer + compass fused by the phone
+    const onOri=e=>{
+        oriN++;
+        if(e.gamma==null||e.beta==null){info="no values";return}
+        let yaw=0;
+        if(e.alpha!=null){                                  // compass / heading: turning left-right
+            if(base==null)base=e.alpha;
+            const d=((e.alpha-base+540)%360)-180;
+            base=(base+d*.03+360)%360;
+            yaw=cl(d/25)*.6;
+        }
+        src="tilt+compass";info="g"+e.gamma.toFixed(0)+" b"+e.beta.toFixed(0);
+        tx=cl(e.gamma/30+yaw);ty=cl((e.beta-50)/35);kick();
+    };
+    // 2) motion = gyroscope rotation speed (slosh) + accelerometer fallback
+    const onMot=e=>{
+        motN++;
+        const r=e.rotationRate;
+        if(r&&r.gamma!=null){sx=cl(sx+r.gamma/500);sy=cl(sy+r.beta/500);kick()}
+        if(src==="tilt+compass")return;
+        const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;
+        src="accelerometer";info="x"+a.x.toFixed(1)+" y"+a.y.toFixed(1);
+        tx=cl(-a.x/6);ty=cl((a.y-7.5)/6);kick();
+    };
+    // 3) Generic Sensor API (Chrome on Android): relative orientation sensor
+    const generic=()=>{
+        if(oriN&&src!=="-")return;
+        try{
+            if(!("RelativeOrientationSensor" in window))return;
+            const sen=new RelativeOrientationSensor({frequency:30,referenceFrame:"screen"});
+            let bp=null,br=null;
+            sen.addEventListener("reading",()=>{
+                const q=sen.quaternion;if(!q)return;genN++;
+                const [qx,qy,qz,qw]=q;
+                const roll=Math.atan2(2*(qw*qx+qy*qz),1-2*(qx*qx+qy*qy));
+                const pitch=Math.asin(Math.max(-1,Math.min(1,2*(qw*qy-qz*qx))));
+                if(bp==null){bp=pitch;br=roll}
+                bp+=(pitch-bp)*.01;br+=(roll-br)*.01;       // follows slowly -> works at any holding angle
+                src="generic sensor";info="";
+                tx=cl((pitch-bp)/.45);ty=cl((roll-br)/.45);kick();
+            });
+            sen.addEventListener("error",()=>{});
+            sen.start();
+        }catch(err){}
+    };
+    const listen=()=>{
+        if(on)return;on=true;
+        addEventListener("deviceorientation",onOri,{passive:true});
+        addEventListener("devicemotion",onMot,{passive:true});
+        setTimeout(generic,2000);
+    };
     if(matchMedia("(pointer:fine)").matches){
         addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;kick()},{passive:true});
     }
-    if(typeof DeviceOrientationEvent==="undefined")return;
+    if(typeof DeviceOrientationEvent==="undefined"){info="no sensor API here";show();return}
     if(typeof DeviceOrientationEvent.requestPermission==="function"){
         // iPhone / iPad: the first tap asks the system for motion permission
+        info="waiting for first tap";show();
         const ask=()=>{
             if(on||denied)return;
-            DeviceOrientationEvent.requestPermission().then(r=>{
-                if(r==="granted")listen();else denied=true;
+            const reqs=[DeviceOrientationEvent.requestPermission()];
+            if(typeof DeviceMotionEvent!=="undefined"&&typeof DeviceMotionEvent.requestPermission==="function")reqs.push(DeviceMotionEvent.requestPermission());
+            Promise.all(reqs).then(r=>{
+                if(r[0]==="granted")listen();else{denied=true;info="permission "+r[0];show()}
             }).catch(()=>{});
         };
         addEventListener("click",ask);
-    }else listen();
+    }else{listen();info="listening...";show()}
 })();
 </script>
 </body>
