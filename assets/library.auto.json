@@ -577,7 +577,20 @@
       "aliases": [
         "شایان یو"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Kam Kam",
+          "artist": "Shayan yo",
+          "audio": "music/Shayan yo/singles/Shayan Yo - Kam Kam.mp3",
+          "cover": "music/Shayan yo/singles/Shayan Yo - Kam Kam.jpg"
+        },
+        {
+          "title": "Sekte (Piano Version)",
+          "artist": "Shayan yo",
+          "audio": "music/Shayan yo/singles/Shayan Yo - Sekte (Piano Version).mp3",
+          "cover": null
+        }
+      ],
       "albums": []
     },
     {
