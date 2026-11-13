@@ -22,7 +22,7 @@
           "title": "Fargh Darim",
           "artist": "Sepehr Khalse",
           "audio": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.mp3",
-          "cover": null
+          "cover": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.JPG"
         }
       ],
       "albums": [
@@ -83,7 +83,7 @@
               "title": "Tool Keshid",
               "artist": "Sepehr Khalse",
               "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Tool Keshid.mp3",
-              "cover": null
+              "cover": "music/Sepehr Khalse/albums/Sepehr Khalse - Tool Keshid.JPG"
             }
           ]
         }
@@ -147,7 +147,20 @@
       "aliases": [
         "هایده"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Dele Divooneh (Remixbaz.com) (320)",
+          "artist": "Hayedeh",
+          "audio": "music/Hayedeh/singles/Haydeh - Dele Divooneh (Remixbaz.com) (320).mp3",
+          "cover": null
+        },
+        {
+          "title": "Gol Sangam (Remixbaz.com) (320)",
+          "artist": "Hayedeh",
+          "audio": "music/Hayedeh/singles/Haydeh - Gol Sangam (Remixbaz.com) (320).mp3",
+          "cover": null
+        }
+      ],
       "albums": []
     },
     {
@@ -165,7 +178,7 @@
           "title": "Gharibeh Ashena ",
           "artist": "Googoosh",
           "audio": "music/Googoosh/singles/Googoosh - Gharibeh Ashena .mp3",
-          "cover": null
+          "cover": "music/Googoosh/singles/Googoosh - Gharibeh Ashena .JPG"
         }
       ],
       "albums": []
