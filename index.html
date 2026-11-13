@@ -255,7 +255,7 @@ body.sheet-open{overflow:hidden}
   box-shadow:0 30px 80px rgba(40,60,120,.18),inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.4),
     inset calc(var(--mx) * -12px) calc(var(--my) * -12px) 30px rgba(255,255,255,.6);
   opacity:0;translate:0 60px;scale:.94;
-  transform:perspective(900px) rotateX(calc(var(--my) * -4deg)) rotateY(calc(var(--mx) * 4deg));
+  transform:perspective(var(--persp)) rotateX(calc(var(--my) * var(--tilt-sheet) * -1)) rotateY(calc(var(--mx) * var(--tilt-sheet)));
   will-change:transform,translate,scale,opacity;
   transition:translate .45s cubic-bezier(.4,0,.6,1),scale .45s cubic-bezier(.4,0,.6,1),opacity .35s ease,transform .12s linear}
 .sheet.show .sheet-panel{opacity:1;translate:none;scale:none;
@@ -329,25 +329,37 @@ input[type=range].mini-range::-moz-range-thumb{width:10px;height:10px;border-rad
 body::before{transform:translateZ(0)}
 .fp-bg{transform:translate3d(calc(var(--mx)*16px),calc(var(--my)*16px),0) scale(1.12)}
 
-/* artist cards: 4deg tilt + moving inner edge light */
+/* artist cards: real 3D tilt. The side of the phone that goes DOWN sinks into the screen.
+   Tilt strength = 9deg. Change --tilt to make it stronger/weaker. */
+:root{--tilt:9deg;--tilt-sheet:6deg;--persp:700px}
 .artist-group{
-  position:relative;overflow:hidden;
-  transform:perspective(900px) rotateX(calc(var(--my) * -4deg)) rotateY(calc(var(--mx) * 4deg)) translateZ(0);
-  transition:transform .12s linear,box-shadow .4s;
+  position:relative;
+  transform:perspective(var(--persp)) rotateX(calc(var(--my) * var(--tilt) * -1)) rotateY(calc(var(--mx) * var(--tilt))) translateZ(0);
+  transition:transform .1s linear,box-shadow .2s;
   box-shadow:
-    0 8px 32px rgba(0,0,0,.07),
+    calc(var(--mx) * -16px) calc(10px + var(--my) * -16px) 34px rgba(30,40,80,.14),
     inset 0 1px 0 rgba(255,255,255,.8),
     inset calc(var(--mx) * -10px) calc(var(--my) * -10px) 24px rgba(255,255,255,.75);
 }
 .artist-group:active{
-  transform:perspective(900px) rotateX(calc(var(--my) * -4deg)) rotateY(calc(var(--mx) * 4deg)) scale(.985) translateZ(0);
+  transform:perspective(var(--persp)) rotateX(calc(var(--my) * var(--tilt) * -1)) rotateY(calc(var(--mx) * var(--tilt))) scale(.985) translateZ(0);
 }
+/* depth shading: the side that sinks in gets a little darker */
+.artist-group::before,.sheet-panel::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
+  background:
+    linear-gradient(to right,rgba(20,30,70,calc(var(--mx) * -.16)) 0%,transparent 60%),
+    linear-gradient(to left,rgba(20,30,70,calc(var(--mx) * .16)) 0%,transparent 60%),
+    linear-gradient(to bottom,rgba(20,30,70,calc(var(--my) * -.16)) 0%,transparent 60%),
+    linear-gradient(to top,rgba(20,30,70,calc(var(--my) * .16)) 0%,transparent 60%)}
 
 /* moving glass light (cards, mini player, profile sheet) */
-.artist-group::after,.mini-player::after,.sheet-panel::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:-1;
+/* the light layer is exactly card-sized (never bigger, never transformed);
+   only the gradient position moves, so nothing can escape the card */
+.artist-group::after,.mini-player::after,.sheet-panel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
   background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.45) 22%,transparent 48%);
-  transform:translate3d(calc(var(--mx)*34%),calc(var(--my)*34%),0);will-change:transform}
-.mini-player::after{background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.65),transparent 40%);transform:translate3d(calc(var(--mx)*32%),calc(var(--my)*32%),0)}
+  background-size:200% 200%;background-repeat:no-repeat;
+  background-position:calc(50% + var(--mx)*30%) calc(50% + var(--my)*30%)}
+.mini-player::after{background-image:radial-gradient(circle at 50% 50%,rgba(255,255,255,.65),transparent 40%)}
 
 @media(prefers-reduced-motion:reduce){
   :root{--mx:0!important;--my:0!important}
@@ -1009,8 +1021,8 @@ fpRange.addEventListener("input", (e) => {
     const show=()=>{if(dbg)dbg.textContent="secure:"+window.isSecureContext+"\norientation:"+oriN+" motion:"+motN+" generic:"+genN+"\nsource:"+src+"  "+info+"\nmx:"+x.toFixed(2)+" my:"+y.toFixed(2)};
     const tick=t=>{
         sx*=.93;sy*=.93;                                   // gyroscope "slosh" eases back
-        x+=(cl(tx+sx)-x)*.1;y+=(cl(ty+sy)-y)*.1;
-        if(t-last>33){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t;show()}
+        x+=(cl(tx+sx)-x)*.18;y+=(cl(ty+sy)-y)*.18;
+        if(t-last>16){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t;show()}
         raf=(Math.abs(cl(tx+sx)-x)>.002||Math.abs(cl(ty+sy)-y)>.002||Math.abs(sx)>.002||Math.abs(sy)>.002)?requestAnimationFrame(tick):0;
     };
     const kick=()=>{if(!raf)raf=requestAnimationFrame(tick)};
@@ -1027,7 +1039,7 @@ fpRange.addEventListener("input", (e) => {
             yaw=cl(d/25)*.6;
         }
         src="tilt+compass";info="g"+e.gamma.toFixed(0)+" b"+e.beta.toFixed(0);
-        tx=cl(e.gamma/30+yaw);ty=cl((e.beta-50)/35);kick();
+        tx=cl(e.gamma/20+yaw);ty=cl((e.beta-50)/25);kick();
     };
     // 2) motion = gyroscope rotation speed (slosh) + accelerometer fallback
     const onMot=e=>{
@@ -1037,7 +1049,7 @@ fpRange.addEventListener("input", (e) => {
         if(src==="tilt+compass")return;
         const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;
         src="accelerometer";info="x"+a.x.toFixed(1)+" y"+a.y.toFixed(1);
-        tx=cl(-a.x/6);ty=cl((a.y-7.5)/6);kick();
+        tx=cl(-a.x/4);ty=cl((a.y-7.5)/4);kick();
     };
     // 3) Generic Sensor API (Chrome on Android): relative orientation sensor
     const generic=()=>{
