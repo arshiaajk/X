@@ -137,6 +137,24 @@
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/CAPSULE/04 Hiphopologist - 7.5.2.mp3",
               "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            },
+            {
+              "title": "Ayne",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/05 Hiphopologist - Ayne.mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            },
+            {
+              "title": "Toxic (feat. Sinazza)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/06 Hiphopologist - Toxic (feat. Sinazza).mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            },
+            {
+              "title": "GHORS II (feat. Poobon)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/07 Hiphopologist - GHORS II (feat. Poobon).mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
             }
           ]
         }
