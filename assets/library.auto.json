@@ -157,6 +157,37 @@
               "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
             }
           ]
+        },
+        {
+          "title": "NOSKHE",
+          "artist": "Hiphopologist",
+          "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg",
+          "tracks": [
+            {
+              "title": "Norf Norf (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Norf Norf (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Noskhe (Intro) (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Noskhe (Intro) (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "OD (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/OD (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Sadism [Diis Shayea] (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Sadism [Diis Shayea] (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            }
+          ]
         }
       ]
     },
