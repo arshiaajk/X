@@ -27,11 +27,6 @@
       ],
       "albums": [
         {
-          "title": "Day One",
-          "cover": "",
-          "tracks": []
-        },
-        {
           "title": "Sepehr Khalse",
           "artist": "Sepehr Khalse",
           "cover": null,
@@ -105,168 +100,8 @@
         "هیپ هاپولوجیست",
         "هیپ‌هاپولوژیست"
       ],
-      "singles": [
-        {
-          "title": "Bache Mardom",
-          "artist": "Hiphopologist feat. Erfan",
-          "cover": "IMG_5069.jpeg",
-          "audio": "Hiphopologist – Bache Mardom.mp3"
-        }
-      ],
-      "albums": [
-        {
-          "title": "CAPSULE",
-          "cover": "IMG_5073.jpeg",
-          "tracks": [
-            {
-              "title": "Sogand",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "01 Hiphopologist - Sogand.mp3"
-            },
-            {
-              "title": "Misoozam Too Shahr",
-              "artist": "Hiphopologist feat. Sinazza",
-              "audio": "02 Hiphopologist - Misoozam Too Shahr (ft. Sinazza).mp3"
-            },
-            {
-              "title": "Batman",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "03 Hiphopologist - Batman.mp3"
-            },
-            {
-              "title": "7.5.2",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "04 Hiphopologist - 7.5.2.mp3"
-            },
-            {
-              "title": "Ayne",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "05 Hiphopologist - Ayne.mp3"
-            },
-            {
-              "title": "Toxic",
-              "artist": "Hiphopologist feat. Sinazza",
-              "audio": "06 Hiphopologist - Toxic (feat. Sinazza).mp3"
-            },
-            {
-              "title": "GHORS II",
-              "artist": "Hiphopologist feat. Poobon",
-              "audio": "07 Hiphopologist - GHORS II (feat. Poobon).mp3"
-            }
-          ]
-        },
-        {
-          "title": "NOSKHE",
-          "cover": "IMG_5074.jpeg",
-          "tracks": [
-            {
-              "title": "Intro",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Noskhe (Intro) (BandMusic).mp3"
-            },
-            {
-              "title": "OD",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "OD (BandMusic).mp3"
-            },
-            {
-              "title": "Sadism",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Sadism [Diis Shayea] (BandMusic).mp3"
-            },
-            {
-              "title": "Norf Norf",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Norf Norf (BandMusic).mp3"
-            },
-            {
-              "title": "Daryakenar",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Darya Kenar (BandMusic).mp3"
-            },
-            {
-              "title": "Sheesh",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Sheesh (BandMusic).mp3"
-            },
-            {
-              "title": "Adams Skit",
-              "artist": "Hiphopologist feat. Shayan Rag",
-              "audio": "Adams Skit (BandMusic).mp3"
-            },
-            {
-              "title": "Dastan",
-              "artist": "Hiphopologist feat. 021Kid",
-              "audio": "Dastan (BandMusic).mp3"
-            },
-            {
-              "title": "Bank",
-              "artist": "Hiphopologist feat. Catchybeatz",
-              "audio": "Bank (BandMusic).mp3"
-            },
-            {
-              "title": "Yallah",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Yallah (BandMusic).mp3"
-            },
-            {
-              "title": "Traplife",
-              "artist": "Hiphopologist feat. Behzad Leito",
-              "audio": "Traplife (BandMusic).mp3"
-            },
-            {
-              "title": "Diaz Skit",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Diaz Skit (BandMusic).mp3"
-            },
-            {
-              "title": "DMT",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "DMT (BandMusic).mp3"
-            },
-            {
-              "title": "Bato",
-              "artist": "Hiphopologist feat. Chvrsi, Mahsa Dehdari & Arian Dousti",
-              "audio": "Bato (BandMusic).mp3"
-            },
-            {
-              "title": "Rotation",
-              "artist": "Hiphopologist feat. Sinazza",
-              "audio": "Rotation (BandMusic).mp3"
-            },
-            {
-              "title": "Bache > Bad B",
-              "artist": "Hiphopologist feat. Saeed Dehghan",
-              "audio": "Bache Bad (BandMusic).mp3"
-            },
-            {
-              "title": "Bache",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Bache (BandMusic).mp3"
-            },
-            {
-              "title": "Shir",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Shir (BandMusic).mp3"
-            },
-            {
-              "title": "Rie",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "noskhe-19-rie.mp3"
-            },
-            {
-              "title": "RIP",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "RIP (BandMusic).mp3"
-            },
-            {
-              "title": "Roopoosh",
-              "artist": "Hiphopologist & Ashkan Kagan",
-              "audio": "Roopush (BandMusic).mp3"
-            }
-          ]
-        }
-      ]
+      "singles": [],
+      "albums": []
     },
     {
       "name": "System Of A Down",
@@ -280,24 +115,6 @@
         "سیستم آف ا داون"
       ],
       "singles": [
-        {
-          "title": "Chop Suey!",
-          "artist": "System Of A Down",
-          "cover": "chop-suey.jpg",
-          "audio": "chop-suey.mp3"
-        },
-        {
-          "title": "Toxicity",
-          "artist": "System Of A Down",
-          "cover": "toxicity.jpg",
-          "audio": "toxicity.mp3"
-        },
-        {
-          "title": "Lonely Day",
-          "artist": "System Of A Down",
-          "cover": "lonely-day.jpg",
-          "audio": "lonely-day.mp3"
-        },
         {
           "title": "lv-0-20260528133151",
           "artist": "System Of A Down",
@@ -318,64 +135,7 @@
         "سجاد شاهی"
       ],
       "singles": [],
-      "albums": [
-        {
-          "title": "TAJ",
-          "cover": "IMG_5072.jpeg",
-          "tracks": [
-            {
-              "title": "SHAH",
-              "artist": "Sajad Shahi feat. Dorcci",
-              "audio": "01 Shah - Sajad Shahi - Dorcci (BandMusic).mp3"
-            },
-            {
-              "title": "Koosh",
-              "artist": "Sajad Shahi feat. Ali Geramy",
-              "audio": "02 Sajad Shahi - Ali Geramy - Koosh (BandMusic).mp3"
-            },
-            {
-              "title": "Ghesse",
-              "artist": "Sajad Shahi",
-              "audio": "03 Gheseh (BandMusic).mp3"
-            },
-            {
-              "title": "Taghas",
-              "artist": "Sajad Shahi",
-              "audio": "04 Sajad Shahi - Taghas (BandMusic).mp3"
-            },
-            {
-              "title": "BALLISTIC",
-              "artist": "Sajad Shahi",
-              "audio": "04 Sajad Shahi - Taghas (BandMusic).mp3"
-            },
-            {
-              "title": "Dige",
-              "artist": "Sajad Shahi feat. Moreshahin",
-              "audio": "06 Sajad Shahi - Dige (BandMusic).mp3"
-            },
-            {
-              "title": "SLEEP MODE",
-              "artist": "Sajad Shahi, Matin Fattahi, Dorcci, Ali Geramy & 6ehtash",
-              "audio": "Sajad Shahi - SLEEP MODE (Ft Matin Fattahi x Dorcci x Ali Geramy).mp3"
-            },
-            {
-              "title": "Samtam",
-              "artist": "Sajad Shahi",
-              "audio": "Sajad Shahi-Samtam-mahanmusic.net.mp3"
-            },
-            {
-              "title": "DEEV",
-              "artist": "Sajad Shahi feat. 6ehtash",
-              "audio": "09 Sajad Shahi - DEEV (BandMusic).mp3"
-            },
-            {
-              "title": "TAJ (Outro)",
-              "artist": "Sajad Shahi & Ali Janak",
-              "audio": "10 Sajad Shahi - TAJ (BandMusic).mp3"
-            }
-          ]
-        }
-      ]
+      "albums": []
     },
     {
       "name": "Hayedeh",
