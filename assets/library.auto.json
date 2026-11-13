@@ -212,6 +212,24 @@
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
+              "title": "RIP (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/RIP (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Roopush (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Roopush (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Rotation (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Rotation (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
               "title": "Sadism [Diis Shayea] (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Sadism [Diis Shayea] (BandMusic).mp3",
@@ -221,6 +239,12 @@
               "title": "Sheesh (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Sheesh (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Shir (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Shir (BandMusic).mp3",
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
