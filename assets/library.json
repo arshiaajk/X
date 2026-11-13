@@ -12,8 +12,9 @@
      "audio": "Shahin Miri – Fargh Darim.mp3"
     }
    ],
-   "albums": [],
-   "aliases": []
+   "albums": ["music/Sepehr Khalse/albums"],
+   "aliases": ["Day one",
+   "دی وان"]
   },
   {
    "name": "Hiphopologist",
