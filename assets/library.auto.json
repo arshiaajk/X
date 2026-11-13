@@ -164,6 +164,24 @@
           "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg",
           "tracks": [
             {
+              "title": "Adams Skit (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Adams Skit (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Darya Kenar (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Darya Kenar (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Dastan (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Dastan (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
               "title": "Norf Norf (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Norf Norf (BandMusic).mp3",
@@ -185,6 +203,12 @@
               "title": "Sadism [Diis Shayea] (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Sadism [Diis Shayea] (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Sheesh (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Sheesh (BandMusic).mp3",
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             }
           ]
