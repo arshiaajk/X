@@ -12,7 +12,14 @@
           "audio": "Shahin Miri – Fargh Darim.mp3"
         }
       ],
-      "albums": [],
+      "albums": [
+        "music/Sepehr Khalse/albums",
+        {
+          "title": "Day One",
+          "cover": "",
+          "tracks": []
+        }
+      ],
       "aliases": [
         "Day one",
         "دی وان"
@@ -211,89 +218,9 @@
           "artist": "System Of A Down",
           "cover": "lonely-day.jpg",
           "audio": "lonely-day.mp3"
-        },
-        {
-          "title": "B.Y.O.B.",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Aerials",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Hypnotize",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Sugar",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Spiders",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Question!",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Radio/Video",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Protect the Land",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Genocidal Humanoidz",
-          "artist": "System Of A Down",
-          "cover": "",
-          "audio": ""
         }
       ],
-      "albums": [
-        {
-          "title": "System of a Down",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Toxicity",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Steal This Album!",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Mezmerize",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hypnotize",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "albums": [],
       "aliases": [
         "SOAD",
         "سیستم آف ا داون"
@@ -370,102 +297,8 @@
       "name": "Hayedeh",
       "photo": "",
       "description": "LEGENDARY PERSIAN SINGER",
-      "singles": [
-        {
-          "title": "Soghati",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Rouzaye Roshan",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Ghesseyeh Man",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Zendegi",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Nagoo Nemiyam",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Ravi",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Tavalod",
-          "artist": "Hayedeh",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Azadeh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Raftam",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Nasepasi",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Faryad",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Bolboli Ke Khamosh Shod",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Aamadanet Mahaaleh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Owje Sedaa",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Mehmaan",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hayf",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Taraneh-ye Saal",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "هایده"
       ]
@@ -474,92 +307,8 @@
       "name": "Googoosh",
       "photo": "",
       "description": "ICONIC PERSIAN POP SINGER",
-      "singles": [
-        {
-          "title": "Pol",
-          "artist": "Googoosh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Ghesseye Vafaa",
-          "artist": "Googoosh",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Lahzeh Bidari",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Do Panjareh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Mordab",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hamsafar",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Kooh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Do Maahi",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Zartosht",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Akharin Khabar",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Manifest",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Shabe Sepid",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hajme Sabz",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ejaz",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Akse Khosoosi",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Bisto Yek",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "گوگوش"
       ]
@@ -578,131 +327,8 @@
       "name": "Siavash Ghomayshi",
       "photo": "",
       "description": "PERSIAN POP SINGER-SONGWRITER",
-      "singles": [
-        {
-          "title": "Digeh Man O Midoonam",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Parandeh",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "To Baroon Keh Rafty",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Jazireh",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Alaki",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Ashegh",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Rafigh",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Baazi",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Tardid",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Hasrat",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Javooneh",
-          "artist": "Siavash Ghomayshi",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Farangis",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hekayat",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Khabe Baroon",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Taak",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ghesseye Gol va Tagarg",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Bee Sarzamin Tar az Baad",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Roozhaye BeeKhatereh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ghoroub Ta Tolou (Remix)",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ragbaar",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Yadegari",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Sarghozasht",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "سیاوش قمیشی",
         "Siavash Ghomeishi"
@@ -713,43 +339,7 @@
       "photo": "",
       "description": "PERSIAN POP SINGER",
       "singles": [],
-      "albums": [
-        {
-          "title": "Tapesh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Nazi Naz Kon",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Shab Zadeh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Kouhe Yakh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Khalij",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Gharibeh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Setarehaye Sorbi",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "albums": [],
       "aliases": [
         "ابی",
         "ابراهیم"
@@ -759,62 +349,7 @@
       "name": "Vinak",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Ama To Migi Na",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Karam Hite",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Moosh Zade",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Cuckoldy",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Belaad Gang",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Hanta",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Gin",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "MIGA",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Pas Migirim",
-          "artist": "Vinak",
-          "cover": "",
-          "audio": ""
-        }
-      ],
+      "singles": [],
       "albums": [],
       "aliases": [
         "ویناک"
@@ -845,43 +380,8 @@
       "name": "Hichkas",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Mooye Parishoon",
-          "artist": "Hichkas",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Killing Fields",
-          "artist": "Hichkas",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Komak",
-          "artist": "Hichkas",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Jangale Asfalt",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Anjam Vazife (EP)",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Mojaz",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "هیچکس"
       ]
@@ -890,38 +390,8 @@
       "name": "Yas",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Bam",
-          "artist": "Yas",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Bayad Betoonim",
-          "artist": "Yas",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Komak",
-          "artist": "Yas",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Khiyabooniha",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Be Omide Iran",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "یاس"
       ]
@@ -930,37 +400,8 @@
       "name": "Mehrad Hidden",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Salakh",
-          "artist": "Mehrad Hidden",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Zoozanaghe",
-          "artist": "Mehrad Hidden",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Sefr",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Toonel Vol. 1",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Toonel Vol. 2",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "مهراد هیدن"
       ]
@@ -969,20 +410,7 @@
       "name": "Zedbazi",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Yakh",
-          "artist": "Zedbazi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Bache Mahal",
-          "artist": "Zedbazi",
-          "cover": "",
-          "audio": ""
-        }
-      ],
+      "singles": [],
       "albums": [],
       "aliases": [
         "زدبازی"
@@ -1051,71 +479,9 @@
           "artist": "Amir Tataloo",
           "cover": "",
           "audio": "Amir Tataloo - Nagoo Na.mp3"
-        },
-        {
-          "title": "Bargard",
-          "artist": "Amir Tataloo",
-          "cover": "",
-          "audio": ""
         }
       ],
-      "albums": [
-        {
-          "title": "Zire Hamkaf",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Tatality",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Man",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Shomareh 6",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Mamnoo",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Shomareh 7",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ghahreman",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Amir",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Sayeh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Jahanam",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Fereshteh",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "albums": [],
       "aliases": [
         "امیر تتلو",
         "Tataloo"
@@ -1146,38 +512,7 @@
       "photo": "",
       "description": "ARTIST",
       "singles": [],
-      "albums": [
-        {
-          "title": "Az Khaneh Ta Goor",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hamishegi",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Khodafezi",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ayatol Trap",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Angizeh",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Nur",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "albums": [],
       "aliases": [
         "عرفان"
       ]
@@ -1326,128 +661,8 @@
       "name": "Metallica",
       "photo": "",
       "description": "AMERICAN HEAVY METAL BAND",
-      "singles": [
-        {
-          "title": "Enter Sandman",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Nothing Else Matters",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "One",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Master of Puppets",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Fade to Black",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "The Unforgiven",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Sad but True",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Fuel",
-          "artist": "Metallica",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Kill 'Em All",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Ride the Lightning",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Master of Puppets",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "...And Justice for All",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Metallica",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Load",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "ReLoad",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Garage Inc.",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "S&M",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "St. Anger",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Death Magnetic",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Lulu",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hardwired... to Self-Destruct",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "72 Seasons",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "متالیکا"
       ]
@@ -1456,148 +671,8 @@
       "name": "Drake",
       "photo": "",
       "description": "CANADIAN RAPPER & SINGER",
-      "singles": [
-        {
-          "title": "Hotline Bling",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "God's Plan",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "One Dance",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "In My Feelings",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Started from the Bottom",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Nice for What",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Passionfruit",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Rich Flex",
-          "artist": "Drake",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "So Far Gone",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Thank Me Later",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Take Care",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Nothing Was the Same",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "If You're Reading This It's Too Late",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "What a Time to Be Alive",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Views",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "More Life",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Scorpion",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Dark Lane Demo Tapes",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Certified Lover Boy",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Honestly, Nevermind",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Her Loss",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "For All the Dogs",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Some Sexy Songs 4 U",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Iceman",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Habibti",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Maid of Honour",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "دریک",
         "درایک"
@@ -1607,85 +682,8 @@
       "name": "Dua Lipa",
       "photo": "",
       "description": "BRITISH POP SINGER",
-      "singles": [
-        {
-          "title": "New Rules",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "IDGAF",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "One Kiss",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Don't Start Now",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Levitating",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Physical",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Houdini",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Training Season",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Illusion",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Dance the Night",
-          "artist": "Dua Lipa",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Dua Lipa",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Future Nostalgia",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Radical Optimism",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "دوا لیپا",
         "دوالیپا"
@@ -1695,110 +693,8 @@
       "name": "Rihanna",
       "photo": "",
       "description": "BARBADIAN POP & R&B SINGER",
-      "singles": [
-        {
-          "title": "Umbrella",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Disturbia",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Rude Boy",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Only Girl (In the World)",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "S&M",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "We Found Love",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Diamonds",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Stay",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Work",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Needed Me",
-          "artist": "Rihanna",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Music of the Sun",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "A Girl Like Me",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Good Girl Gone Bad",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Rated R",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Loud",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Talk That Talk",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Unapologetic",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Anti",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "ریحانا",
         "ریهانا"
@@ -1808,124 +704,8 @@
       "name": "Eminem",
       "photo": "",
       "description": "AMERICAN RAPPER",
-      "singles": [
-        {
-          "title": "Lose Yourself",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Stan",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "The Real Slim Shady",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Without Me",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Mockingbird",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Love the Way You Lie",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Not Afraid",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Rap God",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "The Monster",
-          "artist": "Eminem",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Infinite",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "The Slim Shady LP",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "The Marshall Mathers LP",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "The Eminem Show",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Encore",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Relapse",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Recovery",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "The Marshall Mathers LP 2",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Revival",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Kamikaze",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Music to Be Murdered By",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "The Death of Slim Shady (Coup de Grâce)",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "اینم",
         "امینم"
@@ -1935,103 +715,8 @@
       "name": "The Weeknd",
       "photo": "",
       "description": "CANADIAN R&B SINGER",
-      "singles": [
-        {
-          "title": "Can't Feel My Face",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "The Hills",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Starboy",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "I Feel It Coming",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Blinding Lights",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Save Your Tears",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Die for You",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Take My Breath",
-          "artist": "The Weeknd",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "House of Balloons",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Thursday",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Echoes of Silence",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Kiss Land",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Beauty Behind the Madness",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Starboy",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "After Hours",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Dawn FM",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hurry Up Tomorrow",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "ویکند",
         "ذا ویکند"
@@ -2041,116 +726,8 @@
       "name": "Linkin Park",
       "photo": "",
       "description": "AMERICAN ROCK BAND",
-      "singles": [
-        {
-          "title": "Crawling",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "One Step Closer",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "In the End",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Papercut",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Numb",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Faint",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Somewhere I Belong",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Breaking the Habit",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "What I've Done",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Heavy Is the Crown",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "The Emptiness Machine",
-          "artist": "Linkin Park",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Hybrid Theory",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Meteora",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Minutes to Midnight",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "A Thousand Suns",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Living Things",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "The Hunting Party",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "One More Light",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "From Zero",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "لینکین پارک"
       ]
@@ -2159,84 +736,8 @@
       "name": "Billie Eilish",
       "photo": "",
       "description": "AMERICAN POP SINGER",
-      "singles": [
-        {
-          "title": "Ocean Eyes",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "bad guy",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Lovely",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Everything I Wanted",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Happier Than Ever",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "What Was I Made For?",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Lunch",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Birds of a Feather",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Wildflower",
-          "artist": "Billie Eilish",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Don't Smile at Me",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "When We All Fall Asleep, Where Do We Go?",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Happier Than Ever",
-          "cover": "",
-          "tracks": []
-        },
-        {
-          "title": "Hit Me Hard and Soft",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "بیلی ایلیش"
       ]
@@ -2245,14 +746,7 @@
       "name": "Hoomaan",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Bi Marefat",
-          "artist": "Arta, Hoomaan & Sami Low",
-          "cover": "",
-          "audio": ""
-        }
-      ],
+      "singles": [],
       "albums": [],
       "aliases": [
         "Houman",
@@ -2263,21 +757,8 @@
       "name": "Hoodadk4",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Shame Akhar",
-          "artist": "Hoodadk4 X Mhrdxd",
-          "cover": "",
-          "audio": ""
-        }
-      ],
-      "albums": [
-        {
-          "title": "Javaher",
-          "cover": "",
-          "tracks": []
-        }
-      ],
+      "singles": [],
+      "albums": [],
       "aliases": [
         "Hodadka",
         "هودادکا"
@@ -2288,94 +769,7 @@
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
       "singles": [],
-      "albums": [
-        {
-          "title": "Tsunami",
-          "cover": "",
-          "tracks": [
-            {
-              "title": "Tsunami",
-              "artist": "Arta & Arman Miladi",
-              "audio": ""
-            },
-            {
-              "title": "Zendegi Hamine",
-              "artist": "Arta",
-              "audio": ""
-            },
-            {
-              "title": "Gej",
-              "artist": "Arta, Sepehr Khalse & Smokepurpp",
-              "audio": ""
-            },
-            {
-              "title": "Private Jet",
-              "artist": "Arta, Koorosh & Arman Miladi",
-              "audio": ""
-            },
-            {
-              "title": "Ama Dige Gozasht",
-              "artist": "Arta, Vinak & Arman Miladi",
-              "audio": ""
-            },
-            {
-              "title": "Bi Marefat",
-              "artist": "Arta, Hoomaan & Sami Low",
-              "audio": ""
-            },
-            {
-              "title": "Jealous",
-              "artist": "Arta & Koorosh",
-              "audio": ""
-            },
-            {
-              "title": "Westside",
-              "artist": "Arta, Saretan & Parsa",
-              "audio": ""
-            },
-            {
-              "title": "Adatame",
-              "artist": "Arta, Radochi & Arman Miladi",
-              "audio": ""
-            },
-            {
-              "title": "Benzema",
-              "artist": "Arta & Smokepurpp feat. Desiigner",
-              "audio": ""
-            },
-            {
-              "title": "Redbull",
-              "artist": "Arta, Koorosh & Smokepurpp",
-              "audio": ""
-            },
-            {
-              "title": "Man Delam Tange",
-              "artist": "Arta, Rubina & Arman Miladi",
-              "audio": ""
-            },
-            {
-              "title": "Toxic",
-              "artist": "Arta",
-              "audio": ""
-            },
-            {
-              "title": "Fana",
-              "artist": "Arta, Koorosh & Sepehr Khalse feat. Saman Wilson",
-              "audio": ""
-            },
-            {
-              "title": "Azat Badam Miad",
-              "artist": "Arta",
-              "audio": ""
-            },
-            {
-              "title": "BHMBH",
-              "artist": "Arta feat. Poobon",
-              "audio": ""
-            }
-          ]
-        }
-      ],
+      "albums": [],
       "aliases": [
         "جوپیتر ارتا",
         "Jupiter Orta",
@@ -2386,32 +780,7 @@
       "name": "Koorosh",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "singles": [
-        {
-          "title": "Jealous",
-          "artist": "Arta & Koorosh",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Private Jet",
-          "artist": "Arta, Koorosh & Arman Miladi",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Redbull",
-          "artist": "Arta, Koorosh & Smokepurpp",
-          "cover": "",
-          "audio": ""
-        },
-        {
-          "title": "Fana",
-          "artist": "Arta, Koorosh & Sepehr Khalse feat. Saman Wilson",
-          "cover": "",
-          "audio": ""
-        }
-      ],
+      "singles": [],
       "albums": [],
       "aliases": [
         "Kourosh",
