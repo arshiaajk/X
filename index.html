@@ -197,10 +197,10 @@ footer a{color:#111;text-decoration:none}
 /* ===== GLASS ===== */
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(circle at 10% 15%,rgba(255,140,170,.38),transparent 42%),
-    radial-gradient(circle at 90% 28%,rgba(120,170,255,.38),transparent 44%),
-    radial-gradient(circle at 25% 88%,rgba(140,230,200,.32),transparent 46%),
-    radial-gradient(circle at 88% 92%,rgba(255,205,120,.30),transparent 42%),#fff}
+    radial-gradient(circle at 10% 15%,rgba(255,140,170,.5),transparent 42%),
+    radial-gradient(circle at 90% 28%,rgba(120,170,255,.5),transparent 44%),
+    radial-gradient(circle at 25% 88%,rgba(140,230,200,.45),transparent 46%),
+    radial-gradient(circle at 88% 92%,rgba(255,205,120,.42),transparent 42%),#fff}
 .artist-group{
   background:rgba(255,255,255,.38);
   -webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);
@@ -219,7 +219,6 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .view-more.more-artists:hover{background:#111}
 
 /* ===== PERFORMANCE OVERRIDES ===== */
-.artist-group{-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);background:rgba(255,255,255,.4)}
 .mini-wave path{will-change:transform}
 .top-results{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);border-radius:24px;padding:6px 22px 10px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.07)}
 .top-label{font-size:10px;letter-spacing:4px;color:#888;padding:16px 0 4px}
@@ -244,13 +243,13 @@ body.sheet-open{overflow:hidden}
 /* ===== ARTIST PROFILE SHEET ===== */
 .sheet{position:fixed;inset:0;z-index:55;visibility:hidden;pointer-events:none;transition:visibility 0s .6s}
 .sheet.show{visibility:visible;pointer-events:auto;transition-delay:0s}
-.sheet-back{position:absolute;inset:0;background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .6s ease}
+.sheet-back{position:absolute;inset:0;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .6s ease}
 .sheet.show .sheet-back{opacity:1}
 /* open/close uses the individual `translate` + `scale` properties,
    so `transform` stays free for the motion tilt */
 .sheet-panel{position:absolute;left:14px;right:14px;top:9vh;bottom:14px;max-width:640px;margin:0 auto;border-radius:38px;overflow:hidden;
-  background:linear-gradient(160deg,rgba(255,255,255,.28),rgba(255,255,255,.08));
-  -webkit-backdrop-filter:blur(10px) saturate(200%) brightness(1.04);backdrop-filter:blur(10px) saturate(200%) brightness(1.04);
+  background:linear-gradient(160deg,rgba(255,255,255,.46),rgba(255,255,255,.2));
+  -webkit-backdrop-filter:blur(26px) saturate(190%) brightness(1.04);backdrop-filter:blur(26px) saturate(190%) brightness(1.04);
   border:1px solid rgba(255,255,255,.85);
   box-shadow:0 30px 80px rgba(40,60,120,.2),inset 0 1.5px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(255,255,255,.5),inset 0 0 40px rgba(255,255,255,.35),inset 0 0 0 1px rgba(255,255,255,.25);
   opacity:0;translate:0 60px;scale:.94;
@@ -321,36 +320,49 @@ input[type=range].mini-range::-moz-range-track{height:4px;border-radius:999px;ba
 input[type=range].mini-range::-moz-range-progress{height:4px;border-radius:999px;background:#111}
 input[type=range].mini-range::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:#111;border:0}
 
-/* ===== MOTION (tilt / gyro / mouse) =====
-   Page background stays STILL. Cards + profile sheet get a real 3D tilt. */
-:root{--mx:0;--my:0;--tilt:9deg;--tilt-sheet:6deg;--persp:700px}
+/* ===== MOTION: 3D tilt + moving light + depth shading + moving shadow =====
+   --mx / --my are set only on #artistList and the profile sheet (not on <html>),
+   and cards that are off-screen are frozen (.off) -> far fewer style/paint updates. */
+:root{--mx:0;--my:0;--tilt:6deg;--tilt-sheet:4deg;--persp:800px}
 body::before{transform:translateZ(0)}
-.fp-bg{transform:translate3d(calc(var(--mx)*16px),calc(var(--my)*16px),0) scale(1.12)}
 
+/* ===== iOS 26 "liquid glass" cards ===== */
 .artist-group{
   position:relative;
-  transform:perspective(var(--persp)) rotateX(calc(var(--my) * var(--tilt) * -1)) rotateY(calc(var(--mx) * var(--tilt))) translateZ(0);
-  transition:transform .1s linear,box-shadow .2s;
+  background:linear-gradient(135deg,rgba(255,255,255,.26),rgba(255,255,255,.08) 55%,rgba(255,255,255,.16));
+  -webkit-backdrop-filter:blur(14px) saturate(200%) brightness(1.05);
+  backdrop-filter:blur(14px) saturate(200%) brightness(1.05);
+  border:1px solid rgba(255,255,255,.7);
+  /* shadow slides opposite to the tilt (small blur = cheap to repaint) */
   box-shadow:
-    calc(var(--mx) * -16px) calc(10px + var(--my) * -16px) 34px rgba(30,40,80,.14),
-    inset 0 1px 0 rgba(255,255,255,.8),
-    inset calc(var(--mx) * -8px) calc(var(--my) * -8px) 22px rgba(255,255,255,.35);
+    calc(var(--mx) * -10px) calc(8px + var(--my) * -10px) 22px rgba(30,40,90,.13),
+    inset 2px 2px 1px -1px rgba(255,255,255,.95),
+    inset -2px -2px 1px -1px rgba(255,255,255,.55),
+    inset 0 0 26px rgba(255,255,255,.22);
+  transform:perspective(var(--persp)) rotateX(calc(var(--my) * var(--tilt) * -1)) rotateY(calc(var(--mx) * var(--tilt))) translateZ(0);
+  transition:transform .12s linear;
 }
 .artist-group:active{
   transform:perspective(var(--persp)) rotateX(calc(var(--my) * var(--tilt) * -1)) rotateY(calc(var(--mx) * var(--tilt))) scale(.985) translateZ(0);
 }
-/* depth shading: the side that sinks in gets a little darker */
+.artist-group.off{--mx:0;--my:0}
+
+/* layer 1 (::before): static sheen + depth shading.
+   The shading is ONE gradient whose position moves, so the side that sinks in gets darker. */
 .artist-group::before,.sheet-panel::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:1;
-  background:
-    linear-gradient(to right,rgba(20,30,70,calc(var(--mx) * -.16)) 0%,transparent 60%),
-    linear-gradient(to left,rgba(20,30,70,calc(var(--mx) * .16)) 0%,transparent 60%),
-    linear-gradient(to bottom,rgba(20,30,70,calc(var(--my) * -.16)) 0%,transparent 60%),
-    linear-gradient(to top,rgba(20,30,70,calc(var(--my) * .16)) 0%,transparent 60%)}
-/* soft moving light: same size as the card, very faint so the glass stays see-through */
+  background-image:
+    linear-gradient(120deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.08) 22%,transparent 42%,transparent 70%,rgba(255,255,255,.22) 100%),
+    radial-gradient(circle at 50% 50%,transparent 38%,rgba(20,30,70,.2) 100%);
+  background-size:100% 100%,230% 230%;
+  background-repeat:no-repeat;
+  background-position:0 0,calc(50% - var(--mx)*28%) calc(50% - var(--my)*28%)}
+/* layer 2 (::after): soft light that follows the raised side. Same size as the card (never overflows) */
 .artist-group::after,.sheet-panel::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;
-  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.28) 0%,rgba(255,255,255,.1) 25%,transparent 50%);
+  background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.32) 0%,rgba(255,255,255,.1) 26%,transparent 52%);
   background-size:200% 200%;background-repeat:no-repeat;
-  background-position:calc(50% + var(--mx)*30%) calc(50% + var(--my)*30%)}
+  background-position:calc(50% - var(--mx)*30%) calc(50% - var(--my)*30%)}
+.artist-group .view-more{background:rgba(255,255,255,.3)}
+
 @media(prefers-reduced-motion:reduce){:root{--mx:0!important;--my:0!important}}
 </style>
 </head>
@@ -997,14 +1009,21 @@ fpRange.addEventListener("input", (e) => {
 /* ---------- motion: tilt + compass + gyroscope (+ mouse on desktop) ---------- */
 (function(){
     if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
-    const root=document.documentElement;
-    let tx=0,ty=0,sx=0,sy=0,x=0,y=0,raf=0,last=0,on=false,denied=false;
+    const listEl=document.getElementById("artistList"),sheetEl=document.getElementById("sheet"),panelEl=sheetEl.querySelector(".sheet-panel");
+    // freeze cards that are off-screen: no work for things nobody can see
+    const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("off",!e.isIntersecting)),{rootMargin:"120px"});
+    new MutationObserver(()=>listEl.querySelectorAll(".artist-group:not([data-o])").forEach(g=>{g.dataset.o=1;io.observe(g)})).observe(listEl,{childList:true});
+    let tx=0,ty=0,sx=0,sy=0,x=0,y=0,px=0,py=0,raf=0,last=0,on=false,denied=false;
     let oriN=0,src="-",base=null;
     const cl=v=>Math.max(-1,Math.min(1,v));
     const tick=t=>{
         sx*=.93;sy*=.93;
-        x+=(cl(tx+sx)-x)*.18;y+=(cl(ty+sy)-y)*.18;
-        if(t-last>16){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t}
+        x+=(cl(tx+sx)-x)*.2;y+=(cl(ty+sy)-y)*.2;
+        if(t-last>32&&!document.hidden&&(Math.abs(x-px)>.004||Math.abs(y-py)>.004)){
+            const vx=x.toFixed(3),vy=y.toFixed(3);
+            listEl.style.setProperty("--mx",vx);listEl.style.setProperty("--my",vy);
+            if(sheetEl.classList.contains("show")){panelEl.style.setProperty("--mx",vx);panelEl.style.setProperty("--my",vy)}
+            last=t;px=x;py=y}
         raf=(Math.abs(cl(tx+sx)-x)>.002||Math.abs(cl(ty+sy)-y)>.002||Math.abs(sx)>.002||Math.abs(sy)>.002)?requestAnimationFrame(tick):0;
     };
     const kick=()=>{if(!raf)raf=requestAnimationFrame(tick)};
