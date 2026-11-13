@@ -284,6 +284,41 @@ body.sheet-open{overflow:hidden}
   .sheet-scroll{padding:26px 16px 130px}
   .album-tracks{max-height:600px}
 }
+/* ===== MINI PLAYER: floating glass card ===== */
+.mini-player{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:620px;margin:0 auto;border-radius:30px;padding-bottom:0;overflow:hidden;
+  border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.5);
+  -webkit-backdrop-filter:blur(24px) saturate(190%);backdrop-filter:blur(24px) saturate(190%);
+  box-shadow:0 14px 40px rgba(30,40,80,.16),inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.4);
+  transform:translateY(150%) scale(.96);transition:transform .7s cubic-bezier(.2,1.1,.3,1),opacity .4s}
+.mini-inner{padding:12px 14px}
+.mini-range{display:block;width:100%;flex:none;height:20px;padding:8px 0;margin-top:2px;background-clip:content-box;
+  background-image:linear-gradient(to right,#111 var(--p),rgba(0,0,0,.14) var(--p))}
+.mini-ctrl button{background:rgba(255,255,255,.45);color:#111;border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 4px 12px rgba(0,0,0,.08)}
+.mini-ctrl #miniNext{background:rgba(255,255,255,.45);color:#111;border:1px solid rgba(255,255,255,.85)}
+.mini-ctrl #miniNext:hover,.mini-ctrl button:hover,.mini-ctrl button:focus-visible{background:#111;color:#fff}
+body{padding-bottom:140px}
+@media(max-width:600px){body{padding-bottom:130px}.mini-inner{padding:10px 12px}}
+
+/* ===== FULL PLAYER: glass controls ===== */
+.fp-close,.fp-dl,.fp-ctrl button:not(.fp-play){background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.5),0 8px 24px rgba(0,0,0,.25)}
+.fp-ctrl button:not(.fp-play){width:58px;height:58px;border-radius:50%}
+.fp-ctrl .fp-play{background:rgba(255,255,255,.28);color:#fff;border:1px solid rgba(255,255,255,.55);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.6),0 10px 30px rgba(0,0,0,.3)}
+.fp-bar input[type=range]{height:6px;border-radius:3px}
+.fp-bar input[type=range]::-webkit-slider-thumb{box-shadow:0 2px 8px rgba(0,0,0,.35)}
+
+/* ===== MOTION (tilt / mouse) ===== */
+:root{--mx:0;--my:0}
+body::before{transform:translate3d(calc(var(--mx)*24px),calc(var(--my)*24px),0) scale(1.1);will-change:transform}
+.fp-bg{transform:translate3d(calc(var(--mx)*16px),calc(var(--my)*16px),0) scale(1.12)}
+.artist-group{position:relative;overflow:hidden}
+.artist-group::after,.mini-player::after,.sheet-panel::after{content:"";position:absolute;inset:-50%;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.5),transparent 40%);
+  transform:translate3d(calc(var(--mx)*22%),calc(var(--my)*22%),0);will-change:transform}
+@media(prefers-reduced-motion:reduce){:root{--mx:0!important;--my:0!important}}
 </style>
 </head>
 <body>
@@ -313,21 +348,12 @@ body.sheet-open{overflow:hidden}
 
 <!-- MINI PLAYER -->
 <div class="mini-player" id="miniPlayer" aria-live="polite">
-    <div class="mini-progress">
-        <div class="mini-progress-fill" id="miniFill"></div>
-        <div class="mini-wave" aria-hidden="true">
-            <svg viewBox="0 0 1200 14" preserveAspectRatio="none">
-                <path d="M0 7 Q 50 2 100 7 T 200 7 T 300 7 T 400 7 T 500 7 T 600 7 T 700 7 T 800 7 T 900 7 T 1000 7 T 1100 7 T 1200 7"/>
-                <path d="M0 7 Q 60 3 120 7 T 240 7 T 360 7 T 480 7 T 600 7 T 720 7 T 840 7 T 960 7 T 1080 7 T 1200 7"/>
-                <path d="M0 7 Q 40 4 80 7 T 160 7 T 240 7 T 320 7 T 400 7 T 480 7 T 560 7 T 640 7 T 720 7 T 800 7 T 880 7 T 960 7 T 1040 7 T 1120 7 T 1200 7"/>
-            </svg>
-        </div>
-    </div>
     <div class="mini-inner">
         <img class="mini-cover" id="miniCover" alt="" src="" style="visibility:hidden">
         <div class="mini-info">
             <div class="mini-title" id="miniTitle">-</div>
             <div class="mini-artist" id="miniArtist"></div>
+            <input type="range" class="mini-range" id="miniRange" min="0" max="1000" value="0" aria-label="Seek">
         </div>
         <div class="mini-ctrl">
             <button type="button" class="mini-play" id="miniPlay" aria-label="Play / Pause">?</button>
@@ -450,7 +476,12 @@ let isAnimating = false;
 
 // Mini Player Elements
 const miniPlayer=document.getElementById("miniPlayer");
-const miniFill=document.getElementById("miniFill");
+const miniRange=document.getElementById("miniRange");
+let miniDrag=false;
+miniRange.addEventListener("pointerdown",()=>{miniDrag=true});
+["pointerup","pointercancel","change"].forEach(ev=>miniRange.addEventListener(ev,()=>{miniDrag=false}));
+miniRange.addEventListener("click",e=>e.stopPropagation());
+miniRange.addEventListener("input",()=>{fill(miniRange);if(cur&&A.duration)A.currentTime=miniRange.value/1000*A.duration});
 const miniCover=document.getElementById("miniCover");
 const miniTitle=document.getElementById("miniTitle");
 const miniArtist=document.getElementById("miniArtist");
@@ -573,7 +604,7 @@ A.addEventListener("timeupdate",()=>{
 
     cur.rng.value = val; fill(cur.rng);
     cur.time.textContent = fmt(A.currentTime)+" / "+fmt(A.duration);
-    miniFill.style.transform="scaleX("+(p/100)+")";
+    if(!miniDrag){miniRange.value=val;fill(miniRange)}
 
     fpRange.value = val; fill(fpRange);
     fpTimeCur.textContent = fmt(A.currentTime);
@@ -608,7 +639,7 @@ function createTrack(t){
     const start=()=>{
         if(cur)cur.reset();
         cur={row,btn:play,rng,time,reset,title:t.title,artist:t.artist||"",cover:t.cover||null,audio:t.audio};
-        rng.disabled=false;
+        rng.disabled=false;miniRange.value=0;fill(miniRange);
         A.src=url(t.audio);A.play().catch(()=>reset());
         updateUI();
     };
@@ -923,6 +954,30 @@ fpRange.addEventListener("input", (e) => {
     });
     tg.addEventListener("click",e=>{if(moved){e.preventDefault();moved=false}},true);
     addEventListener("keydown",e=>{if(e.key==="Escape"&&tg.isConnected){dx=100;onUp()}});
+})();
+
+/* ---------- tilt / mouse motion ---------- */
+(function(){
+    if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+    const root=document.documentElement;
+    let tx=0,ty=0,x=0,y=0,raf=0,last=0;
+    const cl=v=>Math.max(-1,Math.min(1,v));
+    const tick=t=>{
+        x+=(tx-x)*.08;y+=(ty-y)*.08;
+        if(t-last>33){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t}
+        raf=(Math.abs(tx-x)>.002||Math.abs(ty-y)>.002)?requestAnimationFrame(tick):0;
+    };
+    const kick=()=>{if(!raf)raf=requestAnimationFrame(tick)};
+    const onOri=e=>{if(e.gamma==null||e.beta==null)return;tx=cl(e.gamma/35);ty=cl((e.beta-50)/40);kick()};
+    const listen=()=>addEventListener("deviceorientation",onOri,{passive:true});
+    if(matchMedia("(pointer:fine)").matches){
+        addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;kick()},{passive:true});
+    }
+    if(typeof DeviceOrientationEvent!=="undefined"&&typeof DeviceOrientationEvent.requestPermission==="function"){
+        addEventListener("click",()=>{
+            DeviceOrientationEvent.requestPermission().then(r=>{if(r==="granted")listen()}).catch(()=>{});
+        },{once:true});
+    }else if(typeof DeviceOrientationEvent!=="undefined"){listen()}
 })();
 </script>
 </body>
