@@ -108,7 +108,39 @@
           "cover": "music/Hiphopologist/singles/Hiphopologist – Bache Mardom.jpg"
         }
       ],
-      "albums": []
+      "albums": [
+        {
+          "title": "CAPSULE",
+          "artist": "Hiphopologist",
+          "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG",
+          "tracks": [
+            {
+              "title": "Sogand",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/01 Hiphopologist - Sogand.mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            },
+            {
+              "title": "Misoozam Too Shahr (ft. Sinazza)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/02 Hiphopologist - Misoozam Too Shahr (ft. Sinazza).mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            },
+            {
+              "title": "Batman",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/03 Hiphopologist - Batman.mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            },
+            {
+              "title": "7.5.2",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/CAPSULE/04 Hiphopologist - 7.5.2.mp3",
+              "cover": "music/Hiphopologist/albums/CAPSULE/cover.JPG"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "System Of A Down",
