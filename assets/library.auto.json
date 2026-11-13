@@ -100,7 +100,14 @@
         "هیپ هاپولوجیست",
         "هیپ‌هاپولوژیست"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Bache Mardom",
+          "artist": "Hiphopologist",
+          "audio": "music/Hiphopologist/singles/Hiphopologist – Bache Mardom.mp3",
+          "cover": "music/Hiphopologist/singles/Hiphopologist – Bache Mardom.jpg"
+        }
+      ],
       "albums": [
         {
           "title": "Hiphopologist",
