@@ -1,23 +1,29 @@
 /*
   ساخت library.auto.json + پیدا کردن خودکار کاور آهنگ و عکس خواننده
 
+  هر آهنگی که توی این پوشه‌ها بذاری خودکار به لایبریری اضافه می‌شه:
+    assets/music/<Artist>/singles/*.mp3
+    assets/music/<Artist>/albums/<AlbumName>/*.mp3
+  (mp3 که مستقیم داخل albums باشه هم یه آلبوم هم‌اسم خواننده می‌سازه)
+
+  ترتیب آهنگ‌های آلبوم فقط از روی شماره ابتدای اسم فایل تعیین می‌شه (اسم فایل هر چی باشه مهم نیست).
+  فایل‌های بدون شماره می‌رن آخر.
+
+  خروجی = ترکیب library.json (دستی) + پوشه‌ها:
+    - همه خواننده‌های library.json می‌مونن (با aliases و description)
+    - آهنگ‌های پوشه‌ها اضافه می‌شن، تکراری‌ها فقط یک بار میان
+
+  کاور آلبوم: cover.* / folder.* / front.* / album.* ، یا عکسی هم‌اسم آلبوم، یا اولین عکس داخل پوشه آلبوم.
+
   منبع‌های عکس (به ترتیب اولویت): SoundCloud ← Spotify ← iTunes ← Deezer
-  SoundCloud منبع اصلیه؛ اگه چیزی پیدا نکرد نوبت Spotify و بعد بقیه می‌شه.
-  Spotify و SoundCloud فقط وقتی فعال می‌شن که کلید API بدی (رایگانه، پایین‌تر توضیح داده شده):
+  Spotify و SoundCloud فقط وقتی فعال می‌شن که کلید API بدی:
     SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET        (developer.spotify.com/dashboard)
     SOUNDCLOUD_CLIENT_ID / SOUNDCLOUD_CLIENT_SECRET  (اختیاری)
   iTunes و Deezer کلید نمی‌خوان و همیشه فعالن.
 
-  آهنگ از منبع‌های «باز» (فقط آهنگ‌های با لایسنس Creative Commons / دامنه عمومی):
-    Jamendo         JAMENDO_CLIENT_ID   (رایگان: devportal.jamendo.com)
-    Internet Archive  بدون کلید، فقط آیتم‌هایی که لایسنس CC یا public domain دارن
-  آهنگ‌ها داخل پوشه singles هر خواننده ذخیره می‌شن، کنار هر کدوم یه فایل «.license.json» با لایسنس و لینک منبع.
-
-  متغیرهای محیطی دیگر:
+  متغیرهای محیطی:
     NO_COVERS=1       اصلاً دنبال عکس نگرده
-    NO_OPEN_MUSIC=1   دنبال آهنگ باز نگرده
-    FORCE_COVERS=1    کش «پیدا نشد» رو نادیده بگیره (برای آهنگ‌ها: FORCE_OPEN=1)
-    OPEN_MAX=20       حداکثر تعداد آهنگ جدید برای هر خواننده در هر اجرا
+    FORCE_COVERS=1    کش «پیدا نشد» رو نادیده بگیره
 
   اگه اسم پوشه خواننده فارسیه و توی اسپاتیفای انگلیسی ثبت شده، داخل پوشه‌اش فایل info.json بساز:
     { "searchName": "Hichkas" }
@@ -52,6 +58,31 @@ const similar = (a, b) => {
 
 const SEP = /\s[-\u2013\u2014]\s/;
 const titleOf = base => SEP.test(base) ? base.split(SEP).slice(1).join(' - ') : base;
+const natural = (a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+
+// ارقام فارسی/عربی رو به انگلیسی تبدیل می‌کنه
+const faDigits = s => s
+  .replace(/[\u06f0-\u06f9]/g, c => c.charCodeAt(0) - 0x06f0)
+  .replace(/[\u0660-\u0669]/g, c => c.charCodeAt(0) - 0x0660);
+
+// شماره ترک رو از اسم فایل درمیاره، با هر فرمتی:
+// "01 - Name", "01. Name", "1) Name", "01 Name", "01_Name", "Track 03", "Artist - 05 - Name", "۰۳ اسم"
+function parseTrack(base, artistName) {
+  const s = faDigits(base).trim();
+  const re = /^(?:track\s*)?(\d{1,3})(?!\d)[\s\-._)\]:]*(.*)$/i;
+  let m = s.match(re);
+  if (!m && SEP.test(s)) {                        // حالت "Artist - 05 - Name"
+    m = s.split(SEP).slice(1).join(' - ').trim().match(re);
+  }
+  if (!m) return { num: null, title: titleOf(base).trim() || base };
+  let title = m[2].trim();
+  // "01 Hiphopologist - Sogand" -> "Sogand"
+  if (SEP.test(title)) {
+    const parts = title.split(SEP);
+    if (similar(parts[0], artistName)) title = parts.slice(1).join(' - ').trim();
+  }
+  return { num: parseInt(m[1], 10), title: title || ('Track ' + m[1]) };
+}
 
 /* ---------- شبکه ---------- */
 async function getJson(url, opts = {}) {
@@ -225,90 +256,58 @@ function searchNameOf(artistPath, artistName) {
 const artistDirs = () => fs.existsSync(musicDir)
   ? fs.readdirSync(musicDir, { withFileTypes: true }).filter(d => d.isDirectory()) : [];
 
-/* ---------- آهنگ از منبع‌های باز (CC / public domain) ---------- */
-const OPEN_RECHECK_MS = 7 * 24 * 3600 * 1000;   // هر خواننده هفته‌ای یک بار بررسی می‌شه
-const OPEN_MAX = parseInt(env.OPEN_MAX, 10) || 20;
-const MAX_BYTES = 40 * 1024 * 1024;
-const safeName = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
-const isMp3 = b => b.length > 10000 && ((b[0] === 0x49 && b[1] === 0x44 && b[2] === 0x33) || (b[0] === 0xff && (b[1] & 0xe0) === 0xe0));
-const OPEN_LICENSE_RE = /creativecommons\.org|publicdomain/i;
+/* ---------- خواندن آلبوم‌ها ---------- */
+// dir: پوشه فایل‌ها ، rel: مسیر نسبی برای سایت ، loose: آهنگ‌هایی که مستقیم داخل albums هستن
+function buildAlbum(title, dir, rel, artistName, loose) {
+  const files = fs.readdirSync(dir, { withFileTypes: true }).filter(d => d.isFile()).map(d => d.name);
+  const mp3s = files.filter(f => f.toLowerCase().endsWith('.mp3'));
+  if (!mp3s.length) return null;
+  const imgs = files.filter(f => IMG_RE.test(f)).sort(natural);
 
-async function downloadMp3(url, dest) {
-  try {
-    const r = await fetch(url, { signal: AbortSignal.timeout(180000), redirect: 'follow' });
-    if (!r.ok) { console.log('  download failed: HTTP ' + r.status); return false; }
-    if (+r.headers.get('content-length') > MAX_BYTES) { console.log('  skipped: file too large'); return false; }
-    const buf = Buffer.from(await r.arrayBuffer());
-    if (buf.length > MAX_BYTES || !isMp3(buf)) { console.log('  skipped: not a valid mp3'); return false; }
-    fs.writeFileSync(dest, buf);
-    return true;
-  } catch (e) { console.log('  download failed: ' + e.message); return false; }
+  const albumCover = imgs.find(f => /^(cover|folder|front|album)\./i.test(f))
+    || (loose ? null : (imgs.find(f => norm(path.parse(f).name) === norm(title)) || imgs[0] || null));
+  const coverPath = albumCover ? `${rel}/${albumCover}` : null;
+
+  // ترتیب: فقط بر اساس شماره. فایل‌های بدون شماره می‌رن آخر (به ترتیب الفبایی)
+  const parsed = mp3s.map(file => ({ file, ...parseTrack(path.parse(file).name, artistName) }))
+    .sort((a, b) => {
+      if (a.num !== null && b.num !== null && a.num !== b.num) return a.num - b.num;
+      if (a.num !== null && b.num === null) return -1;
+      if (a.num === null && b.num !== null) return 1;
+      return natural(a.file, b.file);
+    });
+
+  const tracks = parsed.map(p => {
+    const base = path.parse(p.file).name;
+    const own = imgs.find(f => new RegExp(`^${escapeRe(base)}\\.(${IMG_EXT.join('|')})$`, 'i').test(f));
+    return {
+      title: p.title,
+      artist: artistName,
+      audio: `${rel}/${p.file}`,
+      cover: own ? `${rel}/${own}` : coverPath
+    };
+  });
+  return { title, artist: artistName, cover: coverPath, tracks };
 }
 
-// هر منبع باز: tracks(artistName) -> { error, list: [{ title, url, cover, license, page, source, by }] }
-const openSources = [
-  {
-    name: 'Jamendo', enabled: () => !!env.JAMENDO_CLIENT_ID,
-    async tracks(name) {
-      const r = await getJson('https://api.jamendo.com/v3.0/tracks/?format=json&limit=50&audiodlformat=mp32&order=popularity_total'
-        + '&client_id=' + enc(env.JAMENDO_CLIENT_ID) + '&artist_name=' + enc(name));
-      if (r.error) return { error: r.error, list: [] };
-      return { list: ((r.data && r.data.results) || [])
-        .filter(x => norm(x.artist_name) === norm(name) && x.audiodownload_allowed && x.audiodownload && x.license_ccurl)
-        .map(x => ({ title: x.name, url: x.audiodownload, cover: x.image, license: x.license_ccurl,
-                     page: x.shareurl, source: 'Jamendo', by: x.artist_name })) };
-    }
-  },
-  {
-    name: 'Internet Archive', enabled: () => true,
-    async tracks(name) {
-      const q = `creator:"${name.replace(/"/g, '')}" AND mediatype:audio`;
-      const s = await getJson('https://archive.org/advancedsearch.php?output=json&rows=15&fl[]=identifier&fl[]=creator&fl[]=licenseurl&q=' + enc(q));
-      if (s.error) return { error: s.error, list: [] };
-      const out = [];
-      for (const d of ((s.data && s.data.response && s.data.response.docs) || [])) {
-        const creators = [].concat(d.creator || []);
-        const lic = [].concat(d.licenseurl || []).find(u => OPEN_LICENSE_RE.test(u));
-        if (!lic || !creators.some(c => norm(c) === norm(name))) continue;     // لایسنس باز + اسم دقیق خواننده
-        const m = await getJson('https://archive.org/metadata/' + enc(d.identifier));
-        for (const f of ((m.data && m.data.files) || [])) {
-          if (!/\.mp3$/i.test(f.name) || f.source === 'metadata' || !/mp3/i.test(f.format || '')) continue;
-          out.push({ title: f.title || path.parse(f.name).name, url: `https://archive.org/download/${enc(d.identifier)}/${enc(f.name)}`,
-                     cover: null, license: lic, page: 'https://archive.org/details/' + d.identifier, source: 'Internet Archive', by: name });
-        }
-        await sleep(300);
-      }
-      return { list: out };
-    }
-  }
-];
+function readAlbums(artistPath, artistName) {
+  const albumsPath = path.join(artistPath, 'albums');
+  if (!fs.existsSync(albumsPath)) return [];
+  const base = `music/${artistName}/albums`;
+  const out = [];
 
-async function fetchOpenMusic(artist, artistPath, singlesPath, searchName) {
-  let added = 0, anyError = false;
-  const seen = new Set();
-  for (const s of openSources.filter(s => s.enabled())) {
-    if (added >= OPEN_MAX) break;
-    const { error, list } = await s.tracks(searchName);
-    if (error) { anyError = true; console.log(`  ${s.name}: ERROR ${error}`); continue; }
-    console.log(`  ${s.name}: ${list.length} open-licensed tracks`);
-    for (const tr of list) {
-      if (added >= OPEN_MAX) break;
-      const title = safeName(tr.title);
-      if (!title || seen.has(norm(title))) continue;
-      seen.add(norm(title));
-      const base = `${artist} - ${title}`;
-      if (fs.existsSync(path.join(singlesPath, base + '.mp3'))) continue;        // قبلاً گرفته شده
-      if (fs.readdirSync(singlesPath).some(f => f.toLowerCase().endsWith('.mp3') && similar(titleOf(path.parse(f).name), title))) continue;
-      console.log(`  downloading: ${title}  [${tr.license}]`);
-      if (!(await downloadMp3(tr.url, path.join(singlesPath, base + '.mp3')))) { anyError = true; continue; }
-      fs.writeFileSync(path.join(singlesPath, base + '.license.json'),
-        JSON.stringify({ license: tr.license, source: tr.source, url: tr.page, by: tr.by }, null, 2));
-      if (tr.cover && !hasCover(singlesPath, base)) await download(tr.cover, path.join(singlesPath, base + '.jpg'));
-      added++;
-      await sleep(500);
-    }
-  }
-  return { added, anyError };
+  // آهنگ‌هایی که مستقیم داخل albums گذاشته شدن
+  const loose = buildAlbum(artistName, albumsPath, base, artistName, true);
+  if (loose) out.push(loose);
+
+  // هر زیرپوشه = یه آلبوم
+  fs.readdirSync(albumsPath, { withFileTypes: true })
+    .filter(d => d.isDirectory()).map(d => d.name).sort(natural)
+    .forEach(name => {
+      const alb = buildAlbum(name, path.join(albumsPath, name), `${base}/${name}`, artistName, false);
+      if (alb) out.push(alb);
+    });
+  return out;
 }
 
 /* ---------- اصلی ---------- */
@@ -333,34 +332,16 @@ async function main() {
   }
 
   // ۲. پیدا کردن عکس خواننده و کاور آهنگ‌هایی که ندارن
-  if (env.NO_COVERS !== '1' || env.NO_OPEN_MUSIC !== '1') {
+  if (env.NO_COVERS !== '1') {
     if (typeof fetch !== 'function') {
-      console.log(`!! Node ${process.version} has no fetch - Node 18+ is required to download images and music.`);
+      console.log(`!! Node ${process.version} has no fetch - Node 18+ is required to download images.`);
     } else {
       let cache = {};
       try { cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8')); } catch {}
       if (env.FORCE_COVERS === '1') cache = {};
       const fresh = key => cache[key] && Date.now() - cache[key] < RETRY_MS;
-      const stat = { photos: 0, covers: 0, missed: 0, songs: 0 };
+      const stat = { photos: 0, covers: 0, missed: 0 };
 
-      // ۲-پ) آهنگ از منبع‌های باز
-      if (env.NO_OPEN_MUSIC !== '1') {
-        console.log('Open music sources: ' + openSources.filter(s => s.enabled()).map(s => s.name).join(', '));
-        if (!env.JAMENDO_CLIENT_ID) console.log('(Jamendo is off - set JAMENDO_CLIENT_ID to enable it)');
-        for (const dir of artistDirs()) {
-          const artist = dir.name, artistPath = path.join(musicDir, artist);
-          const singlesPath = path.join(artistPath, 'singles');
-          const key = 'open:' + artist;
-          if (env.FORCE_OPEN !== '1' && cache[key] && Date.now() - cache[key] < OPEN_RECHECK_MS) continue;
-          if (!fs.existsSync(singlesPath)) fs.mkdirSync(singlesPath, { recursive: true });
-          console.log(`Searching open-licensed music: ${artist}`);
-          const res = await fetchOpenMusic(artist, artistPath, singlesPath, searchNameOf(artistPath, artist));
-          stat.songs += res.added;
-          if (!res.anyError) cache[key] = Date.now();
-        }
-      }
-
-      if (env.NO_COVERS !== '1') {
       console.log('Sources: ' + sources.filter(s => s.enabled()).map(s => s.name).join(', '));
       if (!hasSoundcloud()) console.log('(SoundCloud is off - set SOUNDCLOUD_CLIENT_ID and SOUNDCLOUD_CLIENT_SECRET to enable it)');
       if (!hasSpotify()) console.log('(Spotify is off - set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET to enable it)');
@@ -385,7 +366,7 @@ async function main() {
         await sleep(500);
       }
 
-      // ۲-ب) کاور آهنگ
+      // ۲-ب) کاور تک‌آهنگ‌ها
       for (const dir of artistDirs()) {
         const artist = dir.name, artistPath = path.join(musicDir, artist);
         const singlesPath = path.join(artistPath, 'singles');
@@ -411,44 +392,96 @@ async function main() {
           await sleep(500);
         }
       }
-      }
+
       fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2));
-      console.log(`Done: ${stat.songs} open songs, ${stat.photos} artist photos, ${stat.covers} covers downloaded, ${stat.missed} images not found.`);
+      console.log(`Done: ${stat.photos} artist photos, ${stat.covers} covers downloaded, ${stat.missed} images not found.`);
     }
   }
 
-  // ۳. خواندن آهنگ‌ها و ساخت فایل JSON
-  const result = { artists: [] };
+  // ۳. خواندن آهنگ‌ها از پوشه‌ها و ترکیب با library.json
+  let manualArtists = [];
+  try {
+    manualArtists = (JSON.parse(fs.readFileSync(libFile, 'utf8')).artists || []).filter(a => a && a.name);
+  } catch {}
+
+  // ۳-الف) اسکن پوشه‌ها
+  const scanned = {};
   artistDirs().forEach(dir => {
     const artistName = dir.name;
     const artistPath = path.join(musicDir, artistName);
     const singlesPath = path.join(artistPath, 'singles');
-    const artistObj = { name: artistName, photo: null, description: 'ARTIST', singles: [], albums: [] };
+    const obj = { name: artistName, photo: null, description: 'ARTIST', singles: [], albums: [] };
 
     const photo = findLocalPhoto(artistPath, artistName);
-    if (photo) artistObj.photo = `music/${artistName}/${photo}`;
+    if (photo) obj.photo = `music/${artistName}/${photo}`;
 
     if (fs.existsSync(singlesPath)) {
       const all = fs.readdirSync(singlesPath);
-      all.filter(f => f.toLowerCase().endsWith('.mp3')).forEach(file => {
+      all.filter(f => f.toLowerCase().endsWith('.mp3')).sort(natural).forEach(file => {
         const base = path.parse(file).name;
         const coverFile = all.find(f => new RegExp(`^${escapeRe(base)}\\.(${IMG_EXT.join('|')})$`, 'i').test(f));
-        let lic = null;
-        try { lic = JSON.parse(fs.readFileSync(path.join(singlesPath, base + '.license.json'), 'utf8')); } catch {}
-        artistObj.singles.push({
+        obj.singles.push({
           title: titleOf(base),
           artist: artistName,
           audio: `music/${artistName}/singles/${file}`,
-          cover: coverFile ? `music/${artistName}/singles/${coverFile}` : null,
-          ...(lic ? { license: lic } : {})
+          cover: coverFile ? `music/${artistName}/singles/${coverFile}` : null
         });
       });
     }
-    if (artistObj.singles.length > 0 || artistObj.albums.length > 0) result.artists.push(artistObj);
+    obj.albums = readAlbums(artistPath, artistName);
+    scanned[norm(artistName)] = obj;
+  });
+
+  // ۳-ب) ترکیب با library.json
+  const audioKey = p => norm(path.parse(String(p || '')).name);
+  const fixSingle = (s, artistName) => {
+    if (typeof s === 'string') {
+      return { title: titleOf(path.parse(s).name), artist: artistName, audio: s, cover: null };
+    }
+    return s && s.audio ? s : null;
+  };
+
+  const result = { artists: [] };
+  const used = new Set();
+
+  manualArtists.forEach(man => {
+    const key = norm(man.name);
+    used.add(key);
+    const sc = scanned[key] || { singles: [], albums: [], photo: null };
+
+    // آهنگ تکراری (هم دستی، هم تو پوشه) فقط یک بار میاد
+    const have = new Set(sc.singles.map(s => audioKey(s.audio)));
+    const singles = (Array.isArray(man.singles) ? man.singles : [])
+      .map(s => fixSingle(s, man.name))
+      .filter(s => s && !have.has(audioKey(s.audio)))
+      .concat(sc.singles);
+
+    // آلبوم‌های دستی (فقط آبجکت‌های درست) + آلبوم‌های پوشه با اسم متفاوت
+    const manAlbums = (Array.isArray(man.albums) ? man.albums : [])
+      .filter(a => a && typeof a === 'object' && Array.isArray(a.tracks));
+    const manTitles = new Set(manAlbums.map(a => norm(a.title)));
+    const albums = manAlbums.concat(sc.albums.filter(a => !manTitles.has(norm(a.title))));
+
+    const { singles: _s, albums: _a, ...rest } = man;      // aliases و بقیه فیلدها حفظ می‌شن
+    result.artists.push({
+      ...rest,
+      name: man.name,
+      photo: sc.photo || man.photo || null,
+      description: man.description || 'ARTIST',
+      singles,
+      albums
+    });
+  });
+
+  // خواننده‌هایی که فقط تو پوشه هستن
+  Object.keys(scanned).filter(k => !used.has(k)).forEach(k => {
+    const a = scanned[k];
+    if (a.singles.length || a.albums.length) result.artists.push(a);
   });
 
   fs.writeFileSync(path.join(assetsDir, 'library.auto.json'), JSON.stringify(result, null, 2));
-  console.log('Successfully generated library.auto.json with ' + result.artists.length + ' artists.');
+  const nAlb = result.artists.reduce((n, a) => n + a.albums.length, 0);
+  console.log(`Successfully generated library.auto.json with ${result.artists.length} artists and ${nAlb} albums.`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
