@@ -783,7 +783,7 @@
     },
     {
       "name": "Eminem",
-      "photo": "music/Eminem/photo.jpg",
+      "photo": "music/Eminem/photo.JPG",
       "description": "AMERICAN RAPPER",
       "folder": "music/Eminem",
       "singlesFolder": "music/Eminem/singles",
