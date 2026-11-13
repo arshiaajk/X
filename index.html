@@ -60,7 +60,7 @@ input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;bac
 .empty{font-size:12px;color:#999;letter-spacing:1px;padding:20px 0}
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-.artist-group.fade-in { animation: fadeIn .5s ease-out both; }
+.artist-group.fade-in { animation: fadeIn .5s ease-out backwards; }
 
 .tg{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:50;transform:translate(-50%,200%);opacity:0;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
 .tg.show{transform:translate(calc(-50% + var(--dx,0px)),0);opacity:1}
@@ -225,10 +225,69 @@ body::before{will-change:transform;transform:translateZ(0)}
 .top-results{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);border-radius:24px;padding:6px 22px 10px;margin-bottom:16px;box-shadow:0 8px 32px rgba(0,0,0,.07)}
 .top-label{font-size:10px;letter-spacing:4px;color:#888;padding:16px 0 4px}
 .top-results .track:last-child{border-bottom:0}
+/* ===== DEMO LABEL ===== */
+.demo{font-size:5px;letter-spacing:2px;color:#aaa;font-weight:600;margin-top:4px}
+
+/* ===== LIQUID GLASS MOTION ===== */
+:root{--spring:cubic-bezier(.34,1.56,.64,1)}
+*{-webkit-tap-highlight-color:transparent}
+.view-more,.ctrl button,.ctrl a.dl-btn,.mini-ctrl button,.fp-close,.fp-dl,.glass-btn,.fp-ctrl button{transition:transform .5s var(--spring),background .35s,color .35s,box-shadow .35s,opacity .3s}
+.view-more:active,.ctrl button:active,.ctrl a.dl-btn:active,.mini-ctrl button:active,.fp-close:active,.fp-dl:active,.glass-btn:active,.fp-ctrl button:active{transform:scale(.9)}
+.ctrl button,.ctrl a.dl-btn{background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.35));border-color:rgba(17,17,17,.3);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 3px 10px rgba(0,0,0,.06)}
+.ctrl button:hover,.ctrl button:focus-visible,.ctrl a.dl-btn:hover{background:#111;color:#fff}
+.mini-player{background:rgba(255,255,255,.7);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);border-top:1px solid rgba(255,255,255,.8)}
+.artist-card{cursor:pointer}
+.artist-group{transition:transform .5s var(--spring),box-shadow .4s}
+.artist-group:active{transform:scale(.985) translateZ(0)}
+#search{transition:border-color .3s,box-shadow .5s var(--spring)}
+#search:focus{box-shadow:0 0 0 4px rgba(255,255,255,.6),0 10px 30px rgba(0,0,0,.08)}
+.top-results{animation:fadeIn .45s ease-out backwards}
+body.sheet-open{overflow:hidden}
+
+/* ===== ARTIST PROFILE SHEET ===== */
+.sheet{position:fixed;inset:0;z-index:55;visibility:hidden;pointer-events:none;transition:visibility 0s .6s}
+.sheet.show{visibility:visible;pointer-events:auto;transition-delay:0s}
+.sheet-back{position:absolute;inset:0;background:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px) saturate(140%);backdrop-filter:blur(8px) saturate(140%);opacity:0;transition:opacity .6s ease}
+.sheet.show .sheet-back{opacity:1}
+.sheet-panel{position:absolute;left:14px;right:14px;top:9vh;bottom:14px;max-width:640px;margin:0 auto;border-radius:38px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,.25));
+  -webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);
+  border:1px solid rgba(255,255,255,.75);
+  box-shadow:0 30px 80px rgba(40,60,120,.18),inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.4),inset 0 0 30px rgba(255,255,255,.25);
+  opacity:0;transform:translateY(60px) scale(.94);will-change:transform,opacity;
+  transition:transform .45s cubic-bezier(.4,0,.6,1),opacity .35s ease}
+.sheet.show .sheet-panel{opacity:1;transform:none;transition:transform .75s cubic-bezier(.2,1.1,.3,1),opacity .45s ease}
+.glass-btn{position:absolute;top:16px;right:16px;z-index:5;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.8);color:#111;cursor:pointer;
+  background:rgba(255,255,255,.4);-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);
+  box-shadow:0 6px 20px rgba(0,0,0,.1),inset 0 1.5px 0 rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center}
+.glass-btn:hover{transform:scale(1.08)}
+.sheet-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:30px 22px 130px}
+.sheet-head{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sheet-photo{width:130px;height:130px;object-fit:cover;border-radius:32px;background:rgba(255,255,255,.5);box-shadow:0 16px 40px rgba(0,0,0,.18),0 0 0 1px rgba(255,255,255,.7)}
+.sheet-head h3{font-size:22px;margin-top:18px}
+.sheet-head p{font-size:10px;color:#666;letter-spacing:2px;margin-top:8px}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:340px;margin:24px auto 14px;padding:4px;border-radius:999px;background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1px 3px rgba(0,0,0,.06),inset 0 1px 0 rgba(255,255,255,.8)}
+.seg button{position:relative;z-index:1;background:none;border:0;padding:12px 0;font-size:10px;letter-spacing:3px;color:#555;cursor:pointer;transition:color .35s}
+.seg button[aria-selected=true]{color:#111;font-weight:700}
+.seg-pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:rgba(255,255,255,.85);box-shadow:0 4px 14px rgba(0,0,0,.1),inset 0 1px 0 #fff;transition:transform .6s cubic-bezier(.34,1.4,.64,1)}
+.seg[data-t=singles] .seg-pill{transform:translateX(100%)}
+.pane{display:none}
+.pane.on{display:block;animation:paneIn .55s cubic-bezier(.2,.9,.3,1) both}
+@keyframes paneIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.sheet-panel .track{border-bottom-color:rgba(0,0,0,.07)}
+.sheet-panel .album-heading{border-top-color:rgba(0,0,0,.08)}
+.sheet-panel .view-more{background:rgba(255,255,255,.4)}
+.sheet-panel .view-more:hover{background:#111;color:#fff}
+.album-tracks{max-height:472px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+@media(max-width:600px){
+  .sheet-panel{left:10px;right:10px;top:7vh;bottom:10px;border-radius:32px}
+  .sheet-scroll{padding:26px 16px 130px}
+  .album-tracks{max-height:600px}
+}
 </style>
 </head>
 <body>
-<header><div class="date" id="date"></div><div class="logo" aria-label="ARSX"><span class="l" style="--i:0" aria-hidden="true">A</span><span class="l" style="--i:1" aria-hidden="true">R</span><span class="l" style="--i:2" aria-hidden="true">S</span><span class="l" style="--i:3" aria-hidden="true">X</span></div></header>
+<header><div><div class="date" id="date"></div><div class="demo">DEMO VERSION</div></div><div class="logo" aria-label="ARSX"><span class="l" style="--i:0" aria-hidden="true">A</span><span class="l" style="--i:1" aria-hidden="true">R</span><span class="l" style="--i:2" aria-hidden="true">S</span><span class="l" style="--i:3" aria-hidden="true">X</span></div></header>
 <main>
 <section id="artists">
     <h2 class="section-title">ARSHIA AJANKAN</h2>
@@ -275,6 +334,29 @@ body::before{will-change:transform;transform:translateZ(0)}
             <button type="button" id="miniNext" aria-label="Next track">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
             </button>
+        </div>
+    </div>
+</div>
+
+<!-- ARTIST SHEET -->
+<div class="sheet" id="sheet" aria-hidden="true">
+    <div class="sheet-back" id="sheetBack"></div>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="Artist profile">
+        <button type="button" class="glass-btn" id="sheetX" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <div class="sheet-scroll" id="sheetScroll">
+            <div class="sheet-head">
+                <img class="sheet-photo" id="sheetPhoto" alt="">
+                <h3 id="sheetName"></h3>
+                <p id="sheetDesc"></p>
+            </div>
+            <div class="seg" id="seg" data-t="albums">
+                <span class="seg-pill"></span>
+                <button type="button" data-t="albums" aria-selected="true">ALBUMS</button>
+                <button type="button" data-t="singles" aria-selected="false">SINGLES</button>
+            </div>
+            <div id="sheetBody"></div>
         </div>
     </div>
 </div>
@@ -547,7 +629,7 @@ function createAlbum(album){
     const btn=el("button","view-more","VIEW MORE");btn.type="button";
     head.append(txt,btn);
     const list=el("div");
-    const rows=album.tracks.map(t=>createTrack({...t,cover:album.cover,artist:t.artist||""}));chain(rows);rows.forEach(r=>list.appendChild(r));
+    list.className="album-tracks";const rows=album.tracks.map(t=>createTrack({...t,cover:album.cover,artist:t.artist||""}));chain(rows);rows.forEach(r=>list.appendChild(r));
     const wrap=collapse(list);
     const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
     box.append(head,wrap);box.api={set,wrap,rows,title:album.title,cover:album.cover};return box;
@@ -610,35 +692,67 @@ function merge(lists){
     return [...map.values()];
 }
 
+/* ---------- artist profile sheet ---------- */
+const sheet=document.getElementById("sheet"),sheetPhoto=document.getElementById("sheetPhoto"),
+      sheetName=document.getElementById("sheetName"),sheetDesc=document.getElementById("sheetDesc"),
+      sheetBody=document.getElementById("sheetBody"),sheetScroll=document.getElementById("sheetScroll"),
+      seg=document.getElementById("seg");
+sheetPhoto.onerror=()=>{sheetPhoto.style.visibility="hidden"};
+function setTab(t){
+    seg.dataset.t=t;
+    seg.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.t===t)));
+    sheetBody.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
+    const p=sheetBody.querySelector(".pane."+t);if(p)p.classList.add("on");
+}
+function openSheet(it){
+    const a=it.artist;
+    if(a.photo){sheetPhoto.src=url(a.photo);sheetPhoto.style.visibility="visible"}
+    else{sheetPhoto.removeAttribute("src");sheetPhoto.style.visibility="hidden"}
+    sheetName.textContent=a.name;sheetDesc.textContent=a.description||"ARTIST";
+    sheetBody.replaceChildren(it.albumsPane,it.singlesPane);
+    setTab(a.albums.length||!a.singles.length?"albums":"singles");
+    sheetScroll.scrollTop=0;
+    sheet.classList.add("show");sheet.setAttribute("aria-hidden","false");
+    document.body.classList.add("sheet-open");
+}
+function closeSheet(){
+    sheet.classList.remove("show");sheet.setAttribute("aria-hidden","true");
+    document.body.classList.remove("sheet-open");
+}
+seg.addEventListener("click",e=>{const b=e.target.closest("button");if(b)setTab(b.dataset.t)});
+document.getElementById("sheetX").addEventListener("click",closeSheet);
+document.getElementById("sheetBack").addEventListener("click",closeSheet);
+addEventListener("keydown",e=>{if(e.key==="Escape"&&sheet.classList.contains("show"))closeSheet()});
+
 function renderArtist(artist,list){
     const group=el("div","artist-group");
-    const card=el("div","artist-card");
+    const card=el("div","artist-card");card.tabIndex=0;card.setAttribute("role","button");card.setAttribute("aria-label","Open "+artist.name);
     const info=el("div","artist-info");
-    const btn=el("button","view-more","VIEW MORE");btn.type="button";
+    const btn=el("button","view-more","VIEW");btn.type="button";
     info.append(el("h3","",artist.name),el("p","",artist.description||"ARTIST"),btn);
     card.append(pic("artist-photo",artist.photo,artist.name),info);
 
-    const pad=el("div","pad");
-    if(!artist.singles.length&&!artist.albums.length)pad.appendChild(el("div","empty","NO TRACKS YET"));
-    const sr=artist.singles.map(t=>createTrack(t));chain(sr);sr.forEach(r=>pad.appendChild(r));
-    const boxes=artist.albums.map(a=>createAlbum(a));boxes.forEach(b=>pad.appendChild(b));
-    const wrap=collapse(pad);wrap.classList.add("artist-content");
-    const set=bindToggle(btn,wrap,o=>{btn.textContent=o?"VIEW LESS":"VIEW MORE"});
-    group.append(card,wrap);list.appendChild(group);
+    const mkPane=(cls,empty,arr)=>{const p=el("div","pane "+cls);if(!arr.length)p.appendChild(el("div","empty",empty));return p};
+    const singlesPane=mkPane("singles","NO SINGLES YET",artist.singles),albumsPane=mkPane("albums","NO ALBUMS YET",artist.albums);
+    const sr=artist.singles.map(t=>createTrack(t));chain(sr);sr.forEach(r=>singlesPane.appendChild(r));
+    const boxes=artist.albums.map(a=>createAlbum(a));boxes.forEach(b=>albumsPane.appendChild(b));
+    group.appendChild(card);list.appendChild(group);
     const tracks=[
         ...sr.map((row,i)=>({row,t:artist.singles[i],album:null})),
         ...boxes.flatMap((b,i)=>b.api.rows.map((row,j)=>({row,t:artist.albums[i].tracks[j],album:b.api})))];
-    return{group,artist,set,wrap,albums:boxes.map(b=>b.api),tracks,auto:[]};
+    return{group,card,artist,singlesPane,albumsPane,albums:boxes.map(b=>b.api),tracks};
 }
 
 (async()=>{
     const FIRST=5;
     const list=document.getElementById("artistList");
     const searchEl=document.getElementById("search");
-    const artists=merge(await Promise.all([load("library.json"),load("library.auto.json")]));
+    const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+    const artists=shuffle(merge(await Promise.all([load("library.json"),load("library.auto.json")])));
     if(!artists.length){list.appendChild(el("div","empty",location.protocol==="file:"?"OPENED AS A LOCAL FILE - the browser blocks loading assets/library.json. Open the site through GitHub Pages or a local server.":"LIBRARY NOT FOUND - check assets/library.json"));return}
 
     const items=artists.map(a=>{try{return renderArtist(a,list)}catch(err){console.error("Bad artist entry:",a&&a.name,err);return null}}).filter(Boolean);
+    items.forEach(it=>{const go=()=>openSheet(it);it.card.addEventListener("click",go);it.card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})});
     const noRes=el("div","empty","");noRes.style.display="none";
     const moreBtn=el("button","view-more more-artists","MORE ARTISTS");moreBtn.type="button";
     list.after(noRes);noRes.after(moreBtn);
@@ -679,12 +793,7 @@ function renderArtist(artist,list){
 
     function run(raw){
         try{
-            // reset previous search state
-            items.forEach(it=>{
-                it.auto.forEach(f=>f(false));it.auto=[];
-                it.tracks.forEach(x=>x.row.classList.remove("hit"));
-                it.group.classList.remove("fade-in");it.group.style.animationDelay="";
-            });
+            items.forEach(it=>{it.group.classList.remove("fade-in");it.group.style.animationDelay=""});
             const q=norm(raw);
 
             if(q.length<2){
@@ -694,20 +803,12 @@ function renderArtist(artist,list){
                 return;
             }
 
-            const open=(it,set,wrap)=>{if(!wrap.classList.contains("open")){set(true);it.auto.push(set)}};
             items.forEach(it=>{
                 const sName=Math.max(...[it.artist.name,...(it.artist.aliases||[])].map(n=>score(q,n)));
                 it.sName=sName;
                 it.albums.forEach(b=>b.s=score(q,b.title));
                 it.tracks.forEach(x=>x.s=Math.max(score(q,x.t.title),.85*score(q,x.t.artist||"")));
-                const sAlb=Math.max(0,...it.albums.map(b=>b.s*.95)),sTr=Math.max(0,...it.tracks.map(x=>x.s));
-                it.score=Math.max(sName,sAlb,sTr);
-                if(it.score>=.6&&sName<Math.max(sAlb,sTr)){
-                    const min=Math.max(.6,it.score-.1);
-                    open(it,it.set,it.wrap);
-                    it.tracks.forEach(x=>{if(x.s>=min){x.row.classList.add("hit");x.album&&open(it,x.album.set,x.album.wrap)}});
-                    it.albums.forEach(b=>{if(b.s*.95>=min)open(it,b.set,b.wrap)});
-                }
+                it.score=Math.max(sName,0,...it.albums.map(b=>b.s*.95),...it.tracks.map(x=>x.s));
             });
 
             // most relevant tracks go on top of everything
