@@ -82,16 +82,16 @@
       ]
     },
     {
-      "name": "Mohsti",
+      "name": "Mahasti",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Mohsti",
-      "singlesFolder": "music/Mohsti/singles",
-      "albumsFolder": "music/Mohsti/albums",
+      "folder": "music/Mahasti",
+      "singlesFolder": "music/Mahasti/singles",
+      "albumsFolder": "music/Mahasti/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "محستی"
+        "مهستی"
       ]
     },
     {
@@ -310,16 +310,16 @@
       ]
     },
     {
-      "name": "Shahin Miri",
+      "name": "Shahin Najafi",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Shahin Miri",
-      "singlesFolder": "music/Shahin Miri/singles",
-      "albumsFolder": "music/Shahin Miri/albums",
+      "folder": "music/Shahin Najafi",
+      "singlesFolder": "music/Shahin Najafi/singles",
+      "albumsFolder": "music/Shahin Najafi/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "شاهین میری"
+        "شاهین نجفی"
       ]
     },
     {
@@ -401,42 +401,42 @@
       ]
     },
     {
-      "name": "Mahsa Dehdari",
+      "name": "Saren",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Mahsa Dehdari",
-      "singlesFolder": "music/Mahsa Dehdari/singles",
-      "albumsFolder": "music/Mahsa Dehdari/albums",
+      "folder": "music/Saren",
+      "singlesFolder": "music/Saren/singles",
+      "albumsFolder": "music/Saren/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "مهسا دهداری"
+        "سارن"
       ]
     },
     {
-      "name": "Arian Dousti",
+      "name": "Sorena",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Arian Dousti",
-      "singlesFolder": "music/Arian Dousti/singles",
-      "albumsFolder": "music/Arian Dousti/albums",
+      "folder": "music/Sorena",
+      "singlesFolder": "music/Sorena/singles",
+      "albumsFolder": "music/Sorena/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "آرین دوستی"
+        "سورنا"
       ]
     },
     {
-      "name": "Saeed Dehghan",
+      "name": "Sijal",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Saeed Dehghan",
-      "singlesFolder": "music/Saeed Dehghan/singles",
-      "albumsFolder": "music/Saeed Dehghan/albums",
+      "folder": "music/Sijal",
+      "singlesFolder": "music/Sijal/singles",
+      "albumsFolder": "music/Sijal/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "سعید دهقان"
+        "سیجل"
       ]
     },
     {
@@ -466,16 +466,16 @@
       ]
     },
     {
-      "name": "Moreshahin",
+      "name": "Vigen",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Moreshahin",
-      "singlesFolder": "music/Moreshahin/singles",
-      "albumsFolder": "music/Moreshahin/albums",
+      "folder": "music/Vigen",
+      "singlesFolder": "music/Vigen/singles",
+      "albumsFolder": "music/Vigen/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "مورشاهین"
+        "ویگن"
       ]
     },
     {
@@ -492,16 +492,16 @@
       ]
     },
     {
-      "name": "6ehtash",
+      "name": "Bahram",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/6ehtash",
-      "singlesFolder": "music/6ehtash/singles",
-      "albumsFolder": "music/6ehtash/albums",
+      "folder": "music/Bahram",
+      "singlesFolder": "music/Bahram/singles",
+      "albumsFolder": "music/Bahram/albums",
       "singles": [],
       "albums": [],
       "aliases": [
-        "بهتاش"
+        "بهرام"
       ]
     },
     {
@@ -681,6 +681,61 @@
       "aliases": [
         "Kourosh",
         "کوروش"
+      ]
+    },
+    {
+      "name": "Macfian",
+      "photo": "",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Macfian",
+      "singlesFolder": "music/Macfian/singles",
+      "albumsFolder": "music/Macfian/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "مکفیان"
+      ]
+    },
+    {
+      "name": "Alireza JJ",
+      "photo": "",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Alireza JJ",
+      "singlesFolder": "music/Alireza JJ/singles",
+      "albumsFolder": "music/Alireza JJ/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "علیرضا جی جی",
+        "علیرضا جی‌جی",
+        "AlirezaJJ"
+      ]
+    },
+    {
+      "name": "Pidar",
+      "photo": "",
+      "description": "ARTIST",
+      "folder": "music/Pidar",
+      "singlesFolder": "music/Pidar/singles",
+      "albumsFolder": "music/Pidar/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "پیدار"
+      ]
+    },
+    {
+      "name": "Young Sadden",
+      "photo": "",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Young Sadden",
+      "singlesFolder": "music/Young Sadden/singles",
+      "albumsFolder": "music/Young Sadden/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "یانگ سادن",
+        "یانگ ساده"
       ]
     }
   ]
