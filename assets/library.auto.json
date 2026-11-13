@@ -25,69 +25,7 @@
           "cover": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.JPG"
         }
       ],
-      "albums": [
-        {
-          "title": "Sepehr Khalse",
-          "artist": "Sepehr Khalse",
-          "cover": null,
-          "tracks": [
-            {
-              "title": "Buggy",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Buggy.mp3",
-              "cover": null
-            },
-            {
-              "title": "Day One (Ft Arown)",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Day One (Ft Arown).mp3",
-              "cover": null
-            },
-            {
-              "title": "Dooset Daram",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Dooset Daram.mp3",
-              "cover": null
-            },
-            {
-              "title": "Dozdi Ni (Ft Catchybeatz & Young Sudden)",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Dozdi Ni (Ft Catchybeatz & Young Sudden).mp3",
-              "cover": null
-            },
-            {
-              "title": "Marde Saal",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Marde Saal.mp3",
-              "cover": null
-            },
-            {
-              "title": "Number One",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Number One.mp3",
-              "cover": null
-            },
-            {
-              "title": "Prada (Ft Hiphopologist)",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Prada (Ft Hiphopologist).mp3",
-              "cover": null
-            },
-            {
-              "title": "R.I.P",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - R.I.P.mp3",
-              "cover": null
-            },
-            {
-              "title": "Tool Keshid",
-              "artist": "Sepehr Khalse",
-              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Tool Keshid.mp3",
-              "cover": "music/Sepehr Khalse/albums/Sepehr Khalse - Tool Keshid.JPG"
-            }
-          ]
-        }
-      ]
+      "albums": []
     },
     {
       "name": "Hiphopologist",
