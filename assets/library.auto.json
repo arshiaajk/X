@@ -25,7 +25,33 @@
           "cover": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.JPG"
         }
       ],
-      "albums": []
+      "albums": [
+        {
+          "title": "Day one",
+          "artist": "Sepehr Khalse",
+          "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG",
+          "tracks": [
+            {
+              "title": "Prada (Ft Hiphopologist)",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - Prada (Ft Hiphopologist).mp3",
+              "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG"
+            },
+            {
+              "title": "R.I.P",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - R.I.P.mp3",
+              "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG"
+            },
+            {
+              "title": "Tool Keshid",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - Tool Keshid.mp3",
+              "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Hiphopologist",
