@@ -727,7 +727,7 @@
     },
     {
       "name": "Drake",
-      "photo": "music/Drake/photo.jpg",
+      "photo": "music/Drake/photo.JPG",
       "description": "CANADIAN RAPPER & SINGER",
       "folder": "music/Drake",
       "singlesFolder": "music/Drake/singles",
