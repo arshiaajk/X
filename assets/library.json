@@ -4,6 +4,9 @@
       "name": "Sepehr Khalse",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Sepehr Khalse",
+      "singlesFolder": "music/Sepehr Khalse/singles",
+      "albumsFolder": "music/Sepehr Khalse/albums",
       "singles": [
         {
           "title": "Fargh Darim",
@@ -29,6 +32,9 @@
       "name": "Hiphopologist",
       "photo": "IMG_5079.jpeg",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hiphopologist",
+      "singlesFolder": "music/Hiphopologist/singles",
+      "albumsFolder": "music/Hiphopologist/albums",
       "singles": [
         {
           "title": "Bache Mardom",
@@ -200,6 +206,9 @@
       "name": "System Of A Down",
       "photo": "",
       "description": "ALTERNATIVE METAL BAND",
+      "folder": "music/System Of A Down",
+      "singlesFolder": "music/System Of A Down/singles",
+      "albumsFolder": "music/System Of A Down/albums",
       "singles": [
         {
           "title": "Chop Suey!",
@@ -230,6 +239,9 @@
       "name": "Sajad Shahi",
       "photo": "IMG_5080.jpeg",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Sajad Shahi",
+      "singlesFolder": "music/Sajad Shahi/singles",
+      "albumsFolder": "music/Sajad Shahi/albums",
       "singles": [],
       "albums": [
         {
@@ -297,6 +309,9 @@
       "name": "Hayedeh",
       "photo": "",
       "description": "LEGENDARY PERSIAN SINGER",
+      "folder": "music/Hayedeh",
+      "singlesFolder": "music/Hayedeh/singles",
+      "albumsFolder": "music/Hayedeh/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -307,6 +322,9 @@
       "name": "Googoosh",
       "photo": "",
       "description": "ICONIC PERSIAN POP SINGER",
+      "folder": "music/Googoosh",
+      "singlesFolder": "music/Googoosh/singles",
+      "albumsFolder": "music/Googoosh/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -317,6 +335,9 @@
       "name": "Mohsti",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Mohsti",
+      "singlesFolder": "music/Mohsti/singles",
+      "albumsFolder": "music/Mohsti/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -327,6 +348,9 @@
       "name": "Siavash Ghomayshi",
       "photo": "",
       "description": "PERSIAN POP SINGER-SONGWRITER",
+      "folder": "music/Siavash Ghomayshi",
+      "singlesFolder": "music/Siavash Ghomayshi/singles",
+      "albumsFolder": "music/Siavash Ghomayshi/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -338,6 +362,9 @@
       "name": "Ebi",
       "photo": "",
       "description": "PERSIAN POP SINGER",
+      "folder": "music/Ebi",
+      "singlesFolder": "music/Ebi/singles",
+      "albumsFolder": "music/Ebi/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -349,6 +376,9 @@
       "name": "Vinak",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Vinak",
+      "singlesFolder": "music/Vinak/singles",
+      "albumsFolder": "music/Vinak/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -359,6 +389,9 @@
       "name": "TM Bax",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/TM Bax",
+      "singlesFolder": "music/TM Bax/singles",
+      "albumsFolder": "music/TM Bax/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -370,6 +403,9 @@
       "name": "TJ",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/TJ",
+      "singlesFolder": "music/TJ/singles",
+      "albumsFolder": "music/TJ/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -380,6 +416,9 @@
       "name": "Hichkas",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hichkas",
+      "singlesFolder": "music/Hichkas/singles",
+      "albumsFolder": "music/Hichkas/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -390,6 +429,9 @@
       "name": "Yas",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Yas",
+      "singlesFolder": "music/Yas/singles",
+      "albumsFolder": "music/Yas/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -400,6 +442,9 @@
       "name": "Mehrad Hidden",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Mehrad Hidden",
+      "singlesFolder": "music/Mehrad Hidden/singles",
+      "albumsFolder": "music/Mehrad Hidden/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -410,6 +455,9 @@
       "name": "Zedbazi",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Zedbazi",
+      "singlesFolder": "music/Zedbazi/singles",
+      "albumsFolder": "music/Zedbazi/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -420,6 +468,9 @@
       "name": "Sadegh",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Sadegh",
+      "singlesFolder": "music/Sadegh/singles",
+      "albumsFolder": "music/Sadegh/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -430,6 +481,9 @@
       "name": "Ho3ein",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Ho3ein",
+      "singlesFolder": "music/Ho3ein/singles",
+      "albumsFolder": "music/Ho3ein/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -442,6 +496,9 @@
       "name": "Dariush",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Dariush",
+      "singlesFolder": "music/Dariush/singles",
+      "albumsFolder": "music/Dariush/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -452,6 +509,9 @@
       "name": "Sinazza",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Sinazza",
+      "singlesFolder": "music/Sinazza/singles",
+      "albumsFolder": "music/Sinazza/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -463,6 +523,9 @@
       "name": "Behzad Leito",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Behzad Leito",
+      "singlesFolder": "music/Behzad Leito/singles",
+      "albumsFolder": "music/Behzad Leito/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -473,6 +536,9 @@
       "name": "Amir Tataloo",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Amir Tataloo",
+      "singlesFolder": "music/Amir Tataloo/singles",
+      "albumsFolder": "music/Amir Tataloo/albums",
       "singles": [
         {
           "title": "Nagoo Na",
@@ -491,6 +557,9 @@
       "name": "Ashkan Kagan",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Ashkan Kagan",
+      "singlesFolder": "music/Ashkan Kagan/singles",
+      "albumsFolder": "music/Ashkan Kagan/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -501,6 +570,9 @@
       "name": "Shahin Miri",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Shahin Miri",
+      "singlesFolder": "music/Shahin Miri/singles",
+      "albumsFolder": "music/Shahin Miri/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -511,6 +583,9 @@
       "name": "Erfan",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Erfan",
+      "singlesFolder": "music/Erfan/singles",
+      "albumsFolder": "music/Erfan/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -521,6 +596,9 @@
       "name": "Poobon",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Poobon",
+      "singlesFolder": "music/Poobon/singles",
+      "albumsFolder": "music/Poobon/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -531,6 +609,9 @@
       "name": "Shayan yo",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Shayan yo",
+      "singlesFolder": "music/Shayan yo/singles",
+      "albumsFolder": "music/Shayan yo/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -541,6 +622,9 @@
       "name": "021Kid",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/021Kid",
+      "singlesFolder": "music/021Kid/singles",
+      "albumsFolder": "music/021Kid/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -551,6 +635,9 @@
       "name": "Catchybeatz",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Catchybeatz",
+      "singlesFolder": "music/Catchybeatz/singles",
+      "albumsFolder": "music/Catchybeatz/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -561,6 +648,9 @@
       "name": "Chvrsi",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Chvrsi",
+      "singlesFolder": "music/Chvrsi/singles",
+      "albumsFolder": "music/Chvrsi/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -571,6 +661,9 @@
       "name": "Mahsa Dehdari",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Mahsa Dehdari",
+      "singlesFolder": "music/Mahsa Dehdari/singles",
+      "albumsFolder": "music/Mahsa Dehdari/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -581,6 +674,9 @@
       "name": "Arian Dousti",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Arian Dousti",
+      "singlesFolder": "music/Arian Dousti/singles",
+      "albumsFolder": "music/Arian Dousti/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -591,6 +687,9 @@
       "name": "Saeed Dehghan",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Saeed Dehghan",
+      "singlesFolder": "music/Saeed Dehghan/singles",
+      "albumsFolder": "music/Saeed Dehghan/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -601,6 +700,9 @@
       "name": "Dorcci",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Dorcci",
+      "singlesFolder": "music/Dorcci/singles",
+      "albumsFolder": "music/Dorcci/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -611,6 +713,9 @@
       "name": "Ali Geramy",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Ali Geramy",
+      "singlesFolder": "music/Ali Geramy/singles",
+      "albumsFolder": "music/Ali Geramy/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -621,6 +726,9 @@
       "name": "Moreshahin",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Moreshahin",
+      "singlesFolder": "music/Moreshahin/singles",
+      "albumsFolder": "music/Moreshahin/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -631,6 +739,9 @@
       "name": "Matin Fattahi",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Matin Fattahi",
+      "singlesFolder": "music/Matin Fattahi/singles",
+      "albumsFolder": "music/Matin Fattahi/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -641,6 +752,9 @@
       "name": "6ehtash",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/6ehtash",
+      "singlesFolder": "music/6ehtash/singles",
+      "albumsFolder": "music/6ehtash/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -651,6 +765,9 @@
       "name": "Ali Janak",
       "photo": "",
       "description": "ARTIST",
+      "folder": "music/Ali Janak",
+      "singlesFolder": "music/Ali Janak/singles",
+      "albumsFolder": "music/Ali Janak/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -661,6 +778,9 @@
       "name": "Metallica",
       "photo": "",
       "description": "AMERICAN HEAVY METAL BAND",
+      "folder": "music/Metallica",
+      "singlesFolder": "music/Metallica/singles",
+      "albumsFolder": "music/Metallica/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -671,6 +791,9 @@
       "name": "Drake",
       "photo": "",
       "description": "CANADIAN RAPPER & SINGER",
+      "folder": "music/Drake",
+      "singlesFolder": "music/Drake/singles",
+      "albumsFolder": "music/Drake/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -682,6 +805,9 @@
       "name": "Dua Lipa",
       "photo": "",
       "description": "BRITISH POP SINGER",
+      "folder": "music/Dua Lipa",
+      "singlesFolder": "music/Dua Lipa/singles",
+      "albumsFolder": "music/Dua Lipa/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -693,6 +819,9 @@
       "name": "Rihanna",
       "photo": "",
       "description": "BARBADIAN POP & R&B SINGER",
+      "folder": "music/Rihanna",
+      "singlesFolder": "music/Rihanna/singles",
+      "albumsFolder": "music/Rihanna/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -704,6 +833,9 @@
       "name": "Eminem",
       "photo": "",
       "description": "AMERICAN RAPPER",
+      "folder": "music/Eminem",
+      "singlesFolder": "music/Eminem/singles",
+      "albumsFolder": "music/Eminem/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -715,6 +847,9 @@
       "name": "The Weeknd",
       "photo": "",
       "description": "CANADIAN R&B SINGER",
+      "folder": "music/The Weeknd",
+      "singlesFolder": "music/The Weeknd/singles",
+      "albumsFolder": "music/The Weeknd/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -726,6 +861,9 @@
       "name": "Linkin Park",
       "photo": "",
       "description": "AMERICAN ROCK BAND",
+      "folder": "music/Linkin Park",
+      "singlesFolder": "music/Linkin Park/singles",
+      "albumsFolder": "music/Linkin Park/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -736,6 +874,9 @@
       "name": "Billie Eilish",
       "photo": "",
       "description": "AMERICAN POP SINGER",
+      "folder": "music/Billie Eilish",
+      "singlesFolder": "music/Billie Eilish/singles",
+      "albumsFolder": "music/Billie Eilish/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -746,6 +887,9 @@
       "name": "Hoomaan",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hoomaan",
+      "singlesFolder": "music/Hoomaan/singles",
+      "albumsFolder": "music/Hoomaan/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -757,6 +901,9 @@
       "name": "Hoodadk4",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hoodadk4",
+      "singlesFolder": "music/Hoodadk4/singles",
+      "albumsFolder": "music/Hoodadk4/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -768,6 +915,9 @@
       "name": "Arta",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Arta",
+      "singlesFolder": "music/Arta/singles",
+      "albumsFolder": "music/Arta/albums",
       "singles": [],
       "albums": [],
       "aliases": [
@@ -780,6 +930,9 @@
       "name": "Koorosh",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Koorosh",
+      "singlesFolder": "music/Koorosh/singles",
+      "albumsFolder": "music/Koorosh/albums",
       "singles": [],
       "albums": [],
       "aliases": [
