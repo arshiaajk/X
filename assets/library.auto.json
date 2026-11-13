@@ -185,7 +185,39 @@
         "سجاد شاهی"
       ],
       "singles": [],
-      "albums": []
+      "albums": [
+        {
+          "title": "TAJ",
+          "artist": "Sajad Shahi",
+          "cover": null,
+          "tracks": [
+            {
+              "title": "Sajad Shahi - Dorcci (BandMusic)",
+              "artist": "Sajad Shahi",
+              "audio": "music/Sajad Shahi/albums/TAJ/01 Shah - Sajad Shahi - Dorcci (BandMusic).mp3",
+              "cover": null
+            },
+            {
+              "title": "Ali Geramy - Koosh (BandMusic)",
+              "artist": "Sajad Shahi",
+              "audio": "music/Sajad Shahi/albums/TAJ/02 Sajad Shahi - Ali Geramy - Koosh (BandMusic).mp3",
+              "cover": null
+            },
+            {
+              "title": "Gheseh (BandMusic)",
+              "artist": "Sajad Shahi",
+              "audio": "music/Sajad Shahi/albums/TAJ/03 Gheseh (BandMusic).mp3",
+              "cover": null
+            },
+            {
+              "title": "Taghas (BandMusic)",
+              "artist": "Sajad Shahi",
+              "audio": "music/Sajad Shahi/albums/TAJ/04 Sajad Shahi - Taghas (BandMusic).mp3",
+              "cover": null
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Hayedeh",
