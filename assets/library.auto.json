@@ -170,9 +170,27 @@
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
+              "title": "Bache (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Bache (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Bache Bad (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Bache Bad (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
               "title": "Bank (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Bank (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Bato (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Bato (BandMusic).mp3",
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
@@ -209,6 +227,12 @@
               "title": "OD (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/OD (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Rie (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Rie (BandMusic).mp3",
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
