@@ -32,6 +32,24 @@
           "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG",
           "tracks": [
             {
+              "title": "Buggy",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - Buggy.mp3",
+              "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG"
+            },
+            {
+              "title": "Day One (Ft Arown)",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - Day One (Ft Arown).mp3",
+              "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG"
+            },
+            {
+              "title": "Dooset Daram",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - Dooset Daram.mp3",
+              "cover": "music/Sepehr Khalse/albums/Day one/Cover.JPG"
+            },
+            {
               "title": "Dozdi Ni (Ft Catchybeatz & Young Sudden)",
               "artist": "Sepehr Khalse",
               "audio": "music/Sepehr Khalse/albums/Day one/Sepehr Khalse - Dozdi Ni (Ft Catchybeatz & Young Sudden).mp3",
