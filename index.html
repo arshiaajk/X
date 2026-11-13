@@ -319,6 +319,16 @@ body::before{transform:translate3d(calc(var(--mx)*24px),calc(var(--my)*24px),0) 
   background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.5),transparent 40%);
   transform:translate3d(calc(var(--mx)*22%),calc(var(--my)*22%),0);will-change:transform}
 @media(prefers-reduced-motion:reduce){:root{--mx:0!important;--my:0!important}}
+/* ===== MINI SEEK BAR: thin, rounded, clean end ===== */
+input[type=range].mini-range{-webkit-appearance:none;appearance:none;display:block;width:100%;height:20px;padding:0;margin:2px 0 0;background:transparent!important;outline:none;cursor:pointer;--f:0}
+input[type=range].mini-range::-webkit-slider-runnable-track{height:4px;border-radius:999px;background:linear-gradient(to right,#111 calc(5px + (100% - 10px)*var(--f)),rgba(0,0,0,.14) 0)}
+input[type=range].mini-range::-webkit-slider-thumb{-webkit-appearance:none;width:10px;height:10px;margin-top:-3px;border-radius:50%;background:#111;border:0;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+input[type=range].mini-range::-moz-range-track{height:4px;border-radius:999px;background:rgba(0,0,0,.14)}
+input[type=range].mini-range::-moz-range-progress{height:4px;border-radius:999px;background:#111}
+input[type=range].mini-range::-moz-range-thumb{width:10px;height:10px;border-radius:50%;background:#111;border:0}
+/* ===== MOTION: stronger + button ===== */
+body::before{transform:translate3d(calc(var(--mx)*40px),calc(var(--my)*40px),0) scale(1.12)}
+.artist-group::after,.mini-player::after,.sheet-panel::after{background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.65),transparent 40%);transform:translate3d(calc(var(--mx)*32%),calc(var(--my)*32%),0)}
 </style>
 </head>
 <body>
@@ -454,7 +464,7 @@ const pic=(cls,p,alt)=>{
     i.onerror=()=>{i.style.visibility="hidden"};
     return i;
 };
-const fill=r=>r.style.setProperty("--p",(r.value/10)+"%");
+const fill=r=>{r.style.setProperty("--p",(r.value/10)+"%");r.style.setProperty("--f",r.value/1000)};
 
 function collapse(content){
     const wrap=el("div","collapse"),inner=el("div","inner");
@@ -960,24 +970,30 @@ fpRange.addEventListener("input", (e) => {
 (function(){
     if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
     const root=document.documentElement;
-    let tx=0,ty=0,x=0,y=0,raf=0,last=0;
+    let tx=0,ty=0,x=0,y=0,raf=0,last=0,on=false,denied=false;
     const cl=v=>Math.max(-1,Math.min(1,v));
     const tick=t=>{
-        x+=(tx-x)*.08;y+=(ty-y)*.08;
+        x+=(tx-x)*.1;y+=(ty-y)*.1;
         if(t-last>33){root.style.setProperty("--mx",x.toFixed(3));root.style.setProperty("--my",y.toFixed(3));last=t}
         raf=(Math.abs(tx-x)>.002||Math.abs(ty-y)>.002)?requestAnimationFrame(tick):0;
     };
     const kick=()=>{if(!raf)raf=requestAnimationFrame(tick)};
-    const onOri=e=>{if(e.gamma==null||e.beta==null)return;tx=cl(e.gamma/35);ty=cl((e.beta-50)/40);kick()};
-    const listen=()=>addEventListener("deviceorientation",onOri,{passive:true});
+    const onOri=e=>{if(e.gamma==null||e.beta==null)return;tx=cl(e.gamma/30);ty=cl((e.beta-50)/35);kick()};
+    const listen=()=>{if(on)return;on=true;addEventListener("deviceorientation",onOri,{passive:true})};
     if(matchMedia("(pointer:fine)").matches){
         addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;kick()},{passive:true});
     }
-    if(typeof DeviceOrientationEvent!=="undefined"&&typeof DeviceOrientationEvent.requestPermission==="function"){
-        addEventListener("click",()=>{
-            DeviceOrientationEvent.requestPermission().then(r=>{if(r==="granted")listen()}).catch(()=>{});
-        },{once:true});
-    }else if(typeof DeviceOrientationEvent!=="undefined"){listen()}
+    if(typeof DeviceOrientationEvent==="undefined")return;
+    if(typeof DeviceOrientationEvent.requestPermission==="function"){
+        // iPhone / iPad: the first tap asks the system for motion permission
+        const ask=()=>{
+            if(on||denied)return;
+            DeviceOrientationEvent.requestPermission().then(r=>{
+                if(r==="granted")listen();else denied=true;
+            }).catch(()=>{});
+        };
+        addEventListener("click",ask);
+    }else listen();
 })();
 </script>
 </body>
