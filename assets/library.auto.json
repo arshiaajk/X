@@ -1,9 +1,668 @@
 {
   "artists": [
     {
+      "name": "Sepehr Khalse",
+      "photo": "music/Sepehr Khalse/photo.JPG",
+      "description": "ARTIST",
+      "folder": "music/Sepehr Khalse",
+      "singlesFolder": "music/Sepehr Khalse/singles",
+      "albumsFolder": "music/Sepehr Khalse/albums",
+      "aliases": [
+        "Day one",
+        "دی وان"
+      ],
+      "singles": [
+        {
+          "title": "Fargh Darim",
+          "artist": "Sepehr Khalse",
+          "audio": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.mp3",
+          "cover": null
+        }
+      ],
+      "albums": [
+        {
+          "title": "Day One",
+          "cover": "",
+          "tracks": []
+        },
+        {
+          "title": "Sepehr Khalse",
+          "artist": "Sepehr Khalse",
+          "cover": null,
+          "tracks": [
+            {
+              "title": "Buggy",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Buggy.mp3",
+              "cover": null
+            },
+            {
+              "title": "Day One (Ft Arown)",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Day One (Ft Arown).mp3",
+              "cover": null
+            },
+            {
+              "title": "Dooset Daram",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Dooset Daram.mp3",
+              "cover": null
+            },
+            {
+              "title": "Dozdi Ni (Ft Catchybeatz & Young Sudden)",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Dozdi Ni (Ft Catchybeatz & Young Sudden).mp3",
+              "cover": null
+            },
+            {
+              "title": "Marde Saal",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Marde Saal.mp3",
+              "cover": null
+            },
+            {
+              "title": "Number One",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Number One.mp3",
+              "cover": null
+            },
+            {
+              "title": "Prada (Ft Hiphopologist)",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Prada (Ft Hiphopologist).mp3",
+              "cover": null
+            },
+            {
+              "title": "R.I.P",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - R.I.P.mp3",
+              "cover": null
+            },
+            {
+              "title": "Tool Keshid",
+              "artist": "Sepehr Khalse",
+              "audio": "music/Sepehr Khalse/albums/Sepehr Khalse - Tool Keshid.mp3",
+              "cover": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hiphopologist",
+      "photo": "music/Hiphopologist/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hiphopologist",
+      "singlesFolder": "music/Hiphopologist/singles",
+      "albumsFolder": "music/Hiphopologist/albums",
+      "aliases": [
+        "هیپ هاپولوجیست",
+        "هیپ‌هاپولوژیست"
+      ],
+      "singles": [
+        {
+          "title": "Bache Mardom",
+          "artist": "Hiphopologist feat. Erfan",
+          "cover": "IMG_5069.jpeg",
+          "audio": "Hiphopologist – Bache Mardom.mp3"
+        }
+      ],
+      "albums": [
+        {
+          "title": "CAPSULE",
+          "cover": "IMG_5073.jpeg",
+          "tracks": [
+            {
+              "title": "Sogand",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "01 Hiphopologist - Sogand.mp3"
+            },
+            {
+              "title": "Misoozam Too Shahr",
+              "artist": "Hiphopologist feat. Sinazza",
+              "audio": "02 Hiphopologist - Misoozam Too Shahr (ft. Sinazza).mp3"
+            },
+            {
+              "title": "Batman",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "03 Hiphopologist - Batman.mp3"
+            },
+            {
+              "title": "7.5.2",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "04 Hiphopologist - 7.5.2.mp3"
+            },
+            {
+              "title": "Ayne",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "05 Hiphopologist - Ayne.mp3"
+            },
+            {
+              "title": "Toxic",
+              "artist": "Hiphopologist feat. Sinazza",
+              "audio": "06 Hiphopologist - Toxic (feat. Sinazza).mp3"
+            },
+            {
+              "title": "GHORS II",
+              "artist": "Hiphopologist feat. Poobon",
+              "audio": "07 Hiphopologist - GHORS II (feat. Poobon).mp3"
+            }
+          ]
+        },
+        {
+          "title": "NOSKHE",
+          "cover": "IMG_5074.jpeg",
+          "tracks": [
+            {
+              "title": "Intro",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Noskhe (Intro) (BandMusic).mp3"
+            },
+            {
+              "title": "OD",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "OD (BandMusic).mp3"
+            },
+            {
+              "title": "Sadism",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Sadism [Diis Shayea] (BandMusic).mp3"
+            },
+            {
+              "title": "Norf Norf",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Norf Norf (BandMusic).mp3"
+            },
+            {
+              "title": "Daryakenar",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Darya Kenar (BandMusic).mp3"
+            },
+            {
+              "title": "Sheesh",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Sheesh (BandMusic).mp3"
+            },
+            {
+              "title": "Adams Skit",
+              "artist": "Hiphopologist feat. Shayan Rag",
+              "audio": "Adams Skit (BandMusic).mp3"
+            },
+            {
+              "title": "Dastan",
+              "artist": "Hiphopologist feat. 021Kid",
+              "audio": "Dastan (BandMusic).mp3"
+            },
+            {
+              "title": "Bank",
+              "artist": "Hiphopologist feat. Catchybeatz",
+              "audio": "Bank (BandMusic).mp3"
+            },
+            {
+              "title": "Yallah",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Yallah (BandMusic).mp3"
+            },
+            {
+              "title": "Traplife",
+              "artist": "Hiphopologist feat. Behzad Leito",
+              "audio": "Traplife (BandMusic).mp3"
+            },
+            {
+              "title": "Diaz Skit",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Diaz Skit (BandMusic).mp3"
+            },
+            {
+              "title": "DMT",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "DMT (BandMusic).mp3"
+            },
+            {
+              "title": "Bato",
+              "artist": "Hiphopologist feat. Chvrsi, Mahsa Dehdari & Arian Dousti",
+              "audio": "Bato (BandMusic).mp3"
+            },
+            {
+              "title": "Rotation",
+              "artist": "Hiphopologist feat. Sinazza",
+              "audio": "Rotation (BandMusic).mp3"
+            },
+            {
+              "title": "Bache > Bad B",
+              "artist": "Hiphopologist feat. Saeed Dehghan",
+              "audio": "Bache Bad (BandMusic).mp3"
+            },
+            {
+              "title": "Bache",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Bache (BandMusic).mp3"
+            },
+            {
+              "title": "Shir",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Shir (BandMusic).mp3"
+            },
+            {
+              "title": "Rie",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "noskhe-19-rie.mp3"
+            },
+            {
+              "title": "RIP",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "RIP (BandMusic).mp3"
+            },
+            {
+              "title": "Roopoosh",
+              "artist": "Hiphopologist & Ashkan Kagan",
+              "audio": "Roopush (BandMusic).mp3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "System Of A Down",
+      "photo": "music/System Of A Down/Photo.jpg",
+      "description": "ALTERNATIVE METAL BAND",
+      "folder": "music/System Of A Down",
+      "singlesFolder": "music/System Of A Down/singles",
+      "albumsFolder": "music/System Of A Down/albums",
+      "aliases": [
+        "SOAD",
+        "سیستم آف ا داون"
+      ],
+      "singles": [
+        {
+          "title": "Chop Suey!",
+          "artist": "System Of A Down",
+          "cover": "chop-suey.jpg",
+          "audio": "chop-suey.mp3"
+        },
+        {
+          "title": "Toxicity",
+          "artist": "System Of A Down",
+          "cover": "toxicity.jpg",
+          "audio": "toxicity.mp3"
+        },
+        {
+          "title": "Lonely Day",
+          "artist": "System Of A Down",
+          "cover": "lonely-day.jpg",
+          "audio": "lonely-day.mp3"
+        },
+        {
+          "title": "lv-0-20260528133151",
+          "artist": "System Of A Down",
+          "audio": "music/System Of A Down/singles/System Of A Down - lv-0-20260528133151.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Sajad Shahi",
+      "photo": "music/Sajad Shahi/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Sajad Shahi",
+      "singlesFolder": "music/Sajad Shahi/singles",
+      "albumsFolder": "music/Sajad Shahi/albums",
+      "aliases": [
+        "سجاد شاهی"
+      ],
+      "singles": [],
+      "albums": [
+        {
+          "title": "TAJ",
+          "cover": "IMG_5072.jpeg",
+          "tracks": [
+            {
+              "title": "SHAH",
+              "artist": "Sajad Shahi feat. Dorcci",
+              "audio": "01 Shah - Sajad Shahi - Dorcci (BandMusic).mp3"
+            },
+            {
+              "title": "Koosh",
+              "artist": "Sajad Shahi feat. Ali Geramy",
+              "audio": "02 Sajad Shahi - Ali Geramy - Koosh (BandMusic).mp3"
+            },
+            {
+              "title": "Ghesse",
+              "artist": "Sajad Shahi",
+              "audio": "03 Gheseh (BandMusic).mp3"
+            },
+            {
+              "title": "Taghas",
+              "artist": "Sajad Shahi",
+              "audio": "04 Sajad Shahi - Taghas (BandMusic).mp3"
+            },
+            {
+              "title": "BALLISTIC",
+              "artist": "Sajad Shahi",
+              "audio": "04 Sajad Shahi - Taghas (BandMusic).mp3"
+            },
+            {
+              "title": "Dige",
+              "artist": "Sajad Shahi feat. Moreshahin",
+              "audio": "06 Sajad Shahi - Dige (BandMusic).mp3"
+            },
+            {
+              "title": "SLEEP MODE",
+              "artist": "Sajad Shahi, Matin Fattahi, Dorcci, Ali Geramy & 6ehtash",
+              "audio": "Sajad Shahi - SLEEP MODE (Ft Matin Fattahi x Dorcci x Ali Geramy).mp3"
+            },
+            {
+              "title": "Samtam",
+              "artist": "Sajad Shahi",
+              "audio": "Sajad Shahi-Samtam-mahanmusic.net.mp3"
+            },
+            {
+              "title": "DEEV",
+              "artist": "Sajad Shahi feat. 6ehtash",
+              "audio": "09 Sajad Shahi - DEEV (BandMusic).mp3"
+            },
+            {
+              "title": "TAJ (Outro)",
+              "artist": "Sajad Shahi & Ali Janak",
+              "audio": "10 Sajad Shahi - TAJ (BandMusic).mp3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hayedeh",
+      "photo": "music/Hayedeh/photo.jpg",
+      "description": "LEGENDARY PERSIAN SINGER",
+      "folder": "music/Hayedeh",
+      "singlesFolder": "music/Hayedeh/singles",
+      "albumsFolder": "music/Hayedeh/albums",
+      "aliases": [
+        "هایده"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Googoosh",
+      "photo": "music/Googoosh/photo.jpg",
+      "description": "ICONIC PERSIAN POP SINGER",
+      "folder": "music/Googoosh",
+      "singlesFolder": "music/Googoosh/singles",
+      "albumsFolder": "music/Googoosh/albums",
+      "aliases": [
+        "گوگوش"
+      ],
+      "singles": [
+        {
+          "title": "Gharibeh Ashena ",
+          "artist": "Googoosh",
+          "audio": "music/Googoosh/singles/Googoosh - Gharibeh Ashena .mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Mohsti",
+      "photo": null,
+      "description": "ARTIST",
+      "folder": "music/Mohsti",
+      "singlesFolder": "music/Mohsti/singles",
+      "albumsFolder": "music/Mohsti/albums",
+      "aliases": [
+        "محستی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Siavash Ghomayshi",
+      "photo": "music/Siavash Ghomayshi/photo.jpg",
+      "description": "PERSIAN POP SINGER-SONGWRITER",
+      "folder": "music/Siavash Ghomayshi",
+      "singlesFolder": "music/Siavash Ghomayshi/singles",
+      "albumsFolder": "music/Siavash Ghomayshi/albums",
+      "aliases": [
+        "سیاوش قمیشی",
+        "Siavash Ghomeishi"
+      ],
+      "singles": [
+        {
+          "title": "03 Golaye Pooneh",
+          "artist": "Siavash Ghomayshi",
+          "audio": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.mp3",
+          "cover": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.jpg"
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Ebi",
+      "photo": "music/Ebi/photo.jpg",
+      "description": "PERSIAN POP SINGER",
+      "folder": "music/Ebi",
+      "singlesFolder": "music/Ebi/singles",
+      "albumsFolder": "music/Ebi/albums",
+      "aliases": [
+        "ابی",
+        "ابراهیم"
+      ],
+      "singles": [
+        {
+          "title": "Pooste Shir",
+          "artist": "Ebi",
+          "audio": "music/Ebi/singles/Ebi - Pooste Shir.mp3",
+          "cover": "music/Ebi/singles/Ebi - Pooste Shir.jpg"
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Vinak",
+      "photo": "music/Vinak/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Vinak",
+      "singlesFolder": "music/Vinak/singles",
+      "albumsFolder": "music/Vinak/albums",
+      "aliases": [
+        "ویناک"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "TM Bax",
+      "photo": "music/TM Bax/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/TM Bax",
+      "singlesFolder": "music/TM Bax/singles",
+      "albumsFolder": "music/TM Bax/albums",
+      "aliases": [
+        "تی ام باکس",
+        "TMBax"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "TJ",
+      "photo": "music/TJ/photo.JPG",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/TJ",
+      "singlesFolder": "music/TJ/singles",
+      "albumsFolder": "music/TJ/albums",
+      "aliases": [
+        "تی جی"
+      ],
+      "singles": [
+        {
+          "title": "Shot 4 Me",
+          "artist": "TJ",
+          "audio": "music/TJ/singles/TJ - Shot 4 Me.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Hichkas",
+      "photo": "music/Hichkas/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hichkas",
+      "singlesFolder": "music/Hichkas/singles",
+      "albumsFolder": "music/Hichkas/albums",
+      "aliases": [
+        "هیچکس"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Yas",
+      "photo": "music/Yas/Photo.JPG",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Yas",
+      "singlesFolder": "music/Yas/singles",
+      "albumsFolder": "music/Yas/albums",
+      "aliases": [
+        "یاس"
+      ],
+      "singles": [
+        {
+          "title": "Podcast 10 - Good Stress.Accelerated Learning - 21 09 2016, 21.18",
+          "artist": "Yas",
+          "audio": "music/Yas/singles/Yas - Podcast 10 - Good Stress.Accelerated Learning - 21 09 2016, 21.18.mp3",
+          "cover": null
+        },
+        {
+          "title": "Yas- tracktrack",
+          "artist": "Yas",
+          "audio": "music/Yas/singles/Yas - Yas- tracktrack.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Mehrad Hidden",
+      "photo": "music/Mehrad Hidden/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Mehrad Hidden",
+      "singlesFolder": "music/Mehrad Hidden/singles",
+      "albumsFolder": "music/Mehrad Hidden/albums",
+      "aliases": [
+        "مهراد هیدن"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Zedbazi",
+      "photo": "music/Zedbazi/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Zedbazi",
+      "singlesFolder": "music/Zedbazi/singles",
+      "albumsFolder": "music/Zedbazi/albums",
+      "aliases": [
+        "زدبازی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Sadegh",
+      "photo": "music/Sadegh/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Sadegh",
+      "singlesFolder": "music/Sadegh/singles",
+      "albumsFolder": "music/Sadegh/albums",
+      "aliases": [
+        "صادق"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Ho3ein",
+      "photo": "music/Ho3ein/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Ho3ein",
+      "singlesFolder": "music/Ho3ein/singles",
+      "albumsFolder": "music/Ho3ein/albums",
+      "aliases": [
+        "حصین",
+        "Hossein",
+        "Hosein"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Dariush",
+      "photo": "music/Dariush/photo.JPG",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Dariush",
+      "singlesFolder": "music/Dariush/singles",
+      "albumsFolder": "music/Dariush/albums",
+      "aliases": [
+        "داریوش"
+      ],
+      "singles": [
+        {
+          "title": "DariushDobarevatan_64kb",
+          "artist": "Dariush",
+          "audio": "music/Dariush/singles/Dariush - DariushDobarevatan_64kb.mp3",
+          "cover": null
+        },
+        {
+          "title": "Dobare misazamat vatan",
+          "artist": "Dariush",
+          "audio": "music/Dariush/singles/Dariush - Dobare misazamat vatan.mp3",
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Sinazza",
+      "photo": "music/Sinazza/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Sinazza",
+      "singlesFolder": "music/Sinazza/singles",
+      "albumsFolder": "music/Sinazza/albums",
+      "aliases": [
+        "سیناذا",
+        "سینازا"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Behzad Leito",
+      "photo": "music/Behzad Leito/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Behzad Leito",
+      "singlesFolder": "music/Behzad Leito/singles",
+      "albumsFolder": "music/Behzad Leito/albums",
+      "aliases": [
+        "بهزاد لیتو"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
       "name": "Amir Tataloo",
       "photo": "music/Amir Tataloo/photo.jpg",
-      "description": "ARTIST",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Amir Tataloo",
+      "singlesFolder": "music/Amir Tataloo/singles",
+      "albumsFolder": "music/Amir Tataloo/albums",
+      "aliases": [
+        "امیر تتلو",
+        "Tataloo"
+      ],
       "singles": [
         {
           "title": "Nagoo Na",
@@ -21,369 +680,284 @@
       "albums": []
     },
     {
-      "name": "Dariush",
-      "photo": "music/Dariush/photo.JPG",
+      "name": "Ashkan Kagan",
+      "photo": "music/Ashkan Kagan/photo.jpg",
       "description": "ARTIST",
-      "singles": [
-        {
-          "title": "DariushDobarevatan_64kb",
-          "artist": "Dariush",
-          "audio": "music/Dariush/singles/Dariush - DariushDobarevatan_64kb.mp3",
-          "cover": null,
-          "license": {
-            "license": "http://creativecommons.org/licenses/by-nc-sa/2.5/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/DariushDobaremisazamatvatan",
-            "by": "Dariush"
-          }
-        },
-        {
-          "title": "Dobare misazamat vatan",
-          "artist": "Dariush",
-          "audio": "music/Dariush/singles/Dariush - Dobare misazamat vatan.mp3",
-          "cover": null,
-          "license": {
-            "license": "http://creativecommons.org/licenses/by-nc-sa/2.5/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/DariushDobaremisazamatvatan",
-            "by": "Dariush"
-          }
-        }
+      "folder": "music/Ashkan Kagan",
+      "singlesFolder": "music/Ashkan Kagan/singles",
+      "albumsFolder": "music/Ashkan Kagan/albums",
+      "aliases": [
+        "اشکان کاگان"
       ],
+      "singles": [],
       "albums": []
     },
     {
-      "name": "Dua Lipa",
-      "photo": "music/Dua Lipa/photo.jpg",
+      "name": "Shahin Miri",
+      "photo": "music/Shahin Miri/photo.jpg",
       "description": "ARTIST",
-      "singles": [
-        {
-          "title": "25 8",
-          "artist": "Dua Lipa",
-          "audio": "music/Dua Lipa/singles/Dua Lipa - 25 8.mp3",
-          "cover": null,
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/25-8_20250413",
-            "by": "Dua Lipa"
-          }
-        }
+      "folder": "music/Shahin Miri",
+      "singlesFolder": "music/Shahin Miri/singles",
+      "albumsFolder": "music/Shahin Miri/albums",
+      "aliases": [
+        "شاهین میری"
       ],
-      "albums": []
-    },
-    {
-      "name": "Ebi",
-      "photo": "music/Ebi/photo.jpg",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "Pooste Shir",
-          "artist": "Ebi",
-          "audio": "music/Ebi/singles/Ebi - Pooste Shir.mp3",
-          "cover": "music/Ebi/singles/Ebi - Pooste Shir.jpg"
-        }
-      ],
+      "singles": [],
       "albums": []
     },
     {
       "name": "Erfan",
       "photo": "music/Erfan/photo.jpg",
       "description": "ARTIST",
+      "folder": "music/Erfan",
+      "singlesFolder": "music/Erfan/singles",
+      "albumsFolder": "music/Erfan/albums",
+      "aliases": [
+        "عرفان"
+      ],
       "singles": [
         {
           "title": "029_Kurdish_Audio_Quran_Translation_Mp3",
           "artist": "Erfan",
           "audio": "music/Erfan/singles/Erfan - 029_Kurdish_Audio_Quran_Translation_Mp3.mp3",
-          "cover": null,
-          "license": {
-            "license": "http://creativecommons.org/publicdomain/mark/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/KurdishAudioQuranTranslationMp3",
-            "by": "Erfan"
-          }
-        }
-      ],
-      "albums": []
-    },
-    {
-      "name": "Googoosh",
-      "photo": "music/Googoosh/photo.jpg",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "Gharibeh Ashena ",
-          "artist": "Googoosh",
-          "audio": "music/Googoosh/singles/Googoosh - Gharibeh Ashena .mp3",
           "cover": null
         }
       ],
       "albums": []
     },
     {
-      "name": "Linkin Park",
-      "photo": "music/Linkin Park/photo.jpg",
+      "name": "Poobon",
+      "photo": "music/Poobon/photo.jpg",
       "description": "ARTIST",
-      "singles": [
-        {
-          "title": "BURN IT DOWN",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - BURN IT DOWN.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - BURN IT DOWN.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Bleed It Out",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Bleed It Out.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Bleed It Out.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Breaking The Habit",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Breaking The Habit.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Breaking The Habit.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "CASTLE OF GLASS",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - CASTLE OF GLASS.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - CASTLE OF GLASS.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Crawling",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Crawling.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Crawling.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Faint",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Faint.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Faint.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Friendly Fire",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Friendly Fire.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Friendly Fire.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "In The End",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - In The End.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - In The End.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Leave Out All The Rest",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Leave Out All The Rest.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Leave Out All The Rest.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Lost",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Lost.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Lost.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "New Divide",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - New Divide.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - New Divide.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Numb Encore",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Numb Encore.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Numb Encore.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "One More Light",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - One More Light.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - One More Light.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "One Step Closer",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - One Step Closer.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - One Step Closer.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Papercut",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Papercut.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Papercut.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "QWERTY",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - QWERTY.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - QWERTY.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Somewhere I Belong",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Somewhere I Belong.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Somewhere I Belong.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "Waiting For The End",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - Waiting For The End.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - Waiting For The End.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "What I've Done",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - What I've Done.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - What I've Done.jpg",
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/papercuts-edit",
-            "by": "Linkin Park"
-          }
-        },
-        {
-          "title": "With You",
-          "artist": "Linkin Park",
-          "audio": "music/Linkin Park/singles/Linkin Park - With You.mp3",
-          "cover": "music/Linkin Park/singles/Linkin Park - With You.jpg",
-          "license": {
-            "license": "http://creativecommons.org/publicdomain/mark/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/Hybrid-Theory",
-            "by": "Linkin Park"
-          }
-        }
+      "folder": "music/Poobon",
+      "singlesFolder": "music/Poobon/singles",
+      "albumsFolder": "music/Poobon/albums",
+      "aliases": [
+        "پوبن"
       ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Shayan yo",
+      "photo": "music/Shayan yo/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Shayan yo",
+      "singlesFolder": "music/Shayan yo/singles",
+      "albumsFolder": "music/Shayan yo/albums",
+      "aliases": [
+        "شایان یو"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "021Kid",
+      "photo": "music/021Kid/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/021Kid",
+      "singlesFolder": "music/021Kid/singles",
+      "albumsFolder": "music/021Kid/albums",
+      "aliases": [
+        "۰۲۱ کید"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Catchybeatz",
+      "photo": "music/Catchybeatz/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Catchybeatz",
+      "singlesFolder": "music/Catchybeatz/singles",
+      "albumsFolder": "music/Catchybeatz/albums",
+      "aliases": [
+        "کچی بیتز"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Chvrsi",
+      "photo": "music/Chvrsi/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Chvrsi",
+      "singlesFolder": "music/Chvrsi/singles",
+      "albumsFolder": "music/Chvrsi/albums",
+      "aliases": [
+        "چورسی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Mahsa Dehdari",
+      "photo": "music/Mahsa Dehdari/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Mahsa Dehdari",
+      "singlesFolder": "music/Mahsa Dehdari/singles",
+      "albumsFolder": "music/Mahsa Dehdari/albums",
+      "aliases": [
+        "مهسا دهداری"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Arian Dousti",
+      "photo": "music/Arian Dousti/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Arian Dousti",
+      "singlesFolder": "music/Arian Dousti/singles",
+      "albumsFolder": "music/Arian Dousti/albums",
+      "aliases": [
+        "آرین دوستی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Saeed Dehghan",
+      "photo": "music/Saeed Dehghan/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Saeed Dehghan",
+      "singlesFolder": "music/Saeed Dehghan/singles",
+      "albumsFolder": "music/Saeed Dehghan/albums",
+      "aliases": [
+        "سعید دهقان"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Dorcci",
+      "photo": "music/Dorcci/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Dorcci",
+      "singlesFolder": "music/Dorcci/singles",
+      "albumsFolder": "music/Dorcci/albums",
+      "aliases": [
+        "درچی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Ali Geramy",
+      "photo": "music/Ali Geramy/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Ali Geramy",
+      "singlesFolder": "music/Ali Geramy/singles",
+      "albumsFolder": "music/Ali Geramy/albums",
+      "aliases": [
+        "علی گرامی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Moreshahin",
+      "photo": "music/Moreshahin/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Moreshahin",
+      "singlesFolder": "music/Moreshahin/singles",
+      "albumsFolder": "music/Moreshahin/albums",
+      "aliases": [
+        "مورشاهین"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Matin Fattahi",
+      "photo": "music/Matin Fattahi/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Matin Fattahi",
+      "singlesFolder": "music/Matin Fattahi/singles",
+      "albumsFolder": "music/Matin Fattahi/albums",
+      "aliases": [
+        "متین فتاحی"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "6ehtash",
+      "photo": "music/6ehtash/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/6ehtash",
+      "singlesFolder": "music/6ehtash/singles",
+      "albumsFolder": "music/6ehtash/albums",
+      "aliases": [
+        "بهتاش"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Ali Janak",
+      "photo": "music/Ali Janak/photo.jpg",
+      "description": "ARTIST",
+      "folder": "music/Ali Janak",
+      "singlesFolder": "music/Ali Janak/singles",
+      "albumsFolder": "music/Ali Janak/albums",
+      "aliases": [
+        "علی جانک"
+      ],
+      "singles": [],
       "albums": []
     },
     {
       "name": "Metallica",
       "photo": "music/Metallica/photo.jpg",
-      "description": "ARTIST",
+      "description": "AMERICAN HEAVY METAL BAND",
+      "folder": "music/Metallica",
+      "singlesFolder": "music/Metallica/singles",
+      "albumsFolder": "music/Metallica/albums",
+      "aliases": [
+        "متالیکا"
+      ],
       "singles": [
         {
           "title": "Too Far Gone (Live at MetLife Stadium, East Rutherford, NJ, 8 6 2023)",
           "artist": "Metallica",
           "audio": "music/Metallica/singles/Metallica - Too Far Gone (Live at MetLife Stadium, East Rutherford, NJ, 8 6 2023).mp3",
-          "cover": null,
-          "license": {
-            "license": "http://creativecommons.org/licenses/by/4.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/gs_metallica-too-far-gone-live-at-metlife-stadium-east-rutherford-nj-862023",
-            "by": "Metallica"
-          }
+          "cover": null
+        }
+      ],
+      "albums": []
+    },
+    {
+      "name": "Drake",
+      "photo": "music/Drake/photo.jpg",
+      "description": "CANADIAN RAPPER & SINGER",
+      "folder": "music/Drake",
+      "singlesFolder": "music/Drake/singles",
+      "albumsFolder": "music/Drake/albums",
+      "aliases": [
+        "دریک",
+        "درایک"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Dua Lipa",
+      "photo": "music/Dua Lipa/photo.jpg",
+      "description": "BRITISH POP SINGER",
+      "folder": "music/Dua Lipa",
+      "singlesFolder": "music/Dua Lipa/singles",
+      "albumsFolder": "music/Dua Lipa/albums",
+      "aliases": [
+        "دوا لیپا",
+        "دوالیپا"
+      ],
+      "singles": [
+        {
+          "title": "25 8",
+          "artist": "Dua Lipa",
+          "audio": "music/Dua Lipa/singles/Dua Lipa - 25 8.mp3",
+          "cover": null
         }
       ],
       "albums": []
@@ -391,135 +965,254 @@
     {
       "name": "Rihanna",
       "photo": "music/Rihanna/photo.jpg",
-      "description": "ARTIST",
+      "description": "BARBADIAN POP & R&B SINGER",
+      "folder": "music/Rihanna",
+      "singlesFolder": "music/Rihanna/singles",
+      "albumsFolder": "music/Rihanna/albums",
+      "aliases": [
+        "ریحانا",
+        "ریهانا"
+      ],
       "singles": [
         {
           "title": "Rihanna - Kiss It Better (Explicit) - RihannaVEVO (youtube)",
           "artist": "Rihanna",
           "audio": "music/Rihanna/singles/Rihanna - Rihanna - Kiss It Better (Explicit) - RihannaVEVO (youtube).mp3",
-          "cover": null,
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/mark/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/rihanna-kiss-it-better-explicit-rihanna-vevo-youtube",
-            "by": "Rihanna"
-          }
-        }
-      ],
-      "albums": []
-    },
-    {
-      "name": "Sepehr Khalse",
-      "photo": "music/Sepehr Khalse/photo.JPG",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "Fargh Darim",
-          "artist": "Sepehr Khalse",
-          "audio": "music/Sepehr Khalse/singles/Shahin Miri – Fargh Darim.mp3",
           "cover": null
         }
       ],
       "albums": []
     },
     {
-      "name": "Shayan Yo",
-      "photo": "music/Shayan Yo/Photo.jpg",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "Kam Kam",
-          "artist": "Shayan Yo",
-          "audio": "music/Shayan Yo/singles/Shayan Yo - Kam Kam.mp3",
-          "cover": "music/Shayan Yo/singles/Shayan Yo - Kam Kam.jpg"
-        }
+      "name": "Eminem",
+      "photo": "music/Eminem/photo.jpg",
+      "description": "AMERICAN RAPPER",
+      "folder": "music/Eminem",
+      "singlesFolder": "music/Eminem/singles",
+      "albumsFolder": "music/Eminem/albums",
+      "aliases": [
+        "اینم",
+        "امینم"
       ],
+      "singles": [],
       "albums": []
     },
     {
-      "name": "Siavash Ghomayshi",
-      "photo": "music/Siavash Ghomayshi/photo.jpg",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "03 Golaye Pooneh",
-          "artist": "Siavash Ghomayshi",
-          "audio": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.mp3",
-          "cover": "music/Siavash Ghomayshi/singles/03 Golaye Pooneh.jpg"
-        }
+      "name": "The Weeknd",
+      "photo": "music/The Weeknd/photo.jpg",
+      "description": "CANADIAN R&B SINGER",
+      "folder": "music/The Weeknd",
+      "singlesFolder": "music/The Weeknd/singles",
+      "albumsFolder": "music/The Weeknd/albums",
+      "aliases": [
+        "ویکند",
+        "ذا ویکند"
       ],
+      "singles": [],
       "albums": []
     },
     {
-      "name": "System Of A Down",
-      "photo": "music/System Of A Down/Photo.jpg",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "lv-0-20260528133151",
-          "artist": "System Of A Down",
-          "audio": "music/System Of A Down/singles/System Of A Down - lv-0-20260528133151.mp3",
-          "cover": null,
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/mark/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/S.O.A.D.U.L.T.I.M.A.T.E.",
-            "by": "System Of A Down"
-          }
-        }
+      "name": "Linkin Park",
+      "photo": "music/Linkin Park/photo.jpg",
+      "description": "AMERICAN ROCK BAND",
+      "folder": "music/Linkin Park",
+      "singlesFolder": "music/Linkin Park/singles",
+      "albumsFolder": "music/Linkin Park/albums",
+      "aliases": [
+        "لینکین پارک"
       ],
-      "albums": []
-    },
-    {
-      "name": "TJ",
-      "photo": "music/TJ/photo.JPG",
-      "description": "ARTIST",
       "singles": [
         {
-          "title": "Shot 4 Me",
-          "artist": "TJ",
-          "audio": "music/TJ/singles/TJ - Shot 4 Me.mp3",
-          "cover": null,
-          "license": {
-            "license": "https://creativecommons.org/publicdomain/mark/1.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/08-shot-4-me",
-            "by": "TJ"
-          }
-        }
-      ],
-      "albums": []
-    },
-    {
-      "name": "Yas",
-      "photo": "music/Yas/Photo.JPG",
-      "description": "ARTIST",
-      "singles": [
-        {
-          "title": "Podcast 10 - Good Stress.Accelerated Learning - 21 09 2016, 21.18",
-          "artist": "Yas",
-          "audio": "music/Yas/singles/Yas - Podcast 10 - Good Stress.Accelerated Learning - 21 09 2016, 21.18.mp3",
-          "cover": null,
-          "license": {
-            "license": "http://creativecommons.org/licenses/by-nc/3.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/Podcast10GoodStress.AcceleratedLearning2109201621.18",
-            "by": "Yas"
-          }
+          "title": "Bleed It Out",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Bleed It Out.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Bleed It Out.jpg"
         },
         {
-          "title": "Yas- tracktrack",
-          "artist": "Yas",
-          "audio": "music/Yas/singles/Yas - Yas- tracktrack.mp3",
-          "cover": null,
-          "license": {
-            "license": "http://creativecommons.org/licenses/by-nc-nd/3.0/",
-            "source": "Internet Archive",
-            "url": "https://archive.org/details/jamendo-467628",
-            "by": "Yas"
-          }
+          "title": "Breaking The Habit",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Breaking The Habit.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Breaking The Habit.jpg"
+        },
+        {
+          "title": "BURN IT DOWN",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - BURN IT DOWN.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - BURN IT DOWN.jpg"
+        },
+        {
+          "title": "CASTLE OF GLASS",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - CASTLE OF GLASS.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - CASTLE OF GLASS.jpg"
+        },
+        {
+          "title": "Crawling",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Crawling.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Crawling.jpg"
+        },
+        {
+          "title": "Faint",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Faint.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Faint.jpg"
+        },
+        {
+          "title": "Friendly Fire",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Friendly Fire.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Friendly Fire.jpg"
+        },
+        {
+          "title": "In The End",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - In The End.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - In The End.jpg"
+        },
+        {
+          "title": "Leave Out All The Rest",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Leave Out All The Rest.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Leave Out All The Rest.jpg"
+        },
+        {
+          "title": "Lost",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Lost.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Lost.jpg"
+        },
+        {
+          "title": "New Divide",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - New Divide.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - New Divide.jpg"
+        },
+        {
+          "title": "Numb Encore",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Numb Encore.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Numb Encore.jpg"
+        },
+        {
+          "title": "One More Light",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - One More Light.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - One More Light.jpg"
+        },
+        {
+          "title": "One Step Closer",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - One Step Closer.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - One Step Closer.jpg"
+        },
+        {
+          "title": "Papercut",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Papercut.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Papercut.jpg"
+        },
+        {
+          "title": "QWERTY",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - QWERTY.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - QWERTY.jpg"
+        },
+        {
+          "title": "Somewhere I Belong",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Somewhere I Belong.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Somewhere I Belong.jpg"
+        },
+        {
+          "title": "Waiting For The End",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - Waiting For The End.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - Waiting For The End.jpg"
+        },
+        {
+          "title": "What I've Done",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - What I've Done.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - What I've Done.jpg"
+        },
+        {
+          "title": "With You",
+          "artist": "Linkin Park",
+          "audio": "music/Linkin Park/singles/Linkin Park - With You.mp3",
+          "cover": "music/Linkin Park/singles/Linkin Park - With You.jpg"
         }
       ],
+      "albums": []
+    },
+    {
+      "name": "Billie Eilish",
+      "photo": "music/Billie Eilish/photo.jpg",
+      "description": "AMERICAN POP SINGER",
+      "folder": "music/Billie Eilish",
+      "singlesFolder": "music/Billie Eilish/singles",
+      "albumsFolder": "music/Billie Eilish/albums",
+      "aliases": [
+        "بیلی ایلیش"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Hoomaan",
+      "photo": "music/Hoomaan/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hoomaan",
+      "singlesFolder": "music/Hoomaan/singles",
+      "albumsFolder": "music/Hoomaan/albums",
+      "aliases": [
+        "Houman",
+        "هومان"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Hoodadk4",
+      "photo": "music/Hoodadk4/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Hoodadk4",
+      "singlesFolder": "music/Hoodadk4/singles",
+      "albumsFolder": "music/Hoodadk4/albums",
+      "aliases": [
+        "Hodadka",
+        "هودادکا"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Arta",
+      "photo": "music/Arta/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Arta",
+      "singlesFolder": "music/Arta/singles",
+      "albumsFolder": "music/Arta/albums",
+      "aliases": [
+        "جوپیتر ارتا",
+        "Jupiter Orta",
+        "ارتا"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Koorosh",
+      "photo": "music/Koorosh/photo.jpg",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Koorosh",
+      "singlesFolder": "music/Koorosh/singles",
+      "albumsFolder": "music/Koorosh/albums",
+      "aliases": [
+        "Kourosh",
+        "کوروش"
+      ],
+      "singles": [],
       "albums": []
     }
   ]
