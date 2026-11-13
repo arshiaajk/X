@@ -811,7 +811,7 @@
     },
     {
       "name": "Linkin Park",
-      "photo": "music/Linkin Park/photo.jpg",
+      "photo": "music/Linkin Park/photo.JPG",
       "description": "AMERICAN ROCK BAND",
       "folder": "music/Linkin Park",
       "singlesFolder": "music/Linkin Park/singles",
