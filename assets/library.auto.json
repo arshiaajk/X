@@ -189,55 +189,55 @@
         {
           "title": "TAJ",
           "artist": "Sajad Shahi",
-          "cover": null,
+          "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg",
           "tracks": [
             {
               "title": "Sajad Shahi - Dorcci (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/01 Shah - Sajad Shahi - Dorcci (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "Ali Geramy - Koosh (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/02 Sajad Shahi - Ali Geramy - Koosh (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "Gheseh (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/03 Gheseh (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "Taghas (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/04 Sajad Shahi - Taghas (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "Ballistic (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/05 Ballistic (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "Dige (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/06 Sajad Shahi - Dige (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "DEEV (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/09 Sajad Shahi - DEEV (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             },
             {
               "title": "TAJ (BandMusic)",
               "artist": "Sajad Shahi",
               "audio": "music/Sajad Shahi/albums/TAJ/10 Sajad Shahi - TAJ (BandMusic).mp3",
-              "cover": null
+              "cover": "music/Sajad Shahi/albums/TAJ/cover.jpg"
             }
           ]
         }
