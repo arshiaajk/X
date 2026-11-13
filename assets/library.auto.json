@@ -170,6 +170,12 @@
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
+              "title": "Bank (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Bank (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
               "title": "Darya Kenar (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Darya Kenar (BandMusic).mp3",
@@ -179,6 +185,12 @@
               "title": "Dastan (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Dastan (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "DMT (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/DMT (BandMusic).mp3",
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             },
             {
@@ -209,6 +221,18 @@
               "title": "Sheesh (BandMusic)",
               "artist": "Hiphopologist",
               "audio": "music/Hiphopologist/albums/NOSKHE/Sheesh (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Traplife (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Traplife (BandMusic).mp3",
+              "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
+            },
+            {
+              "title": "Yallah (BandMusic)",
+              "artist": "Hiphopologist",
+              "audio": "music/Hiphopologist/albums/NOSKHE/Yallah (BandMusic).mp3",
               "cover": "music/Hiphopologist/albums/NOSKHE/cover.jpg"
             }
           ]
