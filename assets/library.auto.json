@@ -1174,7 +1174,33 @@
         "بیلی ایلیش"
       ],
       "singles": [],
-      "albums": []
+      "albums": [
+        {
+          "title": "HIT ME HARD AND SOFT",
+          "artist": "Billie Eilish",
+          "cover": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/cover.JPG",
+          "tracks": [
+            {
+              "title": "BIRDS OF A FEATHER",
+              "artist": "Billie Eilish",
+              "audio": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/BIRDS OF A FEATHER.mp3",
+              "cover": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/cover.JPG"
+            },
+            {
+              "title": "BITTERSUITE",
+              "artist": "Billie Eilish",
+              "audio": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/BITTERSUITE.mp3",
+              "cover": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/cover.JPG"
+            },
+            {
+              "title": "BLUE",
+              "artist": "Billie Eilish",
+              "audio": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/BLUE.mp3",
+              "cover": "music/Billie Eilish/albums/HIT ME HARD AND SOFT/cover.JPG"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Hoomaan",
