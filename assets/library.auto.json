@@ -890,7 +890,26 @@
       "aliases": [
         "علی گرامی"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Flick Shot",
+          "artist": "Ali Geramy",
+          "audio": "music/Ali Geramy/singles/Ali Geramy - Flick Shot.mp3",
+          "cover": "music/Ali Geramy/singles/Ali Geramy - Flick Shot.jpg"
+        },
+        {
+          "title": "No More",
+          "artist": "Ali Geramy",
+          "audio": "music/Ali Geramy/singles/Ali Geramy - No More.mp3",
+          "cover": "music/Ali Geramy/singles/Ali Geramy - No More.jpg"
+        },
+        {
+          "title": "Waddup",
+          "artist": "Ali Geramy",
+          "audio": "music/Ali Geramy/singles/Ali geramy - Waddup.mp3",
+          "cover": "music/Ali Geramy/singles/Ali geramy - Waddup.jpg"
+        }
+      ],
       "albums": []
     },
     {
