@@ -719,7 +719,7 @@
     },
     {
       "name": "Shahin Najafi",
-      "photo": "music/Shahin Najafi/photo.jpg",
+      "photo": "music/Shahin Najafi/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Shahin Najafi",
       "singlesFolder": "music/Shahin Najafi/singles",
@@ -830,7 +830,7 @@
     },
     {
       "name": "Saren",
-      "photo": "music/Saren/photo.jpg",
+      "photo": "music/Saren/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Saren",
       "singlesFolder": "music/Saren/singles",
@@ -914,7 +914,7 @@
     },
     {
       "name": "Vigen",
-      "photo": "music/Vigen/photo.jpg",
+      "photo": "music/Vigen/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Vigen",
       "singlesFolder": "music/Vigen/singles",
@@ -1366,7 +1366,7 @@
     },
     {
       "name": "Macfian",
-      "photo": null,
+      "photo": "music/Macfian/photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Macfian",
       "singlesFolder": "music/Macfian/singles",
