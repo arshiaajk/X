@@ -580,7 +580,14 @@
       "aliases": [
         "زدبازی"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Bara Hamishe",
+          "artist": "Zedbazi",
+          "audio": "music/Zedbazi/singles/Zedbazi - Bara Hamishe.mp3",
+          "cover": "music/Zedbazi/singles/Zedbazi - Bara Hamishe.JPG"
+        }
+      ],
       "albums": []
     },
     {
