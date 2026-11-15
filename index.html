@@ -211,6 +211,9 @@ footer a{color:#111;text-decoration:none}
   background:linear-gradient(115deg,transparent 22%,rgba(255,255,255,.34) 36%,rgba(255,255,255,.06) 46%,transparent 56%,transparent 70%,rgba(255,255,255,.16) 80%);
   transform:translate(calc(var(--mx,0)*-9%),calc(var(--my,0)*-9%))}
 .artist-group::after,.sheet-panel::after{display:none}
+/* the glossy sheen over photos exists only while motion is actually running */
+.artist-group::before,.sheet-panel::before{display:none}
+html.motion .artist-group::before,html.motion .sheet-panel::before{display:block}
 .artist-group.live::before,.artist-group.live::after,.sheet.show .sheet-panel::before,.sheet.show .sheet-panel::after{will-change:transform}
 .artist-group .view-more{background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .artist-group .view-more:hover,.artist-group .view-more:focus-visible,.sheet-panel .view-more:hover{background:#111;color:#fff}
@@ -821,8 +824,8 @@ function renderArtist(a,list){
 (function(){
     if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
     const listEl=$("artistList"),sheetEl=$("sheet"),panelEl=sheetEl.querySelector(".sheet-panel");
-    let tx=0,ty=0,sx=0,sy=0,x=0,y=0,px=9,py=9,raf=0,last=0,on=false,denied=false,scrolling=false,st,oriN=0,src="-",base=null;
-    const live=new Set(),cl=v=>Math.max(-1,Math.min(1,v));
+    let active=false,tx=0,ty=0,sx=0,sy=0,x=0,y=0,px=9,py=9,raf=0,last=0,on=false,denied=false,scrolling=false,st,oriN=0,src="-",base=null;
+    const live=new Set(),cl=v=>Math.max(-1,Math.min(1,v)),act=()=>{if(!active){active=true;document.documentElement.classList.add("motion")}};
     const frozen=()=>document.hidden||scrolling||fullPlayer.classList.contains("show");
     const io=new IntersectionObserver(es=>es.forEach(e=>{
         const g=e.target;
@@ -858,6 +861,7 @@ function renderArtist(a,list){
     const onOri=e=>{
         oriN++;
         if(e.gamma==null||e.beta==null)return;
+        act();
         let yaw=0;
         if(e.alpha!=null){
             if(base==null)base=e.alpha;
@@ -870,10 +874,10 @@ function renderArtist(a,list){
     };
     const onMot=e=>{
         const r=e.rotationRate;
-        if(r&&r.gamma!=null){sx=cl(sx+r.gamma/500);sy=cl(sy+r.beta/500);kick()}
+        if(r&&r.gamma!=null){act();sx=cl(sx+r.gamma/500);sy=cl(sy+r.beta/500);kick()}
         if(src==="tilt+compass")return;
         const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;
-        src="accelerometer";
+        act();src="accelerometer";
         tx=cl(-a.x/4);ty=cl((a.y-7.5)/4);kick();
     };
     const generic=()=>{
@@ -889,7 +893,7 @@ function renderArtist(a,list){
                 const pitch=Math.asin(Math.max(-1,Math.min(1,2*(qw*qy-qz*qx))));
                 if(bp==null){bp=pitch;br=roll}
                 bp+=(pitch-bp)*.01;br+=(roll-br)*.01;
-                src="generic sensor";
+                act();src="generic sensor";
                 tx=cl((pitch-bp)/.45);ty=cl((roll-br)/.45);kick();
             });
             sen.addEventListener("error",()=>{});
@@ -903,7 +907,7 @@ function renderArtist(a,list){
         setTimeout(generic,2000);
     };
     if(matchMedia("(pointer:fine)").matches){
-        addEventListener("pointermove",e=>{tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;kick()},{passive:true});
+        addEventListener("pointermove",e=>{act();tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2;kick()},{passive:true});
     }
     if(typeof DeviceOrientationEvent==="undefined")return;
     if(typeof DeviceOrientationEvent.requestPermission==="function"){
