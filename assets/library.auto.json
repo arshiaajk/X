@@ -843,7 +843,7 @@
     },
     {
       "name": "Sorena",
-      "photo": "music/Sorena/photo.jpg",
+      "photo": "music/Sorena/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Sorena",
       "singlesFolder": "music/Sorena/singles",
@@ -856,7 +856,7 @@
     },
     {
       "name": "Sijal",
-      "photo": "music/Sijal/photo.jpg",
+      "photo": "music/Sijal/Photo.JPG",
       "description": "ARTIST",
       "folder": "music/Sijal",
       "singlesFolder": "music/Sijal/singles",
@@ -1379,7 +1379,7 @@
     },
     {
       "name": "Alireza JJ",
-      "photo": "music/Alireza JJ/photo.jpg",
+      "photo": "music/Alireza JJ/photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Alireza JJ",
       "singlesFolder": "music/Alireza JJ/singles",
