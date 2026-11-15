@@ -39,7 +39,7 @@ main{max-width:900px;margin:auto}
 .view-more.more-artists{display:block;width:100%;padding:16px;margin-top:24px;font-size:11px;border-radius:18px}
 
 /* artist cards */
-.artist-group{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.4),rgba(255,255,255,.22) 55%,rgba(255,255,255,.3));-webkit-backdrop-filter:blur(34px) saturate(160%) brightness(1.06);backdrop-filter:blur(34px) saturate(160%) brightness(1.06);border:1px solid rgba(255,255,255,.7);border-radius:24px;box-shadow:0 8px 22px rgba(30,40,90,.13),inset 2px 2px 1px -1px rgba(255,255,255,.95),inset -2px -2px 1px -1px rgba(255,255,255,.55),inset 0 0 26px rgba(255,255,255,.22);margin-bottom:16px;padding:0 22px;transform:perspective(var(--persp)) rotateX(calc(var(--my,0)*var(--tilt)*-1)) rotateY(calc(var(--mx,0)*var(--tilt)));transition:scale .3s cubic-bezier(.34,1.56,.64,1)}
+.artist-group{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.08) 55%,rgba(255,255,255,.16));-webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.03);backdrop-filter:blur(22px) saturate(190%) brightness(1.03);border:1px solid rgba(255,255,255,.7);border-radius:24px;box-shadow:0 8px 22px rgba(30,40,90,.13),inset 2px 2px 1px -1px rgba(255,255,255,.95),inset -2px -2px 1px -1px rgba(255,255,255,.55),inset 0 0 26px rgba(255,255,255,.22);margin-bottom:16px;padding:0 22px;transform:perspective(var(--persp)) rotateX(calc(var(--my,0)*var(--tilt)*-1)) rotateY(calc(var(--mx,0)*var(--tilt)));transition:scale .3s cubic-bezier(.34,1.56,.64,1)}
 .artist-group:active{scale:.985}
 .artist-group.fade-in{animation:fadeIn .5s ease-out backwards}
 @keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
@@ -208,11 +208,9 @@ footer a{color:#111;text-decoration:none}
 .artist-group.live{will-change:transform}
 .artist-group::before,.artist-group::after,.sheet-panel::before,.sheet-panel::after{content:"";position:absolute;inset:-30%;pointer-events:none}
 .artist-group::before,.sheet-panel::before{z-index:1;
-  background:linear-gradient(120deg,rgba(255,255,255,.5) 19%,rgba(255,255,255,.08) 38%,transparent 55%,transparent 68%,rgba(255,255,255,.22) 81%),radial-gradient(closest-side,transparent 50%,rgba(20,30,70,.2) 85%);
+  background:linear-gradient(115deg,transparent 22%,rgba(255,255,255,.34) 36%,rgba(255,255,255,.06) 46%,transparent 56%,transparent 70%,rgba(255,255,255,.16) 80%);
   transform:translate(calc(var(--mx,0)*-9%),calc(var(--my,0)*-9%))}
-.artist-group::after,.sheet-panel::after{z-index:-1;
-  background:radial-gradient(closest-side,rgba(255,255,255,.4),rgba(255,255,255,.1) 50%,transparent);
-  transform:translate(calc(var(--mx,0)*-14%),calc(var(--my,0)*-14%))}
+.artist-group::after,.sheet-panel::after{display:none}
 .artist-group.live::before,.artist-group.live::after,.sheet.show .sheet-panel::before,.sheet.show .sheet-panel::after{will-change:transform}
 .artist-group .view-more{background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .artist-group .view-more:hover,.artist-group .view-more:focus-visible,.sheet-panel .view-more:hover{background:#111;color:#fff}
