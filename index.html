@@ -215,6 +215,9 @@ footer a{color:#111;text-decoration:none}
 .artist-group .view-more{background:rgba(255,255,255,.3);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .artist-group .view-more:hover,.artist-group .view-more:focus-visible,.sheet-panel .view-more:hover{background:#111;color:#fff}
 .sheet-panel .view-more{background:rgba(255,255,255,.4)}
+/* profile open: the page behind it stands completely still */
+body.sheet-open .logo .l{animation-play-state:paused}
+body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{will-change:auto}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
 </style>
 </head>
