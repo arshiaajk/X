@@ -665,7 +665,7 @@ function openSheet(a){
     a.singles.forEach(t=>f.appendChild(createTrack(t,a.singles)));sp.appendChild(f);
     a.albums.forEach(b=>ap.appendChild(createAlbum(b)));
     sheetBody.replaceChildren(sp,ap);
-    setTab(a.albums.length||!a.singles.length?"albums":"singles");
+    setTab(a.singles.length||!a.albums.length?"singles":"albums");
     sheetScroll.scrollTop=0;
     sheet.classList.add("show");sheet.setAttribute("aria-hidden","false");
     document.body.classList.add("sheet-open");
