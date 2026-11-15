@@ -1330,7 +1330,32 @@
         "Kourosh",
         "کوروش"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Adam Barfi _320_",
+          "artist": "Koorosh",
+          "audio": "music/Koorosh/singles/Koorosh _ Arta _ Sami Low - Adam Barfi _320_.mp3",
+          "cover": "music/Koorosh/singles/Koorosh _ Arta _ Sami Low - Adam Barfi _320_.jpg"
+        },
+        {
+          "title": "Roller Coaster",
+          "artist": "Koorosh",
+          "audio": "music/Koorosh/singles/Koorosh _ Catchybeatz - Roller Coaster.mp3",
+          "cover": "music/Koorosh/singles/Koorosh _ Catchybeatz - Roller Coaster.jpg"
+        },
+        {
+          "title": "Mastaane",
+          "artist": "Koorosh",
+          "audio": "music/Koorosh/singles/Koorosh - Mastaane.mp3",
+          "cover": "music/Koorosh/singles/Koorosh - Mastaane.jpg"
+        },
+        {
+          "title": "Befuckam",
+          "artist": "Koorosh",
+          "audio": "music/Koorosh/singles/Sami Beigi - Befuckam.mp3",
+          "cover": "music/Koorosh/singles/Sami Beigi - Befuckam.jpg"
+        }
+      ],
       "albums": []
     },
     {
