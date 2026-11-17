@@ -915,7 +915,8 @@
       "singlesFolder": "music/Sorena/singles",
       "albumsFolder": "music/Sorena/albums",
       "aliases": [
-        "سورنا"
+        "سورنا",
+        "Ali Sorena"
       ],
       "singles": [],
       "albums": []
@@ -1459,15 +1460,16 @@
       "albums": []
     },
     {
-      "name": "Young Sadden",
+      "name": "Young Sudden",
       "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
-      "folder": "music/Young Sadden",
-      "singlesFolder": "music/Young Sadden/singles",
-      "albumsFolder": "music/Young Sadden/albums",
+      "folder": "music/Young Sudden",
+      "singlesFolder": "music/Young Sudden/singles",
+      "albumsFolder": "music/Young Sudden/albums",
       "aliases": [
+        "یانگ ساده",
         "یانگ سادن",
-        "یانگ ساده"
+        "Young Sadden"
       ],
       "singles": [],
       "albums": []
@@ -1487,15 +1489,18 @@
       "albums": []
     },
     {
-      "name": "Mamreza Shaye",
+      "name": "Shayea",
       "photo": null,
       "description": "ARTIST",
-      "folder": "music/Mamreza Shaye",
-      "singlesFolder": "music/Mamreza Shaye/singles",
-      "albumsFolder": "music/Mamreza Shaye/albums",
+      "folder": "music/Shayea",
+      "singlesFolder": "music/Shayea/singles",
+      "albumsFolder": "music/Shayea/albums",
       "aliases": [
+        "شایع",
+        "محمدرضا شایع",
         "ممرضا شایع",
-        "ممرضا"
+        "Mamreza Shayea",
+        "Mohammadreza Shayea"
       ],
       "singles": [],
       "albums": []
