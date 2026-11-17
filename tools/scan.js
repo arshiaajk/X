@@ -6,15 +6,27 @@
     assets/music/<Artist>/albums/<AlbumName>/*.mp3
   (mp3 که مستقیم داخل albums باشه هم یه آلبوم هم‌اسم خواننده می‌سازه)
 
-  ترتیب آهنگ‌های آلبوم فقط از روی شماره ابتدای اسم فایل تعیین می‌شه. فایل‌های بدون شماره می‌رن آخر.
+  ─── اسم آهنگ از روی اسم فایل ───
+    "bache mardom(320).mp3"      ->  bache mardom
+    "Amir Tataloo-barzakh.mp3"   ->  barzakh
+    "Amir Tataloo - Barzakh"     ->  Barzakh
+    "01 - Name", "Track 03", "۰۳ اسم" ->  شماره حذف می‌شه (ترتیب آلبوم از همین شماره‌ست)
+    پیشوند اسم خواننده با اسم پوشه یا aliasهای library.json تشخیص داده می‌شه.
+    کیفیت (320 / 128kbps)، اسم سایت و عبارت‌هایی مثل (Official Audio) هم پاک می‌شن.
 
   ─── کاور و عکس: به این ترتیب ───
     ۱. عکسی که خودت گذاشتی (همیشه اولویت داره و هیچ‌وقت عوض یا پاک نمی‌شه)
          تک‌آهنگ:   <نام‌آهنگ>.jpg|png|webp   کنار mp3
          آلبوم:      cover.* / folder.* / front.* / album.* ، عکس هم‌اسم آلبوم، یا اولین عکس پوشه
          خواننده:   photo.* ، عکس هم‌اسم خواننده، یا هر عکس داخل پوشه خواننده
-    ۲. کاوری که خود فایل mp3 داخلش داره (ID3) ← بیرون کشیده و کنار فایل ذخیره می‌شه
-    ۳. Spotify (فقط تک‌آهنگ‌ها و عکس خواننده‌ها، و فقط وقتی اسم دقیقاً بخونه)
+    ۲. کاوری که خود فایل mp3 داخلش داره (ID3)
+    ۳. Spotify (تک‌آهنگ‌ها، آلبوم‌ها و عکس خواننده‌ها). با چند جستجوی پشت‌سرهم و تطبیق نرم:
+         - اسم خواننده: اسم پوشه، searchName و همه aliasهای library.json امتحان می‌شن
+           و «شامل بودن» هم کافیه (مثلاً "Eminem" با "Eminem feat. Rihanna" می‌خونه)
+         - اگه با اسم خواننده پیدا نشد، فقط با اسم آهنگ هم جستجو می‌کنه و
+           اگه اسم آهنگ دقیقاً یکی بود کاورش رو برمی‌داره (با STRICT_COVERS=1 خاموش می‌شه)
+         - آلبوم: اول با اسم پوشه آلبوم (سال اول اسم مثل "2019 - Name" نادیده گرفته می‌شه) جستجو می‌کنه،
+           اگه پیدا نشد از روی اسم اولین آهنگ‌های آلبوم دنبال کاور می‌گرده
     اگه هیچ‌کدوم پیدا نشد، چیزی ذخیره نمی‌شه و خودت بعداً آپلود می‌کنی.
 
   فایل‌هایی که اسکریپت خودش می‌سازه اسمشون «.auto.» داره، مثلاً  photo.auto.jpg  یا  Song.auto.jpg
@@ -27,9 +39,11 @@
   متغیرهای محیطی:
     NO_COVERS=1       اصلاً دنبال عکس نگرده
     FORCE_COVERS=1    کش «پیدا نشد» رو نادیده بگیره
+    STRICT_COVERS=1   جستجوی فقط-با-اسم-آهنگ (تطبیق نرم) خاموش بشه
 
-  اگه اسم پوشه خواننده فارسیه و توی اسپاتیفای انگلیسی ثبت شده، داخل پوشه‌اش فایل info.json بساز:
-    { "searchName": "Hichkas" }
+  اگه اسم پوشه خواننده فارسیه و توی اسپاتیفای انگلیسی ثبت شده، یکی از این دو کار رو بکن:
+    - توی aliases همون خواننده تو library.json اسم انگلیسی‌ش رو بنویس
+    - یا داخل پوشه‌اش فایل info.json بساز:  { "searchName": "Hichkas" }
 */
 const fs = require('fs');
 const path = require('path');
@@ -44,7 +58,8 @@ const IMG_EXT = ['jpg', 'jpeg', 'png', 'webp'];
 const EXT_GROUP = IMG_EXT.join('|');
 const IMG_RE = new RegExp(`\\.(${EXT_GROUP})$`, 'i');
 const AUTO_RE = /\.auto\.[a-z0-9]+$/i;         // فایل‌هایی که خود اسکریپت ساخته
-const RETRY_MS = 30 * 24 * 3600 * 1000;        // «پیدا نشد» رو ۳۰ روز بعد دوباره امتحان می‌کنه
+const RETRY_MS = 3 * 24 * 3600 * 1000;         // «پیدا نشد» رو ۳ روز بعد دوباره امتحان می‌کنه
+const LOOSE = env.STRICT_COVERS !== '1';       // تطبیق نرم‌تر برای کاور
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const enc = encodeURIComponent;
 const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -69,8 +84,28 @@ const similar = (a, b) => {
   return !!a && !!b && (a === b || a.includes(b) || b.includes(a));
 };
 
+/* ---------- اسم‌های هر خواننده (اسم پوشه + aliasهای library.json) ---------- */
+const aliasMap = {};
+try {
+  (JSON.parse(fs.readFileSync(libFile, 'utf8')).artists || []).forEach(a => {
+    if (a && a.name) aliasMap[norm(a.name)] = [a.name, ...(Array.isArray(a.aliases) ? a.aliases : [])];
+  });
+} catch {}
+const namesOf = artist => aliasMap[norm(artist)] || [artist];
+
+// آیا اسمی که اسپاتیفای داده (یا پیشوند اسم فایل) یکی از اسم‌های این خواننده‌ست؟
+// برابر، یا یکی داخل اون یکی (فقط اگه اسم حداقل ۳ حرف باشه که اسم‌های کوتاه مثل TJ اشتباه نخونن)
+function isArtist(candidate, names) {
+  const c = norm(candidate);
+  if (!c) return false;
+  return names.some(n => {
+    n = norm(n);
+    return n && (c === n || (n.length >= 3 && c.includes(n)) || (c.length >= 3 && n.includes(c)));
+  });
+}
+
+/* ---------- تمیز کردن اسم آهنگ ---------- */
 const SEP = /\s[-\u2013\u2014]\s/;
-const titleOf = base => SEP.test(base) ? base.split(SEP).slice(1).join(' - ') : base;
 const natural = (a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 
 // ارقام فارسی/عربی رو به انگلیسی تبدیل می‌کنه
@@ -78,25 +113,60 @@ const faDigits = s => s
   .replace(/[\u06f0-\u06f9]/g, c => c.charCodeAt(0) - 0x06f0)
   .replace(/[\u0660-\u0669]/g, c => c.charCodeAt(0) - 0x0660);
 
-// شماره ترک رو از اسم فایل درمیاره:
+// آشغال‌های اسم فایل: (320) [128kbps] 320kbps، اسم سایت، (Official Audio) و ...
+const cleanTitle = s => String(s)
+  .replace(/_/g, ' ')
+  .replace(/(?:https?:\/\/|www\.)\S+/gi, ' ')
+  .replace(/[(\[{][^)\]}]*\.(?:com|ir|net|org)\b[^)\]}]*[)\]}]/gi, ' ')
+  .replace(/[(\[{]\s*\d{2,3}\s*(?:kbps|k)?\s*[)\]}]/gi, ' ')
+  .replace(/[(\[{][^)\]}]*\b(?:official|lyrics?|audio|video|mp3|remaster(?:ed)?|hq|hd|320|256|192|128)\b[^)\]}]*[)\]}]/gi, ' ')
+  .replace(/\b(?:320|256|192|128)\s*kbps\b/gi, ' ')
+  .replace(/[\s\-\u2013\u2014]+(?:320|256|192|128)\s*$/g, ' ')
+  .replace(/\s{2,}/g, ' ')
+  .replace(/^[\s\-\u2013\u2014._]+|[\s\-\u2013\u2014._]+$/g, '')
+  .trim();
+
+// "Amir Tataloo-barzakh" یا "Amir Tataloo - barzakh" یا "Amir Tataloo: barzakh" -> "barzakh"
+// فقط وقتی قسمت چپ جداکننده واقعاً اسم همین خواننده باشه حذف می‌شه (جداکننده می‌تونه بدون فاصله باشه)
+function stripArtist(s, names) {
+  const re = /\s*[-\u2013\u2014:]\s*/g;
+  let m;
+  while ((m = re.exec(s))) {
+    const left = s.slice(0, m.index).trim();
+    const rest = s.slice(m.index + m[0].length).trim();
+    if (left && rest && isArtist(left, names)) return rest;
+  }
+  return s;
+}
+
+// شماره ترک و اسم آهنگ رو از اسم فایل درمیاره:
 // "01 - Name", "01. Name", "1) Name", "01 Name", "01_Name", "Track 03", "Artist - 05 - Name", "۰۳ اسم"
 // (چیزی مثل "2Pac - ..." شماره حساب نمی‌شه چون بعد از عدد باید جداکننده باشه)
-function parseTrack(base, artistName) {
-  const s = faDigits(base).trim();
-  const re = /^(?:track\s*)?(\d{1,3})(?!\d)(?:[\s\-._)\]:]+|$)(.*)$/i;
-  let m = s.match(re);
-  if (!m && SEP.test(s)) {                        // حالت "Artist - 05 - Name"
-    m = s.split(SEP).slice(1).join(' - ').trim().match(re);
-  }
-  if (!m) return { num: null, title: titleOf(base).trim() || base };
-  let title = m[2].trim();
-  // "01 Hiphopologist - Sogand" -> "Sogand"
-  if (SEP.test(title)) {
-    const parts = title.split(SEP);
-    if (similar(parts[0], artistName)) title = parts.slice(1).join(' - ').trim();
-  }
-  return { num: parseInt(m[1], 10), title: title || ('Track ' + m[1]) };
+function parseTrack(base, artist) {
+  const names = namesOf(artist);
+  const numRe = /^(?:track\s*)?(\d{1,3})(?!\d)(?:[\s\-._)\]:]+|$)(.*)$/i;
+  const orig = cleanTitle(faDigits(base));
+  let s = orig, num = null;
+  const takeNum = () => {
+    const m = s.match(numRe);
+    if (!m) return false;
+    num = parseInt(m[1], 10);
+    s = m[2].trim();
+    return true;
+  };
+
+  takeNum();
+  s = stripArtist(s, names);
+  if (num === null && takeNum()) s = stripArtist(s, names);       // "Artist - 05 - Name"
+
+  // اگه اسم خواننده شناخته نشد ولی شکلش "X - Name" بود، مثل قبل بعد از اولین " - " رو برمی‌داریم
+  if (num === null && s === orig && SEP.test(s)) s = s.split(SEP).slice(1).join(' - ');
+
+  s = cleanTitle(s);
+  if (!s) s = (num !== null ? 'Track ' + num : orig) || base;
+  return { num, title: s };
 }
+const titleOf = (base, artist) => parseTrack(base, artist).title;
 
 /* ---------- عکس‌ها: کدوم فایل مال خودته و کدوم مال اسکریپت ---------- */
 const isImg = f => IMG_RE.test(f);
@@ -257,27 +327,102 @@ const spSearch = async (type, q, limit) => {
     { headers: { Authorization: 'Bearer ' + tok } });
 };
 
-// کاور آهنگ: اسم خواننده باید دقیقاً یکی از خواننده‌های آهنگ باشه و اسم آهنگ هم بخونه
-async function findCover(artist, title) {
-  const r = await spSearch('track', `track:"${title}" artist:"${artist}"`, 10);
-  if (r.error) { console.log('  Spotify: ERROR ' + r.error); return { url: null, failed: true }; }
-  const items = (r.data && r.data.tracks && r.data.tracks.items) || [];
-  console.log(`  Spotify: ${items.length} results` + (items[0] ? ` (first: "${(items[0].artists || []).map(a => a.name).join(', ')} - ${items[0].name}")` : ''));
-  const hit = items.find(x =>
-    x.album && x.album.images && x.album.images[0] &&
-    (x.artists || []).some(a => norm(a.name) === norm(artist)) &&
-    titleMatch(x.name, title));
-  return { url: hit ? hit.album.images[0].url : null, failed: false };
+// همه اسم‌هایی که خواننده می‌تونه با اون‌ها توی Spotify ثبت شده باشه (searchName اول میاد)
+const artistNames = (artist, searchName) =>
+  [...new Set([searchName, artist, ...namesOf(artist)].filter(Boolean))];
+const latinFirst = names => names.find(n => /[a-z]/i.test(n)) || names[0];
+
+// کاور آهنگ. سه بار جستجو می‌کنه و از دقیق به نرم میره:
+//   ۱) فیلتر track + artist   ۲) جستجوی ساده "اسم‌آهنگ اسم‌خواننده"   ۳) فقط اسم آهنگ
+// خواننده وقتی قبوله که اسمش با یکی از اسم‌ها/aliasها برابر باشه یا شامل اون باشه.
+// توی جستجوی ۳ اگه اسم آهنگ دقیقاً یکی بود، حتی بدون تطبیق خواننده هم قبوله (با STRICT_COVERS=1 خاموش می‌شه).
+async function findCover(names, title, loose = LOOSE) {
+  const primary = latinFirst(names);
+  const queries = [`track:"${title}" artist:"${primary}"`, `${title} ${primary}`, title];
+  let okCalls = 0;
+  for (let i = 0; i < queries.length; i++) {
+    const r = await spSearch('track', queries[i], 10);
+    if (r.error) {
+      console.log('  Spotify: ERROR ' + r.error);
+      if (r.error === 'no token') break;
+      continue;
+    }
+    okCalls++;
+    const items = ((r.data && r.data.tracks && r.data.tracks.items) || [])
+      .filter(x => x.album && x.album.images && x.album.images[0]);
+    console.log(`  Spotify [${i + 1}/3]: ${items.length} results` + (items[0] ? ` (first: "${(items[0].artists || []).map(a => a.name).join(', ')} - ${items[0].name}")` : ''));
+    const byTitle = items.filter(x => titleMatch(x.name, title));
+    let hit = byTitle.find(x => (x.artists || []).some(a => isArtist(a.name, names)));
+    if (!hit && loose && i === queries.length - 1) hit = byTitle.find(x => norm(x.name) === norm(title));
+    if (hit) {
+      console.log(`  matched: "${(hit.artists || []).map(a => a.name).join(', ')} - ${hit.name}"`);
+      return { url: hit.album.images[0].url, failed: false };
+    }
+  }
+  return { url: null, failed: okCalls === 0 };
 }
 
-// عکس خواننده: فقط وقتی اسم دقیقاً یکی باشه
-async function findArtistPhoto(name) {
-  const r = await spSearch('artist', `artist:"${name}"`, 5);
-  if (r.error) { console.log('  Spotify: ERROR ' + r.error); return { url: null, failed: true }; }
-  const items = (r.data && r.data.artists && r.data.artists.items) || [];
-  console.log(`  Spotify: ${items.length} results` + (items[0] ? ` (first: "${items[0].name}")` : ''));
-  const hit = items.find(x => x.images && x.images[0] && norm(x.name) === norm(name));
-  return { url: hit ? hit.images[0].url : null, failed: false };
+// عکس خواننده: با همه اسم‌هاش جستجو می‌کنه و اسمی که برابر یا شامل یکی از اسم‌ها باشه قبوله
+async function findArtistPhoto(names) {
+  const queries = [`artist:"${latinFirst(names)}"`, ...names.slice(0, 4)];
+  let okCalls = 0;
+  for (const q of [...new Set(queries)]) {
+    const r = await spSearch('artist', q, 10);
+    if (r.error) {
+      console.log('  Spotify: ERROR ' + r.error);
+      if (r.error === 'no token') break;
+      continue;
+    }
+    okCalls++;
+    const items = (r.data && r.data.artists && r.data.artists.items) || [];
+    console.log(`  Spotify: ${items.length} results for [${q}]` + (items[0] ? ` (first: "${items[0].name}")` : ''));
+    const hit = items.find(x => x.images && x.images[0] && isArtist(x.name, names));
+    if (hit) {
+      console.log(`  matched: "${hit.name}"`);
+      return { url: hit.images[0].url, failed: false };
+    }
+  }
+  return { url: null, failed: okCalls === 0 };
+}
+
+// اسم پوشه آلبوم رو برای جستجو تمیز می‌کنه: "2019 - Barzakh (320)" -> "Barzakh"
+const albumQueryOf = t => cleanTitle(t).replace(/^\(?\d{4}\)?\s*[-\u2013\u2014._]+\s*/, '').trim();
+
+// کاور آلبوم. اول خود آلبوم رو با اسمش جستجو می‌کنه (آلبوم + خواننده، بعد فقط اسم آلبوم)،
+// اگه پیدا نشد با اسم اولین آهنگ‌ها دنبال آلبومشون می‌گرده (فقط با تطبیق خواننده).
+// title اگه null باشه (آهنگ‌هایی که مستقیم داخل albums هستن) فقط مرحله آهنگ‌ها اجرا می‌شه.
+async function findAlbumCover(names, title, trackTitles) {
+  const primary = latinFirst(names);
+  let okCalls = 0;
+  const q = title ? albumQueryOf(title) : '';
+  if (q) {
+    const queries = [`album:"${q}" artist:"${primary}"`, `${q} ${primary}`, q];
+    for (let i = 0; i < queries.length; i++) {
+      const r = await spSearch('album', queries[i], 10);
+      if (r.error) {
+        console.log('  Spotify: ERROR ' + r.error);
+        if (r.error === 'no token') break;
+        continue;
+      }
+      okCalls++;
+      const items = ((r.data && r.data.albums && r.data.albums.items) || []).filter(x => x.images && x.images[0]);
+      console.log(`  Spotify album [${i + 1}/3]: ${items.length} results` + (items[0] ? ` (first: "${(items[0].artists || []).map(a => a.name).join(', ')} - ${items[0].name}")` : ''));
+      const byTitle = items.filter(x => titleMatch(x.name, q));
+      let hit = byTitle.find(x => (x.artists || []).some(a => isArtist(a.name, names)));
+      if (!hit && LOOSE && i === queries.length - 1) hit = byTitle.find(x => norm(x.name) === norm(q));
+      if (hit) {
+        console.log(`  matched album: "${(hit.artists || []).map(a => a.name).join(', ')} - ${hit.name}"`);
+        return { url: hit.images[0].url, failed: false };
+      }
+    }
+  }
+  for (const t of (trackTitles || []).slice(0, 2)) {
+    console.log(`  trying album cover via track: ${t}`);
+    const res = await findCover(names, t, false);
+    if (res.url) return res;
+    if (!res.failed) okCalls++;
+  }
+  return { url: null, failed: okCalls === 0 };
 }
 
 /* ---------- پوشه‌ها و فایل‌ها ---------- */
@@ -374,28 +519,55 @@ async function main() {
     try { cache = JSON.parse(fs.readFileSync(cacheFile, 'utf8')); } catch {}
     if (env.FORCE_COVERS === '1') cache = {};
     const fresh = key => cache[key] && Date.now() - cache[key] < RETRY_MS;
-    const stat = { embedded: 0, photos: 0, covers: 0, missed: 0 };
+    const stat = { embedded: 0, photos: 0, covers: 0, albumCovers: 0, missed: 0 };
 
     const spotifyOn = hasSpotify() && typeof fetch === 'function';
     if (hasSpotify() && typeof fetch !== 'function') console.log(`!! Node ${process.version} has no fetch - Node 18+ is required for Spotify.`);
-    console.log(spotifyOn ? 'Source: Spotify (+ covers embedded in mp3 files)'
+    console.log(spotifyOn ? 'Source: Spotify (+ covers embedded in mp3 files)' + (LOOSE ? '' : ' [strict]')
       : 'Spotify is off - set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET to enable it (embedded mp3 covers still work).');
 
-    // ۲-الف) کاور داخل mp3: آلبوم‌هایی که هیچ عکسی ندارن
+    // ۲-الف) کاور آلبوم‌هایی که هیچ عکسی ندارن: اول داخل mp3، بعد Spotify
     for (const dir of artistDirs()) {
-      const albumsPath = path.join(musicDir, dir.name, 'albums');
+      const artist = dir.name, artistPath = path.join(musicDir, artist);
+      const albumsPath = path.join(artistPath, 'albums');
       if (!fs.existsSync(albumsPath)) continue;
+      const names = artistNames(artist, searchNameOf(artistPath, artist));
       const dirs = [albumsPath, ...fs.readdirSync(albumsPath, { withFileTypes: true })
         .filter(d => d.isDirectory()).map(d => path.join(albumsPath, d.name))];
       for (const d of dirs) {
         const files = filesIn(d);
+        const mp3s = files.filter(f => f.toLowerCase().endsWith('.mp3')).sort(natural);
+        if (!mp3s.length) continue;
         if (files.some(isImg)) continue;                          // هر عکسی هست دست نمی‌زنیم
-        for (const mp3 of files.filter(f => f.toLowerCase().endsWith('.mp3')).sort(natural)) {
+
+        let done = false;
+        for (const mp3 of mp3s) {
           if (saveEmbedded(path.join(d, mp3), path.join(d, 'cover'))) {
             console.log(`Album cover taken from mp3: ${path.relative(musicDir, d)}`);
             stat.embedded++;
+            done = true;
             break;
           }
+        }
+        if (done || !spotifyOn) continue;
+
+        const isLoose = d === albumsPath;
+        const albumTitle = isLoose ? null : path.basename(d);
+        const key = `album:${artist}/${albumTitle || ''}`;
+        if (fresh(key)) continue;
+        const trackTitles = mp3s
+          .map(f => ({ f, ...parseTrack(path.parse(f).name, artist) }))
+          .sort((a, b) => (a.num === null) - (b.num === null) || (a.num || 0) - (b.num || 0))
+          .map(p => p.title);
+        console.log(`Looking for album cover: ${names[0]} - ${albumTitle || '(loose tracks)'}`);
+        const res = await findAlbumCover(names, albumTitle, trackTitles);
+        if (res.url && await download(res.url, path.join(d, 'cover'))) {
+          console.log('  -> saved cover.auto.* (from Spotify)');
+          stat.albumCovers++; delete cache[key];
+        } else {
+          stat.missed++;
+          if (res.url || res.failed) console.log('  -> connection/API problem, will retry next run');
+          else { console.log('  -> no match (will not retry for 3 days, upload it yourself)'); cache[key] = Date.now(); }
         }
       }
     }
@@ -407,16 +579,16 @@ async function main() {
         if (findLocalPhoto(artistPath, artist)) continue;
         const key = 'photo:' + artist;
         if (fresh(key)) continue;
-        const q = searchNameOf(artistPath, artist);
-        console.log(`Looking for artist photo: ${q}`);
-        const res = await findArtistPhoto(q);
+        const names = artistNames(artist, searchNameOf(artistPath, artist));
+        console.log(`Looking for artist photo: ${names[0]}`);
+        const res = await findArtistPhoto(names);
         if (res.url && await download(res.url, path.join(artistPath, 'photo'))) {
           console.log('  -> saved photo.auto.*');
           stat.photos++; delete cache[key];
         } else {
           stat.missed++;
           if (res.url || res.failed) console.log('  -> connection/API problem, will retry next run');
-          else { console.log('  -> no exact match (will not retry for 30 days, upload it yourself)'); cache[key] = Date.now(); }
+          else { console.log('  -> no match (will not retry for 3 days, upload it yourself)'); cache[key] = Date.now(); }
         }
       }
     }
@@ -426,14 +598,15 @@ async function main() {
       const artist = dir.name, artistPath = path.join(musicDir, artist);
       const singlesPath = path.join(artistPath, 'singles');
       if (!fs.existsSync(singlesPath)) continue;
-      const q = searchNameOf(artistPath, artist);
+      const names = artistNames(artist, searchNameOf(artistPath, artist));
 
       for (const file of fs.readdirSync(singlesPath).filter(f => f.toLowerCase().endsWith('.mp3'))) {
         const base = path.parse(file).name;
         if (findImgFor(fs.readdirSync(singlesPath), base)) continue;        // عکس داره، دست نمی‌زنیم
 
+        const title = titleOf(base, artist);
         if (saveEmbedded(path.join(singlesPath, file), path.join(singlesPath, base))) {
-          console.log(`Cover taken from mp3: ${artist} - ${titleOf(base)}`);
+          console.log(`Cover taken from mp3: ${artist} - ${title}`);
           stat.embedded++;
           continue;
         }
@@ -441,21 +614,21 @@ async function main() {
 
         const key = `${artist}/${base}`;
         if (fresh(key)) continue;
-        console.log(`Looking for cover: ${artist} - ${titleOf(base)}`);
-        const res = await findCover(q, titleOf(base));
+        console.log(`Looking for cover: ${names[0]} - ${title}`);
+        const res = await findCover(names, title);
         if (res.url && await download(res.url, path.join(singlesPath, base))) {
           console.log('  -> saved cover (from Spotify)');
           stat.covers++; delete cache[key];
         } else {
           stat.missed++;
           if (res.url || res.failed) console.log('  -> connection/API problem, will retry next run');
-          else { console.log('  -> no matching result (will not retry for 30 days, upload it yourself)'); cache[key] = Date.now(); }
+          else { console.log('  -> no matching result (will not retry for 3 days, upload it yourself)'); cache[key] = Date.now(); }
         }
       }
     }
 
     fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2));
-    console.log(`Done: ${stat.embedded} covers from mp3 files, ${stat.photos} artist photos and ${stat.covers} covers from Spotify, ${stat.missed} not found.`);
+    console.log(`Done: ${stat.embedded} covers from mp3 files, ${stat.photos} artist photos, ${stat.covers} single covers and ${stat.albumCovers} album covers from Spotify, ${stat.missed} not found.`);
   }
 
   // ۳. خواندن آهنگ‌ها از پوشه‌ها و ترکیب با library.json
@@ -481,7 +654,7 @@ async function main() {
         const base = path.parse(file).name;
         const coverFile = findImgFor(all, base);
         obj.singles.push({
-          title: titleOf(base),
+          title: titleOf(base, artistName),
           artist: artistName,
           audio: `music/${artistName}/singles/${file}`,
           cover: coverFile ? `music/${artistName}/singles/${coverFile}` : null
@@ -496,7 +669,7 @@ async function main() {
   const audioKey = p => norm(path.parse(String(p || '')).name);
   const fixSingle = (s, artistName) => {
     if (typeof s === 'string') {
-      return { title: titleOf(path.parse(s).name), artist: artistName, audio: s, cover: null };
+      return { title: titleOf(path.parse(s).name, artistName), artist: artistName, audio: s, cover: null };
     }
     return s && s.audio ? s : null;
   };
