@@ -473,7 +473,7 @@
     },
     {
       "name": "Vinak",
-      "photo": "music/Vinak/photo.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Vinak",
       "singlesFolder": "music/Vinak/singles",
@@ -486,7 +486,7 @@
     },
     {
       "name": "TM Bax",
-      "photo": "music/TM Bax/photo.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/TM Bax",
       "singlesFolder": "music/TM Bax/singles",
@@ -598,7 +598,7 @@
     },
     {
       "name": "Sadegh",
-      "photo": "music/Sadegh/photo.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Sadegh",
       "singlesFolder": "music/Sadegh/singles",
@@ -611,7 +611,7 @@
     },
     {
       "name": "Ho3ein",
-      "photo": "music/Ho3ein/photo.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Ho3ein",
       "singlesFolder": "music/Ho3ein/singles",
@@ -804,7 +804,7 @@
     },
     {
       "name": "Catchybeatz",
-      "photo": "music/Catchybeatz/photo.JPG",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Catchybeatz",
       "singlesFolder": "music/Catchybeatz/singles",
@@ -817,7 +817,7 @@
     },
     {
       "name": "Chvrsi",
-      "photo": "music/Chvrsi/photo.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Chvrsi",
       "singlesFolder": "music/Chvrsi/singles",
@@ -940,7 +940,7 @@
     },
     {
       "name": "Bahram",
-      "photo": "music/Bahram/photo.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Bahram",
       "singlesFolder": "music/Bahram/singles",
@@ -953,7 +953,7 @@
     },
     {
       "name": "Ali Janak",
-      "photo": "music/Ali Janak/photo.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Ali Janak",
       "singlesFolder": "music/Ali Janak/singles",
@@ -1292,7 +1292,7 @@
     },
     {
       "name": "Hoodadk4",
-      "photo": "music/Hoodadk4/photo.JPG",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Hoodadk4",
       "singlesFolder": "music/Hoodadk4/singles",
@@ -1394,7 +1394,7 @@
     },
     {
       "name": "Pidar",
-      "photo": "music/Pidar/photo.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Pidar",
       "singlesFolder": "music/Pidar/singles",
