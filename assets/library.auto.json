@@ -690,22 +690,16 @@
       ],
       "singles": [
         {
-          "title": "Amir Tataloo - Khabam Nemibare",
+          "title": "Amir Tataloo - Behesht",
           "artist": "Amir Tataloo",
-          "audio": "music/Amir Tataloo/singles/02 - Amir Tataloo - Khabam Nemibare.mp3",
-          "cover": "music/Amir Tataloo/singles/02 - Amir Tataloo - Khabam Nemibare.auto.jpg"
+          "audio": "music/Amir Tataloo/singles/01 - Amir Tataloo - Behesht.mp3",
+          "cover": "music/Amir Tataloo/singles/01 - Amir Tataloo - Behesht.auto.jpg"
         },
         {
-          "title": "Amir Tataloo - Jangale Tarik",
+          "title": "Amir Tataloo - Darvaghe",
           "artist": "Amir Tataloo",
-          "audio": "music/Amir Tataloo/singles/07 - Amir Tataloo - Jangale Tarik.mp3",
-          "cover": "music/Amir Tataloo/singles/07 - Amir Tataloo - Jangale Tarik.auto.jpg"
-        },
-        {
-          "title": "Amir Tataloo - Man Bahat Ghahram",
-          "artist": "Amir Tataloo",
-          "audio": "music/Amir Tataloo/singles/08 - Amir Tataloo - Man Bahat Ghahram.mp3",
-          "cover": "music/Amir Tataloo/singles/08 - Amir Tataloo - Man Bahat Ghahram.auto.jpg"
+          "audio": "music/Amir Tataloo/singles/01 - Amir Tataloo - Darvaghe.mp3",
+          "cover": "music/Amir Tataloo/singles/01 - Amir Tataloo - Darvaghe.auto.jpg"
         },
         {
           "title": "Amir Tataloo - Ba To",
@@ -724,12 +718,6 @@
           "artist": "Amir Tataloo",
           "audio": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.mp3",
           "cover": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.jpg"
-        },
-        {
-          "title": "Ye Chizi Begoo",
-          "artist": "Amir Tataloo",
-          "audio": "music/Amir Tataloo/singles/Amir Tataloo - Ye Chizi Begoo.mp3",
-          "cover": "music/Amir Tataloo/singles/Amir Tataloo - Ye Chizi Begoo.auto.jpg"
         }
       ],
       "albums": []
