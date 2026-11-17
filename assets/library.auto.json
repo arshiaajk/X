@@ -690,10 +690,46 @@
       ],
       "singles": [
         {
+          "title": "Amir Tataloo - Khabam Nemibare",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/02 - Amir Tataloo - Khabam Nemibare.mp3",
+          "cover": "music/Amir Tataloo/singles/02 - Amir Tataloo - Khabam Nemibare.auto.jpg"
+        },
+        {
+          "title": "Amir Tataloo - Jangale Tarik",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/07 - Amir Tataloo - Jangale Tarik.mp3",
+          "cover": "music/Amir Tataloo/singles/07 - Amir Tataloo - Jangale Tarik.auto.jpg"
+        },
+        {
+          "title": "Amir Tataloo - Man Bahat Ghahram",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/08 - Amir Tataloo - Man Bahat Ghahram.mp3",
+          "cover": "music/Amir Tataloo/singles/08 - Amir Tataloo - Man Bahat Ghahram.auto.jpg"
+        },
+        {
+          "title": "Amir Tataloo - Ba To",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/14 - Amir Tataloo - Ba To.mp3",
+          "cover": "music/Amir Tataloo/singles/14 - Amir Tataloo - Ba To.auto.jpg"
+        },
+        {
+          "title": "Amir Tataloo - Bezar Too Hale Khodam Basham",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/15 - Amir Tataloo - Bezar Too Hale Khodam Basham.mp3",
+          "cover": "music/Amir Tataloo/singles/15 - Amir Tataloo - Bezar Too Hale Khodam Basham.auto.jpg"
+        },
+        {
           "title": "Nagoo Na",
           "artist": "Amir Tataloo",
           "audio": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.mp3",
           "cover": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.jpg"
+        },
+        {
+          "title": "Ye Chizi Begoo",
+          "artist": "Amir Tataloo",
+          "audio": "music/Amir Tataloo/singles/Amir Tataloo - Ye Chizi Begoo.mp3",
+          "cover": "music/Amir Tataloo/singles/Amir Tataloo - Ye Chizi Begoo.auto.jpg"
         }
       ],
       "albums": []
