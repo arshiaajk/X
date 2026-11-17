@@ -20,8 +20,10 @@
     ۲. کاوری که خود فایل mp3 داخلش داره (ID3v2.2/2.3/2.4)
     ۳. منابع آنلاین، به ترتیب (هر کدوم پیدا نکرد نفر بعدی امتحان می‌شه):
          آهنگ و آلبوم:  Spotify (فقط با کلید) ← Apple Music (iTunes، بدون کلید)
-         خواننده:        Spotify ← کاور آلبوم‌های Apple Music (آخرین راه، چون Apple عکس خواننده نمیده)
-         عکس خواننده همیشه توی پوشه خود خواننده ذخیره می‌شه:  assets/music/<Artist>/photo.auto.*
+         عکس خواننده: فقط از پروفایل خود خواننده توی Spotify (Apple Music عکس خواننده نداره).
+           هیچ‌وقت کاور آهنگ یا آلبوم به‌جای عکس خواننده گذاشته نمی‌شه.
+           بدون کلید Spotify یا اگه پیدا نشد: خودت photo.jpg رو بذار توی پوشه خواننده
+           (محل ذخیره: assets/music/<Artist>/photo.auto.*)
        برای پیدا کردن، اسم‌ها از این‌ها جمع می‌شن:
          اسم پوشه، searchName، aliasهای library.json، و تگ‌های ID3 خود mp3ها (TPE1 / TIT2 / TALB)
          پس حتی اگه پوشه فارسی باشه ولی تگ فایل انگلیسی باشه، پیدا می‌شه.
@@ -44,7 +46,6 @@
     STRICT_COVERS=1          جستجوی فقط-با-اسم-آهنگ (تطبیق نرم) خاموش بشه
     COVER_SOURCES=itunes          فقط همین منبع استفاده بشه (spotify,itunes)
     ITUNES_COUNTRIES=us,de,gb     استورهای Apple Music که امتحان بشن (پیش‌فرض us,de)
-    NO_ARTIST_ALBUM_FALLBACK=1    کاور آلبوم رو به‌جای عکس خواننده (آخرین راه) استفاده نکنه
 
   اگه اسم پوشه خواننده فارسیه و توی سرویس‌ها انگلیسی ثبت شده، یکی از این دو کار رو بکن:
     - توی aliases همون خواننده تو library.json اسم انگلیسی‌ش رو بنویس
@@ -432,10 +433,7 @@ const PROVIDERS = {
     on: () => true,
     queries(kind, names, t) {
       const p = latinFirst(names), cs = itCountries();
-      if (kind === 'artist') {
-        if (env.NO_ARTIST_ALBUM_FALLBACK === '1') return [];
-        return dedupe(names.slice(0, 3)).map(n => ({ term: n, country: cs[0] }));
-      }
+      if (kind === 'artist') return [];   // Apple عکس خواننده نداره، کاور آلبوم هم جایگزینش نمی‌شه
       return [...cs.map(c => ({ term: `${p} ${t}`, country: c })), { term: t, country: cs[0] }];
     },
     async fetch(kind, q) {
@@ -456,7 +454,7 @@ const PROVIDERS = {
 const ORDER = {
   track:  ['spotify', 'itunes'],
   album:  ['spotify', 'itunes'],
-  artist: ['spotify', 'itunes']
+  artist: ['spotify']   // عکس خواننده فقط از پروفایل خود خواننده؛ هیچ‌وقت کاور آلبوم/آهنگ نمی‌شه
 };
 const ONLY = (env.COVER_SOURCES || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 const enabled = n => !!PROVIDERS[n] && PROVIDERS[n].on() && (!ONLY.length || ONLY.includes(n));
@@ -700,7 +698,9 @@ async function main() {
     }
 
     // ۲-ب) عکس خواننده
-    if (online) {
+    if (online && !enabled('spotify')) {
+      console.log('Artist photos skipped: they come only from Spotify artist profiles (set SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET), or put photo.jpg in the artist folder yourself.');
+    } else if (online) {
       for (const dir of artistDirs()) {
         const artist = dir.name, artistPath = path.join(musicDir, artist);
         if (findLocalPhoto(artistPath, artist)) continue;
