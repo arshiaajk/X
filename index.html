@@ -823,6 +823,12 @@ function renderArtist(a,list){
 /* ---------- motion: tilt (pointer / gyro). Only visible cards are touched, and nothing runs while scrolling ---------- */
 (function(){
     if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+    /* old / weak phones: no motion at all. The web cannot read a phone's release year, so we use proxies:
+       OS older than iOS 15 / Android 11 (2021), low RAM or few cores on Android, or a previous slow-frame test. */
+    const ua=navigator.userAgent,nm=ua.match(/Android (\d+)/),im=/iPhone|iPad|iPod/.test(ua)&&ua.match(/OS (\d+)_/);
+    let flag=0;try{flag=+localStorage.getItem("arsx-nomotion")||0}catch(e){}
+    if((im&&+im[1]<15)||(nm&&(+nm[1]<11||(navigator.deviceMemory&&navigator.deviceMemory<=3)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)))||(flag&&Date.now()-flag<14*864e5))return;
+    let off=false,lastF=0;const dts=[];
     const listEl=$("artistList"),sheetEl=$("sheet"),panelEl=sheetEl.querySelector(".sheet-panel");
     let active=false,tx=0,ty=0,sx=0,sy=0,x=0,y=0,px=9,py=9,raf=0,last=0,on=false,denied=false,scrolling=false,st,oriN=0,src="-",base=null;
     const live=new Set(),cl=v=>Math.max(-1,Math.min(1,v)),act=()=>{if(!active){active=true;document.documentElement.classList.add("motion")}};
@@ -833,9 +839,22 @@ function renderArtist(a,list){
         else{live.delete(g);g.classList.remove("live");g.style.removeProperty("--mx");g.style.removeProperty("--my")}
     }),{rootMargin:"60px"});
     new MutationObserver(()=>listEl.querySelectorAll(".artist-group:not([data-o])").forEach(g=>{g.dataset.o=1;io.observe(g)})).observe(listEl,{childList:true});
+    const slow=()=>{ // device can't keep up: switch motion off for good (14 days)
+        off=true;
+        try{localStorage.setItem("arsx-nomotion",String(Date.now()))}catch(e){}
+        document.documentElement.classList.remove("motion");
+        live.forEach(g=>{g.style.removeProperty("--mx");g.style.removeProperty("--my")});
+        panelEl.style.removeProperty("--mx");panelEl.style.removeProperty("--my");
+        removeEventListener("deviceorientation",onOri);removeEventListener("devicemotion",onMot);
+    };
     const tick=t=>{
         raf=0;
-        if(frozen())return;
+        if(frozen()){lastF=0;return}
+        if(lastF&&t-lastF<100){
+            dts.push(t-lastF);
+            if(dts.length>=45){dts.sort((a,b)=>a-b);if(dts[22]>34)return slow();dts.length=0}
+        }
+        lastF=t;
         sx*=.93;sy*=.93;
         const gx=cl(tx+sx),gy=cl(ty+sy);
         x+=(gx-x)*.2;y+=(gy-y)*.2;
@@ -847,7 +866,7 @@ function renderArtist(a,list){
         }
         if(moved||Math.abs(gx-x)>.002||Math.abs(gy-y)>.002||Math.abs(sx)>.002||Math.abs(sy)>.002)raf=requestAnimationFrame(tick);
     };
-    const kick=()=>{if(!raf&&!frozen())raf=requestAnimationFrame(tick)};
+    const kick=()=>{if(!raf&&!off&&!frozen())raf=requestAnimationFrame(tick)};
     const resync=()=>{
         px=9;py=9;
         if(!sheetEl.classList.contains("show")){panelEl.style.removeProperty("--mx");panelEl.style.removeProperty("--my")}
