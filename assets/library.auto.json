@@ -385,13 +385,13 @@
           "title": "Dele Divooneh",
           "artist": "Hayedeh",
           "audio": "music/Hayedeh/singles/Haydeh - Dele Divooneh (Remixbaz.com) (320).mp3",
-          "cover": null
+          "cover": "music/Hayedeh/singles/Haydeh - Dele Divooneh (Remixbaz.com) (320).auto.jpg"
         },
         {
           "title": "Gol Sangam",
           "artist": "Hayedeh",
           "audio": "music/Hayedeh/singles/Haydeh - Gol Sangam (Remixbaz.com) (320).mp3",
-          "cover": null
+          "cover": "music/Hayedeh/singles/Haydeh - Gol Sangam (Remixbaz.com) (320).auto.jpg"
         }
       ],
       "albums": []
@@ -473,7 +473,7 @@
     },
     {
       "name": "Vinak",
-      "photo": null,
+      "photo": "music/Vinak/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Vinak",
       "singlesFolder": "music/Vinak/singles",
@@ -486,7 +486,7 @@
     },
     {
       "name": "TM Bax",
-      "photo": null,
+      "photo": "music/TM Bax/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/TM Bax",
       "singlesFolder": "music/TM Bax/singles",
@@ -598,7 +598,7 @@
     },
     {
       "name": "Sadegh",
-      "photo": null,
+      "photo": "music/Sadegh/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Sadegh",
       "singlesFolder": "music/Sadegh/singles",
@@ -611,7 +611,7 @@
     },
     {
       "name": "Ho3ein",
-      "photo": null,
+      "photo": "music/Ho3ein/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Ho3ein",
       "singlesFolder": "music/Ho3ein/singles",
@@ -857,7 +857,7 @@
     },
     {
       "name": "Catchybeatz",
-      "photo": null,
+      "photo": "music/Catchybeatz/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Catchybeatz",
       "singlesFolder": "music/Catchybeatz/singles",
@@ -870,7 +870,7 @@
     },
     {
       "name": "Chvrsi",
-      "photo": null,
+      "photo": "music/Chvrsi/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Chvrsi",
       "singlesFolder": "music/Chvrsi/singles",
@@ -994,7 +994,7 @@
     },
     {
       "name": "Bahram",
-      "photo": null,
+      "photo": "music/Bahram/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Bahram",
       "singlesFolder": "music/Bahram/singles",
@@ -1333,7 +1333,7 @@
     },
     {
       "name": "Hoodadk4",
-      "photo": null,
+      "photo": "music/Hoodadk4/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Hoodadk4",
       "singlesFolder": "music/Hoodadk4/singles",
@@ -1342,7 +1342,56 @@
         "Hodadka",
         "هودادکا"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Trauma",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Amirsa x Hoodadk4 - Trauma.mp3",
+          "cover": "music/Hoodadk4/singles/Amirsa x Hoodadk4 - Trauma.auto.jpg"
+        },
+        {
+          "title": "Begin Berizan",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hodadk4 x Khalseh - Begin Berizan.mp3",
+          "cover": null
+        },
+        {
+          "title": "Best In The Game",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hoodadk4 - Best In The Game.mp3",
+          "cover": "music/Hoodadk4/singles/Hoodadk4 - Best In The Game.auto.jpg"
+        },
+        {
+          "title": "Cook Up",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hoodadk4 - Cook Up.mp3",
+          "cover": "music/Hoodadk4/singles/Hoodadk4 - Cook Up.auto.jpg"
+        },
+        {
+          "title": "Deli Bastam (Live Version)",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hoodadk4 - Deli Bastam (Live Version).mp3",
+          "cover": "music/Hoodadk4/singles/Hoodadk4 - Deli Bastam (Live Version).auto.jpg"
+        },
+        {
+          "title": "Gun Lazem",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hoodadk4 - Gun Lazem.mp3",
+          "cover": "music/Hoodadk4/singles/Hoodadk4 - Gun Lazem.auto.jpg"
+        },
+        {
+          "title": "Mibakhsham",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hoodadk4 - Mibakhsham.mp3",
+          "cover": "music/Hoodadk4/singles/Hoodadk4 - Mibakhsham.auto.jpg"
+        },
+        {
+          "title": "Begid Berizan",
+          "artist": "Hoodadk4",
+          "audio": "music/Hoodadk4/singles/Hoodadk4 x Sepehr Khalse - Begid Berizan.mp3",
+          "cover": "music/Hoodadk4/singles/Hoodadk4 x Sepehr Khalse - Begid Berizan.auto.jpg"
+        }
+      ],
       "albums": []
     },
     {
@@ -1478,7 +1527,7 @@
     },
     {
       "name": "Pidar",
-      "photo": null,
+      "photo": "music/Pidar/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Pidar",
       "singlesFolder": "music/Pidar/singles",
@@ -1491,7 +1540,7 @@
     },
     {
       "name": "Young Sudden",
-      "photo": null,
+      "photo": "music/Young Sudden/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Young Sudden",
       "singlesFolder": "music/Young Sudden/singles",
@@ -1506,7 +1555,7 @@
     },
     {
       "name": "Mersad",
-      "photo": null,
+      "photo": "music/Mersad/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Mersad",
       "singlesFolder": "music/Mersad/singles",
@@ -1520,7 +1569,7 @@
     },
     {
       "name": "Shayea",
-      "photo": null,
+      "photo": "music/Shayea/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Shayea",
       "singlesFolder": "music/Shayea/singles",
@@ -1537,7 +1586,7 @@
     },
     {
       "name": "Halim",
-      "photo": null,
+      "photo": "music/Halim/photo.auto.jpg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Halim",
       "singlesFolder": "music/Halim/singles",
@@ -1551,7 +1600,7 @@
     },
     {
       "name": "Mahyar",
-      "photo": null,
+      "photo": "music/Mahyar/photo.auto.jpg",
       "description": "ARTIST",
       "folder": "music/Mahyar",
       "singlesFolder": "music/Mahyar/singles",
