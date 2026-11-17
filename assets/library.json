@@ -505,19 +505,6 @@
       ]
     },
     {
-      "name": "Ali Janak",
-      "photo": "",
-      "description": "ARTIST",
-      "folder": "music/Ali Janak",
-      "singlesFolder": "music/Ali Janak/singles",
-      "albumsFolder": "music/Ali Janak/albums",
-      "singles": [],
-      "albums": [],
-      "aliases": [
-        "علی جانک"
-      ]
-    },
-    {
       "name": "Metallica",
       "photo": "",
       "description": "AMERICAN HEAVY METAL BAND",
@@ -736,6 +723,75 @@
       "aliases": [
         "یانگ سادن",
         "یانگ ساده"
+      ]
+    },
+    {
+      "name": "Mersad",
+      "photo": "",
+      "description": "ARTIST",
+      "folder": "music/Mersad",
+      "singlesFolder": "music/Mersad/singles",
+      "albumsFolder": "music/Mersad/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "مرصاد",
+        "مرساد"
+      ]
+    },
+    {
+      "name": "Mamreza Shaye",
+      "photo": "",
+      "description": "ARTIST",
+      "folder": "music/Mamreza Shaye",
+      "singlesFolder": "music/Mamreza Shaye/singles",
+      "albumsFolder": "music/Mamreza Shaye/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "ممرضا شایع",
+        "ممرضا"
+      ]
+    },
+    {
+      "name": "Halim",
+      "photo": "",
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Halim",
+      "singlesFolder": "music/Halim/singles",
+      "albumsFolder": "music/Halim/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "هلیم",
+        "Helim"
+      ]
+    },
+    {
+      "name": "Mahyar",
+      "photo": "",
+      "description": "ARTIST",
+      "folder": "music/Mahyar",
+      "singlesFolder": "music/Mahyar/singles",
+      "albumsFolder": "music/Mahyar/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "مهیار"
+      ]
+    },
+    {
+      "name": "OST",
+      "photo": "",
+      "description": "SOUNDTRACKS",
+      "folder": "music/OST",
+      "singlesFolder": "music/OST/singles",
+      "albumsFolder": "music/OST/albums",
+      "singles": [],
+      "albums": [],
+      "aliases": [
+        "موسیقی متن",
+        "Soundtrack"
       ]
     }
   ]
