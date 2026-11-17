@@ -423,7 +423,8 @@
       "singles": [],
       "albums": [],
       "aliases": [
-        "سورنا"
+        "سورنا",
+        "Ali Sorena"
       ]
     },
     {
@@ -712,17 +713,18 @@
       ]
     },
     {
-      "name": "Young Sadden",
+      "name": "Young Sudden",
       "photo": "",
       "description": "IRANIAN HIP-HOP ARTIST",
-      "folder": "music/Young Sadden",
-      "singlesFolder": "music/Young Sadden/singles",
-      "albumsFolder": "music/Young Sadden/albums",
+      "folder": "music/Young Sudden",
+      "singlesFolder": "music/Young Sudden/singles",
+      "albumsFolder": "music/Young Sudden/albums",
       "singles": [],
       "albums": [],
       "aliases": [
+        "یانگ ساده",
         "یانگ سادن",
-        "یانگ ساده"
+        "Young Sadden"
       ]
     },
     {
@@ -740,17 +742,20 @@
       ]
     },
     {
-      "name": "Mamreza Shaye",
+      "name": "Shayea",
       "photo": "",
       "description": "ARTIST",
-      "folder": "music/Mamreza Shaye",
-      "singlesFolder": "music/Mamreza Shaye/singles",
-      "albumsFolder": "music/Mamreza Shaye/albums",
+      "folder": "music/Shayea",
+      "singlesFolder": "music/Shayea/singles",
+      "albumsFolder": "music/Shayea/albums",
       "singles": [],
       "albums": [],
       "aliases": [
+        "شایع",
+        "محمدرضا شایع",
         "ممرضا شایع",
-        "ممرضا"
+        "Mamreza Shayea",
+        "Mohammadreza Shayea"
       ]
     },
     {
