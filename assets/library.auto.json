@@ -1428,7 +1428,50 @@
       "aliases": [
         "مکفیان"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Blueberry",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - Blueberry (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - Blueberry (320).auto.jpg"
+        },
+        {
+          "title": "Kee",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - Kee (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - Kee (320).auto.jpg"
+        },
+        {
+          "title": "Lovinomore",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - Lovinomore (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - Lovinomore (320).auto.jpg"
+        },
+        {
+          "title": "Mcfian",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - Mcfian (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - Mcfian (320).auto.jpg"
+        },
+        {
+          "title": "Missed Call",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - Missed Call (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - Missed Call (320).auto.jpg"
+        },
+        {
+          "title": "NÄH (Pro Max)",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - NÄH (Pro Max) (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - NÄH (Pro Max) (320).auto.jpg"
+        },
+        {
+          "title": "Woa",
+          "artist": "Macfian",
+          "audio": "music/Macfian/singles/Nazli Mcfian - Woa (320).mp3",
+          "cover": "music/Macfian/singles/Nazli Mcfian - Woa (320).auto.jpg"
+        }
+      ],
       "albums": []
     },
     {
