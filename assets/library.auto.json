@@ -91,7 +91,7 @@
     },
     {
       "name": "Hiphopologist",
-      "photo": "music/Hiphopologist/photo.jpg",
+      "photo": "IMG_5079.jpeg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Hiphopologist",
       "singlesFolder": "music/Hiphopologist/singles",
@@ -303,7 +303,7 @@
     },
     {
       "name": "Sajad Shahi",
-      "photo": "music/Sajad Shahi/photo.jpg",
+      "photo": "IMG_5080.jpeg",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Sajad Shahi",
       "singlesFolder": "music/Sajad Shahi/singles",
@@ -513,7 +513,7 @@
           "title": "Shot 4 Me",
           "artist": "TJ",
           "audio": "music/TJ/singles/TJ - Shot 4 Me.mp3",
-          "cover": null
+          "cover": "music/TJ/singles/TJ - Shot 4 Me.auto.jpg"
         }
       ],
       "albums": []
@@ -699,7 +699,7 @@
           "title": "Amir-Tataloo-Donya-abanmusics.com-320",
           "artist": "Amir Tataloo",
           "audio": "music/Amir Tataloo/singles/Amir-Tataloo-Donya-abanmusics.com-320.mp3",
-          "cover": null
+          "cover": "music/Amir Tataloo/singles/Amir-Tataloo-Donya-abanmusics.com-320.auto.jpg"
         }
       ],
       "albums": []
