@@ -694,12 +694,6 @@
           "artist": "Amir Tataloo",
           "audio": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.mp3",
           "cover": "music/Amir Tataloo/singles/Amir Tataloo - Nagoo Na.jpg"
-        },
-        {
-          "title": "Amir-Tataloo-Donya-abanmusics.com-320",
-          "artist": "Amir Tataloo",
-          "audio": "music/Amir Tataloo/singles/Amir-Tataloo-Donya-abanmusics.com-320.mp3",
-          "cover": "music/Amir Tataloo/singles/Amir-Tataloo-Donya-abanmusics.com-320.auto.jpg"
         }
       ],
       "albums": []
@@ -947,19 +941,6 @@
       "albumsFolder": "music/Bahram/albums",
       "aliases": [
         "بهرام"
-      ],
-      "singles": [],
-      "albums": []
-    },
-    {
-      "name": "Ali Janak",
-      "photo": null,
-      "description": "ARTIST",
-      "folder": "music/Ali Janak",
-      "singlesFolder": "music/Ali Janak/singles",
-      "albumsFolder": "music/Ali Janak/albums",
-      "aliases": [
-        "علی جانک"
       ],
       "singles": [],
       "albums": []
@@ -1415,6 +1396,75 @@
       "aliases": [
         "یانگ سادن",
         "یانگ ساده"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Mersad",
+      "photo": null,
+      "description": "ARTIST",
+      "folder": "music/Mersad",
+      "singlesFolder": "music/Mersad/singles",
+      "albumsFolder": "music/Mersad/albums",
+      "aliases": [
+        "مرصاد",
+        "مرساد"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Mamreza Shaye",
+      "photo": null,
+      "description": "ARTIST",
+      "folder": "music/Mamreza Shaye",
+      "singlesFolder": "music/Mamreza Shaye/singles",
+      "albumsFolder": "music/Mamreza Shaye/albums",
+      "aliases": [
+        "ممرضا شایع",
+        "ممرضا"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Halim",
+      "photo": null,
+      "description": "IRANIAN HIP-HOP ARTIST",
+      "folder": "music/Halim",
+      "singlesFolder": "music/Halim/singles",
+      "albumsFolder": "music/Halim/albums",
+      "aliases": [
+        "هلیم",
+        "Helim"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "Mahyar",
+      "photo": null,
+      "description": "ARTIST",
+      "folder": "music/Mahyar",
+      "singlesFolder": "music/Mahyar/singles",
+      "albumsFolder": "music/Mahyar/albums",
+      "aliases": [
+        "مهیار"
+      ],
+      "singles": [],
+      "albums": []
+    },
+    {
+      "name": "OST",
+      "photo": null,
+      "description": "SOUNDTRACKS",
+      "folder": "music/OST",
+      "singlesFolder": "music/OST/singles",
+      "albumsFolder": "music/OST/albums",
+      "aliases": [
+        "موسیقی متن",
+        "Soundtrack"
       ],
       "singles": [],
       "albums": []
