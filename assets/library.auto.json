@@ -611,7 +611,7 @@
     },
     {
       "name": "Ho3ein",
-      "photo": "music/Ho3ein/photo.auto.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Ho3ein",
       "singlesFolder": "music/Ho3ein/singles",
@@ -994,7 +994,7 @@
     },
     {
       "name": "Bahram",
-      "photo": "music/Bahram/photo.auto.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Bahram",
       "singlesFolder": "music/Bahram/singles",
