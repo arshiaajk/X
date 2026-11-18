@@ -60,6 +60,7 @@ main{max-width:900px;margin:auto}
 .track-info{flex:1;min-width:0}
 .track-info h4{font-size:14px;margin-bottom:7px}
 .track-info p{font-size:10px;color:#888;margin-bottom:12px}
+.plays{font-variant-numeric:tabular-nums;letter-spacing:1.5px;text-transform:uppercase}
 .bar{display:flex;align-items:center;gap:12px}
 .time{font-size:10px;color:#888;min-width:78px;text-align:right;font-variant-numeric:tabular-nums}
 .album-heading{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:30px 0 10px;padding-top:20px;border-top:1px solid rgba(0,0,0,.08)}
@@ -358,6 +359,27 @@ const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className
 const url=p=>p?"./assets/"+String(p).split("/").map(encodeURIComponent).join("/"):"";
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
 const fill=r=>r.style.setProperty("--f",r.value/1000);
+
+/* ---------- play counts ---------- */
+const COUNT_URL="https://arsx-8585-default-rtdb.europe-west1.firebasedatabase.app/plays"; // empty = this browser only
+const plays={};
+const hash=s=>{let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0,c;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)};
+const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,"")+"M":n>=1e4?(n/1e3).toFixed(1).replace(/\.0$/,"")+"K":String(n);
+const getPlays=t=>plays[t._k]||0;
+const showPlays=t=>{const u=t._ui;if(u&&u.plays){const n=getPlays(t);u.plays.textContent=" · "+fmtN(n)+" plays"}};
+(async()=>{
+    try{
+        if(COUNT_URL){const r=await fetch(COUNT_URL+".json",{cache:"no-cache"});if(r.ok)Object.assign(plays,(await r.json())||{})}
+        else Object.assign(plays,JSON.parse(localStorage.getItem("arsx-plays")||"{}"));
+    }catch(e){}
+})();
+function countPlay(t){
+    plays[t._k]=getPlays(t)+1;showPlays(t);
+    if(COUNT_URL){
+        fetch(COUNT_URL+"/"+t._k+".json",{method:"PUT",keepalive:true,body:JSON.stringify({".sv":{"increment":1}})}).catch(()=>{});
+    }else{try{localStorage.setItem("arsx-plays",JSON.stringify(plays))}catch(e){}}
+}
+
 const pic=(cls,p,alt)=>{
     const i=el("img",cls);i.alt=alt;i.loading="lazy";i.decoding="async";
     if(p)i.src=url(p);
@@ -392,7 +414,7 @@ function rowReset(t){
 }
 function load(t){
     if(cur)rowReset(cur.t);
-    cur={t};
+    cur={t,counted:false};
     if(t._ui)t._ui.rng.disabled=false;
     miniRange.value=0;fill(miniRange);fpRange.value=0;fill(fpRange);
     A.src=url(t.audio);A.play().catch(()=>{});
@@ -489,12 +511,13 @@ A.addEventListener("pause",()=>{
 });
 A.addEventListener("ended",()=>{
     if(!cur)return;
-    if(rep===2){A.currentTime=0;A.play();return}
+    if(rep===2){cur.counted=false;A.currentTime=0;A.play();return}
     if(!step(1,true)){rowReset(cur.t);miniRange.value=0;fill(miniRange);fpRange.value=0;fill(fpRange);updateUI()}
 });
 A.addEventListener("error",()=>{if(cur){rowReset(cur.t);updateUI()}});
 A.addEventListener("timeupdate",()=>{
     if(!cur||!isFinite(A.duration)||!A.duration)return;
+    if(!cur.counted&&A.currentTime>=5){cur.counted=true;countPlay(cur.t)}
     const v=A.currentTime/A.duration*1000,u=cur.t._ui;
     if(u){u.rng.value=v;fill(u.rng);u.time.textContent=fmt(A.currentTime)+" / "+fmt(A.duration)}
     if(!miniDrag){miniRange.value=v;fill(miniRange)}
@@ -543,7 +566,8 @@ function createTrack(t,q){
     const rng=el("input");rng.type="range";rng.min=0;rng.max=1000;rng.value=0;rng.disabled=true;rng.setAttribute("aria-label","Seek "+t.title);
     const time=el("span","time","0:00");
     bar.append(rng,time);
-    info.append(el("h4","",t.title),el("p","",t.artist||""),bar);
+    const ap=el("p","",t.artist||""),pl=el("span","plays");ap.appendChild(pl);
+    info.append(el("h4","",t.title),ap,bar);
 
     const mk=(cls,txt,label)=>{const b=el("button",cls,txt);b.type="button";b.setAttribute("aria-label",label);return b};
     const back=mk("","−10","Back 10 seconds"),play=mk("play","▶","Play "+t.title),fwd=mk("","+10","Forward 10 seconds");
@@ -552,7 +576,7 @@ function createTrack(t,q){
     dl.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
     const ctrl=el("div","ctrl");ctrl.append(back,play,fwd,dl);
 
-    t._ui={play,rng,time};
+    t._ui={play,rng,time,plays:pl};showPlays(t);
     const mine=()=>cur&&cur.t===t;
     if(mine()){ // row re-created while this track is playing
         rng.disabled=false;play.textContent=A.paused?"▶":"❚❚";
@@ -646,7 +670,7 @@ function merge(lists){
     return [...map.values()];
 }
 function prep(a){
-    const one=(t,b)=>{t.artist=t.artist||a.name;t.cover=t.cover||(b&&b.cover)||null;t._n=norm(t.title);t._an=norm(t.artist)};
+    const one=(t,b)=>{t.artist=t.artist||a.name;t.cover=t.cover||(b&&b.cover)||null;t._n=norm(t.title);t._an=norm(t.artist);t._k=hash(String(t.audio))};
     a.singles.forEach(t=>one(t,null));
     a.albums.forEach(b=>{b.tracks=b.tracks||[];b._n=norm(b.title);b.tracks.forEach(t=>one(t,b))});
     a._names=[a.name,...(a.aliases||[])].map(norm);
@@ -666,10 +690,14 @@ function openSheet(a){
     else{sheetPhoto.removeAttribute("src");sheetPhoto.style.visibility="hidden"}
     $("sheetName").textContent=a.name;$("sheetDesc").textContent=a.description||"ARTIST";
     const mkPane=(cls,empty,arr)=>{const p=el("div","pane "+cls);if(!arr.length)p.appendChild(el("div","empty",empty));return p};
-    const sp=mkPane("singles","NO SINGLES YET",a.singles),ap=mkPane("albums","NO ALBUMS YET",a.albums);
+    const byP=(x,y)=>getPlays(y)-getPlays(x); // stable sort: ties keep their original order
+    const singles=[...a.singles].sort(byP);
+    const albTotal=b=>b.tracks.reduce((s,t)=>s+getPlays(t),0);
+    const albums=[...a.albums].sort((x,y)=>albTotal(y)-albTotal(x));
+    const sp=mkPane("singles","NO SINGLES YET",singles),ap=mkPane("albums","NO ALBUMS YET",albums);
     const f=document.createDocumentFragment();
-    a.singles.forEach(t=>f.appendChild(createTrack(t,a.singles)));sp.appendChild(f);
-    a.albums.forEach(b=>ap.appendChild(createAlbum(b)));
+    singles.forEach(t=>f.appendChild(createTrack(t,singles)));sp.appendChild(f);
+    albums.forEach(b=>ap.appendChild(createAlbum(b)));
     sheetBody.replaceChildren(sp,ap);
     setTab(a.singles.length||!a.albums.length?"singles":"albums");
     sheetScroll.scrollTop=0;
