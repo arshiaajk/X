@@ -245,9 +245,7 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
 <body>
 <header>
     <button type="button" class="lib-btn" id="libBtn" aria-label="Open library">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.3l7.8-7.8 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
         <span>LIBRARY</span>
-        <b class="lib-count" id="libCount" hidden>0</b>
     </button>
     <div class="logo" aria-label="ARSX"><span class="l" style="--i:0" aria-hidden="true">A</span><span class="l" style="--i:1" aria-hidden="true">R</span><span class="l" style="--i:2" aria-hidden="true">S</span><span class="l" style="--i:3" aria-hidden="true">X</span></div>
 </header>
@@ -399,7 +397,7 @@ function syncLikes(){
         const on=set.has(b.dataset.k);
         b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));
     });
-    const c=$("libCount");c.textContent=String(profile.likes.length);c.hidden=!profile.likes.length;
+    
 }
 function toggleLike(t,btn){
     const i=profile.likes.indexOf(t._k);
