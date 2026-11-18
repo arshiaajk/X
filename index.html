@@ -420,7 +420,7 @@ const COUNT_URL="https://arsx-8585-default-rtdb.europe-west1.firebasedatabase.ap
 const plays={};
 const hash=s=>{let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0,c;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return(4294967296*(2097151&h2)+(h1>>>0)).toString(36)};
 const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,"")+"M":n>=1e4?(n/1e3).toFixed(1).replace(/\.0$/,"")+"K":String(n);
-const getPlays=t=>plays[t._k]||0;
+const getPlays=t=>(plays[t._k]||0)+(t._ko&&t._ko!==t._k?(plays[t._ko]||0):0); // new stable key + old path-based key (so old counts are kept)
 const showPlays=t=>{const u=t._ui;if(u&&u.plays){const n=getPlays(t);u.plays.textContent=" · "+fmtN(n)+" plays"}};
 (async()=>{
     try{
@@ -429,7 +429,7 @@ const showPlays=t=>{const u=t._ui;if(u&&u.plays){const n=getPlays(t);u.plays.tex
     }catch(e){}
 })();
 function countPlay(t){
-    plays[t._k]=getPlays(t)+1;showPlays(t);
+    plays[t._k]=(plays[t._k]||0)+1;showPlays(t);
     if(COUNT_URL){
         fetch(COUNT_URL+"/"+t._k+".json",{method:"PUT",keepalive:true,body:JSON.stringify({".sv":{"increment":1}})}).catch(()=>{});
     }else{try{localStorage.setItem("arsx-plays",JSON.stringify(plays))}catch(e){}}
@@ -730,7 +730,7 @@ function merge(lists){
     return [...map.values()];
 }
 function prep(a){
-    const one=(t,b)=>{t.artist=t.artist||a.name;t.cover=t.cover||(b&&b.cover)||null;t._n=norm(t.title);t._an=norm(t.artist);t._k=hash(String(t.audio));if(!byKey.has(t._k))byKey.set(t._k,t)};
+    const one=(t,b)=>{t.artist=t.artist||a.name;t.cover=t.cover||(b&&b.cover)||null;t._n=norm(t.title);t._an=norm(t.artist);t._ko=hash(String(t.audio)); /* old key: file path */ t._k=hash("v2|"+(t.id?"id:"+t.id:[t.artist,b?b.title:"",t.title].join("|").trim().toLowerCase())); /* stable key: survives moving/renaming files */ if(!byKey.has(t._k))byKey.set(t._k,t);if(!byKey.has(t._ko))byKey.set(t._ko,t)};
     a.singles.forEach(t=>one(t,null));
     a.albums.forEach(b=>{b.tracks=b.tracks||[];b._n=norm(b.title);b.tracks.forEach(t=>one(t,b))});
     a._names=[a.name,...(a.aliases||[])].map(norm);
@@ -823,7 +823,7 @@ function renderArtist(a,list){
 
     artists.forEach(prep);
     // drop liked songs whose files no longer exist in the archive
-    if(byKey.size){const n=profile.likes.length;profile.likes=profile.likes.filter(k=>byKey.has(k));if(profile.likes.length!==n)saveProfile()}
+    if(byKey.size){profile.likes=[...new Set(profile.likes.map(k=>{const t=byKey.get(k);return t?t._k:k}))];const n=profile.likes.length+1;profile.likes=profile.likes.filter(k=>byKey.has(k));if(profile.likes.length!==n)saveProfile()}
     syncLikes();
     const items=artists.map(a=>{try{return renderArtist(a,list)}catch(err){console.error("Bad artist entry:",a&&a.name,err);return null}}).filter(Boolean);
     const noRes=el("div","empty","");noRes.style.display="none";
