@@ -522,7 +522,7 @@
     },
     {
       "name": "Vinak",
-      "photo": null,
+      "photo": "music/Vinak/Photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Vinak",
       "singlesFolder": "music/Vinak/singles",
@@ -535,7 +535,7 @@
     },
     {
       "name": "TM Bax",
-      "photo": null,
+      "photo": "music/TM Bax/Photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/TM Bax",
       "singlesFolder": "music/TM Bax/singles",
@@ -647,7 +647,7 @@
     },
     {
       "name": "Sadegh",
-      "photo": null,
+      "photo": "music/Sadegh/photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Sadegh",
       "singlesFolder": "music/Sadegh/singles",
@@ -660,7 +660,7 @@
     },
     {
       "name": "Ho3ein",
-      "photo": null,
+      "photo": "music/Ho3ein/photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Ho3ein",
       "singlesFolder": "music/Ho3ein/singles",
@@ -930,7 +930,7 @@
     },
     {
       "name": "Catchybeatz",
-      "photo": null,
+      "photo": "music/Catchybeatz/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Catchybeatz",
       "singlesFolder": "music/Catchybeatz/singles",
@@ -1067,7 +1067,7 @@
     },
     {
       "name": "Bahram",
-      "photo": null,
+      "photo": "music/Bahram/Photo.JPG",
       "description": "ARTIST",
       "folder": "music/Bahram",
       "singlesFolder": "music/Bahram/singles",
@@ -1406,7 +1406,7 @@
     },
     {
       "name": "Hoodadk4",
-      "photo": null,
+      "photo": "music/Hoodadk4/Photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Hoodadk4",
       "singlesFolder": "music/Hoodadk4/singles",
@@ -1600,7 +1600,7 @@
     },
     {
       "name": "Pidar",
-      "photo": null,
+      "photo": "music/Pidar/Photo.JPG",
       "description": "ARTIST",
       "folder": "music/Pidar",
       "singlesFolder": "music/Pidar/singles",
@@ -1613,7 +1613,7 @@
     },
     {
       "name": "Young Sudden",
-      "photo": null,
+      "photo": "music/Young Sudden/Photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Young Sudden",
       "singlesFolder": "music/Young Sudden/singles",
@@ -1628,7 +1628,7 @@
     },
     {
       "name": "Mersad",
-      "photo": null,
+      "photo": "music/Mersad/Photo.JPG",
       "description": "ARTIST",
       "folder": "music/Mersad",
       "singlesFolder": "music/Mersad/singles",
@@ -1685,7 +1685,7 @@
     },
     {
       "name": "Shayea",
-      "photo": null,
+      "photo": "music/Shayea/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Shayea",
       "singlesFolder": "music/Shayea/singles",
@@ -1757,7 +1757,7 @@
     },
     {
       "name": "Heliyom",
-      "photo": null,
+      "photo": "music/Heliyom/photo.JPG",
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Heliyom",
       "singlesFolder": "music/Heliyom/singles",
@@ -1771,7 +1771,7 @@
     },
     {
       "name": "Mahyar",
-      "photo": "music/Mahyar/photo.auto.jpg",
+      "photo": "music/Mahyar/photo.JPG",
       "description": "ARTIST",
       "folder": "music/Mahyar",
       "singlesFolder": "music/Mahyar/singles",
@@ -1784,7 +1784,7 @@
     },
     {
       "name": "OST",
-      "photo": null,
+      "photo": "music/OST/Photo.JPG",
       "description": "SOUNDTRACKS",
       "folder": "music/OST",
       "singlesFolder": "music/OST/singles",
