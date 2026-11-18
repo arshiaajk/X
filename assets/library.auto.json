@@ -1626,6 +1626,12 @@
       ],
       "singles": [
         {
+          "title": "Telo",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Ahang - Telo.mp3",
+          "cover": "music/Shayea/singles/Ahang - Telo.auto.jpg"
+        },
+        {
           "title": "Seyl 2",
           "artist": "Shayea",
           "audio": "music/Shayea/singles/Mehrad Hidden & Shayea - Seyl 2.mp3",
@@ -1638,10 +1644,40 @@
           "cover": "music/Shayea/singles/Shayea - Asabani 2.auto.jpg"
         },
         {
+          "title": "Asabani",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - Asabani.mp3",
+          "cover": "music/Shayea/singles/Shayea - Asabani.auto.jpg"
+        },
+        {
+          "title": "Az Sefr",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - Az Sefr.mp3",
+          "cover": "music/Shayea/singles/Shayea - Az Sefr.auto.jpg"
+        },
+        {
           "title": "Belataklif",
           "artist": "Shayea",
           "audio": "music/Shayea/singles/Shayea - Belataklif.mp3",
           "cover": "music/Shayea/singles/Shayea - Belataklif.auto.jpg"
+        },
+        {
+          "title": "Ghool",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - Ghool.mp3",
+          "cover": "music/Shayea/singles/Shayea - Ghool.auto.jpg"
+        },
+        {
+          "title": "old",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - old.mp3",
+          "cover": "music/Shayea/singles/Shayea - old.auto.jpg"
+        },
+        {
+          "title": "To Ragi",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - To Ragi.mp3",
+          "cover": "music/Shayea/singles/Shayea - To Ragi.auto.jpg"
         }
       ],
       "albums": []
