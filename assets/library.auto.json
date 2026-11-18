@@ -1527,7 +1527,7 @@
     },
     {
       "name": "Pidar",
-      "photo": "music/Pidar/photo.auto.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Pidar",
       "singlesFolder": "music/Pidar/singles",
@@ -1624,7 +1624,26 @@
         "Mamreza Shayea",
         "Mohammadreza Shayea"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Seyl 2",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Mehrad Hidden & Shayea - Seyl 2.mp3",
+          "cover": "music/Shayea/singles/Mehrad Hidden & Shayea - Seyl 2.auto.jpg"
+        },
+        {
+          "title": "Asabani 2",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - Asabani 2.mp3",
+          "cover": "music/Shayea/singles/Shayea - Asabani 2.auto.jpg"
+        },
+        {
+          "title": "Belataklif",
+          "artist": "Shayea",
+          "audio": "music/Shayea/singles/Shayea - Belataklif.mp3",
+          "cover": "music/Shayea/singles/Shayea - Belataklif.auto.jpg"
+        }
+      ],
       "albums": []
     },
     {
