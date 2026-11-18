@@ -311,7 +311,56 @@
       "aliases": [
         "سجاد شاهی"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Tanha Tarin",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Ali Geramy _ Shayan Yo - Tanha Tarin _320_.mp3",
+          "cover": "music/Sajad Shahi/singles/Ali Geramy _ Shayan Yo - Tanha Tarin _320_.auto.jpg"
+        },
+        {
+          "title": "DD",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/DD.mp3",
+          "cover": "music/Sajad Shahi/singles/DD.auto.jpg"
+        },
+        {
+          "title": "Upset",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Sajad Shahi _ Ali Geramy - Upset.mp3",
+          "cover": "music/Sajad Shahi/singles/Sajad Shahi _ Ali Geramy - Upset.auto.jpg"
+        },
+        {
+          "title": "Frenemy",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Sajad Shahi - Frenemy.mp3",
+          "cover": "music/Sajad Shahi/singles/Sajad Shahi - Frenemy.auto.jpg"
+        },
+        {
+          "title": "Khastam",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Sajad Shahi - Khastam.mp3",
+          "cover": "music/Sajad Shahi/singles/Sajad Shahi - Khastam.auto.jpg"
+        },
+        {
+          "title": "TKO",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Sajad Shahi - TKO.mp3",
+          "cover": "music/Sajad Shahi/singles/Sajad Shahi - TKO.auto.jpg"
+        },
+        {
+          "title": "Ye Roo",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Sajad Shahi & Matin Fattahi - Ye Roo (320).mp3",
+          "cover": "music/Sajad Shahi/singles/Sajad Shahi & Matin Fattahi - Ye Roo (320).auto.jpg"
+        },
+        {
+          "title": "Trust Who",
+          "artist": "Sajad Shahi",
+          "audio": "music/Sajad Shahi/singles/Sajad Shahi x Vayne - Trust Who.mp3",
+          "cover": "music/Sajad Shahi/singles/Sajad Shahi x Vayne - Trust Who.auto.jpg"
+        }
+      ],
       "albums": [
         {
           "title": "TAJ",
@@ -828,16 +877,40 @@
       ],
       "singles": [
         {
+          "title": "Tanha Tarin",
+          "artist": "Shayan yo",
+          "audio": "music/Shayan yo/singles/Ali Geramy _ Shayan Yo - Tanha Tarin _320_.mp3",
+          "cover": "music/Shayan yo/singles/Ali Geramy _ Shayan Yo - Tanha Tarin _320_.auto.jpg"
+        },
+        {
           "title": "Sekte",
           "artist": "Shayan yo",
           "audio": "music/Shayan yo/singles/Sekte.mp3",
           "cover": "music/Shayan yo/singles/Sekte.jpg"
         },
         {
+          "title": "Alaki",
+          "artist": "Shayan yo",
+          "audio": "music/Shayan yo/singles/Shayan Yo - Alaki (320).mp3",
+          "cover": "music/Shayan yo/singles/Shayan Yo - Alaki (320).auto.jpg"
+        },
+        {
+          "title": "Beza Boro",
+          "artist": "Shayan yo",
+          "audio": "music/Shayan yo/singles/Shayan Yo - Beza Boro (320).mp3",
+          "cover": "music/Shayan yo/singles/Shayan Yo - Beza Boro (320).auto.jpg"
+        },
+        {
           "title": "Kam Kam",
           "artist": "Shayan yo",
           "audio": "music/Shayan yo/singles/Shayan Yo - Kam Kam.mp3",
           "cover": "music/Shayan yo/singles/Shayan Yo - Kam Kam.jpg"
+        },
+        {
+          "title": "Khastam NakoN",
+          "artist": "Shayan yo",
+          "audio": "music/Shayan yo/singles/Shayan Yo - Khastam NakoN.mp3",
+          "cover": "music/Shayan yo/singles/Shayan Yo - Khastam NakoN.auto.jpg"
         }
       ],
       "albums": []
