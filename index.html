@@ -13,8 +13,6 @@ body.sheet-open{overflow:hidden}
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;transform:translateZ(0);
   background:radial-gradient(circle at 10% 15%,rgba(255,140,170,.5),transparent 42%),radial-gradient(circle at 90% 28%,rgba(120,170,255,.5),transparent 44%),radial-gradient(circle at 25% 88%,rgba(140,230,200,.45),transparent 46%),radial-gradient(circle at 88% 92%,rgba(255,205,120,.42),transparent 42%),#fff}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:100px}
-.date{font-size:8px;letter-spacing:1.5px;color:#666;font-weight:600}
-.demo{font-size:5px;letter-spacing:2px;color:#aaa;font-weight:600;margin-top:4px}
 .logo{font-size:35px;font-weight:900;letter-spacing:9px;display:inline-flex}
 .logo .l{display:inline-block;will-change:transform,opacity;animation:wave 3.2s cubic-bezier(.45,0,.55,1) infinite;animation-delay:calc(var(--i)*-.4s)}
 body.playing .logo .l{animation-name:wave2}
@@ -37,6 +35,14 @@ main{max-width:900px;margin:auto}
 .view-more:hover,.view-more:focus-visible{background:#111;color:#fff}
 .view-more:active{transform:scale(.95)}
 .view-more.more-artists{display:block;width:100%;padding:16px;margin-top:24px;font-size:11px;border-radius:18px}
+
+/* library button (header) */
+.lib-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#111;border:1px solid #111;padding:11px 18px;font-family:inherit;font-size:9px;letter-spacing:3px;cursor:pointer;border-radius:12px;transition:transform .3s,background .25s,color .25s}
+.lib-btn:hover,.lib-btn:focus-visible{background:#111;color:#fff}
+.lib-btn:active{transform:scale(.95)}
+.lib-btn svg{flex-shrink:0}
+.lib-count{font-size:9px;letter-spacing:0;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#111;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;transition:background .25s,color .25s}
+.lib-btn:hover .lib-count,.lib-btn:focus-visible .lib-count{background:#fff;color:#111}
 
 /* artist cards */
 .artist-group{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.2),rgba(255,255,255,.08) 55%,rgba(255,255,255,.16));-webkit-backdrop-filter:blur(22px) saturate(190%) brightness(1.03);backdrop-filter:blur(22px) saturate(190%) brightness(1.03);border:1px solid rgba(255,255,255,.7);border-radius:24px;box-shadow:0 8px 22px rgba(30,40,90,.13),inset 2px 2px 1px -1px rgba(255,255,255,.95),inset -2px -2px 1px -1px rgba(255,255,255,.55),inset 0 0 26px rgba(255,255,255,.22);margin-bottom:16px;padding:0 22px;transform:perspective(var(--persp)) rotateX(calc(var(--my,0)*var(--tilt)*-1)) rotateY(calc(var(--mx,0)*var(--tilt)));transition:scale .3s cubic-bezier(.34,1.56,.64,1)}
@@ -71,6 +77,12 @@ main{max-width:900px;margin:auto}
 .top-results{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.85);border-radius:24px;padding:6px 22px 10px;margin-bottom:16px;box-shadow:0 6px 22px rgba(30,40,90,.08)}
 .top-label{font-size:10px;letter-spacing:4px;color:#888;padding:16px 0 4px}
 .top-results .track:last-child{border-bottom:0}
+
+/* like (heart) buttons */
+.like svg{fill:none;stroke:currentColor;transition:fill .25s,stroke .25s}
+.like.on svg{fill:#ff4d6d;stroke:#ff4d6d}
+.like.pop svg{animation:heartPop .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes heartPop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
 
 /* range sliders (one system: thumb is aligned with the fill, no overhang) */
 input[type=range]{-webkit-appearance:none;appearance:none;flex:1;width:100%;height:20px;margin:0;padding:0;background:transparent;outline:none;cursor:pointer;--f:0;--th:11px;--tk:3px;--on:#111;--off:#ddd}
@@ -123,6 +135,7 @@ footer a{color:#111;text-decoration:none}
 .fp-pulse{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;will-change:opacity;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.35),transparent 60%)}
 .fp-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:space-between;height:100%;padding:40px 20px calc(30px + env(safe-area-inset-bottom,0px));max-width:600px;margin:0 auto;width:100%}
 .fp-header{width:100%;display:flex;justify-content:space-between;align-items:center}
+.fp-right{display:flex;align-items:center;gap:10px}
 .fp-main{display:flex;flex-direction:column;align-items:center;width:100%;margin-top:20px}
 .fp-cover{width:75vw;max-width:320px;aspect-ratio:1;border-radius:20px;object-fit:cover;box-shadow:0 20px 40px rgba(0,0,0,.5);background:#222;will-change:transform}
 .fp-info{text-align:center;margin-top:40px;width:100%}
@@ -133,9 +146,9 @@ footer a{color:#111;text-decoration:none}
 .fp-bar input[type=range]{--th:14px;--tk:6px;--on:#fff;--off:rgba(255,255,255,.25)}
 .fp-bar input[type=range]::-webkit-slider-thumb{box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .fp-times{display:flex;justify-content:space-between;font-size:11px;color:#ccc;font-variant-numeric:tabular-nums}
-.fp-close,.fp-dl,.fp-ctrl button{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:50%;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),0 8px 24px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .25s,opacity .25s}
-.fp-close,.fp-dl{width:44px;height:44px}
-.fp-close:hover,.fp-dl:hover{background:rgba(255,255,255,.25)}
+.fp-close,.fp-dl,.fp-like,.fp-ctrl button{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;border-radius:50%;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.45),0 8px 24px rgba(0,0,0,.25);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .25s,opacity .25s}
+.fp-close,.fp-dl,.fp-like{width:44px;height:44px}
+.fp-close:hover,.fp-dl:hover,.fp-like:hover{background:rgba(255,255,255,.25)}
 .fp-ctrl{display:flex;align-items:center;justify-content:center;gap:12px}
 .fp-ctrl button{width:50px;height:50px}
 .fp-ctrl button.fp-side{width:44px;height:44px;position:relative;opacity:.65}
@@ -143,11 +156,11 @@ footer a{color:#111;text-decoration:none}
 .fp-ctrl button.fp-side[data-m="2"]::after{content:"1";position:absolute;font-size:9px;font-weight:700;top:50%;left:50%;translate:-50% -50%}
 .fp-ctrl .fp-play{width:70px;height:70px;background:rgba(255,255,255,.28);border-color:rgba(255,255,255,.55)}
 .fp-ctrl button:hover{background:rgba(255,255,255,.3)}
-.fp-ctrl button:active,.fp-close:active,.fp-dl:active{transform:scale(.9)}
+.fp-ctrl button:active,.fp-close:active,.fp-dl:active,.fp-like:active{transform:scale(.9)}
 .fp-ctrl svg{fill:currentColor}
 .fp-ctrl svg.st{fill:none;stroke:currentColor}
 
-/* artist sheet */
+/* artist sheet (also used by the library) */
 .sheet{position:fixed;inset:0;z-index:55;visibility:hidden;pointer-events:none;transition:visibility 0s .5s}
 .sheet.show{visibility:visible;pointer-events:auto;transition-delay:0s}
 .sheet-back{position:absolute;inset:0;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .5s ease}
@@ -169,11 +182,14 @@ footer a{color:#111;text-decoration:none}
 .sheet-photo{width:130px;height:130px;object-fit:cover;border-radius:32px;background:#eee;box-shadow:0 12px 30px rgba(0,0,0,.16)}
 .sheet-head h3{font-size:22px;margin-top:18px}
 .sheet-head p{font-size:10px;color:#666;letter-spacing:2px;margin-top:8px}
+.sheet-head.lib h3{font-size:14px;letter-spacing:6px;margin-top:14px;padding-left:6px}
 .seg{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:340px;margin:24px auto 14px;padding:4px;border-radius:999px;background:rgba(0,0,0,.05);border:1px solid rgba(255,255,255,.8)}
 .seg button{position:relative;z-index:1;background:none;border:0;padding:12px 0;font-size:10px;letter-spacing:3px;color:#555;cursor:pointer;transition:color .3s}
 .seg button[aria-selected=true]{color:#111;font-weight:700}
 .seg-pill{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:#fff;box-shadow:0 3px 10px rgba(0,0,0,.1);transition:transform .45s cubic-bezier(.34,1.3,.64,1)}
 .seg[data-t=albums] .seg-pill{transform:translateX(100%)}
+.seg.one{grid-template-columns:1fr}
+.seg.one .seg-pill{width:calc(100% - 8px);transform:none}
 .pane{display:none}
 .pane.on{display:block;animation:paneIn .35s ease both}
 @keyframes paneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -182,6 +198,7 @@ footer a{color:#111;text-decoration:none}
   body{padding:25px 6% 130px}
   header{margin-bottom:70px}
   .logo{font-size:27px}
+  .lib-btn{padding:10px 14px;gap:8px;letter-spacing:2px}
   .artist-card{gap:15px}
   .artist-photo{width:95px;height:95px}
   .artist-info h3{font-size:15px}
@@ -226,7 +243,14 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
 </style>
 </head>
 <body>
-<header><div><div class="date" id="date"></div><div class="demo">DEMO VERSION</div></div><div class="logo" aria-label="ARSX"><span class="l" style="--i:0" aria-hidden="true">A</span><span class="l" style="--i:1" aria-hidden="true">R</span><span class="l" style="--i:2" aria-hidden="true">S</span><span class="l" style="--i:3" aria-hidden="true">X</span></div></header>
+<header>
+    <button type="button" class="lib-btn" id="libBtn" aria-label="Open library">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.3l7.8-7.8 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+        <span>LIBRARY</span>
+        <b class="lib-count" id="libCount" hidden>0</b>
+    </button>
+    <div class="logo" aria-label="ARSX"><span class="l" style="--i:0" aria-hidden="true">A</span><span class="l" style="--i:1" aria-hidden="true">R</span><span class="l" style="--i:2" aria-hidden="true">S</span><span class="l" style="--i:3" aria-hidden="true">X</span></div>
+</header>
 <main>
 <section id="artists">
     <h2 class="section-title">ARSHIA AJANKAN</h2>
@@ -276,7 +300,7 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
     </div>
 </div>
 
-<!-- ARTIST SHEET -->
+<!-- ARTIST SHEET / LIBRARY SHEET -->
 <div class="sheet" id="sheet" aria-hidden="true">
     <div class="sheet-back" id="sheetBack"></div>
     <div class="sheet-panel" role="dialog" aria-modal="true" aria-label="Artist profile">
@@ -284,7 +308,7 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
         <div class="sheet-scroll" id="sheetScroll">
-            <div class="sheet-head">
+            <div class="sheet-head" id="sheetHead">
                 <img class="sheet-photo" id="sheetPhoto" alt="">
                 <h3 id="sheetName"></h3>
                 <p id="sheetDesc"></p>
@@ -293,6 +317,7 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
                 <span class="seg-pill"></span>
                 <button type="button" data-t="singles" aria-selected="false">SINGLES</button>
                 <button type="button" data-t="albums" aria-selected="true">ALBUMS</button>
+                <button type="button" data-t="liked" aria-selected="false" hidden>LIKED SONGS</button>
             </div>
             <div id="sheetBody"></div>
         </div>
@@ -308,9 +333,14 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
             <button class="fp-close" id="fpClose" aria-label="Close full player">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <a class="fp-dl" id="fpDl" href="#" aria-label="Download track">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            </a>
+            <div class="fp-right">
+                <button type="button" class="fp-like like" id="fpLike" aria-label="Like this track">
+                    <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.3l7.8-7.8 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+                </button>
+                <a class="fp-dl" id="fpDl" href="#" aria-label="Download track">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </a>
+            </div>
         </div>
         <div class="fp-main">
             <img class="fp-cover" id="fpCover" alt="">
@@ -346,19 +376,46 @@ body.sheet-open .artist-group.live,body.sheet-open .artist-group.live::before{wi
 </div>
 
 <script>
-/* ---------- date ---------- */
-(function setDate(){
-    document.getElementById("date").textContent=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"}).toUpperCase();
-    const n=new Date();
-    setTimeout(setDate,new Date(n.getFullYear(),n.getMonth(),n.getDate()+1,0,0,1)-n);
-})();
-
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
 const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
 const url=p=>p?"./assets/"+String(p).split("/").map(encodeURIComponent).join("/"):"";
 const fmt=s=>isFinite(s)?Math.floor(s/60)+":"+String(Math.floor(s%60)).padStart(2,"0"):"0:00";
 const fill=r=>r.style.setProperty("--f",r.value/1000);
+
+/* ---------- visitor profile + library (saved in this browser) ---------- */
+const PROF_KEY="arsx-profile";
+const byKey=new Map(); // track key -> track object (filled when the library loads)
+const rid=()=>{try{if(crypto.randomUUID)return crypto.randomUUID()}catch(e){}return Date.now().toString(36)+Math.random().toString(36).slice(2,10)};
+let profile=null;
+try{profile=JSON.parse(localStorage.getItem(PROF_KEY))}catch(e){}
+if(!profile||typeof profile!=="object"||!Array.isArray(profile.likes))profile={id:rid(),created:Date.now(),likes:[]};
+const saveProfile=()=>{try{localStorage.setItem(PROF_KEY,JSON.stringify(profile))}catch(e){}};
+saveProfile(); // a profile exists for every visitor from the first visit
+const isLiked=t=>profile.likes.includes(t._k);
+function syncLikes(){
+    const set=new Set(profile.likes);
+    document.querySelectorAll(".like[data-k]").forEach(b=>{
+        const on=set.has(b.dataset.k);
+        b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));
+    });
+    const c=$("libCount");c.textContent=String(profile.likes.length);c.hidden=!profile.likes.length;
+}
+function toggleLike(t,btn){
+    const i=profile.likes.indexOf(t._k);
+    if(i>=0)profile.likes.splice(i,1);else profile.likes.unshift(t._k);
+    saveProfile();syncLikes();
+    if(btn){btn.classList.remove("pop");void btn.offsetWidth;btn.classList.add("pop")}
+}
+document.addEventListener("click",e=>{
+    const b=e.target.closest(".like[data-k]");if(!b)return;
+    e.stopPropagation();
+    const t=byKey.get(b.dataset.k);if(t)toggleLike(t,b);
+});
+addEventListener("storage",e=>{ // another tab changed the profile
+    if(e.key!==PROF_KEY||!e.newValue)return;
+    try{const p=JSON.parse(e.newValue);if(p&&Array.isArray(p.likes)){profile=p;syncLikes()}}catch(err){}
+});
 
 /* ---------- play counts ---------- */
 const COUNT_URL="https://arsx-8585-default-rtdb.europe-west1.firebasedatabase.app/plays"; // empty = this browser only
@@ -395,7 +452,7 @@ let audioCtx,analyser,dataArray,animating=false,lastT=0;
 const miniPlayer=$("miniPlayer"),miniRange=$("miniRange"),miniCover=$("miniCover"),miniTitle=$("miniTitle"),miniArtist=$("miniArtist"),miniPlay=$("miniPlay");
 const fullPlayer=$("fullPlayer"),fpBg=$("fpBg"),fpCover=$("fpCover"),fpTitle=$("fpTitle"),fpArtist=$("fpArtist"),fpRange=$("fpRange"),
       fpTimeCur=$("fpTimeCur"),fpTimeTot=$("fpTimeTot"),fpPlayIcon=$("fpPlayIcon"),fpDl=$("fpDl"),fpPulse=$("fpPulse"),
-      fpRepeat=$("fpRepeat"),fpShuffle=$("fpShuffle");
+      fpRepeat=$("fpRepeat"),fpShuffle=$("fpShuffle"),fpLike=$("fpLike");
 const SVG_PLAY='<path d="M8 5v14l11-7z"/>',SVG_PAUSE='<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 let miniDrag=false;
 
@@ -463,6 +520,7 @@ function updateUI(){
             fpCover.removeAttribute("src");fpBg.style.backgroundImage="none";
         }
         fpDl.href=url(t.audio);fpDl.download=(t.title||"track")+".mp3";
+        fpLike.dataset.k=t._k;syncLikes();
     }
     const p=A.paused;
     miniPlay.textContent=p?"▶":"❚❚";
@@ -561,6 +619,7 @@ fpRepeat.addEventListener("click",()=>{
 });
 
 /* ---------- track rows ---------- */
+const HEART='<svg width="14" height="14" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21.3l7.8-7.8 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
 function createTrack(t,q){
     const row=el("div","track"),info=el("div","track-info"),bar=el("div","bar");
     const rng=el("input");rng.type="range";rng.min=0;rng.max=1000;rng.value=0;rng.disabled=true;rng.setAttribute("aria-label","Seek "+t.title);
@@ -571,10 +630,13 @@ function createTrack(t,q){
 
     const mk=(cls,txt,label)=>{const b=el("button",cls,txt);b.type="button";b.setAttribute("aria-label",label);return b};
     const back=mk("","−10","Back 10 seconds"),play=mk("play","▶","Play "+t.title),fwd=mk("","+10","Forward 10 seconds");
+    const like=mk("like","","Like "+t.title);
+    like.innerHTML=HEART;like.dataset.k=t._k;
+    const on=isLiked(t);like.classList.toggle("on",on);like.setAttribute("aria-pressed",String(on));
     const dl=el("a","dl-btn");
     dl.href=url(t.audio);dl.setAttribute("download",(t.title||"track")+".mp3");dl.setAttribute("aria-label","Download "+t.title);
     dl.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
-    const ctrl=el("div","ctrl");ctrl.append(back,play,fwd,dl);
+    const ctrl=el("div","ctrl");ctrl.append(back,play,fwd,like,dl);
 
     t._ui={play,rng,time,plays:pl};showPlays(t);
     const mine=()=>cur&&cur.t===t;
@@ -670,25 +732,35 @@ function merge(lists){
     return [...map.values()];
 }
 function prep(a){
-    const one=(t,b)=>{t.artist=t.artist||a.name;t.cover=t.cover||(b&&b.cover)||null;t._n=norm(t.title);t._an=norm(t.artist);t._k=hash(String(t.audio))};
+    const one=(t,b)=>{t.artist=t.artist||a.name;t.cover=t.cover||(b&&b.cover)||null;t._n=norm(t.title);t._an=norm(t.artist);t._k=hash(String(t.audio));if(!byKey.has(t._k))byKey.set(t._k,t)};
     a.singles.forEach(t=>one(t,null));
     a.albums.forEach(b=>{b.tracks=b.tracks||[];b._n=norm(b.title);b.tracks.forEach(t=>one(t,b))});
     a._names=[a.name,...(a.aliases||[])].map(norm);
     a._tracks=[...a.singles,...a.albums.flatMap(b=>b.tracks)];
 }
 
-/* ---------- artist sheet ---------- */
-const sheet=$("sheet"),sheetPhoto=$("sheetPhoto"),sheetBody=$("sheetBody"),sheetScroll=$("sheetScroll"),seg=$("seg");
+/* ---------- artist sheet / library sheet ---------- */
+const sheet=$("sheet"),sheetPhoto=$("sheetPhoto"),sheetBody=$("sheetBody"),sheetScroll=$("sheetScroll"),seg=$("seg"),sheetHead=$("sheetHead"),sheetDesc=$("sheetDesc");
+const segSingles=seg.querySelector('[data-t="singles"]'),segAlbums=seg.querySelector('[data-t="albums"]'),segLiked=seg.querySelector('[data-t="liked"]');
 sheetPhoto.onerror=()=>{sheetPhoto.style.visibility="hidden"};
 function setTab(t){
     seg.dataset.t=t;
     seg.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.t===t)));
     sheetBody.querySelectorAll(".pane").forEach(p=>p.classList.toggle("on",p.classList.contains(t)));
 }
+function showSheet(){
+    sheetScroll.scrollTop=0;
+    sheet.classList.add("show");sheet.setAttribute("aria-hidden","false");
+    document.body.classList.add("sheet-open");
+}
 function openSheet(a){
+    // artist mode: restore the normal profile header + two tabs
+    sheetPhoto.style.display="";sheetDesc.style.display="";sheetHead.classList.remove("lib");
+    seg.classList.remove("one");segSingles.hidden=false;segAlbums.hidden=false;segLiked.hidden=true;
+    sheet.querySelector(".sheet-panel").setAttribute("aria-label","Artist profile");
     if(a.photo){sheetPhoto.src=url(a.photo);sheetPhoto.style.visibility="visible"}
     else{sheetPhoto.removeAttribute("src");sheetPhoto.style.visibility="hidden"}
-    $("sheetName").textContent=a.name;$("sheetDesc").textContent=a.description||"ARTIST";
+    $("sheetName").textContent=a.name;sheetDesc.textContent=a.description||"ARTIST";
     const mkPane=(cls,empty,arr)=>{const p=el("div","pane "+cls);if(!arr.length)p.appendChild(el("div","empty",empty));return p};
     const byP=(x,y)=>getPlays(y)-getPlays(x); // stable sort: ties keep their original order
     const singles=[...a.singles].sort(byP);
@@ -700,9 +772,25 @@ function openSheet(a){
     albums.forEach(b=>ap.appendChild(createAlbum(b)));
     sheetBody.replaceChildren(sp,ap);
     setTab(a.singles.length||!a.albums.length?"singles":"albums");
-    sheetScroll.scrollTop=0;
-    sheet.classList.add("show");sheet.setAttribute("aria-hidden","false");
-    document.body.classList.add("sheet-open");
+    showSheet();
+}
+function openLibrary(){
+    // library mode: only the word LIBRARY on top + one full-width tab
+    sheetPhoto.style.display="none";sheetDesc.style.display="none";sheetHead.classList.add("lib");
+    $("sheetName").textContent="LIBRARY";
+    seg.classList.add("one");segSingles.hidden=true;segAlbums.hidden=true;segLiked.hidden=false;
+    sheet.querySelector(".sheet-panel").setAttribute("aria-label","Library");
+    const list=profile.likes.map(k=>byKey.get(k)).filter(Boolean);
+    const p=el("div","pane liked");
+    if(!list.length)p.appendChild(el("div","empty",profile.likes.length&&!byKey.size?"LOADING...":"NO LIKED SONGS YET"));
+    else{
+        const f=document.createDocumentFragment();
+        list.forEach(t=>f.appendChild(createTrack(t,list)));
+        p.appendChild(f);
+    }
+    sheetBody.replaceChildren(p);
+    setTab("liked");
+    showSheet();
 }
 function closeSheet(){
     sheet.classList.remove("show");sheet.setAttribute("aria-hidden","true");
@@ -711,7 +799,9 @@ function closeSheet(){
 seg.addEventListener("click",e=>{const b=e.target.closest("button");if(b)setTab(b.dataset.t)});
 $("sheetX").addEventListener("click",closeSheet);
 $("sheetBack").addEventListener("click",closeSheet);
+$("libBtn").addEventListener("click",openLibrary);
 addEventListener("keydown",e=>{if(e.key==="Escape"&&sheet.classList.contains("show"))closeSheet()});
+syncLikes();
 
 /* ---------- main list ---------- */
 function renderArtist(a,list){
@@ -734,6 +824,9 @@ function renderArtist(a,list){
     if(!artists.length){list.appendChild(el("div","empty",location.protocol==="file:"?"OPENED AS A LOCAL FILE - the browser blocks loading assets/library.json. Open the site through GitHub Pages or a local server.":"LIBRARY NOT FOUND - check assets/library.json"));return}
 
     artists.forEach(prep);
+    // drop liked songs whose files no longer exist in the archive
+    if(byKey.size){const n=profile.likes.length;profile.likes=profile.likes.filter(k=>byKey.has(k));if(profile.likes.length!==n)saveProfile()}
+    syncLikes();
     const items=artists.map(a=>{try{return renderArtist(a,list)}catch(err){console.error("Bad artist entry:",a&&a.name,err);return null}}).filter(Boolean);
     const noRes=el("div","empty","");noRes.style.display="none";
     const moreBtn=el("button","view-more more-artists","MORE ARTISTS");moreBtn.type="button";
