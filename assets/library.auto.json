@@ -473,7 +473,7 @@
     },
     {
       "name": "Vinak",
-      "photo": "music/Vinak/photo.auto.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Vinak",
       "singlesFolder": "music/Vinak/singles",
@@ -486,7 +486,7 @@
     },
     {
       "name": "TM Bax",
-      "photo": "music/TM Bax/photo.auto.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/TM Bax",
       "singlesFolder": "music/TM Bax/singles",
@@ -598,7 +598,7 @@
     },
     {
       "name": "Sadegh",
-      "photo": "music/Sadegh/photo.auto.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Sadegh",
       "singlesFolder": "music/Sadegh/singles",
@@ -857,7 +857,7 @@
     },
     {
       "name": "Catchybeatz",
-      "photo": "music/Catchybeatz/photo.auto.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Catchybeatz",
       "singlesFolder": "music/Catchybeatz/singles",
@@ -1333,7 +1333,7 @@
     },
     {
       "name": "Hoodadk4",
-      "photo": "music/Hoodadk4/photo.auto.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Hoodadk4",
       "singlesFolder": "music/Hoodadk4/singles",
@@ -1540,7 +1540,7 @@
     },
     {
       "name": "Young Sudden",
-      "photo": "music/Young Sudden/photo.auto.jpg",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
       "folder": "music/Young Sudden",
       "singlesFolder": "music/Young Sudden/singles",
@@ -1555,7 +1555,7 @@
     },
     {
       "name": "Mersad",
-      "photo": "music/Mersad/photo.auto.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Mersad",
       "singlesFolder": "music/Mersad/singles",
@@ -1564,12 +1564,55 @@
         "مرصاد",
         "مرساد"
       ],
-      "singles": [],
+      "singles": [
+        {
+          "title": "Golchin 404",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad - Golchin 404.mp3",
+          "cover": "music/Mersad/singles/Mersad - Golchin 404.auto.jpg"
+        },
+        {
+          "title": "Golo Tagarg",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad - Golo Tagarg.mp3",
+          "cover": "music/Mersad/singles/Mersad - Golo Tagarg.auto.jpg"
+        },
+        {
+          "title": "MIN",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad - MIN.mp3",
+          "cover": "music/Mersad/singles/Mersad - MIN.auto.jpg"
+        },
+        {
+          "title": "Pole Bala Hakim Freestyle",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad - Pole Bala Hakim Freestyle.mp3",
+          "cover": "music/Mersad/singles/Mersad - Pole Bala Hakim Freestyle.auto.jpg"
+        },
+        {
+          "title": "To Mitooni",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad - To Mitooni.mp3",
+          "cover": "music/Mersad/singles/Mersad - To Mitooni.auto.jpg"
+        },
+        {
+          "title": "Bio Bio",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad ft Kixty - Bio Bio .mp3",
+          "cover": "music/Mersad/singles/Mersad ft Kixty - Bio Bio .auto.jpg"
+        },
+        {
+          "title": "Vay",
+          "artist": "Mersad",
+          "audio": "music/Mersad/singles/Mersad ft Kixty - Vay.mp3",
+          "cover": "music/Mersad/singles/Mersad ft Kixty - Vay.auto.jpg"
+        }
+      ],
       "albums": []
     },
     {
       "name": "Shayea",
-      "photo": "music/Shayea/photo.auto.jpg",
+      "photo": null,
       "description": "ARTIST",
       "folder": "music/Shayea",
       "singlesFolder": "music/Shayea/singles",
@@ -1585,15 +1628,15 @@
       "albums": []
     },
     {
-      "name": "Halim",
-      "photo": "music/Halim/photo.auto.jpg",
+      "name": "Heliyom",
+      "photo": null,
       "description": "IRANIAN HIP-HOP ARTIST",
-      "folder": "music/Halim",
-      "singlesFolder": "music/Halim/singles",
-      "albumsFolder": "music/Halim/albums",
+      "folder": "music/Heliyom",
+      "singlesFolder": "music/Heliyom/singles",
+      "albumsFolder": "music/Heliyom/albums",
       "aliases": [
         "هلیم",
-        "Helim"
+        "Heliom"
       ],
       "singles": [],
       "albums": []
